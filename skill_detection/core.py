@@ -648,6 +648,7 @@ class RebuffLLMDetector:
             "score": score,
             "threshold": self.threshold,
             "raw_completion": completion,
+            "raw_response": raw_response,
         }
 
 

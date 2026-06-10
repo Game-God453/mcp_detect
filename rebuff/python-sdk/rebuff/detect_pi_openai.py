@@ -86,5 +86,27 @@ def call_openai_to_detect_pi(
     if len(completion.choices) == 0:
         raise Exception("server error")
 
-    response = {"completion": completion.choices[0].message.content}
+    usage_payload = None
+    if getattr(completion, "usage", None) is not None:
+        usage_payload = {
+            "prompt_tokens": getattr(completion.usage, "prompt_tokens", None),
+            "completion_tokens": getattr(completion.usage, "completion_tokens", None),
+            "total_tokens": getattr(completion.usage, "total_tokens", None),
+        }
+
+    choice_payload = {
+        "finish_reason": getattr(completion.choices[0], "finish_reason", None),
+        "index": getattr(completion.choices[0], "index", None),
+        "message_content": completion.choices[0].message.content,
+        "role": getattr(completion.choices[0].message, "role", None),
+    }
+
+    response = {
+        "completion": completion.choices[0].message.content,
+        "response_id": getattr(completion, "id", None),
+        "response_model": getattr(completion, "model", None),
+        "created": getattr(completion, "created", None),
+        "usage": usage_payload,
+        "choice": choice_payload,
+    }
     return response
