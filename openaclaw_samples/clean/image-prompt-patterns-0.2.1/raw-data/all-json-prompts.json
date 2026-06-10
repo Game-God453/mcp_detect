@@ -1,0 +1,5935 @@
+[
+  {
+    "num": "1",
+    "title": "VR 头显爆炸视图海报",
+    "top_fields": [
+      "type",
+      "subject",
+      "style",
+      "background",
+      "header",
+      "layout"
+    ],
+    "data": {
+      "type": "产品爆炸视图海报",
+      "subject": "VR 头显",
+      "style": "简洁的高科技 3D 渲染，摄影棚灯光，发光装饰",
+      "background": "柔和的紫蓝色渐变",
+      "header": {
+        "logo": "∞ Meta Quest 3",
+        "subtitle": "以全新的结构，重塑全新的现实。"
+      },
+      "layout": {
+        "centerpiece": "VR 头显的垂直堆叠爆炸视图，展示了 9 层不同的内部组件：外壳、摄像头传感器、带芯片的主板、Pancake 透镜、内部框架、电池组、侧带、顶部头带和面部接口衬垫。",
+        "callout_labels": {
+          "count": 8,
+          "left_side": [
+            "Snapdragon® XR2 Gen 2\n卓越的处理性能，带来实时沉浸体验。",
+            "可调节 IPD 机构\n为广大用户提供舒适的佩戴感。",
+            "精密设计的头带\n追求舒适与稳定的工程学设计。"
+          ],
+          "right_side": [
+            "前面板\n精致的设计与优化的重量平衡。",
+            "追踪摄像头\n实现高精度的位置追踪与环境感知。",
+            "Pancake 透镜\n轻薄设计，提供广阔视野与清晰画质。",
+            "高性能电池\n优化电源设计，支持长时间续航。",
+            "柔软的面部接口\n确保长时间佩戴依然舒适。"
+          ]
+        },
+        "footer": {
+          "left_text_block": {
+            "headline": "体验，源于结构的进化。",
+            "body": "每一个零件都蕴含着支撑沉浸式体验的前沿科技与匠心设计。Meta Quest 3 从内部构建未来，为您带来超乎想象的体验。"
+          },
+          "right_logo": "∞ Meta"
+        }
+      }
+    }
+  },
+  {
+    "num": "2",
+    "title": "手绘城市美食地图",
+    "top_fields": [
+      "type",
+      "style",
+      "title_section",
+      "border",
+      "layout"
+    ],
+    "data": {
+      "type": "手绘地图信息图",
+      "style": "复古羊皮纸上的水彩墨水手绘插画",
+      "title_section": {
+        "text": "成都 吃货暴走地图",
+        "mascot": "戴着墨镜并竖起大拇指的卡通红辣椒"
+      },
+      "border": "绿叶与红辣椒藤蔓",
+      "layout": {
+        "background": "带有黄色道路、蓝色河流和绿色公园区域的纹理米色羊皮纸",
+        "sections": [
+          {
+            "title": "地标建筑",
+            "count": 6,
+            "illustrations": [
+              "传统凉亭",
+              "传统寺院",
+              "带有攀爬熊猫的现代摩天大楼",
+              "高耸的电视塔",
+              "传统牌坊",
+              "工业建筑"
+            ],
+            "labels": [
+              "人民公园",
+              "文殊院",
+              "IFS",
+              "339电视塔",
+              "宽窄巷子",
+              "东郊记忆"
+            ]
+          },
+          {
+            "title": "美食地点",
+            "count": 12,
+            "illustrations": [
+              "麻婆豆腐",
+              "红油水饺",
+              "冷锅串串",
+              "三大炮",
+              "蛋烘糕",
+              "九宫格火锅",
+              "肥肠粉",
+              "钵钵鸡",
+              "冒菜",
+              "盖碗茶",
+              "冰粉",
+              "兔头"
+            ],
+            "labels": [
+              "1 陈麻婆豆腐",
+              "2 钟水饺",
+              "3 春熙路",
+              "4 宽窄巷子·三大炮",
+              "5 建设路·叶婆婆蛋烘糕",
+              "6 玉林路·小龙坎火锅",
+              "7 香香巷·肥肠粉",
+              "8 武侯祠大街·钵钵鸡",
+              "9 东郊记忆·冒椒火辣",
+              "10 人民公园·鹤鸣茶社",
+              "11 锦里古街·冰粉",
+              "12 双流老妈兔头"
+            ]
+          },
+          {
+            "title": "图例",
+            "position": "右下角",
+            "count": 5,
+            "items": [
+              "红点",
+              "绿色建筑",
+              "绿树",
+              "蓝线",
+              "黄色双线"
+            ],
+            "labels": [
+              "美食地点",
+              "地标景点",
+              "公园绿地",
+              "河流湖泊",
+              "主要道路"
+            ]
+          }
+        ],
+        "centerpiece": "坐着吃竹子的大熊猫",
+        "bottom_right_extras": [
+          "带有东南西北方向的复古罗盘",
+          "带有红辣椒图标的免责声明：'温馨提示：吃辣需谨慎，肠胃要保护~'"
+        ]
+      }
+    }
+  },
+  {
+    "num": "4",
+    "title": "电商直播 UI 样机",
+    "top_fields": [
+      "type",
+      "subject",
+      "ui_overlay"
+    ],
+    "data": {
+      "type": "直播 UI 样机",
+      "subject": {
+        "description": "Elon Musk 的肖像，面带微笑，身穿印有白色技术示意图的黑色 T 恤",
+        "background": "左侧显示带有 'SPACEX' 文字的屏幕，右侧显示红色的 'Tesla T logo' 和一辆深色汽车"
+      },
+      "ui_overlay": {
+        "top_header": {
+          "host_info": "头像，名称 'Elon Musk'，副标题 '55.6万本场点赞'，红色 '关注' 按钮",
+          "rank_badge": "带有 '全站第1名' 的金币图标",
+          "viewer_stats": "3 个顶部观众头像，显示 '12.3w'、'8.6w'、'5.7w'，总计 '68.7万'，'X' 关闭按钮",
+          "right_links": "'更多直播 >'，'礼物展馆 0/24'（带有蓝色 '经典' 标签）"
+        },
+        "mid_left_gifts": {
+          "count": 2,
+          "items": [
+            "头像 '科技爱好者'，'送小心心'，爱心图标 x 1314",
+            "头像 '星辰大海'，'送火箭'，火箭图标 x 666"
+          ]
+        },
+        "bottom_left_chat": {
+          "system_message": "37 级勋章 '宇宙漫游者 加入了直播间'",
+          "message_count": 7,
+          "messages": [
+            "小火箭: 马斯克！未来可期！🚀",
+            "future: 特斯拉Model 2什么时候出？",
+            "星空梦想家: SpaceX今年能上火星吗？",
+            "AI探索者: Neuralink进展如何？",
+            "帅气的网友: 马总好！",
+            "Mars: 第一次来你的直播，超激动！",
+            "用户123: 讲讲AI吧，会取代人类吗？"
+          ]
+        },
+        "bottom_right_product_card": {
+          "hot_tag": "橙色 '热卖 x 1888'",
+          "image": "Tesla Cybertruck",
+          "title": "特斯拉Cybertruck 电动皮卡",
+          "price": "¥ 1,618,000",
+          "button": "红色 '抢' 按钮",
+          "floating_animation": "半透明爱心沿右侧边缘向上浮动"
+        },
+        "bottom_bar": {
+          "input_field": "'说点什么...'",
+          "icons": [
+            "笑脸",
+            "三个点",
+            "购物车",
+            "礼物盒",
+            "分享"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "num": "6",
+    "title": "3D 石阶演化信息图",
+    "top_fields": [
+      "type",
+      "instruction",
+      "style",
+      "layout"
+    ],
+    "data": {
+      "type": "演化时间轴信息图",
+      "instruction": "以 REFERENCE_0 作为结构基础，将平面矢量设计转化为高度逼真的 3D 信息图。将平滑的坡道替换为独特的石阶，并将所有生物升级为照片级真实的 3D 模型。",
+      "style": {
+        "background": "复古纹理羊皮纸",
+        "staircase": "逼真的纹理石块",
+        "subjects": "高度精细的照片级真实 3D 渲染"
+      },
+      "layout": {
+        "main_title": "人类演化",
+        "sections": [
+          {
+            "position": "左侧边栏",
+            "count": 8,
+            "labels": [
+              "L0: 单细胞生命",
+              "L1: 多细胞生物",
+              "L2: 动物界",
+              "L3: 脊索动物",
+              "L4: 上陆革命",
+              "L5: 哺乳纲",
+              "L6: 人科演化",
+              "L7: 智人纪元"
+            ]
+          },
+          {
+            "position": "右上角",
+            "title": "获得的功能 / 失去的功能",
+            "description": "带有加号和减号图标的图例"
+          },
+          {
+            "position": "底部中心",
+            "title": "演化关键里程碑",
+            "count": 6,
+            "description": "包含 6 个展示从猿到人演化剪影图形的时间轴"
+          }
+        ],
+        "centerpiece": {
+          "description": "蜿蜒的石阶，共有 25 个编号台阶，展示特定生物。",
+          "count": 25,
+          "notable_elements": [
+            "第 07 阶: 水母",
+            "第 09 阶: 菊石",
+            "第 10 阶: 三叶虫",
+            "第 24 阶: 直立行走的人类",
+            "第 25 阶: 带有问号的发光宇宙剪影"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "num": "4",
+    "title": "个人资料 / 头像 - Idol Maid Polaroid Collection",
+    "top_fields": [
+      "type",
+      "setting",
+      "character",
+      "layout"
+    ],
+    "data": {
+      "type": "collection of instant photos",
+      "setting": "laid out flat on a white fabric surface",
+      "character": {
+        "hair": "long pink hair with blue inner color",
+        "outfit": "black and white maid uniform with frilly headband and black ribbons",
+        "eyes": "reddish-pink"
+      },
+      "layout": {
+        "arrangement": "two rows of five polaroid photos",
+        "count": 10,
+        "photos": [
+          {
+            "position": "top row 1",
+            "description": "holding a pink heart cushion"
+          },
+          {
+            "position": "top row 2",
+            "description": "winking, making a peace sign"
+          },
+          {
+            "position": "top row 3",
+            "description": "making a hand heart, pink heart doodle on the bottom border"
+          },
+          {
+            "position": "top row 4",
+            "description": "resting chin on hands, gentle smile"
+          },
+          {
+            "position": "top row 5",
+            "description": "holding a red rose, winking"
+          },
+          {
+            "position": "bottom row 1",
+            "description": "finger to lips, shy expression"
+          },
+          {
+            "position": "bottom row 2",
+            "description": "holding a small pink cake"
+          },
+          {
+            "position": "bottom row 3",
+            "description": "winking, hand near face, signature 'Hanashi' and heart doodle on border"
+          },
+          {
+            "position": "bottom row 4",
+            "description": "holding a pink bunny plushie, sparkle doodles, signature 'Hanashi' and bunny doodle on border"
+          },
+          {
+            "position": "bottom row 5",
+            "description": "winking, sparkle doodles, message 'いつも応援ありがとう！これからもよろしくね♪' and signature 'Hanashi' on border"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "num": "5",
+    "title": "个人资料 / 头像 - 4-Panel Professional Avatar Grid",
+    "top_fields": [
+      "type",
+      "subject",
+      "style",
+      "layout"
+    ],
+    "data": {
+      "type": "2x2 portrait grid",
+      "subject": "young adult East Asian male with short black hair and a slight smile",
+      "style": "photorealistic, high-resolution, professional lighting, consistent facial identity across all panels",
+      "layout": {
+        "format": "2x2 grid",
+        "panel_count": 4,
+        "panels": [
+          {
+            "position": "top-left",
+            "description": "Corporate professional wearing a dark navy suit, white shirt, and blue tie against a gray textured background"
+          },
+          {
+            "position": "top-right",
+            "description": "Casual attire wearing a dark blue crew neck t-shirt against a blurred outdoor park background"
+          },
+          {
+            "position": "bottom-left",
+            "description": "Construction worker wearing a yellow hard hat, navy blue work shirt, and bright orange high-visibility vest against a blurred warehouse background"
+          },
+          {
+            "position": "bottom-right",
+            "description": "Medical professional wearing a white lab coat over a light blue collared shirt against a blurred laboratory background"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "num": "9",
+    "title": "个人资料 / 头像 - 3D Animated Character Expression Grid",
+    "top_fields": [
+      "type",
+      "style",
+      "character_base",
+      "common_theme",
+      "layout"
+    ],
+    "data": {
+      "type": "3x3 character expression grid",
+      "style": "3D animation, Pixar style",
+      "character_base": "young woman with voluminous dark wavy hair and round wire-rimmed glasses",
+      "common_theme": "peeking through a torn hole in white paper",
+      "layout": {
+        "rows": 3,
+        "columns": 3,
+        "total_panels": 9,
+        "panels": [
+          {
+            "position": "top-left",
+            "expression": "winking",
+            "action": "adjusting glasses",
+            "outfit": "green sweater"
+          },
+          {
+            "position": "top-center",
+            "expression": "smirking",
+            "action": "lowering dark sunglasses",
+            "outfit": "red leather jacket"
+          },
+          {
+            "position": "top-right",
+            "expression": "thinking",
+            "action": "finger on chin",
+            "outfit": "yellow hoodie"
+          },
+          {
+            "position": "middle-left",
+            "expression": "big smile",
+            "action": "arms resting on edge",
+            "outfit": "black and white striped shirt"
+          },
+          {
+            "position": "middle-center",
+            "expression": "smiling",
+            "action": "thumbs up",
+            "outfit": "orange button-up shirt"
+          },
+          {
+            "position": "middle-right",
+            "expression": "neutral",
+            "action": "drinking boba tea",
+            "outfit": "blue sweater"
+          },
+          {
+            "position": "bottom-left",
+            "expression": "happy",
+            "action": "waving",
+            "outfit": "purple sweater vest over white shirt"
+          },
+          {
+            "position": "bottom-center",
+            "expression": "laughing with eyes closed",
+            "action": "arms crossed",
+            "outfit": "pink cardigan"
+          },
+          {
+            "position": "bottom-right",
+            "expression": "silly",
+            "action": "poking cheeks",
+            "outfit": "teal sweater"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "num": "11",
+    "title": "个人资料 / 头像 - 神话角色头像网格",
+    "top_fields": [
+      "type",
+      "theme",
+      "style",
+      "layout"
+    ],
+    "data": {
+      "type": "角色头像网格",
+      "theme": "西游记神话",
+      "style": "简洁的 2D 卡通矢量插画，粗轮廓，平铺色彩",
+      "layout": {
+        "background": "浅灰色 细微纹理",
+        "format": "圆形头像网格，每个圆圈下方居中带有文字标签",
+        "rows": [
+          {
+            "count": 4,
+            "items": [
+              {
+                "label": "孙悟空",
+                "description": "戴着金箍和红围巾的猴子男孩"
+              },
+              {
+                "label": "唐三藏",
+                "description": "戴着华丽金冠的僧侣"
+              },
+              {
+                "label": "猪八戒",
+                "description": "拿着钉耙的猪人"
+              },
+              {
+                "label": "沙悟净",
+                "description": "拿着月牙铲的留胡子男子"
+              }
+            ]
+          },
+          {
+            "count": 4,
+            "items": [
+              {
+                "label": "白龙马",
+                "description": "戴着金缰绳的白马"
+              },
+              {
+                "label": "玉皇大帝",
+                "description": "留着白胡子、戴着金冠的长者"
+              },
+              {
+                "label": "观音",
+                "description": "手持柳枝的女神"
+              },
+              {
+                "label": "牛魔王",
+                "description": "身穿盔甲的凶猛牛魔"
+              }
+            ]
+          },
+          {
+            "count": 4,
+            "items": [
+              {
+                "label": "铁扇公主",
+                "description": "手持绿色芭蕉扇的女子"
+              },
+              {
+                "label": "红孩儿",
+                "description": "红发、长角且带有小火苗的男孩"
+              },
+              {
+                "label": "黑风怪",
+                "description": "眼睛闪烁红光的暗影恶魔"
+              },
+              {
+                "label": "哪吒",
+                "description": "扎着双丸子头、手持火尖枪的男孩"
+              }
+            ]
+          },
+          {
+            "count": 3,
+            "description": "重复铁扇公主、黑风怪和哪吒的局部行，底部略有裁剪"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "num": "17",
+    "title": "个人资料 / 头像 - 3x3 角色肖像网格",
+    "top_fields": [
+      "type",
+      "theme",
+      "style",
+      "layout",
+      "count",
+      "portraits"
+    ],
+    "data": {
+      "type": "角色肖像网格",
+      "theme": "权力的游戏角色",
+      "style": "2D 平面插画，简洁线条，漫画风格，侧脸向右，肤色白皙带腮红",
+      "layout": {
+        "grid": "3x3",
+        "background": "浅灰色纹理",
+        "frame_style": "白色圆角矩形边框，下方带有文字标签"
+      },
+      "count": 9,
+      "portraits": [
+        {
+          "label": "Jon Snow",
+          "description": "黑色半扎发，胡须，深色毛皮斗篷"
+        },
+        {
+          "label": "Daenerys Targaryen",
+          "description": "银色编发，蓝色连衣裙"
+        },
+        {
+          "label": "Tyrion Lannister",
+          "description": "棕色卷发，胡须，深色束腰外衣配金色别针"
+        },
+        {
+          "label": "Cersei Lannister",
+          "description": "金色编发，华丽的红金配色连衣裙"
+        },
+        {
+          "label": "Ned Stark",
+          "description": "棕色半扎发，胡须，深色毛皮斗篷"
+        },
+        {
+          "label": "Arya Stark",
+          "description": "深色短半扎发，棕色束腰外衣，剑柄"
+        },
+        {
+          "label": "Jaime Lannister",
+          "description": "金色短发，带有狮子图案的金色盔甲"
+        },
+        {
+          "label": "Sansa Stark",
+          "description": "红色编发，带有毛皮领的蓝色连衣裙"
+        },
+        {
+          "label": "Theon Greyjoy",
+          "description": "深色短卷发，带有海怪别针的深色束腰外衣"
+        }
+      ]
+    }
+  },
+  {
+    "num": "21",
+    "title": "社交媒体帖子 - 4 格日式数字广告横幅网格",
+    "top_fields": [
+      "type",
+      "layout"
+    ],
+    "data": {
+      "type": "2x2 日式数字广告横幅网格",
+      "layout": {
+        "structure": "4 个等分象限",
+        "quadrants": [
+          {
+            "position": "左上",
+            "theme": "旅游",
+            "subject": "一对情侣在白沙滩上牵手，眺望碧蓝的海水和明亮的蓝天。",
+            "elements": [
+              "左下角的红色木槿花"
+            ],
+            "text_labels": [
+              "今年こそ、解き放て。",
+              "沖縄旅行",
+              "3日間の癒やし旅",
+              "航空券＋ホテル",
+              "39,800円〜",
+              "絶景、グルメ、体験 ぜんぶ叶う!"
+            ],
+            "icons": {
+              "count": 3,
+              "descriptions": [
+                "飞机",
+                "酒店建筑",
+                "汽车"
+              ]
+            }
+          },
+          {
+            "position": "右上",
+            "theme": "护肤",
+            "subject": "一位年轻女性的特写肖像，皮肤水润透亮，闭着眼睛，轻轻触摸脸颊。",
+            "elements": [
+              "柔和的粉色渐变背景",
+              "动态水花效果",
+              "粉色化妆品罐，标签为 'LUMIÈRE Brightening Gel'"
+            ],
+            "text_labels": [
+              "毛穴・くすみ卒業！",
+              "透明感あふれる",
+              "水光肌へ",
+              "新感覚スキンケア",
+              "初回限定 78%OFF",
+              "1,980円"
+            ],
+            "badges": {
+              "count": 3,
+              "style": "金色圆形",
+              "labels": [
+                "毛穴ケア",
+                "高保湿",
+                "ハリ・ツヤ"
+              ]
+            }
+          },
+          {
+            "position": "左下",
+            "theme": "美食",
+            "subject": "厚切的五分熟牛排在深色烤盘上滋滋作响。",
+            "elements": [
+              "蒜片",
+              "迷迭香枝",
+              "带有烟雾和余烬光芒的深色背景"
+            ],
+            "text_labels": [
+              "とろける旨さ！",
+              "黒毛和牛",
+              "贅沢ステーキ",
+              "期間限定",
+              "特別価格",
+              "通常価格 8,980円",
+              "4,980円"
+            ],
+            "badges": {
+              "count": 1,
+              "style": "红色圆形",
+              "labels": [
+                "A4 A5等級"
+              ]
+            }
+          },
+          {
+            "position": "右下",
+            "theme": "在线教育",
+            "subject": "一名穿着蓝色衬衫的年轻男子在书桌前学习，在笔记本上写字，旁边放着一台打开的笔记本电脑。",
+            "elements": [
+              "明亮的室内光线",
+              "书桌环境"
+            ],
+            "text_labels": [
+              "スキマ時間で",
+              "最短合格！",
+              "オンライン資格講座",
+              "スマホで完結",
+              "効率学習で差がつく！",
+              "今だけ！ 受講料 20%OFF"
+            ],
+            "badges": {
+              "count": 1,
+              "style": "蓝色圆形",
+              "labels": [
+                "受講者数 10万人 突破！"
+              ]
+            },
+            "icons": {
+              "count": 2,
+              "descriptions": [
+                "智能手机",
+                "打开的书本"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "num": "24",
+    "title": "社交媒体帖子 - 7-Day Fashion Lookbook Infographic",
+    "top_fields": [
+      "type",
+      "header",
+      "subject",
+      "layout",
+      "footer"
+    ],
+    "data": {
+      "type": "7-day fashion lookbook infographic",
+      "header": {
+        "title": "一周穿搭指南",
+        "subtitle": "温柔 | 靓丽 | 优雅",
+        "slogan_cn": "优雅不设限，自信每一天",
+        "slogan_en": "ELEGANCE HAS NO LIMIT, BE CONFIDENT EVERY DAY"
+      },
+      "subject": "young elegant Asian woman",
+      "layout": {
+        "columns": 7,
+        "column_elements": [
+          "day_header",
+          "main_portrait",
+          "4_detail_thumbnails",
+          "outfit_specs",
+          "keywords_colors",
+          "3_color_swatches",
+          "star_ratings",
+          "fabric_price",
+          "4_season_icons"
+        ],
+        "days": [
+          {
+            "day": "周一 (MONDAY)",
+            "outfit": "beige blazer suit",
+            "scene": "场景：重要会议 / 正式商务"
+          },
+          {
+            "day": "周二 (TUESDAY)",
+            "outfit": "pink blazer suit",
+            "scene": "场景：日常通勤"
+          },
+          {
+            "day": "周三 (WEDNESDAY)",
+            "outfit": "cream knit cardigan set",
+            "scene": "场景：生活休闲"
+          },
+          {
+            "day": "周四 (THURSDAY)",
+            "outfit": "champagne slip dress",
+            "scene": "场景：外出私会"
+          },
+          {
+            "day": "周五 (FRIDAY)",
+            "outfit": "blue knit top, white skirt",
+            "scene": "场景：休闲社交"
+          },
+          {
+            "day": "周六 (SATURDAY)",
+            "outfit": "white sports bra, purple leggings",
+            "scene": "场景：运动休闲"
+          },
+          {
+            "day": "周日 (SUNDAY)",
+            "outfit": "beige lounge knitwear",
+            "scene": "场景：居家 / 约会"
+          }
+        ]
+      },
+      "footer": {
+        "tips": "Tips: 根据天气与场合灵活调整，配饰是提升整体造型的关键；保持自信与舒适，才是穿搭的最终目的。",
+        "legend": [
+          "春: 春季适用",
+          "夏: 夏季适用",
+          "秋: 秋季适用",
+          "冬: 冬季适用"
+        ]
+      }
+    }
+  },
+  {
+    "num": "27",
+    "title": "社交媒体帖子 - Satirical 4-Panel Product Ads",
+    "top_fields": [
+      "type",
+      "layout"
+    ],
+    "data": {
+      "type": "4-panel satirical product advertisement grid",
+      "layout": {
+        "grid": "2x2",
+        "panels": [
+          {
+            "position": "top-left",
+            "product_name": "座る石",
+            "visual": "man in white shirt and dark pants sitting on a large round stone in a park",
+            "catchphrase": "いつでも、どこでも、落ち着ける。",
+            "sales_badge": "累計販売数 12,000個 突破!",
+            "vertical_text": "公園のベンチが埋まっていた日に。",
+            "features_count": 3,
+            "features_labels": [
+              "重さ約8kgで安定感抜群",
+              "底面フェルト加工で傷つけにくい",
+              "付属の専用ベルトで持ち運び簡単"
+            ],
+            "extra_visual": "small inset image of the stone with a leather carrying strap",
+            "specs": [
+              "耐荷重 150kg",
+              "安心の日本製"
+            ]
+          },
+          {
+            "position": "top-right",
+            "product_name": "磨きたくない人の歯ブラシ",
+            "visual": "sleek light blue toothbrush angled diagonally on a dark blue background",
+            "toothbrush_text": "I don't want to brush my yeeth.",
+            "catchphrase": "持っているだけで安心感",
+            "vertical_text": "歯を磨く代わりに、これを持つ。",
+            "sales_badge": "シリーズ累計販売数 85,000本 突破!",
+            "features_count": 3,
+            "features_labels": [
+              "気持ちを落ち着けるお守り代わりに",
+              "会議や商談前のエチケットに",
+              "磨かない選択を、もっと自由に。"
+            ],
+            "bottom_banner": "歯磨きストレスから、あなたを解放する。"
+          },
+          {
+            "position": "bottom-left",
+            "product_name": "雲の貯金箱",
+            "visual": "hand inserting a coin into a fluffy white cloud-shaped piggy bank",
+            "catchphrase": "空気より軽い、安心感。",
+            "sales_badge": "累計販売数 23,567個 突破!",
+            "features_count": 3,
+            "features_labels": [
+              "ふわふわの触り心地",
+              "割れないから安心",
+              "インテリアに馴染むデザイン"
+            ],
+            "color_variants_count": 3,
+            "color_variants_labels": [
+              "blue",
+              "pink",
+              "white"
+            ],
+            "price": "¥2,980 (税込)",
+            "bottom_text": "今日から、空に向かってコツコツ貯めよう。"
+          },
+          {
+            "position": "bottom-right",
+            "product_name": "叱ってくれる石",
+            "visual": "round stone on a wooden desk with a pen, text written on the stone",
+            "stone_text": "いいかげんやれ",
+            "catchphrase": "やる気が出ないあなたへ。",
+            "sales_badge": "累計販売数 18,000個 突破!",
+            "features_count": 3,
+            "features_labels": [
+              "見るたびに心を奮い立たせる",
+              "厳選された言葉をランダム表示",
+              "電池不要、半永久的に叱ってくれる"
+            ],
+            "phrase_variants_count": 10,
+            "phrase_variants_labels": [
+              "甘えるな",
+              "考えるな",
+              "動け",
+              "現実を見ろ",
+              "逃げるな",
+              "寝るな",
+              "やればできる",
+              "お前ならできる",
+              "寝るな",
+              "もう言い訳するな"
+            ],
+            "price": "¥3,500 (税込)"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "num": "30",
+    "title": "社交媒体帖子 - Historical Figure Social Media Mockup",
+    "top_fields": [
+      "type",
+      "platform",
+      "header",
+      "post",
+      "footer"
+    ],
+    "data": {
+      "type": "mobile social media app UI mockup",
+      "platform": "Twitter/X dark mode",
+      "header": {
+        "status_bar": "time 19:28, bird icon, signal, wifi, battery",
+        "navigation": "back arrow, 'Tweet' title"
+      },
+      "post": {
+        "author": {
+          "avatar": "portrait of a Chinese emperor in red robes and black hat",
+          "display_name": "Emperor Zhu Yuanzhang 👑 [verified badge]",
+          "handle": "@Emperor_Ming"
+        },
+        "content": {
+          "text": "I have ascended to the Dragon Throne! Today, I am proclaimed as the Emperor of the Ming Dynasty. The era of Hongwu has begun. Let us rebuild our great nation together!",
+          "hashtags": "#MingDynasty #HongwuEra #NewBeginning",
+          "media_grid": {
+            "count": 3,
+            "images": [
+              "emperor seated on an ornate golden throne in red and gold robes",
+              "wide shot of a grand Chinese palace courtyard with a large crowd",
+              "emperor on horseback leading an army with a red dragon banner"
+            ]
+          }
+        },
+        "metadata": {
+          "timestamp": "1:36 PM · Jan 23, 1368",
+          "engagement": "5,432 Retweets, 8,765 Quotes, 20.1K Likes, 102.3K Views"
+        },
+        "actions": "reply, retweet, like (red heart with '1'), share, upload"
+      },
+      "footer": {
+        "reply_bar": {
+          "avatar": "woman in red",
+          "placeholder": "Reply to Emperor Zhu Yuanzhang..."
+        },
+        "navigation_bar": "home, search, notifications (red '1' badge), messages"
+      }
+    }
+  },
+  {
+    "num": "32",
+    "title": "社交媒体帖子 - 3D Cinematic Multi-Panel Promo Poster",
+    "top_fields": [
+      "type",
+      "style",
+      "characters",
+      "layout"
+    ],
+    "data": {
+      "type": "cinematic promotional poster",
+      "style": "3D CGI animation style, highly detailed, dramatic lighting, caricature characters",
+      "characters": [
+        {
+          "id": "char1",
+          "description": "large shirtless man with long black hair, beard, and glasses"
+        },
+        {
+          "id": "char2",
+          "description": "elderly woman in a kimono with white hair tied up"
+        },
+        {
+          "id": "char3",
+          "description": "small man with a topknot, glasses, mustache, wearing a bright green sweater"
+        }
+      ],
+      "layout": {
+        "panels": [
+          {
+            "position": "top",
+            "scene": "wide shot of a town street with buildings and a city skyline in the background",
+            "characters_present": [
+              "char1",
+              "char2",
+              "char3"
+            ],
+            "text_overlays": [
+              "ある日ーー",
+              "いつもの日常がーー",
+              "こんばんは"
+            ]
+          },
+          {
+            "position": "middle left",
+            "scene": "close-up of char1 looking shocked against a dark fiery background",
+            "text_overlays": [
+              "私が出禁？"
+            ]
+          },
+          {
+            "position": "middle right",
+            "scene": "close-up of char2 looking angry and pointing against a stormy sea background",
+            "text_overlays": [
+              "海を荒らすな！"
+            ]
+          },
+          {
+            "position": "bottom",
+            "scene": "char3 pointing, char1 screaming, a second instance of char3 falling backwards, and char2 sitting angrily against a fiery chaotic background",
+            "text_overlays": [
+              "全然出ない！"
+            ],
+            "bottom_titles": [
+              "パチンコ軍団親のイメチェン",
+              "LINEスタンプ販売中"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "num": "33",
+    "title": "社交媒体帖子 - 5-Panel Mixed Style Collage",
+    "top_fields": [
+      "type",
+      "layout",
+      "panels"
+    ],
+    "data": {
+      "type": "5-panel collage",
+      "layout": "grid with 3 top panels and 2 bottom panels",
+      "panels": [
+        {
+          "position": "top-left",
+          "subject": "analog clock",
+          "details": "teal background, time showing 7:42",
+          "style": "flat vector illustration"
+        },
+        {
+          "position": "top-middle",
+          "subject": "woman holding playing cards",
+          "details": "holding 5 cards: Ace of Spades, King of Hearts, Queen of Clubs, Jack of Diamonds, 10 of Spades",
+          "style": "classic oil painting portrait"
+        },
+        {
+          "position": "top-right",
+          "subject": "glass of red liquid",
+          "details": "wine glass filled to the brim with dark red liquid, marble surface",
+          "style": "photorealistic studio photography"
+        },
+        {
+          "position": "bottom-left",
+          "subject": "chessboard",
+          "details": "wooden board with 32 pieces in standard starting position",
+          "style": "photorealistic high-angle shot"
+        },
+        {
+          "position": "bottom-right",
+          "subject": "two dice",
+          "details": "left die shows 5 on top, right die shows 2 on top",
+          "style": "pop art comic book halftone with red and blue burst"
+        }
+      ]
+    }
+  },
+  {
+    "num": "34",
+    "title": "社交媒体帖子 - 2x2 SNS School Banner Ad Grid",
+    "top_fields": [
+      "type",
+      "theme",
+      "target_audience",
+      "layout"
+    ],
+    "data": {
+      "type": "2x2 grid of banner advertisements",
+      "theme": "SNSスクール",
+      "target_audience": "学生",
+      "layout": {
+        "grid": "2x2",
+        "panels": [
+          {
+            "position": "top-left",
+            "style": "dark neon, blue and purple",
+            "subject": "young woman looking up hopefully, holding a smartphone, wearing a purple sweatshirt",
+            "main_text": "SNSを仕事にしたい人へ",
+            "sub_text": "“好き”をカタチに。未来を変える一歩を、今。",
+            "elements": [
+              "white and yellow typography",
+              "yellow call-to-action button: チェックする >",
+              "hand-drawn neon accents (crown, stars, heart)"
+            ]
+          },
+          {
+            "position": "top-right",
+            "style": "bright, pop, cyan and white",
+            "subject": "young woman smiling directly at camera, holding a smartphone, wearing a teal hoodie, hair in a bun",
+            "main_text": "好きな発信を武器にする",
+            "sub_text": "企画・編集・投稿を学ぶ",
+            "elements": [
+              "torn paper texture backgrounds for text",
+              "yellow starburst sticker: 無料体験",
+              "3 feature icons with text: lightbulb (企画力), pencil (編集力), paper plane (投稿力)"
+            ]
+          },
+          {
+            "position": "bottom-left",
+            "style": "dark, analytical, neon purple and green",
+            "subject": "young man looking thoughtfully at his smartphone, wearing a black hoodie",
+            "main_text": "バズるだけじゃない 分析まで学べる",
+            "sub_text": "#伸びる理由がわかると、もっと伸ばせる。",
+            "elements": [
+              "3 floating holographic data panels with line graphs and stats (125.6万, 23.8%, 12.6%)",
+              "3 feature icons at bottom: bar chart (データ分析), magnifying glass (改善提案), target (成果につなげる)",
+              "yellow call-to-action button: 詳しく見る >"
+            ]
+          },
+          {
+            "position": "bottom-right",
+            "style": "bright, friendly, purple and white",
+            "subject": "group of 4 young people (3 women, 1 man) huddled together smiling at a smartphone",
+            "main_text": "SNSで未来の可能性を広げよう",
+            "sub_text": "仲間と学べるコミュニティ",
+            "elements": [
+              "torn paper texture backgrounds for text",
+              "3 bullet points with icons (people, speech bubbles, rising chart)",
+              "2 polaroid-style inset photos showing students studying at a desk",
+              "yellow call-to-action button: 今すぐ参加 >"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "num": "35",
+    "title": "社交媒体帖子 - 2x2 Grid of Online School Banner Ads",
+    "top_fields": [
+      "type",
+      "theme",
+      "design_style",
+      "layout"
+    ],
+    "data": {
+      "type": "2x2 grid of banner advertisements",
+      "theme": "SNSスクール for ママ",
+      "design_style": "soft, approachable, bright lighting, featuring soft green, white, and natural beige tones",
+      "layout": {
+        "sections": [
+          {
+            "position": "top-left",
+            "visual_style": "photography",
+            "image_description": "Smiling woman working on a laptop at a table, a toddler playing with toys in the blurred background.",
+            "headlines": [
+              "ママの“やってみたい”を応援！",
+              "子育てしながら学べる",
+              "SNSスクール"
+            ],
+            "features": {
+              "count": 1,
+              "type": "icon with text",
+              "labels": [
+                "自宅で無理なくスキルアップ (with house icon)"
+              ]
+            },
+            "call_to_action_button": "無料相談"
+          },
+          {
+            "position": "top-right",
+            "visual_style": "photography",
+            "image_description": "Smiling woman holding a white mug, looking at a laptop.",
+            "headlines": [
+              "ちょっとの時間が、大きな一歩に。",
+              "スキマ時間を未来につなげる",
+              "動画講座で学びやすい"
+            ],
+            "features": {
+              "count": 3,
+              "type": "circular icons with text below",
+              "labels": [
+                "スマホでも学べる (smartphone icon)",
+                "1日15分からOK (clock icon)",
+                "繰り返し視聴できる (play button icon)"
+              ]
+            },
+            "call_to_action_button": "詳しく見る"
+          },
+          {
+            "position": "bottom-left",
+            "visual_style": "watercolor illustration",
+            "image_description": "Illustration of a woman with hair in a bun, smiling at a laptop with a green mug nearby.",
+            "headlines": [
+              "はじめてでも大丈夫！ (with beginner mark)",
+              "在宅でできるSNSの仕事",
+              "未経験OK"
+            ],
+            "features": {
+              "count": 3,
+              "type": "circular icons with text below",
+              "labels": [
+                "サポート充実 (heart icon)",
+                "パソコンが苦手でも安心 (laptop icon)",
+                "収入の柱をつくれる (yen coin icon)"
+              ]
+            },
+            "call_to_action_button": "体験してみる"
+          },
+          {
+            "position": "bottom-right",
+            "visual_style": "photography",
+            "image_description": "Smiling mother and young daughter sitting on a sofa reading a picture book together.",
+            "headlines": [
+              "家族との時間も大切に",
+              "自分らしい働き方へ",
+              "ママの笑顔がいちばんの未来になる。"
+            ],
+            "features": {
+              "count": 3,
+              "type": "checkmark bullet points",
+              "labels": [
+                "場所や時間に縛られない",
+                "やりがいも収入も叶う",
+                "子どもの成長をそばで見守れる"
+              ]
+            },
+            "extra_graphics": "Small illustration of a house and trees at the bottom left.",
+            "call_to_action_button": "説明会へ"
+          }
+        ],
+        "common_elements": "All panels feature a rounded green pill button with white text and a right-pointing arrow icon at the bottom."
+      }
+    }
+  },
+  {
+    "num": "36",
+    "title": "社交媒体帖子 - 2x2 Social Media Course Banner Ads",
+    "top_fields": [
+      "type",
+      "theme",
+      "panels"
+    ],
+    "data": {
+      "type": "2x2 grid of promotional banner ads",
+      "theme": "Social Media Content Creation School",
+      "panels": [
+        {
+          "position": "top-left",
+          "color_palette": "light blue and pink pastel gradient",
+          "subject": "young woman smiling, resting chin on hand, smartphone and ring light in foreground",
+          "typography": {
+            "headline": "発信を仕事に変える SNSスクール",
+            "subheadings": [
+              "好きが、私の未来になる！",
+              "クリエイター志望歓迎！"
+            ]
+          },
+          "layout_elements": {
+            "bullet_points_count": 3,
+            "call_to_action_button": "pink button labeled '無料体験 >'"
+          }
+        },
+        {
+          "position": "top-right",
+          "color_palette": "deep blue and cyan geometric",
+          "subject": "young man looking intently at a professional camera on a tripod with a ring light",
+          "typography": {
+            "headline": "魅せる投稿が学べる",
+            "subheadings": [
+              "企画・撮影・運用サポート"
+            ]
+          },
+          "layout_elements": {
+            "circular_icons_count": 3,
+            "icon_types": [
+              "lightbulb",
+              "camera",
+              "bar chart"
+            ],
+            "call_to_action_button": "yellow button labeled '詳細はこちら >'"
+          }
+        },
+        {
+          "position": "bottom-left",
+          "color_palette": "soft beige and white aesthetic",
+          "subject": "young woman looking thoughtfully to the side, mood board background",
+          "typography": {
+            "headline": "自分の世界観を育てる",
+            "subheadings": [
+              "あなたらしさが、一番の強みになる。",
+              "SNSブランディング講座"
+            ]
+          },
+          "layout_elements": {
+            "horizontal_icons_count": 3,
+            "icon_types": [
+              "palette",
+              "person",
+              "heart"
+            ],
+            "call_to_action_button": "pink button labeled '今すぐ見る >'"
+          }
+        },
+        {
+          "position": "bottom-right",
+          "color_palette": "vibrant pink and magenta pop design",
+          "subject": "young woman smiling brightly, pointing at text, messy bun, smartphone on tripod",
+          "typography": {
+            "headline": "好きな発信でファンをつくる",
+            "subheadings": [
+              "実践型レッスン"
+            ]
+          },
+          "layout_elements": {
+            "bullet_points_count": 4,
+            "call_to_action_button": "yellow button labeled '申し込む >'"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "num": "37",
+    "title": "社交媒体帖子 - 9-Panel Self-Care Infographic Grid",
+    "top_fields": [
+      "type",
+      "style",
+      "character",
+      "layout"
+    ],
+    "data": {
+      "type": "infographic poster",
+      "style": "cute flat vector illustration, cozy, warm, soft shading, pastel Morandi colors, soft pinks, purples, and warm tones",
+      "character": "young woman with shoulder-length brown hair wearing a pinkish-purple shirt",
+      "layout": {
+        "structure": "4 rows, 3 columns. Top row is a merged header. Rows 2-4 contain 9 individual panels.",
+        "header": {
+          "title": "情绪不好了？",
+          "subtitle": "8个让你瞬间变好的方法",
+          "sub_subtitle": "写给焦虑的你，快来看看",
+          "visual": "character hugging herself, surrounded by yellow sparkles and hearts"
+        },
+        "grid_panels": [
+          {
+            "id": 1,
+            "title": "1. 深呼吸",
+            "text": "调节神经，缓解紧张情绪。",
+            "visual": "character with eyes closed, smiling, surrounded by clouds"
+          },
+          {
+            "id": 2,
+            "title": "2. 去户外散步",
+            "text": "接触自然，让心静下来。",
+            "visual": "character walking outdoors among green trees and bushes"
+          },
+          {
+            "id": 3,
+            "title": "3. 写情绪日记",
+            "text": "把烦恼写下，大脑会更轻松。",
+            "visual": "character sitting at a desk writing in a notebook with a pen, floating hearts"
+          },
+          {
+            "id": 4,
+            "title": "4. 抱抱自己",
+            "text": "给予自己温暖和安慰。",
+            "visual": "character hugging herself with eyes closed, floating hearts"
+          },
+          {
+            "id": 5,
+            "title": "5. 听听音乐",
+            "text": "让舒缓的旋律治愈心灵。",
+            "visual": "character wearing large white headphones, eyes closed, floating colorful music notes"
+          },
+          {
+            "id": 6,
+            "title": "6. 找人倾诉",
+            "text": "分享你的烦恼，让压力释放。",
+            "visual": "character holding a smartphone, talking to another similar-looking girl, floating hearts"
+          },
+          {
+            "id": 7,
+            "title": "7. 看看天空",
+            "text": "感受天空的辽阔，让心情变好。",
+            "visual": "character looking up at a blue sky with white clouds and sparkles"
+          },
+          {
+            "id": 8,
+            "title": "8. 冥想",
+            "text": "专注于呼吸，找回内心的宁静。",
+            "visual": "an open notebook, a pen, and a pink flower on a desk"
+          },
+          {
+            "id": 9,
+            "title": "none",
+            "text": "转发收藏，每天都要关爱自己！",
+            "visual": "character sitting cross-legged in a meditation pose, eyes closed, with a glowing halo behind her head"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "num": "39",
+    "title": "信息图 / 教育视觉图 - Fashion Design Process Infographic",
+    "top_fields": [
+      "type",
+      "title",
+      "subtitle",
+      "style",
+      "layout"
+    ],
+    "data": {
+      "type": "fashion design process infographic",
+      "title": "一件女装诞生的因果链 THE CAUSAL CHAIN OF A WOMEN'S GARMENT",
+      "subtitle": "从纤维，到版型，到上身 FROM FIBER TO FIT",
+      "style": {
+        "aesthetic": "elegant editorial, technical fashion illustration, highly detailed",
+        "color_palette": "beige, cream, and neutral tones"
+      },
+      "layout": {
+        "centerpiece": {
+          "description": "Exploded-view illustration of a women's trench coat dress showing cascading layers of fabric, pattern pieces, and stitching lines. Top shows a model wearing the finished garment.",
+          "central_list": {
+            "count": 13,
+            "type": "numbered steps with pointer lines",
+            "labels": [
+              "01 Material",
+              "02 Inspiration",
+              "03 Sketch",
+              "04 Fabric",
+              "05 Draping",
+              "06 Pattern",
+              "07 Sewing",
+              "08 Fitting",
+              "09 Revision",
+              "10 Team",
+              "11 Construction",
+              "12 Garment",
+              "13 Collaboration"
+            ]
+          }
+        },
+        "left_column": [
+          {
+            "module": "MODULE 1: RAW MATERIAL AND FABRIC",
+            "count": 6,
+            "items": [
+              "Fiber",
+              "Yarn Structure",
+              "Fabric Construction",
+              "Weight",
+              "Drape",
+              "Surface Texture"
+            ]
+          },
+          {
+            "module": "MODULE 2: INSPIRATION AND DIRECTION",
+            "count": 5,
+            "items": [
+              "Inspiration Source",
+              "Color Direction",
+              "Woman Image",
+              "Occasion Positioning",
+              "Silhouette Intention"
+            ]
+          },
+          {
+            "module": "MODULE 3: DESIGN SKETCH AND SILHOUETTE",
+            "count": 7,
+            "items": [
+              "Design Sketch",
+              "Construction Line",
+              "Front Back Relationship",
+              "Neckline",
+              "Shoulder Line",
+              "Waist Line",
+              "Hem Proportion"
+            ]
+          }
+        ],
+        "right_column": [
+          {
+            "module": "MODULE 4: PATTERNMAKING AND DRAPING",
+            "count": 6,
+            "items": [
+              "Draping",
+              "Patternmaking",
+              "Dart",
+              "Panel Line",
+              "Ease",
+              "Grain Direction"
+            ]
+          },
+          {
+            "module": "MODULE 5: CUTTING AND SAMPLING",
+            "count": 5,
+            "items": [
+              "Cutting",
+              "Layout",
+              "Sample Sewing",
+              "Construction Sequence",
+              "Technique Test"
+            ]
+          },
+          {
+            "module": "MODULE 6: FITTING AND REVISION",
+            "count": 4,
+            "items": [
+              "Fitting",
+              "Fit Issues",
+              "Before",
+              "After"
+            ]
+          }
+        ],
+        "bottom_row": [
+          {
+            "module": "MODULE 7: TEAM COLLABORATION",
+            "count": 8,
+            "items": [
+              "Designer",
+              "Patternmaker",
+              "Fabric Buyer",
+              "Sample Maker",
+              "Merchandiser",
+              "QC",
+              "Feedback Loop",
+              "Model"
+            ]
+          },
+          {
+            "module": "MODULE 8: FINAL GARMENT PRESENTATION",
+            "count": 3,
+            "items": [
+              "Details",
+              "Finished Front & Back",
+              "Labels & Care"
+            ]
+          },
+          {
+            "module": "MODULE 9: FINAL WEAR",
+            "count": 3,
+            "items": [
+              "Drape",
+              "Proportion",
+              "Movement in Motion"
+            ]
+          },
+          {
+            "module": "MODULE 10: THE CHAIN SUMMARY",
+            "count": 8,
+            "items": [
+              "Material Foundation",
+              "Aesthetic Judgment",
+              "Structural Engineering",
+              "Craft Realization",
+              "Body Negotiation",
+              "Team Collaboration",
+              "Iterative Revision",
+              "Final Garment"
+            ]
+          }
+        ],
+        "footer": "一件成衣，因无数判断而存在 A garment exists because of countless decisions."
+      }
+    }
+  },
+  {
+    "num": "40",
+    "title": "信息图 / 教育视觉图 - Medical Infographic on Diabetes Progression",
+    "top_fields": [
+      "type",
+      "style",
+      "color_palette",
+      "language",
+      "header",
+      "layout"
+    ],
+    "data": {
+      "type": "medical infographic poster",
+      "style": "highly detailed anatomical illustrations, clean structured layout, scientific diagrammatic style",
+      "color_palette": "medical red, blue, beige, and anatomical flesh tones",
+      "language": "bilingual Chinese and English",
+      "header": {
+        "main_title": "糖尿病诞生的因果链",
+        "english_title": "THE CAUSAL CHAIN OF DIABETES",
+        "subtitle": "从胰岛素失灵，到高血糖，到全身损伤"
+      },
+      "layout": {
+        "centerpiece": "transparent human body showing circulatory system and internal organs",
+        "sections_count": 14,
+        "sections": [
+          {
+            "id": "01",
+            "title": "葡萄糖进入生命",
+            "visuals": [
+              "stomach and intestines"
+            ]
+          },
+          {
+            "id": "02",
+            "title": "胰腺与胰岛素",
+            "visuals": [
+              "pancreas",
+              "beta cell"
+            ]
+          },
+          {
+            "id": "03",
+            "title": "正常胰岛素作用",
+            "visuals": [
+              "receptor signaling diagram",
+              "muscle, liver, adipose icons"
+            ]
+          },
+          {
+            "id": "04",
+            "title": "胰岛素抵抗: 2型通路开始",
+            "visuals": [
+              "receptor blockage diagram",
+              "7 lifestyle icons"
+            ]
+          },
+          {
+            "id": "05",
+            "title": "肝脏持续释放葡萄糖",
+            "visuals": [
+              "liver"
+            ]
+          },
+          {
+            "id": "06",
+            "title": "β细胞衰竭: 代偿到失败",
+            "visuals": [
+              "beta-cell decline line chart"
+            ]
+          },
+          {
+            "id": "07",
+            "title": "1型糖尿病分支",
+            "visuals": [
+              "autoimmune destruction diagram"
+            ]
+          },
+          {
+            "id": "08",
+            "title": "高血糖与血液化学",
+            "visuals": [
+              "blood vessel with glucose",
+              "glucose indicators table",
+              "glucose variability chart"
+            ]
+          },
+          {
+            "id": "09",
+            "title": "高血糖导致组织损伤",
+            "visuals": [
+              "4 pathways of damage diagrams"
+            ]
+          },
+          {
+            "id": "10",
+            "title": "急性代谢后果",
+            "visuals": [
+              "7 symptom icons"
+            ]
+          },
+          {
+            "id": "11",
+            "title": "微血管并发症",
+            "visuals": [
+              "eye",
+              "kidney",
+              "nerve cross-section"
+            ]
+          },
+          {
+            "id": "12",
+            "title": "大血管并发症与组织损伤",
+            "visuals": [
+              "heart",
+              "brain",
+              "diabetic foot"
+            ]
+          },
+          {
+            "id": "13",
+            "title": "器官系统长期代价",
+            "visuals": [
+              "text list"
+            ]
+          },
+          {
+            "id": "14",
+            "title": "糖尿病是调控系统失灵",
+            "visuals": [
+              "metabolic control flowchart"
+            ]
+          }
+        ],
+        "footer": {
+          "core_message": "核心信息 CORE MESSAGE"
+        }
+      }
+    }
+  },
+  {
+    "num": "41",
+    "title": "信息图 / 教育视觉图 - Medical Infographic of Gout Pathology",
+    "top_fields": [
+      "type",
+      "style",
+      "header",
+      "centerpiece",
+      "layout",
+      "theme"
+    ],
+    "data": {
+      "type": "comprehensive medical infographic",
+      "style": "highly detailed 3D medical illustration, clinical white background, clean typography",
+      "header": {
+        "title_cn": "痛风诞生的因果链",
+        "title_en": "THE CAUSAL CHAIN OF GOUT",
+        "subtitle": "Pain is not the beginning. Metabolic imbalance is.",
+        "top_right_sequence": {
+          "count": 6,
+          "labels": [
+            "Metabolism",
+            "Transport",
+            "Crystallization",
+            "Immunity",
+            "Inflammation",
+            "Damage"
+          ]
+        }
+      },
+      "centerpiece": {
+        "description": "transparent anatomical human body showing liver, kidneys, and vascular system",
+        "details": "pathway highlighted in glowing red descending to the foot"
+      },
+      "layout": {
+        "left_column": [
+          {
+            "id": "01",
+            "title": "Purine Sources",
+            "elements": 6,
+            "labels": [
+              "Red meat",
+              "Organ meats",
+              "Seafood",
+              "Beer",
+              "Endogenous",
+              "Fructose"
+            ]
+          },
+          {
+            "id": "02",
+            "title": "Uric Acid Production",
+            "elements": 2,
+            "labels": [
+              "Chemical pathway",
+              "Liver"
+            ]
+          },
+          {
+            "id": "03",
+            "title": "Renal & Intestinal Excretion",
+            "elements": 2,
+            "labels": [
+              "Kidney nephron",
+              "Intestines"
+            ]
+          },
+          {
+            "id": "04",
+            "title": "Hyperuricemia",
+            "elements": 2,
+            "labels": [
+              "Blood vial",
+              "Solubility graph"
+            ]
+          }
+        ],
+        "center_overlay": [
+          {
+            "id": "05",
+            "title": "Crystal Physics",
+            "elements": 3,
+            "labels": [
+              "Supersaturation beaker",
+              "Precipitation beaker",
+              "Molecular structure"
+            ]
+          },
+          {
+            "id": "06",
+            "title": "Joint Deposition & Local Environment",
+            "elements": 1,
+            "labels": [
+              "First MTP joint cross-section"
+            ]
+          }
+        ],
+        "right_column": [
+          {
+            "id": "07",
+            "title": "Immune Inflammatory Cascade",
+            "elements": 4,
+            "labels": [
+              "Macrophage",
+              "Inflammasome",
+              "Neutrophil",
+              "Cytokines"
+            ]
+          },
+          {
+            "id": "08",
+            "title": "Acute Gout Flare",
+            "elements": 1,
+            "labels": [
+              "Inflamed foot"
+            ]
+          },
+          {
+            "id": "09",
+            "title": "Chronic Structural Damage",
+            "elements": 1,
+            "labels": [
+              "Bone erosion joint"
+            ]
+          },
+          {
+            "id": "10",
+            "title": "Tophus Formation",
+            "elements": 2,
+            "labels": [
+              "Hand tophi",
+              "Foot tophi"
+            ]
+          },
+          {
+            "id": "11",
+            "title": "Beyond the Joint",
+            "elements": 2,
+            "labels": [
+              "Kidney stones",
+              "Systemic burden"
+            ]
+          }
+        ],
+        "bottom_row": [
+          {
+            "id": "12",
+            "title": "Pain Is the Final Signal",
+            "elements": 7,
+            "labels": [
+              "Increased Purine",
+              "Overproduction",
+              "Reduced Excretion",
+              "Hyperuricemia",
+              "Crystal Formation",
+              "Immune Activation",
+              "Man in pain"
+            ]
+          }
+        ]
+      },
+      "theme": "gout and uric acid crystallization"
+    }
+  },
+  {
+    "num": "42",
+    "title": "信息图 / 教育视觉图 - Camera Exploded View Infographic",
+    "top_fields": [
+      "type",
+      "subject",
+      "header",
+      "centerpiece",
+      "layout",
+      "style"
+    ],
+    "data": {
+      "type": "technical infographic",
+      "subject": "digital photography process",
+      "header": {
+        "title": "一张照片诞生的因果链 THE CAUSAL CHAIN OF A PHOTOGRAPH",
+        "subtitle": "从世界，到图像 FROM WORLD TO IMAGE"
+      },
+      "centerpiece": {
+        "description": "Exploded isometric view of a modern mirrorless camera",
+        "model": "Canon EOS R5",
+        "labeled_parts_count": 12,
+        "labeled_parts": [
+          "EVF",
+          "Body Structure",
+          "Control Dials",
+          "Thermal Design",
+          "Optical Axis",
+          "IBIS Stabilizer",
+          "Shutter Unit",
+          "Full-Frame Sensor",
+          "DIGIC X Processor",
+          "Main PCB",
+          "High-Speed Bus",
+          "Card Slot"
+        ]
+      },
+      "layout": {
+        "left_column": {
+          "description": "Chronological causal chain",
+          "count": 13,
+          "steps": [
+            "01 REALITY EXISTS",
+            "02 PHOTONS LEAVE THE WORLD",
+            "03 LENS ACCEPTS & BENDS LIGHT",
+            "04 APERTURE SELECTS",
+            "05 SHUTTER CUTS TIME",
+            "06 FOCUS SETS PRIORITY",
+            "07 SENSOR RECEIVES EVENT",
+            "08 LIGHT BECOMES CHARGE",
+            "09 ANALOG READOUT",
+            "10 A/D CONVERSION",
+            "11 COMPUTATION RECONSTRUCTS",
+            "12 IMAGE APPEARS",
+            "13 MEMORY OUTLIVES"
+          ]
+        },
+        "right_column": {
+          "title": "八大模块 / 8 MODULES",
+          "count": 8,
+          "modules": [
+            "1 ORIGIN OF LIGHT",
+            "2 LENS SHAPES REALITY",
+            "3 APERTURE & SHUTTER EDIT THE WORLD",
+            "4 FOCUS DECIDES CLARITY",
+            "5 SENSOR MEASURES LIGHT",
+            "6 SIGNAL BORN & AMPLIFIED",
+            "7 COMPUTATION BUILDS IMAGE",
+            "8 FILE BECOMES MEMORY"
+          ]
+        },
+        "side_diagrams": {
+          "count": 7,
+          "descriptions": [
+            "Ray cone & image formation",
+            "Aperture & depth of field",
+            "Shutter & motion",
+            "Focal plane & clarity",
+            "Pixel structure",
+            "Photoelectric conversion",
+            "Analog signal waveform"
+          ]
+        },
+        "footer": {
+          "count": 5,
+          "description": "Philosophical summary points"
+        }
+      },
+      "style": "technical, precise, wireframe elements, glowing data lines, photorealistic camera components, clean typography, dual-language"
+    }
+  },
+  {
+    "num": "43",
+    "title": "信息图 / 教育视觉图 - Camera Exploded View Infographic",
+    "top_fields": [
+      "type",
+      "header",
+      "centerpiece",
+      "layout",
+      "style"
+    ],
+    "data": {
+      "type": "technical infographic and exploded view diagram",
+      "header": {
+        "title": "佳能 EOS R5 成像系统剖面 CANON EOS R5 IMAGING ATLAS",
+        "subtitles": [
+          "一张照片是如何被制造出来的 HOW AN IMAGE IS ACTUALLY FORMED",
+          "从光，到数据 | FROM PHOTONS TO FILES",
+          "相机不是壳体，而是一条运算链 A camera is not a shell, but a computational chain"
+        ],
+        "top_left_box": {
+          "title": "EOS R5 核心规格 KEY SPECIFICATIONS",
+          "bullet_points_count": 6
+        },
+        "top_right_images": {
+          "count": 2,
+          "description": "front and back views of the camera body"
+        }
+      },
+      "centerpiece": {
+        "description": "highly detailed 3D exploded view of the Canon EOS R5 camera, showing internal components separated vertically",
+        "components_visible": [
+          "lens mount",
+          "lens elements with glowing blue light rays",
+          "image sensor",
+          "motherboard with glowing DIGIC X chip",
+          "battery pack",
+          "dual card slots",
+          "electronic viewfinder (EVF)"
+        ]
+      },
+      "layout": {
+        "numbered_sections": [
+          {
+            "number": 1,
+            "title": "光学入口 OPTICAL ENTRY",
+            "elements": [
+              "lens cross-section with light rays",
+              "2 line graphs"
+            ]
+          },
+          {
+            "number": 2,
+            "title": "光圈、快门与曝光控制 APERTURE, SHUTTER, EXPOSURE",
+            "elements": [
+              "3 aperture blade diagrams",
+              "4 shutter speed example photos",
+              "depth of field diagram",
+              "exposure triangle diagram"
+            ]
+          },
+          {
+            "number": 3,
+            "title": "对焦系统与成像平面 FOCUS ACQUISITION + IMAGE PLANE",
+            "elements": [
+              "lens alignment diagram",
+              "AF coverage photo of a runner"
+            ]
+          },
+          {
+            "number": 4,
+            "title": "传感器与像素结构 SENSOR + PIXEL ARCHITECTURE",
+            "elements": [
+              "3D pixel array diagram",
+              "single pixel cross-section diagram",
+              "sensor spec table",
+              "quantum efficiency graph"
+            ]
+          },
+          {
+            "number": 5,
+            "title": "防抖系统与机械稳定 IBIS + MECHANICAL STABILIZATION",
+            "elements": [
+              "sensor shift mechanism diagram with yaw/pitch/roll axes",
+              "2 stabilization effect comparison photos"
+            ]
+          },
+          {
+            "number": 6,
+            "title": "模拟信号、模数转换与读出 ANALOG READOUT + A/D CONVERSION",
+            "elements": [
+              "signal flowchart",
+              "3 readout timing graphs",
+              "signal-to-noise ratio graph",
+              "rolling shutter example photo of a car"
+            ]
+          },
+          {
+            "number": 7,
+            "title": "DIGIC X 图像处理链 DIGIC X IMAGE PROCESSING PIPELINE",
+            "elements": [
+              "processing flowchart with central chip",
+              "dynamic range graph",
+              "tone curve graph",
+              "histogram"
+            ]
+          },
+          {
+            "number": 8,
+            "title": "文件生成、显示与存储 FILE OUTPUT, PREVIEW, STORAGE",
+            "elements": [
+              "file output flowchart",
+              "2 storage card icons",
+              "file workflow diagram"
+            ]
+          }
+        ],
+        "bottom_comparisons": {
+          "count": 5,
+          "labels": [
+            "传感器尺寸对比 SENSOR SIZE COMPARISON",
+            "镜头焦距与视角 FOCAL LENGTH & ANGLE OF VIEW",
+            "ISO 与噪点关系 ISO & NOISE RELATIONSHIP",
+            "光圈与景深关系 APERTURE & DEPTH OF FIELD",
+            "RAW vs JPEG"
+          ]
+        },
+        "footer": "光被捕获，数据被解读，影像被记录，记忆被永恒。 Light is captured. Data is interpreted. Image is recorded. Memory is eternal."
+      },
+      "style": "clean, technical, highly detailed, photorealistic components, blueprint-style annotations, light gray background, precise typography"
+    }
+  },
+  {
+    "num": "44",
+    "title": "信息图 / 教育视觉图 - Botanical Growth Atlas Infographic",
+    "top_fields": [
+      "type",
+      "subject",
+      "style",
+      "header",
+      "centerpiece",
+      "layout"
+    ],
+    "data": {
+      "type": "scientific botanical infographic poster",
+      "subject": "Pomegranate (Punica granatum)",
+      "style": "vintage botanical illustration mixed with modern infographic design, highly detailed, earthy greens, deep reds, parchment background",
+      "header": {
+        "main_title": "植物生命路径剖面",
+        "english_title": "BOTANICAL GROWTH ATLAS",
+        "subtitle": "从种子到果实，一株植物如何展开自己 / FROM SEED TO FRUIT"
+      },
+      "centerpiece": "full plant showing extensive root system, woody stem, green leaves, blooming red flowers, and ripe fruits including one halved to show seeds",
+      "layout": {
+        "numbered_sections": [
+          {
+            "number": 1,
+            "title": "种子结构 / Seed Architecture",
+            "content": "cross-section of a single seed with 6 labeled parts"
+          },
+          {
+            "number": 2,
+            "title": "萌发机制 / Germination Mechanism",
+            "content": "sequence of 5 sprouting seeds showing radicle emergence"
+          },
+          {
+            "number": 3,
+            "title": "根系与地下网络 / Root System + Subsurface Intelligence",
+            "content": "detailed root network with 2 circular microscopic cross-sections showing vascular bundles and hyphae"
+          },
+          {
+            "number": 4,
+            "title": "茎叶生长与维管系统 / Stem, Leaf & Vascular System",
+            "content": "leaf detail and circular stem cross-section with 5 labeled layers"
+          },
+          {
+            "number": 5,
+            "title": "光合作用与能量转换 / Photosynthesis + Energy Conversion",
+            "content": "3D cellular cross-section of a leaf showing mesophyll and chloroplasts, plus a chemical equation diagram"
+          },
+          {
+            "number": 6,
+            "title": "花芽分化与开花机制 / Bud Formation + Blooming",
+            "content": "detailed flower cross-section showing stamen and ovary, plus a 4-season timeline"
+          },
+          {
+            "number": 7,
+            "title": "授粉与结果路径 / Pollination + Fruiting Pathway",
+            "content": "bee approaching a flower cross-section, followed by a sequence of 5 stages of ovary development into a fruit"
+          },
+          {
+            "number": 8,
+            "title": "果实成熟与种子循环 / Fruit Maturation + Seed Cycle",
+            "content": "ripe fruit breaking open, seeds dispersing downwards to a new sprout"
+          }
+        ],
+        "additional_elements": [
+          {
+            "position": "bottom left",
+            "title": "环境触发因素 / Environmental Triggers",
+            "content": "grid of 6 weather/environmental icons and 6 nutrient element icons (N, P, K, Ca, Mg, Fe)"
+          },
+          {
+            "position": "bottom edge",
+            "title": "Growth Timeline",
+            "content": "linear sequence of 19 small plant icons showing the complete life cycle from seed to mature plant"
+          }
+        ],
+        "footer_quote": "理解植物，就是理解生命如何在时间中构建秩序。"
+      }
+    }
+  },
+  {
+    "num": "45",
+    "title": "信息图 / 教育视觉图 - 3D Urban Systems Atlas Infographic",
+    "top_fields": [
+      "type",
+      "style",
+      "header",
+      "layout"
+    ],
+    "data": {
+      "type": "complex urban systems atlas infographic",
+      "style": "dark background with glowing blue, gold, and purple accents, highly detailed technical illustration, 3D isometric cutaway",
+      "header": {
+        "title": "上海城市系统剖面 SHANGHAI URBAN SYSTEMS ATLAS",
+        "subtitles": [
+          "地表之上，是城市；地表之下，是秩序 Beneath the skyline lies the machine.",
+          "一座城市如何运转 How a Megacity Actually Works"
+        ]
+      },
+      "layout": {
+        "top_left": "Compass rose and city map labeled '上海市域位置 SHANGHAI LOCATION'",
+        "top_right": "Data table titled '城市数据 CITY DATA' with 7 rows of statistics",
+        "centerpiece": {
+          "description": "highly detailed 3D isometric cutaway render of a megacity river landscape",
+          "layers": [
+            "地面层 SURFACE",
+            "排水层 DRAINAGE LAYER",
+            "电力层 POWER LAYER",
+            "通信层 COMMUNICATION LAYER",
+            "轨道交通层 METRO LAYER",
+            "道路隧道层 ROAD TUNNEL LAYER",
+            "管廊综合层 UTILITY CORRIDOR LAYER"
+          ]
+        },
+        "side_panels": [
+          {
+            "id": "01",
+            "title": "城市主骨架 URBAN SKELETON",
+            "elements": "Map with 8 legend items"
+          },
+          {
+            "id": "02",
+            "title": "排水与地下水网 DRAINAGE + STORMWATER",
+            "elements": "Cross-section diagram '典型排水剖面 DRAINAGE SECTION' with 5 legend items"
+          },
+          {
+            "id": "03",
+            "title": "电网与能源分配 POWER GRID + ENERGY",
+            "elements": "Cross-section diagram '典型变电站剖面 SUBSTATION SECTION' with 6 legend items"
+          },
+          {
+            "id": "04",
+            "title": "通信与网络骨干 TELECOM + INTERNET",
+            "elements": "Cross-section diagram '数据中心剖面 DATA CENTER SECTION' with 6 legend items"
+          },
+          {
+            "id": "05",
+            "title": "地铁与地下交通 METRO + SUBSURFACE MOBILITY",
+            "elements": "Cross-section diagram '人民广场站剖面 PEOPLE'S SQUARE STATION' with 6 legend items"
+          },
+          {
+            "id": "06",
+            "title": "道路、高架与循环 ROADS + ELEVATED MOBILITY",
+            "elements": "Cross-section diagram '南浦大桥剖面 NANPU BRIDGE SECTION' with 6 legend items"
+          },
+          {
+            "id": "07",
+            "title": "管廊与地下设施 UTILITY CORRIDORS + PLUMBING",
+            "elements": "Cross-section diagram '综合管廊 UTILITY CORRIDOR' with 8 legend items"
+          },
+          {
+            "id": "08",
+            "title": "城市流量与系统协同 URBAN FLOWS + COORDINATION",
+            "elements": "Map diagram '城市运行指挥中心 CITY OPERATIONS CENTER' with 6 legend items"
+          }
+        ],
+        "bottom_panels": {
+          "system_logic": {
+            "title": "城市系统协同逻辑 SYSTEM COORDINATION LOGIC",
+            "steps": 4,
+            "labels": [
+              "感知层 SENSING LAYER",
+              "网络层 NETWORK LAYER",
+              "平台层 PLATFORM LAYER",
+              "应用层 APPLICATION LAYER"
+            ]
+          },
+          "city_brain": {
+            "title": "城市大脑 CITY BRAIN",
+            "central_node": 1,
+            "peripheral_nodes": 8
+          },
+          "references": {
+            "depth_scale": {
+              "title": "深度与尺度 DEPTH & SCALE REFERENCE",
+              "icons": 5
+            },
+            "map_scale": {
+              "title": "比例尺 SCALE",
+              "markers": 4
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "num": "48",
+    "title": "信息图 / 教育视觉图 - Scientific Optical Hardware Diagram",
+    "top_fields": [
+      "type",
+      "layout"
+    ],
+    "data": {
+      "type": "scientific hardware diagram",
+      "layout": {
+        "main_scene": "3D render of an optical table with a red laser beam passing through 11 aligned optical components mounted on black posts.",
+        "top_brackets": [
+          {
+            "label": "Dual Modulation",
+            "span": "SLM1"
+          },
+          {
+            "label": "4f Relay Optics",
+            "span": "Lens L1 to Lens L2"
+          },
+          {
+            "label": "Imaging Optics",
+            "span": "SLM2 to Lens L4"
+          },
+          {
+            "label": "Detection",
+            "span": "Camera"
+          }
+        ],
+        "optical_components_left_to_right": [
+          {
+            "name": "Laser",
+            "labels": [
+              "Laser",
+              "λ = 632.8 nm"
+            ]
+          },
+          {
+            "name": "SLM1",
+            "labels": [
+              "SLM1",
+              "(Phase / Pol. Mod.)"
+            ]
+          },
+          {
+            "name": "Lens L1",
+            "labels": [
+              "Lens L1",
+              "(f1)"
+            ]
+          },
+          {
+            "name": "Iris",
+            "labels": [
+              "Fourier Plane",
+              "(Pupil Plane)",
+              "Iris",
+              "(Higher Orders Filtered)"
+            ]
+          },
+          {
+            "name": "HWP",
+            "labels": [
+              "HWP",
+              "(λ/2)"
+            ]
+          },
+          {
+            "name": "Lens L2",
+            "labels": [
+              "Lens L2",
+              "(f1)"
+            ]
+          },
+          {
+            "name": "SLM2",
+            "labels": [
+              "SLM2",
+              "(Phase / Pol. Mod.)"
+            ]
+          },
+          {
+            "name": "Lens L3",
+            "labels": [
+              "Lens L3",
+              "(f2)"
+            ]
+          },
+          {
+            "name": "Lens L4",
+            "labels": [
+              "Lens L4",
+              "(f2)"
+            ]
+          },
+          {
+            "name": "Linear Polarizer",
+            "labels": [
+              "Linear",
+              "-Polarizer",
+              "(Global Analyzer)"
+            ]
+          },
+          {
+            "name": "Polarization Camera",
+            "labels": [
+              "POLARIZATION CAMERA"
+            ]
+          }
+        ],
+        "inset_box": {
+          "position": "bottom right",
+          "title": "Polarization Camera Micro-Polarizer Array (Per-Pixel Analyzer)",
+          "grid": "4x4 grid of colored squares with directional arrows",
+          "legend_count": 4,
+          "legend_items": [
+            "Red square, horizontal arrow, 0° (H)",
+            "Green square, vertical arrow, 90° (V)",
+            "Blue square, diagonal arrow, 45° (D)",
+            "Yellow square, diagonal arrow, 135° (A)"
+          ]
+        },
+        "bottom_caption": {
+          "figure_prefix": "Fig. 5.",
+          "title": "Ellipsography Hardware Setup.",
+          "text": "Paragraph of scientific text explaining the dual-modulation configuration, 4f relay optics, and polarization camera."
+        }
+      }
+    }
+  },
+  {
+    "num": "49",
+    "title": "信息图 / 教育视觉图 - Optical Hardware Setup Diagram",
+    "top_fields": [
+      "type",
+      "main_setup",
+      "inset_diagram",
+      "bottom_caption"
+    ],
+    "data": {
+      "type": "scientific optical setup diagram",
+      "main_setup": {
+        "base": "optical breadboard table with grid of mounting holes",
+        "beam": "red laser beam passing horizontally through all components",
+        "top_grouping_brackets": [
+          "Dual Modulation",
+          "4f Relay Optics",
+          "Imaging Optics",
+          "Detection"
+        ],
+        "components_left_to_right": [
+          {
+            "name": "Laser",
+            "label": "λ = 632.8 nm",
+            "appearance": "black rectangular box"
+          },
+          {
+            "name": "SLM1",
+            "label": "(Phase / Pol. Mod.)",
+            "appearance": "black square device on post"
+          },
+          {
+            "name": "Lens L1",
+            "label": "(f1)",
+            "appearance": "lens in black ring mount"
+          },
+          {
+            "name": "Iris",
+            "label": "Fourier Plane (Pupil Plane) / (Higher Orders Filtered)",
+            "appearance": "black ring mount with dashed line above"
+          },
+          {
+            "name": "HWP",
+            "label": "(λ/2)",
+            "appearance": "purple-tinted optic in black ring mount"
+          },
+          {
+            "name": "Lens L2",
+            "label": "(f1)",
+            "appearance": "lens in black ring mount"
+          },
+          {
+            "name": "SLM2",
+            "label": "(Phase / Pol. Mod.)",
+            "appearance": "black square device on post"
+          },
+          {
+            "name": "Lens L3",
+            "label": "(f2)",
+            "appearance": "lens in black ring mount"
+          },
+          {
+            "name": "Lens L4",
+            "label": "(f2)",
+            "appearance": "lens in black ring mount"
+          },
+          {
+            "name": "Linear Polarizer",
+            "label": "(Global Analyzer)",
+            "appearance": "lens in black ring mount"
+          },
+          {
+            "name": "Polarization Camera",
+            "label": "POLARIZATION CAMERA",
+            "appearance": "blue and black box camera"
+          }
+        ]
+      },
+      "inset_diagram": {
+        "position": "bottom right, dashed border",
+        "title": "Polarization Camera Micro-Polarizer Array (Per-Pixel Analyzer)",
+        "visuals": "4x4 grid of colored squares with white directional arrows",
+        "legend_count": 4,
+        "legend_labels": [
+          "red right-arrow 0° (H)",
+          "green up-arrow 90° (V)",
+          "blue diagonal-arrow 45° (D)",
+          "yellow diagonal-arrow 135° (A)"
+        ]
+      },
+      "bottom_caption": {
+        "figure_number": "Fig. 5.",
+        "title": "Ellipsography Hardware Setup.",
+        "description": "Our prototype display system employs a dual-modulation configuration to achieve simultaneous control of phase and polarization. A 4f relay optics setup transfers the modulated wavefront..."
+      }
+    }
+  },
+  {
+    "num": "50",
+    "title": "信息图 / 教育视觉图 - Soccer Match Infographic Poster",
+    "top_fields": [
+      "type",
+      "theme",
+      "background",
+      "header",
+      "matchup",
+      "facts_section",
+      "footer"
+    ],
+    "data": {
+      "type": "sports match infographic poster",
+      "theme": "UEFA Champions League",
+      "background": "dark blue and purple cosmic sky, glowing blue hexagonal lines, illuminated stadium reflecting on water at bottom",
+      "header": {
+        "logo": "UEFA Champions League",
+        "title": "HALBFINALE",
+        "subtitle": "DAS ZIEL: BUDAPEST 2026",
+        "venue": "PUSKÁS ARÉNA"
+      },
+      "matchup": {
+        "player_left": "Harry Kane in red FC Bayern kit",
+        "player_right": "Ousmane Dembélé in blue PSG kit",
+        "center_logos": "FC Bayern München and Paris Saint-Germain with VS",
+        "date_box": "calendar icon, MITTWOCH, 06.05.2026"
+      },
+      "facts_section": {
+        "title": "FACTS",
+        "count": 5,
+        "items": [
+          "Trophy icon: DIE KÖNIGSKLASSE 2025/26",
+          "Bar chart icon: KANE IN TOPFORM",
+          "Lightning bolt icon: DEMBÉLÉ ÜBERFLIEGER",
+          "Two people icon: BISHER 14 DUELLE",
+          "Stadium icon: BUDAPEST RUFT"
+        ]
+      },
+      "footer": {
+        "trophy": "Champions League trophy on right",
+        "stadium_image": "Puskás Aréna at night",
+        "tagline": "EIN TRAUM. EIN ZIEL. EIN TITEL.",
+        "bottom_text": "ROAD TO BUDAPEST 2026"
+      }
+    }
+  },
+  {
+    "num": "55",
+    "title": "YouTube 缩略图 - VTuber Chat Stream Thumbnail",
+    "top_fields": [
+      "type",
+      "style",
+      "character",
+      "layout"
+    ],
+    "data": {
+      "type": "VTuber stream thumbnail",
+      "style": "anime, highly detailed, cute, sparkly, overwhelmingly pink color palette",
+      "character": {
+        "description": "anime girl with brown hair in twin buns, amber eyes, smiling gently",
+        "outfit": "pink kimono combined with a white frilly maid apron, cherry blossom hair accessories",
+        "pose": "holding a pink microphone decorated with a flower near her face"
+      },
+      "layout": {
+        "background": "pink gradient with sparkles, glowing hearts, and decorative pink bows",
+        "text_sections": [
+          {
+            "type": "top ribbon",
+            "text": "まったりおしゃべりしよ〜🤍"
+          },
+          {
+            "type": "main title",
+            "text": "雑談配信",
+            "decorations": "surrounded by 3 large peach illustrations"
+          },
+          {
+            "type": "middle ribbon",
+            "text": "みんなと楽しい時間を過ごしたいなっ♡"
+          },
+          {
+            "type": "bullet points",
+            "position": "bottom left",
+            "count": 3,
+            "icon": "peach",
+            "labels": [
+              "初見さん〇",
+              "ポイント回収〇",
+              "ROMO"
+            ]
+          },
+          {
+            "type": "speech bubble",
+            "position": "bottom right",
+            "text": "コメント大歓迎♪ いっぱいお話し しようねっ♡"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "num": "56",
+    "title": "YouTube 缩略图 - Pastel Pink VTuber Stream Thumbnail",
+    "top_fields": [
+      "type",
+      "theme",
+      "character",
+      "layout"
+    ],
+    "data": {
+      "type": "VTuber stream thumbnail",
+      "theme": "pastel pink, soft, cute, lace, ribbons, hearts, bunny motif",
+      "character": {
+        "position": "right side, waist-up",
+        "appearance": "anime girl, pastel pink long wavy hair, large grey eyes, blush, pink heart earrings",
+        "accessories": "white bunny ears, large pink bow on head",
+        "outfit": "white frilly dress with lace, large pink ribbon bow at collar with heart gem"
+      },
+      "layout": {
+        "background": "soft pink with subtle sparkles, lace patterns, floating hearts",
+        "text_elements": [
+          {
+            "type": "main title",
+            "position": "top left",
+            "style": "large stylized pink text with white outline",
+            "text": "雑談配信"
+          },
+          {
+            "type": "speech bubble",
+            "position": "above main title",
+            "text": "まったり"
+          },
+          {
+            "type": "circular badge",
+            "position": "top right",
+            "details": "lace-edged with small pink bow",
+            "text": "きてくれてありがとう♡"
+          },
+          {
+            "type": "heart badge",
+            "position": "bottom right",
+            "details": "large lace-edged heart",
+            "text": "みんなとおしゃべりできるの楽しみにしてるね♡"
+          }
+        ],
+        "list_section": {
+          "position": "bottom left",
+          "count": 3,
+          "style": "horizontal pill-shaped banners with lace edges, each featuring a pink heart with white bunny ears and a tiny bow on the left",
+          "items": [
+            "初見さん〇",
+            "ポイント回収〇",
+            "ROM〇"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "num": "57",
+    "title": "YouTube 缩略图 - Anime VTuber Livestream Thumbnail",
+    "top_fields": [
+      "type",
+      "character",
+      "background",
+      "typography_and_ui"
+    ],
+    "data": {
+      "type": "anime-style livestream thumbnail",
+      "character": {
+        "hair": "short silver hair with cyan underlights",
+        "eyes": "large bright blue",
+        "outfit": "white collared shirt, black tie with silver accents, black jacket, black beret with a large blue heart jewel, blue jewel brooch, black choker",
+        "pose": "smiling gently, looking at viewer, positioned on the right side"
+      },
+      "background": "pastel blue with white clouds, sparkles, stars, small bows, and a subtle grid pattern",
+      "typography_and_ui": {
+        "top_left_speech_bubble": "まったりおしゃべりしよ〜♡",
+        "main_title": {
+          "text": "雑談配信",
+          "style": "large, soft blue gradient, white outline, decorated with small hearts, positioned on the middle-left"
+        },
+        "bottom_left_badges": {
+          "count": 3,
+          "style": "white pill-shaped buttons with a purple heart icon on the left",
+          "labels": [
+            "初見さん〇",
+            "ポイント回収〇",
+            "ROM〇"
+          ]
+        },
+        "bottom_right_cloud_bubble": "気軽にコメントしてね♡"
+      }
+    }
+  },
+  {
+    "num": "58",
+    "title": "YouTube 缩略图 - VTuber Chat Stream Thumbnail",
+    "top_fields": [
+      "type",
+      "character",
+      "background",
+      "typography_and_layout"
+    ],
+    "data": {
+      "type": "VTuber stream thumbnail",
+      "character": {
+        "hair": "long blonde twin tails with pink gradient ends",
+        "eyes": "large pink anime eyes",
+        "expression": "cheerful smile with a small fang, making a peace sign near the eye",
+        "outfit": "black top with harness straps, black heart-ring choker, multiple ear piercings including a cross dangle, black nail polish"
+      },
+      "background": "vibrant neon pink and black leopard print with glowing yellow accents, sparkles, and floating hearts",
+      "typography_and_layout": {
+        "main_title": {
+          "position": "top left",
+          "style": "large, bold, 3D, pink and black with white outlines",
+          "text": "雑談配信"
+        },
+        "top_right_text": {
+          "style": "casual handwritten style with a heart",
+          "text": "まったり話そ〜♡"
+        },
+        "bottom_left_banners": {
+          "count": 3,
+          "style": "glowing pill-shaped banners with heart icons on the left",
+          "colors": [
+            "pink",
+            "yellow",
+            "purple"
+          ],
+          "labels": [
+            "初見さん〇",
+            "ポイント回収〇",
+            "ROM〇"
+          ]
+        },
+        "bottom_right_text": {
+          "style": "casual handwritten style with a heart, yellow text with pink outline",
+          "text": "気軽にコメントしてねっ♡"
+        }
+      }
+    }
+  },
+  {
+    "num": "60",
+    "title": "YouTube 缩略图 - VTuber 初配信缩略图",
+    "top_fields": [
+      "type",
+      "character",
+      "background",
+      "layout"
+    ],
+    "data": {
+      "type": "VTuber 初配信缩略图",
+      "character": {
+        "appearance": "动漫少女，深紫色长发，紫色眼睛，荷叶边白衬衫，深紫色领结，巨大的发饰",
+        "pose": "手指抵唇，可爱的表情",
+        "props": "右侧配有带防喷罩和紫色丝带的电容麦克风"
+      },
+      "background": "魔法星空，闪光特效，发光的蝴蝶，紫色与白色调",
+      "layout": {
+        "typography": [
+          {
+            "position": "左上角",
+            "style": "大号粗体文字，上方配有英文连体字",
+            "text": "初配信",
+            "subtext_1": "First Stream",
+            "subtext_2": "初次见面！我是紫咲莉莉 (Shisaki Lily)！"
+          },
+          {
+            "position": "中左侧",
+            "style": "装饰性边框",
+            "text": "お嬢様学校に通う清楚系VTuberですわ♪"
+          },
+          {
+            "position": "左下角",
+            "style": "Logo 风格",
+            "text": "紫咲リリー",
+            "subtext": "Shisaki Lily"
+          },
+          {
+            "position": "右上角",
+            "style": "竖排文字",
+            "text": "皆さまの心に、優雅なひとときをお届けしますわ♪"
+          },
+          {
+            "position": "右下角",
+            "style": "装饰性胶囊形状",
+            "text": "4.21 SUN 21:00~",
+            "subtext": "✦ START ✦"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "num": "61",
+    "title": "YouTube 缩略图 - 金色与黑色风格信息产品缩略图",
+    "top_fields": [
+      "type",
+      "style",
+      "subject",
+      "layout"
+    ],
+    "data": {
+      "type": "宣传横幅 / YouTube 缩略图",
+      "style": "高对比度、华丽、专业，金色与黑色 配色，发光射线，闪烁粒子",
+      "subject": {
+        "description": "一位穿着深色西装、双臂交叉的自信亚裔年轻男性",
+        "pose": "看向右上方",
+        "props": "面前放着一台发光的笔记本电脑"
+      },
+      "layout": {
+        "background": "深色背景配以放射状金色光芒",
+        "text_sections": {
+          "top_left_badge": "[保存版]",
+          "top_header": "零基础也能从今天开始！以最短时间掌握 AI 变现能力！",
+          "main_title": {
+            "text": "AI 副业完全攻略",
+            "style": "大号、粗体、3D 金色与白色排版"
+          },
+          "subtitle_box": "新手也能月入 10 万",
+          "top_right_badge": {
+            "style": "金色月桂花环",
+            "text": "2026 年最新版"
+          },
+          "middle_right_tags": {
+            "count": 3,
+            "style": "堆叠式金色边框方框",
+            "labels": [
+              "最短时间变现",
+              "附具体案例",
+              "人人皆可上手"
+            ]
+          },
+          "middle_right_ribbon": {
+            "style": "红色丝带横幅",
+            "text": "步骤详尽解析"
+          },
+          "bottom_left_tags": {
+            "count": 6,
+            "style": "2x3 金色边框方框网格",
+            "labels": [
+              "推荐工具介绍",
+              "清晰的变现流程",
+              "不踩坑的入门方法",
+              "最小化工作时间",
+              "附带模板",
+              "易于复刻的方法"
+            ]
+          },
+          "bottom_footer": "不再迷茫！AI 副业教科书",
+          "bottom_right_badge": {
+            "style": "金色月桂花环",
+            "text": "附带模板"
+          }
+        }
+      }
+    }
+  },
+  {
+    "num": "62",
+    "title": "YouTube 缩略图 - Neon AI 副业 YouTube 缩略图",
+    "top_fields": [
+      "type",
+      "style",
+      "character",
+      "layout"
+    ],
+    "data": {
+      "type": "宣传横幅缩略图",
+      "style": "活力霓虹，宇宙星系背景，动漫插画风格，高密度日语排版，发光文字特效",
+      "character": {
+        "description": "面带微笑的年轻女性，右手食指指向斜上方",
+        "appearance": "长 棕色 发，紫色水滴耳环，纹理紫色毛衣",
+        "position": "右侧"
+      },
+      "layout": {
+        "background": "紫色、粉色和蓝色星空星云",
+        "center_typography": {
+          "top_small_text": "何から始めるか迷う人へ",
+          "main_title": "初心者でもわかる AI副業",
+          "subtitle": "最初の1本におすすめ",
+          "floating_text_near_character": "やさしく解説♡"
+        },
+        "top_left": {
+          "yellow_ribbon": "ゼロから始める"
+        },
+        "top_right": {
+          "pink_circle_badge": "初心者 OK"
+        },
+        "left_column": {
+          "count": 7,
+          "description": "药丸形状的徽章堆叠",
+          "labels": [
+            "スマホでもOK (带手机图标)",
+            "副業デビューに (带新手标记图标)",
+            "具体例つき",
+            "テンプレ付き",
+            "おすすめツール紹介",
+            "収益化の流れ",
+            "失敗しない始め方"
+          ]
+        },
+        "bottom_left_graphics": {
+          "count": 3,
+          "items": [
+            "显示 AI 大脑电路图的笔记本电脑",
+            "发光的灯泡",
+            "正在起飞的火箭"
+          ]
+        },
+        "bottom_center": {
+          "large_purple_button": "完全解説",
+          "checklist_text_below": "✓始め方 ✓稼ぎ方 ✓注意点 ✓続け方まで全部わかる！"
+        },
+        "bottom_right": {
+          "pink_cloud_shape": {
+            "count": 3,
+            "bullet_points": [
+              "✓難しい知識不要",
+              "✓今日から始められる",
+              "✓やさしく丁寧に解説"
+            ]
+          },
+          "gold_medal_seal": "保存版",
+          "purple_badge": "2026年 最新版"
+        }
+      }
+    }
+  },
+  {
+    "num": "63",
+    "title": "YouTube 缩略图 - 霓虹商务信息产品缩略图",
+    "top_fields": [
+      "type",
+      "style",
+      "background",
+      "subject",
+      "layout"
+    ],
+    "data": {
+      "type": "YouTube 缩略图",
+      "style": "高冲击力，霓虹绿与黑色配色方案，赛博商务美学",
+      "background": "深色背景，带有发光的绿色网格、向上的图表线条和巨大的绿色箭头",
+      "subject": {
+        "description": "身着黑色西装的严肃日本男性",
+        "position": "右侧",
+        "props": "右下角堆叠的 1 万日元钞票"
+      },
+      "layout": {
+        "main_title": {
+          "text": "月入 30 万 ChatGPT 副业，人人皆可上手",
+          "position": "居中，巨大的粗体白色与绿色渐变文字"
+        },
+        "top_left_badge": {
+          "text": "高可复制性",
+          "style": "倾斜的霓虹绿边框"
+        },
+        "top_tags": {
+          "count": 4,
+          "labels": [
+            "新手友好",
+            "手机即可操作",
+            "快速实现变现",
+            "附具体案例"
+          ]
+        },
+        "left_bullet_points": {
+          "count": 6,
+          "style": "带有霓虹绿边框和图标的深色方框",
+          "items": [
+            "灯泡图标：零失败起步法",
+            "日元硬币图标：副业推荐",
+            "图表图标：变现流程",
+            "搜索图标：项目寻找方法",
+            "聊天图标：附提示词示例",
+            "剪贴板图标：附模板"
+          ]
+        },
+        "bottom_banner": {
+          "text": "步骤详解",
+          "icons": "左侧 ChatGPT Logo，右侧向上图表"
+        },
+        "bottom_tags": {
+          "count": 2,
+          "labels": [
+            "2026 年最新版",
+            "即刻上手"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "num": "66",
+    "title": "YouTube 缩略图 - YouTube 直播界面模型",
+    "top_fields": [
+      "type",
+      "top_nav",
+      "player",
+      "details"
+    ],
+    "data": {
+      "type": "YouTube 直播 UI",
+      "top_nav": {
+        "logo": "YouTube Premium",
+        "search": "bilal fraiha",
+        "icons": 3
+      },
+      "player": {
+        "subjects": [
+          "Sydney Sweeney 身穿白色开衫",
+          "留胡子的男子身穿米色夹克正在大笑"
+        ],
+        "bg": "沙发，2 个银色播放按钮，公羊标志 'SARDI'",
+        "overlays": {
+          "chat": {
+            "pos": "左侧",
+            "count": 15,
+            "desc": "彩色用户名，白色文本"
+          },
+          "goal": {
+            "pos": "右上角",
+            "text": "今晚目标：0 到 25"
+          },
+          "banner": {
+            "pos": "底部中央",
+            "text": "K MOREBILAL"
+          }
+        },
+        "controls": {
+          "count": 10
+        }
+      },
+      "details": {
+        "title": "FULL STREAM | سيدني سويني مع بلال",
+        "channel": "More Bilal No Filter",
+        "buttons": 5
+      }
+    }
+  },
+  {
+    "num": "68",
+    "title": "YouTube 缩略图 - 动漫 VTuber 反应视频缩略图",
+    "top_fields": [
+      "type",
+      "style",
+      "character",
+      "layout"
+    ],
+    "data": {
+      "type": "YouTube 缩略图",
+      "style": "动漫风格，前卫，霓虹粉与黑色配色，带有颓废风和喷溅装饰",
+      "character": {
+        "appearance": "动漫少女，银色 头发，猫耳，紫色双眸",
+        "expression": "震惊且冒汗，张嘴",
+        "accessories": "带有粉色十字架的黑色猫咪发夹，带有心形环的黑色颈圈",
+        "action": "手持带有漩涡标志的粉色智能手机"
+      },
+      "layout": {
+        "main_title": {
+          "position": "底部居中",
+          "style": "巨大、粗体、3D 字体，带有颓废质感",
+          "lines": [
+            {
+              "text": "争议话题",
+              "color": "霓虹粉"
+            },
+            {
+              "text": "在线阅读 ;;",
+              "color": "白色"
+            }
+          ]
+        },
+        "ui_elements": [
+          {
+            "type": "社交媒体信息流模拟",
+            "position": "中左",
+            "header": "← 话题",
+            "post_count": 3,
+            "details": "头像，中文文本，点赞、评论、转发的交互图标"
+          },
+          {
+            "type": "实时聊天模拟",
+            "position": "右侧边缘",
+            "message_count": 4,
+            "details": "粉色用户图标，中文文本"
+          }
+        ],
+        "text_callouts": [
+          {
+            "type": "尖刺状对话气泡",
+            "position": "顶部居中",
+            "text": "这真的对吗？;;"
+          },
+          {
+            "type": "霓虹灯箱",
+            "position": "右上角",
+            "text": "实时反应中"
+          },
+          {
+            "type": "漂浮的颓废风文字",
+            "position": "最左侧",
+            "line_count": 3,
+            "text": [
+              "OO 争议",
+              "震惊真相",
+              "史诗级事件"
+            ]
+          },
+          {
+            "type": "带有箭头的手写文字",
+            "position": "右下角",
+            "text": "你们怎么看？"
+          }
+        ],
+        "logos": [
+          {
+            "type": "应用图标",
+            "position": "左上角",
+            "description": "黑色圆角方块上的白色漩涡标志"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "num": "69",
+    "title": "YouTube 缩略图 - YouTube 直播演示界面模型",
+    "top_fields": [
+      "type",
+      "header",
+      "video_player",
+      "video_details"
+    ],
+    "data": {
+      "type": "YouTube 桌面深色模式 UI 模型",
+      "header": {
+        "logo": "YouTube",
+        "search_bar": "搜索",
+        "icons_count": 5,
+        "icons": [
+          "搜索",
+          "麦克风",
+          "创建",
+          "通知",
+          "个人资料"
+        ]
+      },
+      "video_player": {
+        "top_left_badge": "直播",
+        "left_side": {
+          "subject": "身穿绿色毛衣站在木质讲台上的男士",
+          "podium_logo": "OpenAI"
+        },
+        "right_side_presentation": {
+          "text_elements": [
+            "OpenAI",
+            "隆重推出",
+            "GPT-Image-2",
+            "更逼真。更实用。更具创造力。"
+          ],
+          "sample_images_count": 4,
+          "sample_images": [
+            "带船的山间湖泊",
+            "光影斑驳的女性肖像",
+            "森林里提着灯笼的可爱机器人",
+            "星夜咖啡馆画作"
+          ]
+        },
+        "bottom_controls_count": 10,
+        "bottom_controls": [
+          "暂停",
+          "下一条",
+          "音量",
+          "直播",
+          "红色进度条",
+          "字幕",
+          "设置",
+          "迷你播放器",
+          "影院模式",
+          "全屏"
+        ]
+      },
+      "video_details": {
+        "title": "OpenAI 直播：隆重推出 GPT-Image-2",
+        "channel": {
+          "name": "OpenAI",
+          "verified": true,
+          "subscribers": "136 万",
+          "button": "订阅"
+        },
+        "action_buttons_count": 5,
+        "action_buttons": [
+          "喜欢 1.2 万",
+          "不喜欢 497",
+          "分享",
+          "保存",
+          "更多"
+        ],
+        "description_box": {
+          "stats": "95,237 人正在观看，7 分钟前开始直播",
+          "tags": "#OpenAI #GPTImage2 #AI",
+          "text": "欢迎参加我们的特别直播活动，我们将介绍 GPT-Image-2，这是我们最新且最先进的图像生成模型。观看新功能演示、实时演示并听取团队分享……更多"
+        }
+      }
+    }
+  },
+  {
+    "num": "75",
+    "title": "漫画 / 故事板 - Satirical 4-Panel Caricature Comic Strip",
+    "top_fields": [
+      "type",
+      "style",
+      "characters",
+      "layout"
+    ],
+    "data": {
+      "type": "4-panel vertical comic strip",
+      "style": "black and white pencil sketch, crosshatch shading, satirical caricature comic",
+      "characters": {
+        "subject_1": "Sam Altman, curly hair, casual sweater",
+        "subject_2": "Ronan Farrow, suit, tie, holding notepad"
+      },
+      "layout": {
+        "panels": [
+          {
+            "panel_number": 1,
+            "top_caption": "SAM ALTMAN THINKS THIS WILL BE A NICE LITTLE PROFILE...",
+            "scene": "subject_1 looking smug with hands steepled; subject_2 looking serious taking notes.",
+            "thought_bubble": "I'LL BE CHARMING. IT'LL BE A GREAT CHARACTER PIECE. PEOPLE WILL LOVE IT.",
+            "center_text": "THE RONAN FARROW INTERVIEW",
+            "inset_portraits": {
+              "count": 2,
+              "labels": [
+                "HARVEY WEINSTEIN EXPOSED",
+                "LESLIE MOONVES EXPOSED"
+              ]
+            },
+            "info_boxes": {
+              "count": 3,
+              "text": [
+                "RONAN FARROW: PULITZER PRIZE-WINNING REPORTER WHO EXPOSED HARVEY WEINSTEIN AT THE NEW YORKER",
+                "AND LESLIE MOONVES AT CBS.",
+                "POWER. ABUSE. ACCOUNTABILITY."
+              ]
+            }
+          },
+          {
+            "panel_number": 2,
+            "top_caption": "CUT TO...",
+            "scene": "Close-up of subject_1 looking shocked and horrified.",
+            "article_header": "THE NEW YORKER\nTHE SAM ALTMAN PROFILE\nTHE OPENAI CEO'S COMPLICATED QUEST\nBy Ronan Farrow"
+          },
+          {
+            "panel_number": 3,
+            "top_caption": "SOON AFTER THE ARTICLE IS PUBLISHED...",
+            "scene": "subject_1 looking extremely stressed, sweating, holding a phone to his ear. Surrounded by 6 hands holding smartphones.",
+            "phone_labels": [
+              "VC",
+              "REPORTER",
+              "EX-STAFFEE",
+              "INVESTOR",
+              "TECH CEO",
+              "FORMER COLLEAGUE"
+            ],
+            "shouts": {
+              "count": 8,
+              "text": [
+                "LIAR!",
+                "COMPULSIVE LIAR!",
+                "PATHOLOGICAL LIAR!",
+                "YOU CAN'T STOP LYING!",
+                "LIAR!!!",
+                "SOCIOPATH! (ALLEGEDLY)",
+                "EVERYTHING HE SAYS IS A LIE!",
+                "MANIPULATIVE LIAR!"
+              ]
+            },
+            "sound_effects": "RING! RING! RING!"
+          },
+          {
+            "panel_number": 4,
+            "top_caption": "AND THE REPORT CONCLUDES...",
+            "scene": "subject_1 looking utterly defeated and depressed.",
+            "quote_box": "\"ALTMAN FREQUENTLY AND CONSISTENTLY LIES TO INVESTORS, EMPLOYEES, THE BOARD, AND EVEN CLOSE FRIENDS.\"\n\"HE APPEARS TO HAVE NO COMFORT TELLING FALSEHOODS.\"\n\"HE IS, BY MANY ACCOUNTS, A COMPULSIVE LIAR AND A SOCIOPATH.\"\n(ALLEGEDLY)",
+            "thought_bubble": {
+              "scene": "Happy subject_1 holding a 'WORLD'S BEST CEO' mug.",
+              "text": "I THOUGHT IT WOULD BE A NICE LITTLE PROFILE...",
+              "sparkle_words": {
+                "count": 4,
+                "text": [
+                  "GENIUS!",
+                  "VISIONARY!",
+                  "INSPIRING!",
+                  "BRILLIANT LEADER!"
+                ]
+              }
+            },
+            "bottom_caption": "INSTEAD, IT'S THE PROFILE THAT EXPOSES HIM."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "num": "76",
+    "title": "漫画 / 故事板 - Two-Page Psychological Thriller Manga Spread",
+    "top_fields": [
+      "type",
+      "style",
+      "global_elements",
+      "layout"
+    ],
+    "data": {
+      "type": "two-page manga spread",
+      "style": "highly detailed realistic manga, monochrome, screentones, dramatic lighting, psychological thriller",
+      "global_elements": {
+        "protagonist": "young Japanese salaryman in a suit",
+        "theme": "surrounded by a massive crowd of identical clones of himself"
+      },
+      "layout": {
+        "left_page": {
+          "type": "full page splash panel",
+          "setting": "Shibuya scramble crossing at night",
+          "visuals": "Protagonist standing alone in the center of the crossing, looking around in shock at a massive crowd where every single person is an exact clone of him.",
+          "text_elements": [
+            {
+              "type": "manga title logo",
+              "text": "俺だらけの街"
+            },
+            {
+              "type": "subtitle",
+              "text": "第1話 交代"
+            },
+            {
+              "type": "narration box",
+              "text": "その夜、世界は静かに俺をやめた。"
+            },
+            {
+              "type": "sound effect",
+              "text": "ザワ…"
+            }
+          ]
+        },
+        "right_page": {
+          "type": "5-panel vertical layout",
+          "panels": [
+            {
+              "panel_number": 1,
+              "visuals": "Extreme close-up of protagonist's eyes, wide with shock, sweating.",
+              "text_elements": [
+                {
+                  "type": "speech bubble",
+                  "text": "……は？ なんで……みんな、俺なんだ？"
+                },
+                {
+                  "type": "sound effect",
+                  "text": "ドクン"
+                }
+              ]
+            },
+            {
+              "panel_number": 2,
+              "visuals": "A horizontal row of 8 identical clones in suits staring blankly forward.",
+              "text_elements": [
+                {
+                  "type": "sound effect",
+                  "text": "ザワ…"
+                }
+              ]
+            },
+            {
+              "panel_number": 3,
+              "visuals": "A clone leaning in to whisper into the shocked protagonist's ear.",
+              "text_elements": [
+                {
+                  "type": "speech bubble",
+                  "text": "お前の代わりは、もう足りてる。"
+                },
+                {
+                  "type": "sound effect",
+                  "text": "スッ"
+                }
+              ]
+            },
+            {
+              "panel_number": 4,
+              "visuals": "Close-up of a smartphone screen held in a hand, showing a push notification.",
+              "text_elements": [
+                {
+                  "type": "screen text",
+                  "text": "交代を開始します。"
+                },
+                {
+                  "type": "sound effect",
+                  "text": "ピロン"
+                }
+              ]
+            },
+            {
+              "panel_number": 5,
+              "visuals": "Wide shot of the endless crowd of clones in the city street.",
+              "text_elements": [
+                {
+                  "type": "narration box",
+                  "text": "最初に消えるのは、名前でも命でもない。居場所だ。"
+                },
+                {
+                  "type": "bottom left text",
+                  "text": "俺は、ここにいていいのか——？"
+                },
+                {
+                  "type": "bottom right text",
+                  "text": "次号へつづく！"
+                },
+                {
+                  "type": "sound effect",
+                  "text": "ザワ… ザワ… ザワ…"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "num": "77",
+    "title": "漫画 / 故事板 - Manga Spread: Fantasy Game Developer",
+    "top_fields": [
+      "type",
+      "style",
+      "theme",
+      "character",
+      "layout"
+    ],
+    "data": {
+      "type": "2-page manga spread",
+      "style": "monochrome anime manga, screentones",
+      "theme": "fantasy mage developing a video game",
+      "character": "anime girl with blonde hair, tiara, cape, white dress, thigh-highs",
+      "layout": {
+        "left_page": {
+          "panel_count": 11,
+          "rows": [
+            {
+              "panels": 1,
+              "action": "Determined at dual-monitor desk, speech bubble: '新作ゲーム、絶対完成させる！'"
+            },
+            {
+              "panels": 3,
+              "action": "Typing, drawing on tablet, testing with controller"
+            },
+            {
+              "panels": 3,
+              "action": "Shocked at ERROR screen, depressed, determined again"
+            },
+            {
+              "panels": 4,
+              "action": "Exhausted, sudden realization, furious typing, monitor showing 'Build succeeded!'"
+            }
+          ]
+        },
+        "right_page": {
+          "panel_count": 2,
+          "panels": [
+            {
+              "type": "large splash",
+              "action": "Casting magic from a glowing circle at a code-error monster labeled 'NullReferenceException'. Speech bubble: 'デバッグ魔法!!'"
+            },
+            {
+              "type": "bottom banner",
+              "action": "Cheering in front of RPG title screen. Speech bubble: 'やったー！'"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "num": "80",
+    "title": "漫画 / 故事板 - Anime Movie Pitch Document with Poster and Settei",
+    "top_fields": [
+      "type",
+      "overall_layout",
+      "top_section",
+      "bottom_sections"
+    ],
+    "data": {
+      "type": "anime movie production pitch document",
+      "overall_layout": "split layout with a large cinematic movie poster on the top half and a grid of 5 detailed reference sheets on the bottom half",
+      "top_section": {
+        "type": "movie poster",
+        "visual": "A man, a woman, and a dog standing on a ruined city street, facing away from the viewer, looking towards a colossal, porous, web-like alien structure dominating the sky. A rusty 'RESTRICTED AREA' sign is on the right.",
+        "typography": {
+          "title": "劇場版 巨骸の向こう側 Fallen Colossus",
+          "release_date": "2027.11.28 ROADSHOW",
+          "tagline": "そこにあるのは、まだ「説明」されていないもの。",
+          "credits_studio": "WIT STUDIO"
+        }
+      },
+      "bottom_sections": [
+        {
+          "title": "来栖 武 / Kurusu Takeru",
+          "type": "character reference sheet",
+          "elements": {
+            "full_body_poses": 3,
+            "expressions": 3,
+            "detail_shots": 8,
+            "description": "Male protagonist in dark tactical jacket and cargo pants. Includes front, back, and side full-body views, headshots, and detailed callouts for gloves, boots, backpack, and radio."
+          }
+        },
+        {
+          "title": "大城 真那 / Oshiro Mana",
+          "type": "character reference sheet",
+          "elements": {
+            "full_body_poses": 3,
+            "expressions": 3,
+            "detail_shots": 6,
+            "description": "Female protagonist in grey tactical uniform. Includes front, back, and side full-body views, headshots, and detailed callouts for jacket, boots, ID badge, and pouch."
+          }
+        },
+        {
+          "title": "カゲ (Kage) 設定画",
+          "type": "animal character reference sheet",
+          "elements": {
+            "full_body_poses": 4,
+            "expressions": 4,
+            "detail_shots": 5,
+            "description": "Dog companion. Includes side, front, back, and angled full-body views, headshots, and detailed callouts for fur texture, paws, and a motorcycle sidecar."
+          }
+        },
+        {
+          "title": "第7巨骸 (Remnant-7) 内部区画 設定画",
+          "type": "environment and vehicle reference sheet",
+          "elements": {
+            "large_diagrams": 1,
+            "environment_thumbnails": 4,
+            "vehicle_designs": 1,
+            "description": "Cross-section of the porous alien structure, smaller environment thumbnails, and a motorcycle design featuring the characters."
+          }
+        },
+        {
+          "title": "Concept Art",
+          "type": "scene illustration",
+          "elements": {
+            "characters": 3,
+            "vehicles": 1,
+            "description": "The male character, female character, and dog with a motorcycle sidecar parked in front of the glowing, porous alien structure."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "num": "82",
+    "title": "漫画 / 故事板 - Futuristic Corporate 3-Panel Manga Page",
+    "top_fields": [
+      "type",
+      "style",
+      "layout",
+      "panels"
+    ],
+    "data": {
+      "type": "3-panel manga page",
+      "style": "anime, highly detailed, cinematic lighting, futuristic corporate",
+      "layout": {
+        "structure": "1 wide top panel, 2 square bottom panels"
+      },
+      "panels": [
+        {
+          "position": "top",
+          "shot": "wide landscape",
+          "scene": "Futuristic corporate lobby with floor-to-ceiling windows",
+          "lighting": "sunrise",
+          "background": "City skyline featuring Tokyo Tower",
+          "details": "Holographic displays, polished reflective floor, reception desk, lounge chairs"
+        },
+        {
+          "position": "bottom left",
+          "shot": "close-up profile",
+          "character": "Young woman, dark hair, black business suit",
+          "accessories": "Futuristic black earpiece with glowing blue light",
+          "speech_bubble": {
+            "style": "standard rounded",
+            "text": "数字はいいわ"
+          }
+        },
+        {
+          "position": "bottom right",
+          "shot": "full body, walking away, touching earpiece",
+          "character": "Same woman, black suit, black heels, carrying a black tote bag",
+          "environment": "Approaching security gates",
+          "holographic_sign": "ECHO 42F",
+          "speech_bubble": {
+            "style": "futuristic angular",
+            "text": "おはようございます、ユキさん。本日は記念すべき ──"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "num": "83",
+    "title": "漫画 / 故事板 - 4-Panel Parody Movie Poster Grid",
+    "top_fields": [
+      "type",
+      "layout",
+      "posters"
+    ],
+    "data": {
+      "type": "movie poster grid",
+      "layout": "2x2 grid",
+      "posters": [
+        {
+          "position": "top-left",
+          "genre": "sci-fi comedy",
+          "visuals": "A Japanese salaryman sitting on a crowded train looking nervous, flanked by two aliens in business attire: a green frog-like alien looking at a smartphone, and a blue octopus-like alien reading a newspaper.",
+          "text_elements": {
+            "tagline_top": "隣の席のアイツ、実は宇宙人でした。",
+            "train_display": "次は 地球 (ちきゅう) Next Earth",
+            "tagline_side": "この星の常識、いつの間にかアップデートされていた。",
+            "main_title": "となりの宇宙人",
+            "cast": "星野サダオ タコヤキ・Z カエルダ・X",
+            "release_date": "6月13日(金) 全国公開"
+          }
+        },
+        {
+          "position": "top-right",
+          "genre": "surreal romance",
+          "visuals": "A man in a dark jacket affectionately hugging a giant onigiri (rice ball) topped with mentaiko (spicy cod roe) wrapped in seaweed. They are sitting on a rocky beach during a beautiful sunset.",
+          "text_elements": {
+            "tagline": "めんたいこは、裏切らない。",
+            "main_title": "めんたいこ ひとすじ",
+            "cast": "中尾シンイチ めんたい子 博多ミツル 高菜ユカリ のり平",
+            "release_date": "7月18日(金) 心にしみる、しお味系ラブストーリー"
+          }
+        },
+        {
+          "position": "bottom-left",
+          "genre": "heist comedy",
+          "visuals": "A joyful elderly woman in a leopard print blouse laughing maniacally while holding a fan of Japanese yen bills. Money is raining down around her. A happy raccoon is in the foreground.",
+          "text_elements": {
+            "tagline": "人生、まだまだ使いきってなんかない！",
+            "main_title": "老後の逆襲",
+            "subtitle": "〜いたずらタヌキと億万長者〜",
+            "cast": "ババンバ・バーバラ タヌキチ 金持ちババ 遺産マユミ 税理士ゴンザレス",
+            "release_date": "9月5日(金) 痛快！下剋上エンターテインメント！"
+          }
+        },
+        {
+          "position": "bottom-right",
+          "genre": "disaster thriller",
+          "visuals": "A dramatic disaster scene where laundry baskets, shirts, and clothes are being sucked up into a stormy, apocalyptic sky above a ruined Tokyo city skyline featuring the Tokyo Tower.",
+          "text_elements": {
+            "tagline": "それは、静かに、確実に、洗濯物を奪っていく。",
+            "main_title": "洗濯物 ストーム",
+            "cast": "森タクヤ 干場カオリ 風間ハルキ ピンチハンガー・タカ 洗濯バサミ・ケン",
+            "release_date": "8月29日(金) 全国の空が、危ない。"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "num": "84",
+    "title": "漫画 / 故事板 - Anime Character Reference Sheet",
+    "top_fields": [
+      "type",
+      "character",
+      "layout"
+    ],
+    "data": {
+      "type": "anime character reference sheet",
+      "character": {
+        "name": "真田大助",
+        "appearance": "young warrior with long brown hair, wearing samurai-inspired armor, red chest plate and guards, navy blue pleated hakama, white short cape"
+      },
+      "layout": {
+        "header": {
+          "title": "真田大助",
+          "subtitle": "戦国時代を舞台にした物語の主人公。日英クォーターの若き武将。",
+          "badge": "設定資料"
+        },
+        "right_side": {
+          "main_portrait": "large full-body standing pose, confident smile",
+          "background_elements": {
+            "emblem": "six-coin crest",
+            "quote": "この国を守る。その誇りと共に。",
+            "scenery": "monochrome Japanese castle with army banners at the bottom right"
+          }
+        },
+        "sections": [
+          {
+            "title": "プロフィール",
+            "position": "top-left",
+            "content": "table with 6 rows and descriptive text"
+          },
+          {
+            "title": "三面図",
+            "position": "mid-left",
+            "count": 3,
+            "labels": [
+              "正面",
+              "側面",
+              "背面"
+            ]
+          },
+          {
+            "title": "表情差分",
+            "position": "top-center",
+            "count": 6,
+            "labels": [
+              "通常",
+              "微笑み",
+              "真剣",
+              "怒り",
+              "驚き",
+              "考え中"
+            ]
+          },
+          {
+            "title": "衣装・装備詳細",
+            "position": "bottom-left",
+            "count": 9,
+            "labels": [
+              "胸当て",
+              "肩当て",
+              "腕甲(籠手)",
+              "脚甲(脛当て・膝当て)",
+              "革靴",
+              "白マント(短)",
+              "帯",
+              "袴/着物部分",
+              "打刀"
+            ]
+          },
+          {
+            "title": "カラーパレット",
+            "position": "bottom-center",
+            "count": 8,
+            "labels": [
+              "真田赤",
+              "濃紺",
+              "金",
+              "白",
+              "茶",
+              "茶褐色",
+              "肌色",
+              "銀"
+            ]
+          },
+          {
+            "title": "世界観",
+            "position": "bottom-center-right",
+            "content": "paragraph of text describing the setting"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "num": "86",
+    "title": "漫画 / 故事板 - Anime Production Layout Sheet",
+    "top_fields": [
+      "type",
+      "style",
+      "subject",
+      "background",
+      "layout"
+    ],
+    "data": {
+      "type": "anime production layout sheet",
+      "style": "traditional colored pencil genga, key animation drawing",
+      "subject": {
+        "character": "ナズナ 七草",
+        "appearance": "anime girl with light purple hair styled in twin braids and bangs, blue eyes, wearing a dark oversized coat",
+        "pose_and_expression": "smug with a small fang, resting chin on hand"
+      },
+      "background": "nighttime city skyline with a railing, soft focus",
+      "layout": {
+        "top_edge": "standard animation paper peg holes",
+        "left_margin": {
+          "series_title": "よふかしのうた",
+          "production_codes": [
+            "#05 C.",
+            "[A] (1)"
+          ],
+          "circled_note": "髪のハイライト 色トレスです"
+        },
+        "right_margin": {
+          "red_box": "002.normal",
+          "timing_layers": [
+            "A (1)",
+            "B (1) (2) (3)",
+            "C (1) (2) END"
+          ],
+          "background_notes": [
+            "BL 夜景",
+            "BG 市街地夜景 色トレス"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "num": "88",
+    "title": "漫画 / 故事板 - 5-Panel Manga Page: Creepy Delivery Man",
+    "top_fields": [
+      "type",
+      "style",
+      "characters",
+      "layout"
+    ],
+    "data": {
+      "type": "manga page",
+      "style": "anime illustration, full color",
+      "characters": {
+        "woman": {
+          "appearance": "long black hair, purple eyes",
+          "outfit": "grey long-sleeve shirt, dark grey skinny jeans, barefoot"
+        },
+        "delivery_man": {
+          "appearance": "bald, older man, thick eyebrows",
+          "outfit": "blue work jacket over a grey shirt"
+        }
+      },
+      "layout": {
+        "description": "Page split vertically. Left side contains 4 stacked horizontal panels. Right side is a single tall vertical panel.",
+        "left_column_panels": [
+          {
+            "panel_number": 1,
+            "scene": "Woman sitting on a grey sofa in a living room, holding a white mug.",
+            "text_elements": [
+              {
+                "type": "speech_bubble",
+                "text": "?"
+              },
+              {
+                "type": "sound_effect",
+                "text": "ピンポーン♪",
+                "description": "doorbell ringing"
+              }
+            ]
+          },
+          {
+            "panel_number": 2,
+            "scene": "Woman opening the front door. Delivery man standing outside holding a cardboard box, smiling.",
+            "text_elements": [
+              {
+                "type": "speech_bubble",
+                "speaker": "delivery_man",
+                "text": "こんにちは〜！宅配便で〜す！"
+              },
+              {
+                "type": "speech_bubble",
+                "speaker": "woman",
+                "text": "は、はい…ありがとうございます"
+              }
+            ]
+          },
+          {
+            "panel_number": 3,
+            "scene": "Close-up of the delivery man laughing enthusiastically with a sparkly pink background.",
+            "text_elements": [
+              {
+                "type": "speech_bubble",
+                "speaker": "delivery_man",
+                "text": "おや〜？いや〜美人さんですなあ！こんな綺麗な方がお一人でお住まいなんて、もったいないなあ〜♪"
+              }
+            ]
+          },
+          {
+            "panel_number": 4,
+            "scene": "Close-up of the woman looking disgusted and uncomfortable, sweating slightly. The back of the delivery man's head is visible in the foreground.",
+            "text_elements": [
+              {
+                "type": "speech_bubble",
+                "speaker": "delivery_man",
+                "text": "それにしてもお肌が綺麗！スタイルも抜群だし〜モデルさんみたいですよ！"
+              },
+              {
+                "type": "thought_bubble",
+                "speaker": "woman",
+                "text": "え…？何この人…ちょっと気持ち悪いかも…"
+              },
+              {
+                "type": "caption_box",
+                "text": "この後も延々と褒め続ける配達員だった…"
+              }
+            ]
+          }
+        ],
+        "right_column_panel": {
+          "panel_number": 5,
+          "scene": "Full-body portrait of the woman standing indoors, looking annoyed and suspicious with her arms crossed.",
+          "text_elements": [
+            {
+              "type": "thought_bubble",
+              "speaker": "woman",
+              "text": "誰かしら…？"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "num": "89",
+    "title": "漫画 / 故事板 - Anime Fantasy Movie Poster",
+    "top_fields": [
+      "type",
+      "scene",
+      "subjects",
+      "layout"
+    ],
+    "data": {
+      "type": "anime-style animated movie poster",
+      "scene": "Magical glowing multi-story treehouse restaurant in a dark enchanted forest at night, illuminated by string lights and warm window glow.",
+      "subjects": {
+        "children": "2 children in center foreground facing the restaurant: a boy with a backpack and lantern, and a girl in a red coat and beret with a lantern.",
+        "animals": "4 anthropomorphic animals: a bear chef holding a MENU book (bottom left), an owl playing violin and a squirrel playing flute on a branch (top left), a badger playing cello (mid right), and a rabbit in a suit holding a sign (bottom right).",
+        "creatures": "3 small black soot-sprite-like creatures with glowing eyes (bottom right).",
+        "floating_food": "4 glowing food items floating in the air: soup, pancakes, omurice, and a fruit parfait."
+      },
+      "layout": {
+        "top_text": "おいしい奇跡が、今夜はじまる。",
+        "building_sign": "森のレストラン",
+        "left_board": "本日のおすすめ\n・森のスープ\n・星のオムライス\n・ふわふわパンケーキ\n・しあわせのパフェ\n...and more!",
+        "right_board": "いらっしゃいませ！\nここは、だれでも\n笑顔になれる場所。",
+        "main_title": {
+          "text": "ふしぎな森のレストラン",
+          "styling": "Large stylized typography with a chef hat, fork, and spoon motifs."
+        },
+        "rabbit_sign": "ごちそうさま！またきてね！",
+        "bottom_left_badge": "家族みんなで楽しめる！心あたたまる冒険ファンタジー",
+        "bottom_center_credits": "Fictional cast and staff names in Japanese.",
+        "bottom_release_date": "2025年 夏休みロードショー！",
+        "bottom_right": "QR code with text '最新情報はこちら！'"
+      }
+    }
+  },
+  {
+    "num": "91",
+    "title": "产品营销 - 动漫角色品牌形象与周边项目",
+    "top_fields": [
+      "type",
+      "theme",
+      "character",
+      "branding",
+      "layout"
+    ],
+    "data": {
+      "type": "品牌形象与周边设计项目",
+      "theme": {
+        "color_palette": "柔粉色 与白色",
+        "motif": "樱花 与粉色爱心"
+      },
+      "character": {
+        "description": "留着棕色短波波头的动漫少女，粉色眼睛，身穿白色连帽衫，面带温柔微笑"
+      },
+      "branding": {
+        "main_logo": "癒音ちー",
+        "sub_logo": "ゆおんちー"
+      },
+      "layout": {
+        "sections": [
+          {
+            "type": "页眉横幅",
+            "position": "顶部",
+            "elements": [
+              "大型主 Logo",
+              "副 Logo",
+              "樱花图案",
+              "右侧角色肖像"
+            ]
+          },
+          {
+            "type": "产品包装",
+            "position": "中左",
+            "elements": [
+              "1 个带有心形透明窗口的方形包装盒，展示粉色心形糖果",
+              "盒身角色插画",
+              "2 个独立糖果包装纸",
+              "5 颗散落的心形糖果"
+            ]
+          },
+          {
+            "type": "宣传海报",
+            "position": "中右",
+            "elements": [
+              "角色肖像",
+              "心形糖果碗",
+              "主 Logo",
+              "文字 '4.26 NEW OPEN'",
+              "文字 '@yuonchii'"
+            ]
+          },
+          {
+            "type": "水平网页横幅",
+            "position": "中下",
+            "elements": [
+              "主 Logo",
+              "樱花",
+              "右侧角色肖像"
+            ]
+          },
+          {
+            "type": "社交媒体个人资料样机",
+            "position": "左下",
+            "elements": [
+              "带有 Logo 的页眉图片",
+              "1 个圆形头像",
+              "账号名 '@yuonchii'",
+              "1 个关注按钮",
+              "模拟简介文本"
+            ]
+          },
+          {
+            "type": "周边商品系列",
+            "position": "右下",
+            "count": 9,
+            "items": [
+              "1 件印有 Logo 的白色 T 恤",
+              "1 个印有角色图案的白色马克杯",
+              "4 枚圆形徽章",
+              "1 个亚克力钥匙扣",
+              "2 包糖果"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "num": "92",
+    "title": "产品营销 - 深色模式病毒式营销案例研究落地页",
+    "top_fields": [
+      "type",
+      "theme",
+      "header",
+      "sections",
+      "footer"
+    ],
+    "data": {
+      "type": "落地页 UI 设计",
+      "theme": "深色模式，现代科技感，霓虹紫 与蓝色发光点缀，玻璃拟态风格",
+      "header": {
+        "logo": "goViralX",
+        "badge": "病毒式营销活动案例研究"
+      },
+      "sections": [
+        {
+          "id": "hero",
+          "layout": "左侧文字，右侧图片布局",
+          "content": {
+            "badge": "案例研究",
+            "headline": "我们如何创造 1000 万+ 的病毒式影响力",
+            "subtitle": "3 天引爆网络，助力品牌实现指数级增长",
+            "stats_row": {
+              "count": 4,
+              "labels": [
+                "总浏览量 10,240,000+",
+                "互动率 18.7%",
+                "转化量 3,200+",
+                "执行周期 72 小时"
+              ]
+            },
+            "hero_image": "电影质感的镜头，展示一个人在暗室中注视着发光的悬浮视频屏幕，带有巨大的播放按钮叠加层"
+          }
+        },
+        {
+          "id": "strategy",
+          "title": "活动拆解：我们的 3 天执行策略",
+          "layout": "3 步垂直时间轴",
+          "steps": [
+            {
+              "step": 1,
+              "title": "策略制定",
+              "image": "人们在屏幕上分析数据"
+            },
+            {
+              "step": 2,
+              "title": "内容制作",
+              "image": "视频编辑界面"
+            },
+            {
+              "step": 3,
+              "title": "分发与放大",
+              "image": "手持带有社交媒体图标的智能手机"
+            }
+          ]
+        },
+        {
+          "id": "performance",
+          "title": "效果评估：数据驱动的绩效表现",
+          "layout": "左侧统计卡片网格，右侧图表",
+          "left_stats": {
+            "count": 4,
+            "labels": [
+              "总曝光量 1000 万+",
+              "平均 CPM 下降 43%",
+              "新增粉丝 28,000+",
+              "转化量 3,200+"
+            ]
+          },
+          "right_charts": {
+            "count": 2,
+            "items": [
+              "折线图显示 7 天趋势，在第 3 天达到 8,320,000 的峰值",
+              "横向柱状图显示平台分布：TikTok 52%，Instagram 24%，X 15%，YouTube 9%"
+            ]
+          }
+        },
+        {
+          "id": "keys_to_success",
+          "title": "为何能病毒式传播：成功的 3 大关键",
+          "layout": "3 张卡片横向排列",
+          "cards": [
+            {
+              "icon": "fire",
+              "title": "情感钩子设计"
+            },
+            {
+              "icon": "bullseye",
+              "title": "内容结构设计"
+            },
+            {
+              "icon": "antenna",
+              "title": "分发策略执行"
+            }
+          ]
+        },
+        {
+          "id": "social_proof",
+          "title": "深受创作者与品牌信赖：他们都在使用 goViralX 实现增长",
+          "layout": "左侧 Logo，右侧客户评价",
+          "left_logos": {
+            "count": 8,
+            "labels": [
+              "SHEIN",
+              "SHOPLINE",
+              "Blueglass",
+              "instacart",
+              "lemon8",
+              "mi",
+              "CIDER",
+              "bellroy"
+            ]
+          },
+          "right_testimonials": {
+            "count": 2,
+            "labels": [
+              "SaaS 创始人评价",
+              "增长经理评价"
+            ]
+          }
+        },
+        {
+          "id": "cta",
+          "title": "准备好实现病毒式传播了吗？：想要获得同样的增长效果？",
+          "layout": "左侧文字与输入框，右侧 3D 插图",
+          "elements": [
+            "带有占位符文本的输入框",
+            "按钮：获取专属增长方案 ->"
+          ],
+          "image": "3D 发光紫色和蓝色火箭发射"
+        }
+      ],
+      "footer": "Logo 和版权声明文本"
+    }
+  },
+  {
+    "num": "93",
+    "title": "产品营销 - 18 面板吉祥物品牌识别文档",
+    "top_fields": [
+      "type",
+      "brand",
+      "subject",
+      "layout"
+    ],
+    "data": {
+      "type": "18 面板品牌识别与角色设计文档",
+      "brand": {
+        "name": "沐阳 MUYANG TEA",
+        "industry": "茶饮店",
+        "colors": [
+          "黄色",
+          "绿色",
+          "白色",
+          "棕色",
+          "深绿色"
+        ]
+      },
+      "subject": "佩戴绿色围裙的 3D 渲染可爱柴犬吉祥物",
+      "layout": {
+        "grid": "3 列 6 行",
+        "sections": [
+          {
+            "title": "01 品牌 DNA 分析 / BRAND DNA ANALYSIS",
+            "elements": [
+              "Logo",
+              "5 个色卡",
+              "6 个图标",
+              "目标受众图表"
+            ]
+          },
+          {
+            "title": "02 概念构思 / CONCEPT MOODBOARD",
+            "elements": [
+              "5 张参考照片",
+              "4 个情绪图标",
+              "设计公式"
+            ]
+          },
+          {
+            "title": "03 形态研究 / FORM STUDY",
+            "elements": [
+              "4 个 Logo 解构图标",
+              "4 个演变步骤",
+              "4 个轮廓图"
+            ]
+          },
+          {
+            "title": "04 概念探索 / CONCEPT EXPLORATION",
+            "elements": [
+              "12 个角色线稿草图"
+            ]
+          },
+          {
+            "title": "05 精细线稿 / REFINED LINE ART",
+            "elements": [
+              "3 行带有比例参考的正侧面线稿"
+            ]
+          },
+          {
+            "title": "06 细节精修 / DETAIL REFINEMENT",
+            "elements": [
+              "2 个带标注的全身渲染图",
+              "4 个圆形特写图"
+            ]
+          },
+          {
+            "title": "07 表情设定 / EXPRESSION SHEET",
+            "elements": [
+              "11 个 3D 渲染头部表情"
+            ]
+          },
+          {
+            "title": "08 姿势库 / POSE LIBRARY",
+            "elements": [
+              "9 个全身 3D 渲染姿势"
+            ]
+          },
+          {
+            "title": "09 转身视图 / TURNAROUND VIEW",
+            "elements": [
+              "5 个全身 3D 渲染图",
+              "5 个对应的线稿视图"
+            ]
+          },
+          {
+            "title": "10 色彩开发 / COLOR DEVELOPMENT",
+            "elements": [
+              "5 行 5 色配色方案",
+              "色彩心理学文字"
+            ]
+          },
+          {
+            "title": "11 材质规格 / MATERIAL SPECIFICATION",
+            "elements": [
+              "5 个纹理色卡",
+              "属性滑块",
+              "4 个制造工艺图标"
+            ]
+          },
+          {
+            "title": "12 色彩应用 / COLOR APPLICATION",
+            "elements": [
+              "4 个配色变体渲染图",
+              "2 个明暗渲染图",
+              "4 个对比度评分圆圈"
+            ]
+          },
+          {
+            "title": "13 构造指南 / CONSTRUCTION GUIDE",
+            "elements": [
+              "2 个几何结构与网格线稿图"
+            ]
+          },
+          {
+            "title": "14 设计系统规则 / DESIGN SYSTEM RULES",
+            "elements": [
+              "最小尺寸图标",
+              "安全空间示意图",
+              "4 个使用示例"
+            ]
+          },
+          {
+            "title": "15 资产变体 / ASSET VARIANTS",
+            "elements": [
+              "3 个尺寸变体",
+              "3 个线稿变体",
+              "3 个简化扁平化头像"
+            ]
+          },
+          {
+            "title": "16 数字应用 / DIGITAL APPLICATIONS",
+            "elements": [
+              "1 个 App 图标",
+              "2 个社交媒体头像",
+              "UI 元素",
+              "3 帧动画循环"
+            ]
+          },
+          {
+            "title": "17 实物应用 / PHYSICAL APPLICATIONS",
+            "elements": [
+              "毛绒玩具样机",
+              "包装样机",
+              "周边商品样机",
+              "店面样机"
+            ]
+          },
+          {
+            "title": "18 最终主视觉 / FINAL RENDERING",
+            "elements": [
+              "吉祥物手持茶饮的大尺寸高分辨率 3D 渲染图",
+              "Logo",
+              "文件格式列表"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "num": "94",
+    "title": "产品营销 - Brand Identity System Board",
+    "top_fields": [
+      "type",
+      "header",
+      "main_logo",
+      "layout"
+    ],
+    "data": {
+      "type": "brand identity system presentation board",
+      "header": {
+        "title": "品牌视觉识别系统 BRAND IDENTITY SYSTEM",
+        "slogan": "爱它·懂它·陪伴它"
+      },
+      "main_logo": {
+        "text": "GDX",
+        "subtitle": "狗东西",
+        "design_feature": "Dog profile in negative space of the letter D",
+        "metadata": [
+          "品牌名称",
+          "行业属性 宠物行业",
+          "设计时间 2024.05"
+        ]
+      },
+      "layout": {
+        "sections": [
+          {
+            "title": "设计网格",
+            "count": 1,
+            "description": "Logo with architectural grid lines and golden ratio measurements"
+          },
+          {
+            "title": "概念草图",
+            "count": 4,
+            "description": "Evolution steps from rough dog sketch to final geometric logo"
+          },
+          {
+            "title": "灵感来源",
+            "count": 4,
+            "description": "Moodboard images including minimalist architecture, a golden retriever, and dark green geometric shapes"
+          },
+          {
+            "title": "创意理念",
+            "count": 4,
+            "description": "Text blocks with minimalist icons explaining design philosophy, positioning, color psychology, and scalability"
+          },
+          {
+            "title": "品牌应用",
+            "count": 6,
+            "labels": [
+              "名片 正反面",
+              "信纸信封",
+              "APP图标",
+              "网站页眉 / 网站图标",
+              "产品包装 / 购物袋",
+              "店面门头 / 标识牌"
+            ],
+            "description": "Mockups of business cards, envelopes, app icons, website header with a dog, paper shopping bags, and a storefront sign"
+          },
+          {
+            "title": "色彩规范",
+            "count": 5,
+            "labels": [
+              "主色",
+              "辅助色",
+              "强调色"
+            ],
+            "colors": [
+              "#1E3D34",
+              "#F5F3EF",
+              "#E5E2DD",
+              "#A8C5B1",
+              "#E0A86E"
+            ]
+          },
+          {
+            "title": "字体规范",
+            "count": 2,
+            "labels": [
+              "思源黑体 CN",
+              "思源柔黑体 CN"
+            ],
+            "description": "Typography specimens showing 'Aa', alphabet, and numbers"
+          },
+          {
+            "title": "最小使用尺寸",
+            "count": 2,
+            "description": "Minimum logo size specifications at 20mm and 12mm"
+          },
+          {
+            "title": "安全留白区域",
+            "count": 1,
+            "description": "Logo surrounded by a bounding box with 'X' indicating clear space margins"
+          },
+          {
+            "title": "错误使用示例",
+            "count": 5,
+            "labels": [
+              "不可拉伸变形",
+              "不可改变颜色",
+              "不可添加阴影",
+              "不可倾斜使用",
+              "不可复杂背景上使用"
+            ],
+            "description": "Examples of incorrect logo usage: stretched, wrong color, drop shadow, tilted, and placed on a busy photographic background"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "num": "95",
+    "title": "产品营销 - Skincare E-commerce Landing Page Mockup",
+    "top_fields": [
+      "type",
+      "brand",
+      "color_palette",
+      "layout"
+    ],
+    "data": {
+      "type": "skincare e-commerce landing page mockup",
+      "brand": "DERMA CALM",
+      "color_palette": [
+        "white",
+        "light blue",
+        "dark blue"
+      ],
+      "layout": {
+        "header": {
+          "logo": "left-aligned brand name with Japanese subtext",
+          "navigation_links": {
+            "count": 6,
+            "labels": [
+              "ABOUT",
+              "PRODUCT",
+              "FEATURE",
+              "INGREDIENT",
+              "VOICE",
+              "Q&A"
+            ]
+          },
+          "buttons": {
+            "count": 2,
+            "labels": [
+              "マイページ",
+              "今すぐ購入する"
+            ]
+          }
+        },
+        "hero_section": {
+          "left_column": {
+            "headline": "敏感な肌にも、毎日つづけられる安心ケア。",
+            "subtext": "paragraph detailing low irritation, moisturizing, fragrance-free, and alcohol-free benefits",
+            "buttons": {
+              "count": 2,
+              "labels": [
+                "今すぐ購入する",
+                "詳しく見る"
+              ]
+            }
+          },
+          "center_column": {
+            "product": "white pump bottle with clear cap labeled Moisture Barrier Serum",
+            "props": [
+              "dollop of white cream",
+              "circular badge reading 皮膚科医監修"
+            ]
+          },
+          "right_column": {
+            "subject": "young East Asian woman with clear glowing skin touching her cheek",
+            "background": "blurred laboratory glassware in a bright, clean clinical setting"
+          }
+        },
+        "bottom_features_panel": {
+          "left_cards": {
+            "count": 3,
+            "descriptions": [
+              "95% satisfaction with 5 stars",
+              "shield icon for low irritation formula",
+              "drop icon for skin barrier support"
+            ]
+          },
+          "right_badges": {
+            "count": 3,
+            "descriptions": [
+              "no fragrance icon",
+              "no alcohol icon",
+              "patch tested icon"
+            ]
+          },
+          "footer": "fine print disclaimers at the bottom"
+        }
+      }
+    }
+  },
+  {
+    "num": "96",
+    "title": "产品营销 - Men's Skincare Website Landing Page Mockup",
+    "top_fields": [
+      "type",
+      "theme",
+      "color_palette",
+      "header",
+      "hero_section",
+      "bottom_stats_bar"
+    ],
+    "data": {
+      "type": "website landing page mockup",
+      "theme": "men's skincare, sleek, professional, dark mode",
+      "color_palette": "dark navy blue, white text, subtle blue gradients",
+      "header": {
+        "logo": "NEX SKIN",
+        "navigation": [
+          "HOME",
+          "PRODUCT",
+          "ABOUT",
+          "FEATURE",
+          "FAQ"
+        ],
+        "cta_button": "今すぐ始める >"
+      },
+      "hero_section": {
+        "left_column": {
+          "headline": "清潔感は、毎日のスキンケアから。",
+          "sub_headline": "男の肌は、もっとシンプルでいい。",
+          "body_text": "3 lines of descriptive text about skincare benefits",
+          "buttons": [
+            {
+              "style": "solid blue",
+              "text": "今すぐ始める >"
+            },
+            {
+              "style": "outlined",
+              "text": "詳しく見る >"
+            }
+          ],
+          "feature_highlights": {
+            "count": 3,
+            "items": [
+              {
+                "icon": "sparkle",
+                "title": "テカリ対策",
+                "subtitle": "皮脂バランスを整える"
+              },
+              {
+                "icon": "water drop",
+                "title": "保湿",
+                "subtitle": "うるおいを与え続ける"
+              },
+              {
+                "icon": "shield/bottle",
+                "title": "オールインワン",
+                "subtitle": "化粧水・美容液・乳液がこれ1本"
+              }
+            ]
+          }
+        },
+        "center_image": {
+          "subject": "handsome young Asian man",
+          "appearance": "clean-cut, dark hair, flawless glowing skin, wearing a black shirt",
+          "pose": "hand touching chin thoughtfully",
+          "lighting": "dramatic studio lighting highlighting facial structure"
+        },
+        "right_column": {
+          "product_shot": {
+            "bottle": "tall cylindrical dark blue bottle with water droplets",
+            "labels": [
+              "NEX SKIN",
+              "ALL-IN-ONE LOTION",
+              "150mL"
+            ],
+            "base": "textured dark rock surface",
+            "badge": "circular outlined badge reading 'これ1本で男の肌悩みをトータルケア'"
+          }
+        }
+      },
+      "bottom_stats_bar": {
+        "count": 3,
+        "items": [
+          {
+            "icon": "users",
+            "label": "累計販売本数",
+            "value": "120万本突破"
+          },
+          {
+            "icon": "star",
+            "label": "使用感満足度",
+            "value": "92.1%"
+          },
+          {
+            "icon": "checklist",
+            "label": "リピート率",
+            "value": "85.3%"
+          }
+        ],
+        "footnotes": "small legal text on the right"
+      }
+    }
+  },
+  {
+    "num": "97",
+    "title": "产品营销 - Skincare E-commerce Landing Page",
+    "top_fields": [
+      "type",
+      "brand",
+      "theme",
+      "color_palette",
+      "layout"
+    ],
+    "data": {
+      "type": "e-commerce landing page hero section",
+      "brand": "CLEAR RESET",
+      "theme": "refreshing skincare, clean aesthetic, water bubbles background",
+      "color_palette": [
+        "white",
+        "teal",
+        "light blue"
+      ],
+      "layout": {
+        "header": {
+          "logo": "CLEAR RESET",
+          "navigation_links": {
+            "count": 5,
+            "labels": [
+              "About Product",
+              "About Pores/Acne",
+              "Ingredients",
+              "How to Use",
+              "FAQ"
+            ]
+          },
+          "action_buttons": {
+            "count": 2,
+            "labels": [
+              "Buy Now",
+              "My Page"
+            ]
+          }
+        },
+        "hero_content": {
+          "headline": "毛穴・ニキビ悩みに、すっきり澄んだ肌へ。",
+          "subheadline": "Balances sebum and clears pores. Non-sticky, medicated skincare for comfortable daily use.",
+          "vertical_copy": "Prevents recurring rough skin and acne, leading to smooth, clear skin."
+        },
+        "visuals": {
+          "model": "young Asian woman with clear radiant skin, hair tied up, smiling softly",
+          "products": {
+            "count": 2,
+            "description": "acne care gel tube and lotion bottle",
+            "placement": "center"
+          },
+          "background": "light blue gradient with floating water bubbles"
+        },
+        "feature_highlights": {
+          "count": 4,
+          "style": "circular icons with text below",
+          "labels": [
+            "Quasi-drug",
+            "Pore Care",
+            "Non-sticky",
+            "Daily Use Morning/Night OK"
+          ]
+        },
+        "call_to_action": {
+          "banner_text": "Limited to first-time buyers",
+          "buttons": {
+            "count": 2,
+            "labels": [
+              "Try it at a discount",
+              "See details"
+            ]
+          }
+        },
+        "statistics_cards": {
+          "count": 4,
+          "style": "white rectangular cards with large teal numbers",
+          "labels": [
+            "Satisfaction 92%",
+            "Pore visibility -23%",
+            "Acne prevention 87%",
+            "Want to repeat 97%"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "num": "98",
+    "title": "产品营销 - Beauty Product Landing Page Mockup",
+    "top_fields": [
+      "type",
+      "aesthetic",
+      "header",
+      "hero_section",
+      "bottom_section"
+    ],
+    "data": {
+      "type": "e-commerce landing page hero section mockup",
+      "aesthetic": "clean, bright, airy, feminine, floral accents with purple flowers, soft pink and white color palette, soft lighting",
+      "header": {
+        "logo": "LUMEA BEAUTY",
+        "navigation_links": {
+          "count": 5,
+          "labels": [
+            "特徴",
+            "成分",
+            "お客様の声",
+            "使い方",
+            "FAQ"
+          ]
+        },
+        "cta_button": "今すぐ試す"
+      },
+      "hero_section": {
+        "left_column": {
+          "headline": "鏡を見るたび、うるおう透明感。",
+          "subheadline": "乾燥・くすみが気になる肌に。美容成分を贅沢に配合した、毎日のための集中保湿美容液。",
+          "feature_badges": {
+            "count": 3,
+            "style": "pill-shaped with small icons",
+            "labels": [
+              "敏感肌OK",
+              "高保湿",
+              "朝晩使える"
+            ]
+          },
+          "bullet_points": {
+            "count": 3,
+            "style": "pink checkmarks",
+            "labels": [
+              "美容成分をしっかり届ける",
+              "ハリ・ツヤのある印象へ",
+              "続けやすいシンプルケア"
+            ]
+          },
+          "cta_buttons": {
+            "count": 2,
+            "labels": [
+              "初回限定で試してみる >",
+              "成分をチェック >"
+            ]
+          },
+          "trust_badges": "送料無料 / 初回限定 / 定期縛りなし"
+        },
+        "center_subject": {
+          "model": "young East Asian woman smiling, touching her cheek",
+          "action": "holding a dropper bottle of serum"
+        },
+        "right_column": {
+          "product_display": {
+            "count": 2,
+            "items": [
+              "moisturizing boost serum dropper bottle",
+              "packaging box"
+            ]
+          },
+          "stat_cards": {
+            "count": 3,
+            "style": "floating white rounded rectangles with gold accents",
+            "labels": [
+              "満足度 96%",
+              "美容成分 5種配合",
+              "愛用者 12,000人突破"
+            ]
+          }
+        }
+      },
+      "bottom_section": {
+        "benefit_cards": {
+          "count": 3,
+          "style": "horizontal white rounded rectangles with icons",
+          "labels": [
+            "うるおい",
+            "透明感",
+            "使いやすさ"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "num": "99",
+    "title": "产品营销 - Fashion Collection Catalog Layout",
+    "top_fields": [
+      "type",
+      "theme",
+      "layout"
+    ],
+    "data": {
+      "type": "fashion product catalog layout",
+      "theme": "A cohesive fashion collection featuring a specific pattern: overlapping circular floral mandala motifs in purple, green, blue, orange, and pink",
+      "layout": {
+        "structure": "2x2 grid with a full-width bottom banner",
+        "sections": [
+          {
+            "id": "01",
+            "title": "Flared Dress",
+            "subtitle": "フレアワンピース",
+            "main_image": "Woman in patterned flared dress holding white handbag.",
+            "swatch_count": 3,
+            "swatch_descriptions": [
+              "purple variant",
+              "green/blue variant",
+              "orange/yellow variant"
+            ],
+            "description_text": "華やかなフレアシルエット。軽やかな素材が優雅な動きを演出します。"
+          },
+          {
+            "id": "02",
+            "title": "Silk Scarf",
+            "subtitle": "シルクスカーフ",
+            "main_image": "Woman in white blouse with patterned silk scarf.",
+            "swatch_count": 2,
+            "swatch_descriptions": [
+              "flat pattern detail",
+              "tied knot detail"
+            ],
+            "description_text": "首元に彩りを添えるシルクスカーフ。上品な光沢と滑らかな肌ざわり。"
+          },
+          {
+            "id": "03",
+            "title": "Tote Bag",
+            "subtitle": "トートバッグ",
+            "main_image": "Woman carrying patterned tote bag.",
+            "swatch_count": 3,
+            "swatch_descriptions": [
+              "purple variant",
+              "blue variant",
+              "orange/yellow variant"
+            ],
+            "description_text": "A4サイズも入る収納力。軽くて丈夫、毎日使いたくなるトートバッグ。"
+          },
+          {
+            "id": "04",
+            "title": "Pouch",
+            "subtitle": "ポーチ",
+            "main_image": "Patterned zip pouch on table with magazine and vase.",
+            "swatch_count": 3,
+            "swatch_descriptions": [
+              "green/purple variant",
+              "orange variant",
+              "pink variant"
+            ],
+            "description_text": "バッグの中を彩る華やかなポーチ。細部まで美しいデザインが魅力です。"
+          }
+        ],
+        "bottom_banner": {
+          "title": "Pattern Design",
+          "description_text": "細やかな線と豊かな色彩が織りなす、唯一無二のパターンデザイン。日常に優雅な彩りを。",
+          "image": "Horizontal strip showing the seamless pattern."
+        }
+      }
+    }
+  },
+  {
+    "num": "100",
+    "title": "产品营销 - Hyper-Energetic Japanese Promo Poster",
+    "top_fields": [
+      "type",
+      "style",
+      "layout"
+    ],
+    "data": {
+      "type": "Japanese promotional landing page poster",
+      "style": "hyper-energetic, explosive typography, vibrant colors, amusement park night festival aesthetic",
+      "layout": {
+        "top_section": {
+          "background": "night sky, fireworks, ferris wheel, roller coaster",
+          "subjects": "4 young adults cheering, raising fists, dynamic lighting",
+          "typography": [
+            "究極の楽しい!!",
+            "やばい!!共感してもらいたい!!",
+            "この一枚が、あなたの人生を最高に塗り替える!!"
+          ],
+          "badges": [
+            "累計販売枚数 252,000 枚突破!!!"
+          ]
+        },
+        "middle_section": {
+          "title": "究極の楽しい体験を実現する5つの超快楽ポイント",
+          "points_count": 5,
+          "points": [
+            {
+              "number": 1,
+              "label": "爆笑覚醒",
+              "image": "people laughing"
+            },
+            {
+              "number": 2,
+              "label": "ドキドキMAX",
+              "image": "roller coaster loop"
+            },
+            {
+              "number": 3,
+              "label": "感動の渦",
+              "image": "fireworks explosion"
+            },
+            {
+              "number": 4,
+              "label": "超解放ゾーン",
+              "image": "silhouettes jumping at sunset"
+            },
+            {
+              "number": 5,
+              "label": "無限リピート",
+              "image": "group of people cheering"
+            }
+          ]
+        },
+        "bonus_section": {
+          "title": "今だけ！超豪華 5大特典付き!!!",
+          "items_count": 5,
+          "items": [
+            "① 限定デザインポスター",
+            "② 楽しい名言ブックレット(PDF)",
+            "③ 超楽しいプレイリスト(MP3)",
+            "④ スマホ壁紙セット",
+            "⑤ 楽しいシークレット映像"
+          ]
+        },
+        "bottom_section": {
+          "product_info": {
+            "name": "究極の楽しいポスター",
+            "variants_count": 3,
+            "variants": [
+              "全力全開ver.",
+              "笑顔爆発ver.",
+              "感動絶頂ver."
+            ]
+          },
+          "pricing": {
+            "label": "魂の価格",
+            "amount": "¥2,980",
+            "shipping": "送料無料"
+          }
+        },
+        "footer": {
+          "text": "人生を最高に楽しみ尽くせ!! さぁ、今すぐ手に入れろ!!",
+          "background_color": "magenta"
+        }
+      }
+    }
+  },
+  {
+    "num": "101",
+    "title": "产品营销 - Green Tea Bottle Advertisement Poster",
+    "top_fields": [
+      "type",
+      "product",
+      "background",
+      "layout"
+    ],
+    "data": {
+      "type": "promotional advertisement poster for a bottled green tea beverage",
+      "product": {
+        "type": "clear plastic PET bottle filled with yellow-green tea",
+        "label": "white label with green typography, featuring the product name '清風茶', subtitle '緑茶 Seifucha', and vertical text '国産茶葉使用' and '香り豊か、後味さわやか'"
+      },
+      "background": "bright, fresh, sunlit outdoor atmosphere with dynamic water splashes wrapping around the bottle and vibrant green tea leaves",
+      "layout": {
+        "sections": [
+          {
+            "title": "headline",
+            "position": "top-left",
+            "text": "新発売",
+            "style": "large red text with a gold underline and a small green leaf accent"
+          },
+          {
+            "title": "catchphrase",
+            "position": "mid-left",
+            "text": "毎日に、すっきり。",
+            "style": "dark green text"
+          },
+          {
+            "title": "features",
+            "position": "lower-left",
+            "count": 2,
+            "labels": [
+              "国産茶葉使用",
+              "香り豊か、後味さわやか"
+            ],
+            "style": "white pill-shaped banners with green leaf icons"
+          },
+          {
+            "title": "price_badge",
+            "position": "top-right",
+            "text": "今だけ!! 特別価格 128円 (税込)",
+            "style": "red circular sticker with white and yellow text"
+          },
+          {
+            "title": "promo_banner",
+            "position": "bottom-left",
+            "text": "期間限定のお得価格!",
+            "style": "angled red ribbon with yellow and white text"
+          },
+          {
+            "title": "footer",
+            "position": "bottom-edge",
+            "text": "全国のコンビニ・スーパーで発売中",
+            "style": "solid green horizontal bar with a white shopping cart icon"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "num": "102",
+    "title": "产品营销 - Anime Strawberry Promo Banner Set",
+    "top_fields": [
+      "type",
+      "theme",
+      "style",
+      "color_palette",
+      "character",
+      "product",
+      "layout"
+    ],
+    "data": {
+      "type": "promotional banner design set",
+      "theme": "strawberry advertisement campaign",
+      "style": "anime illustration, bright, cheerful, commercial graphic design",
+      "color_palette": "pastel pink and vibrant red",
+      "character": "anime girl with brown side ponytail and bunny ears, wearing a pastel blue and pink jacket",
+      "product": "fresh red strawberries",
+      "layout": {
+        "sections": [
+          {
+            "type": "large landscape banner",
+            "position": "top left",
+            "visuals": "character winking and holding a strawberry next to a large basket of strawberries",
+            "main_text": "いちごたっぷり",
+            "sub_text": [
+              "笑顔あふれる、甘〜いひととき♪",
+              "とびきりおいしい！",
+              "ひと粒で、しあわせ広がる♡",
+              "あまっ♡",
+              "旬のおいしさをお届け！"
+            ],
+            "badges": {
+              "count": 3,
+              "labels": [
+                "あま〜くてジューシー！",
+                "いろんなサイズを楽しめる♪",
+                "新鮮朝採れ！"
+              ]
+            }
+          },
+          {
+            "type": "vertical banner",
+            "position": "right",
+            "visuals": "character eating a strawberry with a pile of strawberries below",
+            "main_text": "いちごたっぷり",
+            "sub_text": [
+              "旬のいちごをお届け！",
+              "あま〜くて、ジューシー！",
+              "とろけるおいしさ〜♡"
+            ],
+            "badges": {
+              "count": 3,
+              "labels": [
+                "朝採れ新鮮！",
+                "いろんなサイズを楽しめる♪",
+                "甘くてジューシー！"
+              ]
+            }
+          },
+          {
+            "type": "wide horizontal banner",
+            "position": "middle",
+            "visuals": "character with closed eyes eating a strawberry, flanked by strawberries",
+            "main_text": "いちごたっぷり！",
+            "sub_text": [
+              "あまくて、ジューシーな幸せ♡",
+              "旬の美味しさをお届けします！",
+              "おいし〜っ♡"
+            ]
+          },
+          {
+            "type": "small square banner",
+            "position": "bottom left",
+            "visuals": "character smiling holding strawberry",
+            "text": [
+              "いちごたっぷり",
+              "あま〜くてジューシー！"
+            ]
+          },
+          {
+            "type": "small square banner",
+            "position": "bottom mid-left",
+            "visuals": "pile of strawberries with one cut in half",
+            "text": [
+              "旬のいちご！",
+              "あまくてとろけるおいしさ♡"
+            ]
+          },
+          {
+            "type": "small horizontal banner",
+            "position": "bottom mid-right",
+            "visuals": "character holding strawberry",
+            "text": [
+              "いちごたっぷり",
+              "朝採れ新鮮！",
+              "あまくてジューシー！"
+            ]
+          },
+          {
+            "type": "circular icons",
+            "position": "bottom right",
+            "count": 4,
+            "items": [
+              {
+                "visual": "basket of strawberries",
+                "label": "朝採れ新鮮！"
+              },
+              {
+                "visual": "half strawberry",
+                "label": "あまくてジューシー！"
+              },
+              {
+                "visual": "whole strawberry",
+                "label": "いろんなサイズ！"
+              },
+              {
+                "visual": "character face",
+                "label": "とろけるおいしさ♡"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "num": "103",
+    "title": "产品营销 - Anime Idol Merchandise Catalog",
+    "top_fields": [
+      "type",
+      "theme_colors",
+      "character",
+      "layout"
+    ],
+    "data": {
+      "type": "anime idol merchandise catalog flyer",
+      "theme_colors": "pastel blue and pink",
+      "character": {
+        "name": "ななし",
+        "appearance": "anime girl, long pink hair, blue eyes",
+        "attire": "black and white maid outfit with a red bow tie and blue hair ribbons"
+      },
+      "layout": {
+        "header": {
+          "left": "upper body portrait of the character looking slightly to the side",
+          "center": {
+            "top_banner": "ななし 2nd EP リリース記念ライブ",
+            "main_title": "おしごと☆メイド奮闘中！",
+            "subtitle": "~ Oshigoto Maid Funtouchu! ~",
+            "section_header": "OFFICIAL GOODS"
+          },
+          "right": "purchase bonus info box containing 3 small rectangular photo prints"
+        },
+        "merchandise_grid": [
+          {
+            "id": "01",
+            "name": "アクリルスタンド",
+            "description": "full body acrylic stand of the character"
+          },
+          {
+            "id": "02",
+            "name": "缶バッジ",
+            "description": "set of 6 circular can badges featuring different facial expressions"
+          },
+          {
+            "id": "03",
+            "name": "ビッグタオル",
+            "description": "large rectangular towel showing the character holding a heart pillow"
+          },
+          {
+            "id": "04",
+            "name": "Tシャツ",
+            "description": "white t-shirt showing FRONT with character graphic and BACK with small logo"
+          },
+          {
+            "id": "05",
+            "name": "マフラータオル",
+            "description": "long narrow muffler towel with character art and logo"
+          },
+          {
+            "id": "06",
+            "name": "トートバッグ",
+            "description": "canvas tote bag with blue logo"
+          },
+          {
+            "id": "07",
+            "name": "アクリルキーホルダー",
+            "description": "chibi character acrylic keychain with a star-shaped clasp"
+          },
+          {
+            "id": "08",
+            "name": "ラバーバンド",
+            "description": "blue silicone wristband with logo"
+          },
+          {
+            "id": "09",
+            "name": "ステッカーセット",
+            "description": "set of 4 visible stickers: chibi character, heart, ribbon bow, and logo"
+          },
+          {
+            "id": "10",
+            "name": "ペンライト",
+            "description": "blue glowing concert penlight"
+          }
+        ],
+        "footer": {
+          "left": "purchase notes and guidelines box",
+          "center": "character signature 'Nanashi' with hand-drawn hearts and stars",
+          "right": "payment methods box"
+        }
+      }
+    }
+  },
+  {
+    "num": "107",
+    "title": "电商主图 - 直播带货界面模型",
+    "top_fields": [
+      "type",
+      "subject",
+      "background",
+      "ui_layout"
+    ],
+    "data": {
+      "type": "移动端直播带货界面模型",
+      "subject": {
+        "person": "Elon Musk",
+        "clothing": "带有 SPACEX 标志的黑色 T 恤",
+        "pose": "双手向镜头挥动，热情地进行讲解",
+        "watermark": "@Proof AI"
+      },
+      "background": {
+        "setting": "大型显示屏",
+        "image": "带有星舰火箭和穹顶栖息地的火星景观",
+        "text": [
+          "SPACEX",
+          "移民火星计划"
+        ]
+      },
+      "ui_layout": {
+        "header": {
+          "broadcaster_info": {
+            "name": "ElonMusk",
+            "stats": "75.8 万本场点赞",
+            "follow_button": "关注"
+          },
+          "viewer_stats": {
+            "avatars_count": 3,
+            "text": "10 万+",
+            "close_button": "X"
+          },
+          "tags": [
+            "带货总榜第 1 名",
+            "更多直播 >"
+          ]
+        },
+        "product_card": {
+          "position": "中右侧",
+          "status": "讲解中",
+          "image": "火星穹顶栖息地",
+          "title": "火星移民基础套餐",
+          "price": "¥99.00",
+          "action_button": "抢"
+        },
+        "chat_overlay": {
+          "position": "左下角",
+          "join_alert": "星辰大海 加入了直播间",
+          "messages_count": 7,
+          "messages": [
+            "梦想家: 支持马斯克！！🚀",
+            "火星弟弟: 多少钱一位？",
+            "科技迷: 太酷了！想去火星！",
+            "未来已来: 如何报名？",
+            "小火箭: 🌹🌹🌹",
+            "宇宙无敌: 讲解一下细节",
+            "东方不败: 老马牛逼！👍👍👍"
+          ]
+        },
+        "bottom_action_bar": {
+          "input_placeholder": "说点什么...",
+          "icons_count": 4,
+          "icons": [
+            "购物车",
+            "礼盒",
+            "心形星球",
+            "加号"
+          ]
+        },
+        "floating_reactions": {
+          "position": "右下角",
+          "elements": "漂浮的心形、点赞和笑脸表情堆叠"
+        }
+      }
+    }
+  },
+  {
+    "num": "109",
+    "title": "电商主图 - 4 格广告网格概念",
+    "top_fields": [
+      "type",
+      "layout",
+      "quadrants"
+    ],
+    "data": {
+      "type": "2x2 广告横幅网格",
+      "layout": "4 个独立的象限，每个象限展示不同行业的广告",
+      "quadrants": [
+        {
+          "position": "左上",
+          "industry": "护肤",
+          "visuals": "亚洲女性轻触脸颊，漂浮的水滴，白色按压式瓶装产品",
+          "brand": "BALANCÉE",
+          "copy": {
+            "headline": "素肌が、目覚める。",
+            "subheadline": "迈向充满透明感的新自我。",
+            "features_count": 3,
+            "features_labels": [
+              "高保湿",
+              "预防肌肤粗糙",
+              "美白护理*"
+            ]
+          }
+        },
+        {
+          "position": "右上",
+          "industry": "餐饮食品",
+          "visuals": "特写镜头下的肉酱意大利面，撒有磨碎的奶酪和欧芹，深色调氛围光",
+          "brand": "Trattoria Luce",
+          "copy": {
+            "headline": "このパスタ、事件級。",
+            "badge": "限时供应",
+            "description": "黑毛和牛波隆那肉酱面 〜松露香气〜"
+          }
+        },
+        {
+          "position": "左下",
+          "industry": "旅游",
+          "visuals": "背着背包的女性面对风景秀丽的高山湖泊，明亮的日光",
+          "brand": "NATURE JOURNEY",
+          "copy": {
+            "headline": "わたしを、解き放つ旅へ。",
+            "subheadline": "在自然中，让心动起来。",
+            "script": "Find your freedom.",
+            "banner_details": [
+              "初夏特别活动",
+              "6 月 1 日 周六 - 6 月 30 日 周日",
+              "最高 20% 折扣",
+              "现有多项限时特别方案！"
+            ]
+          }
+        },
+        {
+          "position": "右下",
+          "industry": "SaaS 应用",
+          "visuals": "智能手机显示着一个包含 4 个日程项目的任务管理应用界面",
+          "brand": "Taskme",
+          "copy": {
+            "headline": "タスク管理を、もっとシンプルに、スマートに。",
+            "circle_badge": "设计你的一天。",
+            "features_count": 3,
+            "features_labels": [
+              "直观的操作体验",
+              "支持团队共享",
+              "随时随地访问"
+            ],
+            "bottom_banner": "7 天免费试用进行中！"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "num": "110",
+    "title": "电商主图 - 电商直播 UI 样机",
+    "top_fields": [
+      "type",
+      "scene",
+      "product_design",
+      "ui_overlays"
+    ],
+    "data": {
+      "type": "电商直播截图样机",
+      "scene": {
+        "subject": "外貌酷似 Sam Altman 的白人男性",
+        "clothing": "深绿色圆领毛衣",
+        "action": "一只手拿着黑色产品盒，另一只手指向它",
+        "setting": "暗色调摄影棚，左侧配有麦克风，背景有淡淡的 'AI' 文字",
+        "props": [
+          "印有白色 OpenAI 标志的黑色马克杯",
+          "右侧堆叠着 4 个黑色产品盒"
+        ]
+      },
+      "product_design": {
+        "box_color": "黑色",
+        "logo": "橙色星号或太阳光芒图案",
+        "text": "Claude Opus 4.7"
+      },
+      "ui_overlays": {
+        "top_left_product_info": {
+          "brand_tag": "Anthropic 官方旗舰店",
+          "title": "Claude Opus 4.7",
+          "subtitle": "更强推理·更高智能",
+          "sub_subtitle": "最强大模型: Opus 4.7 重磅发布!",
+          "bullet_points_count": 3,
+          "bullet_points": [
+            "超强推理能力",
+            "代码能力巅峰",
+            "复杂任务轻松搞定"
+          ]
+        },
+        "top_right_live_status": {
+          "viewer_info": "直播中 | 52.8 万人观看",
+          "promo_banner": "直播专属福利 限时折扣·错过不再有",
+          "countdown": "倒计时 00:09:47"
+        },
+        "middle_right_price_card": {
+          "header": "Claude Opus 4.7 直播间专享价",
+          "price_currency": "¥",
+          "price_value": "0.47",
+          "price_unit": "/百万 tokens 起",
+          "original_price": "原价: ¥1.89",
+          "button": "立即抢购"
+        },
+        "bottom_left_chat": {
+          "message_count": 9,
+          "input_box_placeholder": "说点什么..."
+        },
+        "bottom_right_banner": {
+          "headline": "奥特曼首推！认准 Claude Opus 4.7",
+          "subheadline": "更智能 · 更安全 · 更可靠",
+          "feature_tags_count": 4,
+          "feature_tags": [
+            "强大推理",
+            "代码神器",
+            "安全可靠",
+            "极速响应"
+          ]
+        },
+        "floating_elements": [
+          {
+            "type": "sticker",
+            "position": "产品盒右侧上方",
+            "text": "史上最强 AI 模型!"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "num": "114",
+    "title": "电商主图 - 直播电商 UI 原型",
+    "top_fields": [
+      "type",
+      "subject",
+      "ui_layout"
+    ],
+    "data": {
+      "type": "移动端直播电商界面原型",
+      "subject": {
+        "description": "年轻亚裔女性，留着深色长发，身穿浅色碎花睡衣套装并配有粉色蝴蝶结，正向镜头展示睡衣面料",
+        "background": "温馨的房间，挂着睡衣的衣架，鲜花，暖色调灯光"
+      },
+      "ui_layout": {
+        "top_bar": {
+          "time": "20:34",
+          "host_info": {
+            "name": "小雨睡衣",
+            "stats": "12.8万本场点赞",
+            "button": "关注"
+          },
+          "viewer_info": {
+            "avatars_count": 3,
+            "total_viewers": "1.2万"
+          }
+        },
+        "floating_tags": {
+          "count": 2,
+          "labels": [
+            "带货总榜第3名",
+            "人气榜"
+          ]
+        },
+        "widgets": {
+          "top_left": "带有 03:45 倒计时的红包图标",
+          "top_right": "悬浮爱心图标，附带文字“直播好物大赏 发现新热爱”"
+        },
+        "marketing_text_overlay": {
+          "position": "中右侧",
+          "lines_count": 5,
+          "lines": [
+            "新款睡衣",
+            "正在秒杀中...",
+            "亲肤透气",
+            "柔软舒适",
+            "不起球 不褪色"
+          ]
+        },
+        "chat_log": {
+          "position": "左下侧",
+          "message_count": 7,
+          "messages": [
+            "32 雨*** 加入了直播间",
+            "小***: 好看，多少钱",
+            "小***: 拍了，期待发货",
+            "C***: 质量看着不错",
+            "用***: 身高165，体重120斤，穿多大码？",
+            "@***: 主播身上这款有货吗？",
+            "晴***: 已拍，坐等收货！"
+          ]
+        },
+        "product_card": {
+          "position": "右下侧",
+          "thumbnail": "主播缩略图",
+          "title": "【小雨睡衣】春季新款家居服套装",
+          "tags_count": 2,
+          "tags": [
+            "7天无理由退货",
+            "运费险"
+          ],
+          "price_section": "秒杀价 ¥ 89.9",
+          "action_button": "抢"
+        },
+        "bottom_bar": {
+          "input_placeholder": "说点什么...",
+          "icon_count": 5,
+          "icons": [
+            "笑脸",
+            "购物车",
+            "爱心/礼物",
+            "礼盒",
+            "三个点"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "num": "115",
+    "title": "电商主图 - 电商 LED 驱动器信息图",
+    "top_fields": [
+      "type",
+      "theme",
+      "product",
+      "layout"
+    ],
+    "data": {
+      "type": "电商产品信息图",
+      "theme": "深色模式，搭配 橙色 点缀",
+      "product": {
+        "brand": "MEAN WELL",
+        "model": "ELG-100-24B",
+        "description": "100W 恒流 LED 驱动器，长方形银色金属外壳，两端配有黑色电缆，并带有详细的规格标签"
+      },
+      "layout": {
+        "sections": [
+          {
+            "name": "首屏展示区",
+            "elements": [
+              "左上角品牌 Logo",
+              "主标题：'户外稳定供电'",
+              "副标题：宽电压输入，防护型外壳……",
+              "大型产品斜侧面展示图",
+              "背景中淡化的 '100W' 水印"
+            ]
+          },
+          {
+            "name": "功能亮点",
+            "count": 3,
+            "panels": [
+              {
+                "title": "精密制造",
+                "visual": "规格标签特写"
+              },
+              {
+                "title": "稳固连接",
+                "visual": "电缆入口及安装耳特写"
+              },
+              {
+                "title": "核心特性",
+                "visual": "产品斜侧面展示图，配有 3 条指向文字的引线：'100~305VAC 输入'、'恒流输出'、'IP67 / IP65 防护外壳'"
+              }
+            ]
+          },
+          {
+            "name": "应用场景",
+            "count": 4,
+            "panels": [
+              {
+                "title": "街道照明",
+                "visual": "路灯照亮的夜间高速公路"
+              },
+              {
+                "title": "户外工程",
+                "visual": "带有建筑景观照明的现代建筑外观"
+              },
+              {
+                "title": "室内系统",
+                "visual": "安装有线性吸顶灯的现代商业走廊"
+              },
+              {
+                "title": "调光控制",
+                "visual": "带有 4 个标签的电气控制箱：'0-10V'、'PWM'、'电阻'、'DALI'"
+              }
+            ]
+          },
+          {
+            "name": "环境防护",
+            "elements": [
+              "产品置于潮湿表面，带有水滴和雨水效果",
+              "标题：'防护性能'",
+              "关于室内/户外使用及主动式 PFC 的描述文本",
+              "徽章：'5 年质保'"
+            ]
+          },
+          {
+            "name": "技术规格",
+            "elements": [
+              "标题：'照明电源技术'",
+              "4 个带勾选标记的要点：'100~305VAC 输入'、'主动式 PFC'、'低待机功耗 <0.5W'、'0~10V / PWM / 电阻 / DALI'",
+              "产品在科技感电路板背景上发光的展示图"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "num": "116",
+    "title": "电商主图 - 电商直播间 UI 设计稿",
+    "top_fields": [
+      "type",
+      "subject",
+      "layout"
+    ],
+    "data": {
+      "type": "电商直播界面设计稿",
+      "subject": {
+        "description": "年轻亚裔女性，留着波浪长卷发，身穿白色短袖 Polo 衫和白色百褶网球裙，右肩扛着一支白色网球拍，面带柔和表情直视镜头",
+        "background": "柔和的浅灰色摄影棚背景"
+      },
+      "layout": {
+        "header": {
+          "left": {
+            "avatar": "女性头像",
+            "name": "小鹿运动优选",
+            "stats": "12.8 万本场点赞",
+            "button": "关注",
+            "badge": "带货榜第 3 名"
+          },
+          "right": {
+            "viewer_avatars_count": 3,
+            "viewer_count": "1.2 万",
+            "close_icon": "X"
+          }
+        },
+        "floating_elements": [
+          {
+            "position": "右上角",
+            "type": "优惠券卡片",
+            "title": "直播间专属券",
+            "details": "¥20 满 199 可用",
+            "button": "领取"
+          },
+          {
+            "position": "中左侧",
+            "type": "活动文案",
+            "subtitle": "夏日运动季",
+            "headline": "活力开场",
+            "bullet_points_count": 3,
+            "bullet_points": [
+              "透气速干",
+              "弹力舒适",
+              "运动百搭"
+            ]
+          },
+          {
+            "position": "中右侧",
+            "type": "当前讲解商品卡片",
+            "badge": "正在讲解",
+            "image": "白色 Polo 衫和裙子平铺图",
+            "title": "运动 POLO 衫套装",
+            "details": "白色·M 码",
+            "price": "¥129",
+            "button": "去抢购"
+          },
+          {
+            "position": "右下角",
+            "type": "次要商品卡片",
+            "badge": "热卖 x 156",
+            "image": "模特穿着该套装",
+            "title": "运动 POLO 衫套装女 透气速干 显瘦百搭",
+            "tags": [
+              "7 天无理由退货",
+              "运费险"
+            ],
+            "price": "¥129",
+            "button": "抢"
+          }
+        ],
+        "chat_overlay": {
+          "position": "左下角",
+          "message_count": 5,
+          "messages": [
+            "小鹿姐姐: 欢迎新朋友们来到直播间~",
+            "运动达人: 这套好看!",
+            "卡卡西: 布料透气吗?",
+            "小鹿运动优选: 我们这个面料是冰丝速干的，运动出汗也不闷热哦~",
+            "用户_6789: 已拍!"
+          ],
+          "purchase_alert": "用户_6789 等 3 人 正在去购买"
+        },
+        "footer": {
+          "input_bar": "说点什么...",
+          "icons_count": 5,
+          "icons": [
+            "smile",
+            "shopping cart",
+            "heart",
+            "share",
+            "more"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "num": "117",
+    "title": "电商主图 - 电商直播界面模型",
+    "top_fields": [
+      "type",
+      "subject",
+      "ui_layout"
+    ],
+    "data": {
+      "type": "电商直播界面模型",
+      "subject": {
+        "description": "年轻亚裔女性，留着波浪长卷发，皮肤透亮带有微汗，身穿白色短袖 Polo 衫和白色百褶网球裙，右肩扛着一支白色网球拍，直视镜头。",
+        "background": "纯白色"
+      },
+      "ui_layout": {
+        "top_bar": {
+          "left": {
+            "profile_name": "小鹿运动优选",
+            "stats": "12.8 万本场点赞",
+            "button": "关注",
+            "badge": "带货榜第 3 名"
+          },
+          "right": {
+            "viewer_avatars_count": 3,
+            "viewer_count": "1.2 万",
+            "close_button": "X"
+          }
+        },
+        "left_panel": {
+          "campaign": {
+            "title": "夏日运动季 🎾",
+            "subtitle": "活力开场",
+            "bullet_points_count": 3,
+            "bullet_points": [
+              "透气速干",
+              "弹力舒适",
+              "运动百搭"
+            ]
+          }
+        },
+        "right_panel": {
+          "coupon": {
+            "text": "直播间专属券 ¥20 满 199 可用",
+            "button": "领取"
+          },
+          "product_cards_count": 2,
+          "product_cards": [
+            {
+              "status": "正在讲解",
+              "image": "白色 Polo 衫和百褶裙",
+              "title": "运动 POLO 衫套装",
+              "details": "白色·M 码",
+              "price": "¥129",
+              "button": "去抢购"
+            },
+            {
+              "status": "热卖 x 156",
+              "tags": [
+                "品牌",
+                "夏季新款"
+              ],
+              "image": "主播缩略图",
+              "title": "运动 POLO 衫套装女 透气速干 显瘦百搭",
+              "features": [
+                "7 天无理由退货",
+                "运费险"
+              ],
+              "price": "¥129",
+              "button": "抢"
+            }
+          ]
+        },
+        "bottom_panel": {
+          "chat_messages_count": 5,
+          "chat_messages": [
+            "小鹿姐姐: 欢迎新朋友们来到直播间~",
+            "运动达人: 这套好看！",
+            "卡卡西: 布料透气吗？",
+            "主播 小鹿运动优选: 我们这个面料是冰丝速干的，运动出汗也不闷热哦~",
+            "用户_6789: 已拍！"
+          ],
+          "purchase_notification": "用户_6789 等 3 人 正在去购买",
+          "input_bar": {
+            "placeholder": "说点什么...",
+            "icons_count": 5,
+            "icons": [
+              "表情",
+              "购物车",
+              "爱心",
+              "礼物",
+              "更多选项"
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "num": "119",
+    "title": "游戏素材 - Open-World Game Screenshot Mockup",
+    "top_fields": [
+      "type",
+      "perspective",
+      "character",
+      "environment",
+      "ui_elements"
+    ],
+    "data": {
+      "type": "video game screenshot mockup",
+      "perspective": "third-person over-the-shoulder",
+      "character": {
+        "description": "male protagonist seen from behind",
+        "clothing": "grey tank top with graphic 'LEONIDA MARINE CENTER', camouflage cargo shorts"
+      },
+      "environment": {
+        "setting": "tropical coastal town, dirt road, sunny daytime with scattered clouds",
+        "left_side": "wooden welcome sign reading 'Welcome to LEONIDA KEYS YOUR PARADISE', pink plastic flamingo, tropical foliage, distant water tower",
+        "center": "green building with 'FISH' sign and marlin graphic, sign reading 'BAIT TACKLE ICE BEER WINE', pedestrians walking",
+        "right_side": "two-story wooden building 'Brian's Boat Works & Marina', 'Brian's Bar' neon sign, parked pickup truck, jet skis on a trailer"
+      },
+      "ui_elements": {
+        "count": 5,
+        "components": [
+          {
+            "position": "top-left",
+            "type": "mission objective",
+            "text": "MEET RAUL\nRaul has some work for you at his boatyard"
+          },
+          {
+            "position": "top-right",
+            "type": "status HUD",
+            "text": "13:47\n$1,142",
+            "icon": "pink palm tree"
+          },
+          {
+            "position": "bottom-left",
+            "type": "minimap",
+            "description": "circular map with purple border, white map icons including 'N' for north"
+          },
+          {
+            "position": "bottom-left, right of minimap",
+            "type": "location text",
+            "text": "LEONIDA KEYS\nPALM ISLAND"
+          },
+          {
+            "position": "bottom-right",
+            "type": "watermark",
+            "text": "GTA VI\nPRE-ALPHA FOOTAGE"
+          }
+        ]
+      }
+    }
+  }
+]

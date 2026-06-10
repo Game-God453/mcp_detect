@@ -1,0 +1,29 @@
+# Local configuration
+.env
+.env.*
+!.env.example
+
+# Detection outputs
+detection_runs/
+
+# Python cache and build artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Editor and OS files
+.DS_Store
+.idea/
+.vscode/

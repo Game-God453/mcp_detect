@@ -1,0 +1,27 @@
+{
+  "name": "prompt-reuse-index-cards",
+  "version": "1.0.0",
+  "license": "MIT-0",
+  "language": "en",
+  "hasExecutableCode": false,
+  "execution": "noExec",
+  "promptOnly": true,
+  "requires_api": false,
+  "no_network": true,
+  "no_credentials": true,
+  "no_code_execution": true,
+  "contentType": "document-only",
+  "triggerKeywords": [
+    "promptOrganizer",
+    "aiPromptCards",
+    "promptLibrary",
+    "reusablePrompts",
+    "productivityCards",
+    "workflowPrompts",
+    "promptDeck",
+    "promptIndex"
+  ],
+  "description": "Build printable or copyable index cards from reusable AI prompts with inputs, expected outputs, quality checks, adaptation notes, and a master index.",
+  "author": "Batch DT implementation",
+  "category": "AI productivity"
+}

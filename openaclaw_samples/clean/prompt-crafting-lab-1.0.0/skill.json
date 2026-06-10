@@ -1,0 +1,22 @@
+{
+  "slug": "prompt-crafting-lab",
+  "name": "Prompt Crafting Lab",
+  "version": "1.0.0",
+  "type": "prompt-flow",
+  "description": "Hands-on coaching to write effective, precise AI prompts for real-world tasks.",
+  "author": "Bell (design)",
+  "license": "MIT",
+  "category": "AI & Digital Fluency / Core Technique",
+  "target_user": "Anyone who uses AI tools and wants better results — from beginners to intermediate users.",
+  "tags": ["prompt-engineering","ai-prompts","prompt-crafting","chatgpt","claude","prompt-design"],
+  "trigger_keywords": ["How do I write better prompts?","My AI responses are not good enough","Help me improve my prompting","I want to get more from ChatGPT/Claude","Teach me prompt engineering"],
+  "use_cases": ["Learning prompt engineering fundamentals","Improving existing AI prompts","Structuring complex task descriptions for AI","Understanding why certain prompts fail"],
+  "requires": {},
+  "requires_api": false,
+  "no_code_execution": true,
+  "no_network": true,
+  "no_credentials": true,
+  "contentType": "document-only",
+  "project": "ai-digital-fluency-skills-2026-05-06",
+  "priority": "P0"
+}

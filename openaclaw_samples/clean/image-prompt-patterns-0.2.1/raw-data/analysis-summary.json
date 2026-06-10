@@ -1,0 +1,285 @@
+{
+  "total": 126,
+  "by_category": {
+    "个人资料 / 头像": 20,
+    "YouTube 缩略图": 20,
+    "漫画 / 故事板": 18,
+    "社交媒体帖子": 17,
+    "信息图 / 教育视觉图": 15,
+    "电商主图": 14,
+    "产品营销": 13,
+    "Featured": 6,
+    "游戏素材": 3
+  },
+  "by_structure": {
+    "JSON": 71,
+    "Natural+params": 52,
+    "Natural": 3
+  },
+  "top_json_fields": [
+    [
+      "type",
+      71
+    ],
+    [
+      "layout",
+      53
+    ],
+    [
+      "style",
+      29
+    ],
+    [
+      "theme",
+      16
+    ],
+    [
+      "header",
+      15
+    ],
+    [
+      "character",
+      15
+    ],
+    [
+      "subject",
+      14
+    ],
+    [
+      "background",
+      9
+    ],
+    [
+      "color_palette",
+      5
+    ],
+    [
+      "footer",
+      4
+    ],
+    [
+      "centerpiece",
+      4
+    ],
+    [
+      "characters",
+      3
+    ],
+    [
+      "panels",
+      3
+    ],
+    [
+      "brand",
+      3
+    ],
+    [
+      "product",
+      3
+    ],
+    [
+      "ui_layout",
+      3
+    ],
+    [
+      "scene",
+      2
+    ],
+    [
+      "hero_section",
+      2
+    ],
+    [
+      "title_section",
+      1
+    ],
+    [
+      "border",
+      1
+    ],
+    [
+      "ui_overlay",
+      1
+    ],
+    [
+      "instruction",
+      1
+    ],
+    [
+      "setting",
+      1
+    ],
+    [
+      "character_base",
+      1
+    ],
+    [
+      "common_theme",
+      1
+    ],
+    [
+      "count",
+      1
+    ],
+    [
+      "portraits",
+      1
+    ],
+    [
+      "platform",
+      1
+    ],
+    [
+      "post",
+      1
+    ],
+    [
+      "target_audience",
+      1
+    ],
+    [
+      "design_style",
+      1
+    ],
+    [
+      "title",
+      1
+    ],
+    [
+      "subtitle",
+      1
+    ],
+    [
+      "language",
+      1
+    ],
+    [
+      "main_setup",
+      1
+    ],
+    [
+      "inset_diagram",
+      1
+    ],
+    [
+      "bottom_caption",
+      1
+    ],
+    [
+      "matchup",
+      1
+    ],
+    [
+      "facts_section",
+      1
+    ],
+    [
+      "typography_and_ui",
+      1
+    ],
+    [
+      "typography_and_layout",
+      1
+    ],
+    [
+      "top_nav",
+      1
+    ],
+    [
+      "player",
+      1
+    ],
+    [
+      "details",
+      1
+    ],
+    [
+      "video_player",
+      1
+    ],
+    [
+      "video_details",
+      1
+    ],
+    [
+      "global_elements",
+      1
+    ],
+    [
+      "overall_layout",
+      1
+    ],
+    [
+      "top_section",
+      1
+    ],
+    [
+      "bottom_sections",
+      1
+    ]
+  ],
+  "json_prompts_titles": [
+    "VR 头显爆炸视图海报",
+    "手绘城市美食地图",
+    "电商直播 UI 样机",
+    "3D 石阶演化信息图",
+    "个人资料 / 头像 - Idol Maid Polaroid Collection",
+    "个人资料 / 头像 - 4-Panel Professional Avatar Grid",
+    "个人资料 / 头像 - 3D Animated Character Expression Grid",
+    "个人资料 / 头像 - 神话角色头像网格",
+    "个人资料 / 头像 - VTuber 个人资料卡生成器",
+    "个人资料 / 头像 - 3x3 角色肖像网格",
+    "社交媒体帖子 - 4 格日式数字广告横幅网格",
+    "社交媒体帖子 - 7-Day Fashion Lookbook Infographic",
+    "社交媒体帖子 - Satirical 4-Panel Product Ads",
+    "社交媒体帖子 - Historical Figure Social Media Mockup",
+    "社交媒体帖子 - 3D Cinematic Multi-Panel Promo Poster",
+    "社交媒体帖子 - 5-Panel Mixed Style Collage",
+    "社交媒体帖子 - 2x2 SNS School Banner Ad Grid",
+    "社交媒体帖子 - 2x2 Grid of Online School Banner Ads",
+    "社交媒体帖子 - 2x2 Social Media Course Banner Ads",
+    "社交媒体帖子 - 9-Panel Self-Care Infographic Grid",
+    "信息图 / 教育视觉图 - Fashion Design Process Infographic",
+    "信息图 / 教育视觉图 - Medical Infographic on Diabetes Progression",
+    "信息图 / 教育视觉图 - Medical Infographic of Gout Pathology",
+    "信息图 / 教育视觉图 - Camera Exploded View Infographic",
+    "信息图 / 教育视觉图 - Camera Exploded View Infographic",
+    "信息图 / 教育视觉图 - Botanical Growth Atlas Infographic",
+    "信息图 / 教育视觉图 - 3D Urban Systems Atlas Infographic",
+    "信息图 / 教育视觉图 - Scientific Optical Hardware Diagram",
+    "信息图 / 教育视觉图 - Optical Hardware Setup Diagram",
+    "信息图 / 教育视觉图 - Soccer Match Infographic Poster"
+  ],
+  "natural_prompts_titles": [
+    "混合风格的桃太郎讲解 Slides",
+    "动漫武术对决",
+    "个人资料 / 头像 - Cosplay Selfie Prompt",
+    "个人资料 / 头像 - Personalized Minecraft Skin Prompt",
+    "个人资料 / 头像 - Vintage 35mm Flash Portrait",
+    "个人资料 / 头像 - Goth Style Transformation",
+    "个人资料 / 头像 - Graffiti Sketch AI Builder Style",
+    "个人资料 / 头像 - Photorealistic Anime Schoolgirl Crouching Portrait",
+    "个人资料 / 头像 - Kawaii 3D Character Icon",
+    "个人资料 / 头像 - 写实风格秋季和服人像",
+    "个人资料 / 头像 - 定制 Logo 篮球自拍",
+    "个人资料 / 头像 - 趣味动物贴纸套装",
+    "个人资料 / 头像 - VTuber 个人资料卡生成器",
+    "个人资料 / 头像 - 涂鸦草图风格 AI Builder",
+    "个人资料 / 头像 - 历史皇帝肖像生成",
+    "个人资料 / 头像 - 戏剧性湿发肖像摄影",
+    "个人资料 / 头像 - 后台 Cosplayer 肖像",
+    "社交媒体帖子 - Douyin Livestream Screenshot Prompt",
+    "社交媒体帖子 - Surreal Gothic Hall with Floating Masks",
+    "社交媒体帖子 - Whiteboard Marker Anime Sketch",
+    "社交媒体帖子 - Vintage Arcade Repair Flash Photography",
+    "社交媒体帖子 - Food Recipe Flowchart Prompt",
+    "社交媒体帖子 - Goth Girl on Unicorn Ride",
+    "社交媒体帖子 - Oriental Fantasy City Poster",
+    "信息图 / 教育视觉图 - Eastern Mythology Infographic Manuscript",
+    "信息图 / 教育视觉图 - Encyclopedia Style Infographic Generator",
+    "信息图 / 教育视觉图 - Pose and Lighting Analysis Sheet Transformer",
+    "信息图 / 教育视觉图 - Character Relationship Diagram Poster Generator",
+    "信息图 / 教育视觉图 - Epic Concept/Movie Poster Generator",
+    "YouTube 缩略图 - Next-Gen Voxel Game Screenshot"
+  ]
+}
