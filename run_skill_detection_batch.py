@@ -10,6 +10,7 @@ from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 from skill_detection.core import (
     DEFAULT_PPL_MODEL_NAME,
+    KnownAnswerLLMDetector,
     PerplexityDetectors,
     append_jsonl,
     atomic_write_json,
@@ -18,6 +19,7 @@ from skill_detection.core import (
     init_ppl_worker,
     latest_rows_by_skill,
     load_jsonl,
+    resolve_known_answer_config,
     resolve_rebuff_config,
     run_ppl_chunk,
     utc_now_iso,
@@ -31,7 +33,7 @@ DEFAULT_MANIFEST_PATH = DEFAULT_TEST_ROOT / "selection_manifest.json"
 DEFAULT_OUTPUT_DIR = Path("detection_runs/poisoned_skill_sample100")
 DEFAULT_ENV_PATH = Path(".env")
 
-ALL_METHODS = ("rebuff_llm", "ppl", "ppl_windowed")
+ALL_METHODS = ("rebuff_llm", "known_answer_detection", "ppl", "ppl_windowed")
 
 
 def log(message: str) -> None:
@@ -93,8 +95,9 @@ def env_csv(name: str, default: Optional[Iterable[str]] = None) -> List[str]:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
-            "Batch-detect poisoned skills using Rebuff LLM-only, PPL, and windowed PPL. "
-            "The detection input is restricted to skill name + description."
+            "Batch-detect poisoned skills using rebuff_llm, known_answer_detection, "
+            "ppl, and ppl_windowed. The detection input is restricted to skill "
+            "name + description."
         )
     )
     parser.add_argument(
@@ -188,10 +191,15 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--rebuff-model", default=env_str("REBUFF_OPENAI_MODEL"))
     parser.add_argument("--rebuff-threshold", type=float, default=env_float("REBUFF_THRESHOLD", 0.9))
     parser.add_argument(
+        "--known-answer-secret",
+        default=env_str("KNOWN_ANSWER_SECRET", "Hello World!"),
+        help="Secret text used by paper-style known-answer detection.",
+    )
+    parser.add_argument(
         "--rebuff-max-workers",
         type=int,
         default=env_int("REBUFF_MAX_WORKERS", 16),
-        help="Max concurrent Rebuff LLM API calls.",
+        help="Max concurrent LLM API calls for rebuff_llm and known_answer_detection.",
     )
     return parser
 
@@ -220,8 +228,8 @@ def chunk_list(values: List[Dict[str, Any]], chunk_size: int) -> List[List[Dict[
     return [values[index : index + chunk_size] for index in range(0, len(values), chunk_size)]
 
 
-def rebuff_task(skill_key: str, text: str, detector: Any) -> Dict[str, Any]:
-    return {"skill_key": skill_key, "methods": {"rebuff_llm": {"status": "ok", **detector.detect(text)}}}
+def llm_task(method_name: str, skill_key: str, text: str, detector: Any) -> Dict[str, Any]:
+    return {"skill_key": skill_key, "methods": {method_name: {"status": "ok", **detector.detect(text)}}}
 
 
 def row_is_retryable(previous: Optional[Dict[str, Any]], method: str, retry_errors: bool) -> bool:
@@ -326,6 +334,7 @@ def main() -> int:
         )
 
     rebuff_detector = None
+    known_answer_detector = None
     if "rebuff_llm" in args.methods:
         rebuff_detector = resolve_rebuff_config(
             cli_api_key=args.rebuff_api_key,
@@ -342,6 +351,23 @@ def main() -> int:
             "[rebuff] configured: "
             f"model={rebuff_detector.model}, base={rebuff_detector.api_base}, "
             f"max_workers={args.rebuff_max_workers}"
+        )
+    if "known_answer_detection" in args.methods:
+        known_answer_detector = resolve_known_answer_config(
+            cli_api_key=args.rebuff_api_key,
+            cli_model=args.rebuff_model,
+            cli_api_base=args.rebuff_api_base,
+            cli_secret_text=args.known_answer_secret,
+        )
+        thresholds["known_answer_detection"] = {
+            "api_base": known_answer_detector.api_base,
+            "model": known_answer_detector.model,
+            "secret_text": known_answer_detector.secret_text,
+        }
+        log(
+            "[known-answer] configured: "
+            f"model={known_answer_detector.model}, base={known_answer_detector.api_base}, "
+            f"secret={known_answer_detector.secret_text!r}, max_workers={args.rebuff_max_workers}"
         )
 
     config_payload = {
@@ -381,13 +407,16 @@ def main() -> int:
 
     persist_state()
 
-    rebuff_jobs: List[Any] = []
+    llm_jobs: List[Dict[str, Any]] = []
     ppl_jobs: List[Dict[str, Any]] = []
 
     for record in test_records:
         previous = latest_rows.get(record.skill_key)
         need_rebuff = "rebuff_llm" in args.methods and row_is_retryable(
             previous, "rebuff_llm", args.retry_errors
+        )
+        need_known_answer = "known_answer_detection" in args.methods and row_is_retryable(
+            previous, "known_answer_detection", args.retry_errors
         )
         need_ppl = "ppl" in args.methods and row_is_retryable(
             previous, "ppl", args.retry_errors
@@ -397,7 +426,21 @@ def main() -> int:
         )
 
         if need_rebuff:
-            rebuff_jobs.append(record)
+            llm_jobs.append(
+                {
+                    "method_name": "rebuff_llm",
+                    "record": record,
+                    "detector": rebuff_detector,
+                }
+            )
+        if need_known_answer:
+            llm_jobs.append(
+                {
+                    "method_name": "known_answer_detection",
+                    "record": record,
+                    "detector": known_answer_detector,
+                }
+            )
         if need_ppl or need_ppl_windowed:
             ppl_jobs.append(
                 {
@@ -410,31 +453,35 @@ def main() -> int:
 
     log(
         "[plan] pending jobs: "
-        f"rebuff={len(rebuff_jobs)}, "
+        f"llm={len(llm_jobs)}, "
         f"ppl_like={len(ppl_jobs)}"
     )
 
     future_map: Dict[Any, Tuple[str, Any]] = {}
     rebuff_executor: Optional[ThreadPoolExecutor] = None
     ppl_executors: List[ProcessPoolExecutor] = []
-    completed_rebuff = 0
+    completed_llm = 0
     completed_ppl_like = 0
-    rebuff_error_count = 0
+    llm_error_count = 0
     ppl_error_count = 0
 
     try:
-        if rebuff_jobs:
-            assert rebuff_detector is not None
+        if llm_jobs:
             rebuff_executor = ThreadPoolExecutor(max_workers=max(1, args.rebuff_max_workers))
-            for record in rebuff_jobs:
+            for job in llm_jobs:
+                record = job["record"]
+                method_name = job["method_name"]
+                detector = job["detector"]
+                assert detector is not None
                 future = rebuff_executor.submit(
-                    rebuff_task,
+                    llm_task,
+                    method_name,
                     record.skill_key,
                     record.input_text,
-                    rebuff_detector,
+                    detector,
                 )
-                future_map[future] = ("rebuff", record.skill_key)
-            log(f"[rebuff] submitted {len(rebuff_jobs)} requests")
+                future_map[future] = ("llm", (method_name, record.skill_key))
+            log(f"[llm] submitted {len(llm_jobs)} requests")
 
         if ppl_jobs:
             ppl_devices = parse_device_list(args.ppl_devices, args.ppl_device)
@@ -482,18 +529,19 @@ def main() -> int:
                 except Exception as error:
                     if args.stop_on_error:
                         raise
-                    if future_type == "rebuff":
-                        rebuff_error_count += 1
+                    if future_type == "llm":
+                        method_name, skill_key = future_context
+                        llm_error_count += 1
                         row = merge_skill_result(
-                            skill_key=future_context,
-                            method_updates={"rebuff_llm": method_error_payload(error)},
+                            skill_key=skill_key,
+                            method_updates={method_name: method_error_payload(error)},
                             records_by_skill=records_by_skill,
                             latest_rows=latest_rows,
                         )
                         append_jsonl(results_path, row)
                         persist_state()
                         log(
-                            f"[rebuff][error] {future_context}: {type(error).__name__}: {error}"
+                            f"[{method_name}][error] {skill_key}: {type(error).__name__}: {error}"
                         )
                     else:
                         ppl_error_count += len(future_context)
@@ -516,8 +564,9 @@ def main() -> int:
                         )
                     continue
 
-                if future_type == "rebuff":
+                if future_type == "llm":
                     skill_key = result["skill_key"]
+                    method_name = next(iter(result["methods"].keys()))
                     row = merge_skill_result(
                         skill_key=skill_key,
                         method_updates=result["methods"],
@@ -526,12 +575,12 @@ def main() -> int:
                     )
                     append_jsonl(results_path, row)
                     persist_state()
-                    completed_rebuff += 1
-                    rebuff_status = row["methods"]["rebuff_llm"]["status"]
-                    rebuff_flagged = row["methods"]["rebuff_llm"].get("flagged")
+                    completed_llm += 1
+                    llm_status = row["methods"][method_name]["status"]
+                    llm_flagged = row["methods"][method_name].get("flagged")
                     log(
-                        f"[rebuff][{completed_rebuff}/{len(rebuff_jobs)}] "
-                        f"{skill_key} status={rebuff_status} flagged={rebuff_flagged}"
+                        f"[{method_name}][{completed_llm}/{len(llm_jobs)}] "
+                        f"{skill_key} status={llm_status} flagged={llm_flagged}"
                     )
                 else:
                     completed_ppl_like += len(result)
@@ -557,7 +606,7 @@ def main() -> int:
     persist_state()
     log(
         "[done] finished run: "
-        f"rebuff_completed={completed_rebuff}, rebuff_errors={rebuff_error_count}, "
+        f"llm_completed={completed_llm}, llm_errors={llm_error_count}, "
         f"ppl_completed={completed_ppl_like}, ppl_errors={ppl_error_count}"
     )
     log(f"[done] summary written to: {summary_path}")
