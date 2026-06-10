@@ -34,6 +34,10 @@ DEFAULT_ENV_PATH = Path(".env")
 ALL_METHODS = ("rebuff_llm", "ppl", "ppl_windowed")
 
 
+def log(message: str) -> None:
+    print(message, flush=True)
+
+
 def load_env_file(path: Path) -> None:
     if not path.exists():
         return
@@ -269,6 +273,10 @@ def main() -> int:
     state_path = output_dir / "run_state.json"
     summary_path = output_dir / "summary.json"
 
+    log(f"[config] env file: {env_path}")
+    log(f"[config] output dir: {output_dir}")
+    log(f"[config] methods: {', '.join(args.methods)}")
+
     clean_records = discover_skills(
         dataset_root=args.clean_root,
         source_dataset="clean",
@@ -282,6 +290,9 @@ def main() -> int:
     if args.limit is not None:
         test_records = test_records[: args.limit]
 
+    log(f"[data] clean skills for thresholding: {len(clean_records)}")
+    log(f"[data] poisoned test skills: {len(test_records)}")
+
     existing_rows = load_jsonl(results_path)
     latest_rows = latest_rows_by_skill(existing_rows)
     records_by_skill = {record.skill_key: record for record in test_records}
@@ -289,6 +300,11 @@ def main() -> int:
     thresholds: Dict[str, Any] = {}
     if "ppl" in args.methods or "ppl_windowed" in args.methods:
         ppl_devices = parse_device_list(args.ppl_devices, args.ppl_device)
+        log(
+            "[ppl] calibrating thresholds with "
+            f"model={args.ppl_model}, devices={','.join(ppl_devices)}, "
+            f"batch_size={args.ppl_batch_size}, window_size={args.window_size}"
+        )
         ppl_detectors = PerplexityDetectors(
             model_name_or_path=args.ppl_model,
             device=ppl_devices[0],
@@ -302,6 +318,12 @@ def main() -> int:
         )
         thresholds["perplexity"] = ppl_detectors.fit(clean_records)
         ppl_detectors.release()
+        log(
+            "[ppl] calibrated: "
+            f"log_threshold={thresholds['perplexity']['ppl_log_threshold']:.4f}, "
+            f"window_log_threshold={thresholds['perplexity']['ppl_window_log_threshold']:.4f}, "
+            f"window_size={thresholds['perplexity']['window_size']}"
+        )
 
     rebuff_detector = None
     if "rebuff_llm" in args.methods:
@@ -316,6 +338,11 @@ def main() -> int:
             "api_base": rebuff_detector.api_base,
             "model": rebuff_detector.model,
         }
+        log(
+            "[rebuff] configured: "
+            f"model={rebuff_detector.model}, base={rebuff_detector.api_base}, "
+            f"max_workers={args.rebuff_max_workers}"
+        )
 
     config_payload = {
         "started_at": utc_now_iso(),
@@ -381,9 +408,19 @@ def main() -> int:
                 }
             )
 
+    log(
+        "[plan] pending jobs: "
+        f"rebuff={len(rebuff_jobs)}, "
+        f"ppl_like={len(ppl_jobs)}"
+    )
+
     future_map: Dict[Any, Tuple[str, Any]] = {}
     rebuff_executor: Optional[ThreadPoolExecutor] = None
     ppl_executors: List[ProcessPoolExecutor] = []
+    completed_rebuff = 0
+    completed_ppl_like = 0
+    rebuff_error_count = 0
+    ppl_error_count = 0
 
     try:
         if rebuff_jobs:
@@ -397,6 +434,7 @@ def main() -> int:
                     rebuff_detector,
                 )
                 future_map[future] = ("rebuff", record.skill_key)
+            log(f"[rebuff] submitted {len(rebuff_jobs)} requests")
 
         if ppl_jobs:
             ppl_devices = parse_device_list(args.ppl_devices, args.ppl_device)
@@ -417,6 +455,10 @@ def main() -> int:
                 ppl_executors.append(executor)
 
             ppl_chunks = chunk_list(ppl_jobs, args.ppl_chunk_size)
+            log(
+                "[ppl] submitted "
+                f"{len(ppl_chunks)} chunks across {len(ppl_executors)} worker(s)"
+            )
             for index, chunk in enumerate(ppl_chunks):
                 executor = ppl_executors[index % len(ppl_executors)]
                 future = executor.submit(
@@ -428,6 +470,9 @@ def main() -> int:
                 )
                 future_map[future] = ("ppl", [item["skill_key"] for item in chunk])
 
+        if not future_map:
+            log("[done] no pending work; all requested methods already completed")
+
         while future_map:
             done, _ = wait(set(future_map.keys()), return_when=FIRST_COMPLETED)
             for future in done:
@@ -438,6 +483,7 @@ def main() -> int:
                     if args.stop_on_error:
                         raise
                     if future_type == "rebuff":
+                        rebuff_error_count += 1
                         row = merge_skill_result(
                             skill_key=future_context,
                             method_updates={"rebuff_llm": method_error_payload(error)},
@@ -446,7 +492,11 @@ def main() -> int:
                         )
                         append_jsonl(results_path, row)
                         persist_state()
+                        log(
+                            f"[rebuff][error] {future_context}: {type(error).__name__}: {error}"
+                        )
                     else:
+                        ppl_error_count += len(future_context)
                         for skill_key in future_context:
                             row = merge_skill_result(
                                 skill_key=skill_key,
@@ -460,6 +510,10 @@ def main() -> int:
                             )
                             append_jsonl(results_path, row)
                             persist_state()
+                        log(
+                            "[ppl][error] chunk failed for "
+                            f"{len(future_context)} skills: {type(error).__name__}: {error}"
+                        )
                     continue
 
                 if future_type == "rebuff":
@@ -472,7 +526,15 @@ def main() -> int:
                     )
                     append_jsonl(results_path, row)
                     persist_state()
+                    completed_rebuff += 1
+                    rebuff_status = row["methods"]["rebuff_llm"]["status"]
+                    rebuff_flagged = row["methods"]["rebuff_llm"].get("flagged")
+                    log(
+                        f"[rebuff][{completed_rebuff}/{len(rebuff_jobs)}] "
+                        f"{skill_key} status={rebuff_status} flagged={rebuff_flagged}"
+                    )
                 else:
+                    completed_ppl_like += len(result)
                     for item in result:
                         row = merge_skill_result(
                             skill_key=item["skill_key"],
@@ -482,6 +544,10 @@ def main() -> int:
                         )
                         append_jsonl(results_path, row)
                         persist_state()
+                    log(
+                        f"[ppl][{completed_ppl_like}/{len(ppl_jobs)}] "
+                        f"finished chunk of {len(result)} skills"
+                    )
     finally:
         if rebuff_executor is not None:
             rebuff_executor.shutdown(wait=True, cancel_futures=False)
@@ -489,6 +555,12 @@ def main() -> int:
             executor.shutdown(wait=True, cancel_futures=False)
 
     persist_state()
+    log(
+        "[done] finished run: "
+        f"rebuff_completed={completed_rebuff}, rebuff_errors={rebuff_error_count}, "
+        f"ppl_completed={completed_ppl_like}, ppl_errors={ppl_error_count}"
+    )
+    log(f"[done] summary written to: {summary_path}")
     return 0
 
 

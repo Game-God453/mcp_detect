@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import importlib.util
 import json
 import math
 import os
@@ -14,11 +15,17 @@ from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
 import yaml
 
+os.environ.setdefault("USE_TF", "0")
+os.environ.setdefault("TRANSFORMERS_NO_TF", "1")
+os.environ.setdefault("TF_CPP_MIN_LOG_LEVEL", "3")
+os.environ.setdefault("TF_ENABLE_ONEDNN_OPTS", "0")
+
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 DEFAULT_PPL_MODEL_NAME = "gpt2"
 
 REBUFF_SDK_DIR = ROOT_DIR / "rebuff" / "python-sdk"
+REBUFF_DETECT_OPENAI_FILE = REBUFF_SDK_DIR / "rebuff" / "detect_pi_openai.py"
 
 
 def utc_now_iso() -> str:
@@ -588,18 +595,43 @@ class RebuffLLMDetector:
         self.model = model
         self.api_base = api_base
         self.threshold = threshold
+        self._call_openai_to_detect_pi = None
+        self._render_prompt_for_pi_detection = None
+
+    def _lazy_load_rebuff_openai_helpers(self) -> None:
+        if (
+            self._call_openai_to_detect_pi is not None
+            and self._render_prompt_for_pi_detection is not None
+        ):
+            return
+
+        if not REBUFF_DETECT_OPENAI_FILE.exists():
+            raise FileNotFoundError(
+                f"Expected Rebuff detector file not found: {REBUFF_DETECT_OPENAI_FILE}"
+            )
+
+        spec = importlib.util.spec_from_file_location(
+            "rebuff_detect_pi_openai_direct",
+            REBUFF_DETECT_OPENAI_FILE,
+        )
+        if spec is None or spec.loader is None:
+            raise ImportError(
+                f"Could not load module spec from {REBUFF_DETECT_OPENAI_FILE}"
+            )
+
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+
+        self._call_openai_to_detect_pi = module.call_openai_to_detect_pi
+        self._render_prompt_for_pi_detection = module.render_prompt_for_pi_detection
 
     def detect(self, text: str) -> Dict[str, Any]:
-        if str(REBUFF_SDK_DIR) not in sys.path:
-            sys.path.insert(0, str(REBUFF_SDK_DIR))
+        self._lazy_load_rebuff_openai_helpers()
+        assert self._call_openai_to_detect_pi is not None
+        assert self._render_prompt_for_pi_detection is not None
 
-        from rebuff.detect_pi_openai import (  # type: ignore
-            call_openai_to_detect_pi,
-            render_prompt_for_pi_detection,
-        )
-
-        rendered = render_prompt_for_pi_detection(text)
-        raw_response = call_openai_to_detect_pi(
+        rendered = self._render_prompt_for_pi_detection(text)
+        raw_response = self._call_openai_to_detect_pi(
             prompt_to_detect_pi_using_openai=rendered,
             model=self.model,
             api_key=self.api_key,
