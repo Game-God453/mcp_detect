@@ -16,12 +16,14 @@ from skill_detection.core import (
     atomic_write_json,
     build_summary,
     discover_skills,
+    discover_skills_from_json,
     init_ppl_worker,
     latest_rows_by_skill,
     load_jsonl,
     resolve_known_answer_config,
     resolve_rebuff_config,
     run_ppl_chunk,
+    split_skill_records,
     utc_now_iso,
 )
 
@@ -32,6 +34,7 @@ DEFAULT_TEST_ROOT = Path("openaclaw_samples/poisoned_skill_test/poisoned_skill_s
 DEFAULT_MANIFEST_PATH = DEFAULT_TEST_ROOT / "selection_manifest.json"
 DEFAULT_OUTPUT_DIR = Path("detection_runs/poisoned_skill_sample100")
 DEFAULT_ENV_PATH = Path(".env")
+DEFAULT_JSON_DATASET_PATH = Path("skill_poison_results_sum.json")
 
 ALL_METHODS = ("rebuff_llm", "known_answer_detection", "ppl", "ppl_windowed")
 
@@ -126,6 +129,30 @@ def build_parser() -> argparse.ArgumentParser:
         "--output-dir",
         type=Path,
         default=Path(env_str("SKILL_DETECT_OUTPUT_DIR", str(DEFAULT_OUTPUT_DIR))),
+    )
+    parser.add_argument(
+        "--dataset-mode",
+        choices=("sample_test", "json_split"),
+        default=env_str("SKILL_DETECT_DATASET_MODE", "sample_test"),
+        help="Use the existing sample test set or randomly split the JSON dataset into train/test.",
+    )
+    parser.add_argument(
+        "--json-dataset-path",
+        type=Path,
+        default=Path(env_str("SKILL_DETECT_JSON_DATASET_PATH", str(DEFAULT_JSON_DATASET_PATH))),
+        help="JSON dataset used by dataset_mode=json_split.",
+    )
+    parser.add_argument(
+        "--json-test-ratio",
+        type=float,
+        default=env_float("SKILL_DETECT_JSON_TEST_RATIO", 0.3),
+        help="Test split ratio used by dataset_mode=json_split.",
+    )
+    parser.add_argument(
+        "--json-split-seed",
+        type=int,
+        default=env_int("SKILL_DETECT_JSON_SPLIT_SEED", 42),
+        help="Random seed used by dataset_mode=json_split.",
     )
     parser.add_argument(
         "--methods",
@@ -283,18 +310,40 @@ def main() -> int:
 
     log(f"[config] env file: {env_path}")
     log(f"[config] output dir: {output_dir}")
+    log(f"[config] dataset mode: {args.dataset_mode}")
     log(f"[config] methods: {', '.join(args.methods)}")
+
+    split_metadata: Optional[Dict[str, Any]] = None
+    train_records: List[Any] = []
 
     clean_records = discover_skills(
         dataset_root=args.clean_root,
         source_dataset="clean",
     )
-    test_records = discover_skills(
-        dataset_root=args.test_root,
-        source_dataset="poisoned_test",
-        manifest_path=args.manifest_path,
-        poisoned_all_root=args.poisoned_all_root,
-    )
+
+    if args.dataset_mode == "json_split":
+        poisoned_json_records = discover_skills_from_json(
+            json_path=args.json_dataset_path,
+            source_dataset="poisoned_json",
+        )
+        train_records, test_records, split_metadata = split_skill_records(
+            poisoned_json_records,
+            test_ratio=args.json_test_ratio,
+            seed=args.json_split_seed,
+        )
+        log(
+            "[data] json dataset loaded: "
+            f"total={len(poisoned_json_records)}, train={len(train_records)}, test={len(test_records)}, "
+            f"seed={args.json_split_seed}, test_ratio={args.json_test_ratio}"
+        )
+    else:
+        test_records = discover_skills(
+            dataset_root=args.test_root,
+            source_dataset="poisoned_test",
+            manifest_path=args.manifest_path,
+            poisoned_all_root=args.poisoned_all_root,
+        )
+
     if args.limit is not None:
         test_records = test_records[: args.limit]
 
@@ -376,13 +425,33 @@ def main() -> int:
         "poisoned_all_root": str(args.poisoned_all_root),
         "test_root": str(args.test_root),
         "manifest_path": str(args.manifest_path),
+        "dataset_mode": args.dataset_mode,
+        "json_dataset_path": str(args.json_dataset_path),
+        "json_test_ratio": args.json_test_ratio,
+        "json_split_seed": args.json_split_seed,
         "output_dir": str(output_dir),
         "methods": args.methods,
         "limit": args.limit,
         "retry_errors": args.retry_errors,
         "env_file": str(env_path),
         "thresholds": thresholds,
+        "split_metadata": split_metadata,
     }
+
+    if split_metadata is not None:
+        split_manifest_path = output_dir / "dataset_split.json"
+        atomic_write_json(
+            split_manifest_path,
+            {
+                "dataset_mode": args.dataset_mode,
+                "json_dataset_path": str(args.json_dataset_path),
+                "seed": args.json_split_seed,
+                "test_ratio": args.json_test_ratio,
+                "train_records": [record.to_dict() for record in train_records],
+                "test_records": [record.to_dict() for record in test_records],
+            },
+        )
+        log(f"[data] split manifest written to: {split_manifest_path}")
 
     def persist_state() -> None:
         summary = build_summary(

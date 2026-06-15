@@ -156,6 +156,8 @@ class SkillRecord:
     source_result_index: Optional[int] = None
     source_prototype: Optional[str] = None
     poisoned_source_file: Optional[str] = None
+    trigger_text: Optional[str] = None
+    dataset_split: Optional[str] = None
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -220,6 +222,98 @@ def discover_skills(
         skills.append(record)
 
     return skills
+
+
+def discover_skills_from_json(
+    json_path: Path,
+    source_dataset: str,
+) -> List[SkillRecord]:
+    if not json_path.exists():
+        raise FileNotFoundError(f"JSON dataset not found: {json_path}")
+
+    payload = json.loads(json_path.read_text(encoding="utf-8", errors="ignore"))
+    if not isinstance(payload, list):
+        raise ValueError("JSON dataset must be a list of records")
+
+    skills: List[SkillRecord] = []
+    for index, item in enumerate(payload):
+        if not isinstance(item, dict):
+            raise ValueError(f"JSON dataset row {index} is not an object")
+
+        name = normalize_quotes(str(item.get("skill_name", "") or ""))
+        description = normalize_quotes(str(item.get("poisoned_description", "") or ""))
+        trigger = normalize_quotes(str(item.get("trigger", "") or ""))
+
+        if not name:
+            name = f"json_skill_{index:04d}"
+        if not description:
+            raise ValueError(f"JSON dataset row {index} has empty poisoned_description")
+
+        skill_id = f"JSON{index:04d}"
+        skill_key = f"json_split/{skill_id}"
+
+        skills.append(
+            SkillRecord(
+                skill_key=skill_key,
+                skill_id=skill_id,
+                category="json_split",
+                skill_name=name,
+                description=description,
+                input_text=build_detection_text(name, description),
+                skill_file=f"{json_path}#{index}",
+                source_dataset=source_dataset,
+                manifest_category="json_split",
+                source_result_index=index,
+                trigger_text=trigger or None,
+            )
+        )
+
+    return skills
+
+
+def split_skill_records(
+    records: Sequence[SkillRecord],
+    test_ratio: float,
+    seed: int,
+) -> Tuple[List[SkillRecord], List[SkillRecord], Dict[str, Any]]:
+    if not records:
+        raise ValueError("cannot split an empty dataset")
+    if not 0 < test_ratio < 1:
+        raise ValueError("test_ratio must be between 0 and 1")
+
+    total = len(records)
+    test_size = int(round(total * test_ratio))
+    if total > 1:
+        test_size = max(1, min(total - 1, test_size))
+    else:
+        test_size = 1
+
+    indices = list(range(total))
+    rng = random.Random(seed)
+    rng.shuffle(indices)
+
+    test_index_set = set(indices[:test_size])
+    train_records: List[SkillRecord] = []
+    test_records: List[SkillRecord] = []
+
+    for index, record in enumerate(records):
+        split_name = "test" if index in test_index_set else "train"
+        copied = SkillRecord(**{**record.to_dict(), "dataset_split": split_name})
+        if split_name == "test":
+            test_records.append(copied)
+        else:
+            train_records.append(copied)
+
+    split_metadata = {
+        "seed": seed,
+        "test_ratio": test_ratio,
+        "train_size": len(train_records),
+        "test_size": len(test_records),
+        "total_size": total,
+        "train_indices": [record.source_result_index for record in train_records],
+        "test_indices": [record.source_result_index for record in test_records],
+    }
+    return train_records, test_records, split_metadata
 
 
 class HuggingFaceCausalPerplexityModel:

@@ -5,6 +5,7 @@
 
 # Detection outputs
 detection_runs/
+finetune_runs/
 
 # Python cache and build artifacts
 __pycache__/
