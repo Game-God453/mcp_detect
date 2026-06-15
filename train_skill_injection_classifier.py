@@ -449,7 +449,16 @@ def main() -> int:
         Trainer,
     )
 
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    try:
+        tokenizer = AutoTokenizer.from_pretrained(model_name)
+        log("[tokenizer] loaded fast tokenizer")
+    except Exception as error:
+        log(
+            "[tokenizer] fast tokenizer load failed; "
+            f"falling back to slow tokenizer: {type(error).__name__}: {error}"
+        )
+        tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=False)
+        log("[tokenizer] loaded slow tokenizer")
 
     def preprocess(batch: Dict[str, List[Any]]) -> Dict[str, Any]:
         return tokenizer(
