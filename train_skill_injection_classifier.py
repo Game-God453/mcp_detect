@@ -45,8 +45,10 @@ def load_env_file(path: Path) -> None:
         value = value.strip()
         if not key:
             continue
-        if value and value[0] == value[-1] and value[0] in {"'", '"'}:
+        if value and value[0] in {"'", '"'} and value[-1] == value[0]:
             value = value[1:-1]
+        elif " #" in value:
+            value = value.split(" #", 1)[0].rstrip()
         os.environ.setdefault(key, value)
 
 
