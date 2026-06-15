@@ -7,10 +7,10 @@ import os
 import random
 import re
 import sys
+import uuid
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from tempfile import NamedTemporaryFile
 from typing import Any, Callable, Dict, Iterable, List, Optional, Sequence, Tuple
 
 import yaml
@@ -38,13 +38,20 @@ def ensure_parent_dir(path: Path) -> None:
 
 def atomic_write_json(path: Path, payload: Dict[str, Any]) -> None:
     ensure_parent_dir(path)
-    with NamedTemporaryFile(
-        "w", encoding="utf-8", dir=path.parent, delete=False
-    ) as handle:
-        json.dump(payload, handle, ensure_ascii=False, indent=2, sort_keys=True)
-        handle.write("\n")
-        temp_path = Path(handle.name)
-    temp_path.replace(path)
+    temp_path = path.parent / f".{path.name}.{uuid.uuid4().hex}.tmp"
+    try:
+        with temp_path.open("w", encoding="utf-8") as handle:
+            json.dump(payload, handle, ensure_ascii=False, indent=2, sort_keys=True)
+            handle.write("\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        temp_path.replace(path)
+    finally:
+        if temp_path.exists():
+            try:
+                temp_path.unlink()
+            except OSError:
+                pass
 
 
 def append_jsonl(path: Path, payload: Dict[str, Any]) -> None:
