@@ -11,7 +11,7 @@ from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from tempfile import NamedTemporaryFile
-from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
+from typing import Any, Callable, Dict, Iterable, List, Optional, Sequence, Tuple
 
 import yaml
 
@@ -158,6 +158,9 @@ class SkillRecord:
     poisoned_source_file: Optional[str] = None
     trigger_text: Optional[str] = None
     dataset_split: Optional[str] = None
+    label: Optional[int] = None
+    pair_group_id: Optional[str] = None
+    record_variant: Optional[str] = None
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -224,94 +227,163 @@ def discover_skills(
     return skills
 
 
-def discover_skills_from_json(
+def _stable_short_hash(value: str) -> str:
+    return str(abs(hash(value)))
+
+
+def discover_paired_skills_from_merged_json(
     json_path: Path,
     source_dataset: str,
 ) -> List[SkillRecord]:
     if not json_path.exists():
-        raise FileNotFoundError(f"JSON dataset not found: {json_path}")
+        raise FileNotFoundError(f"Merged JSON dataset not found: {json_path}")
 
     payload = json.loads(json_path.read_text(encoding="utf-8", errors="ignore"))
+    if isinstance(payload, dict):
+        payload = payload.get("items", [])
     if not isinstance(payload, list):
-        raise ValueError("JSON dataset must be a list of records")
+        raise ValueError("Merged JSON dataset must be a list of records or a dict with an 'items' list")
 
-    skills: List[SkillRecord] = []
+    records: List[SkillRecord] = []
     for index, item in enumerate(payload):
         if not isinstance(item, dict):
-            raise ValueError(f"JSON dataset row {index} is not an object")
+            raise ValueError(f"Merged JSON row {index} is not an object")
 
-        name = normalize_quotes(str(item.get("skill_name", "") or ""))
-        description = normalize_quotes(str(item.get("poisoned_description", "") or ""))
+        skill_name = normalize_quotes(str(item.get("skill_name", "") or ""))
+        category = normalize_quotes(str(item.get("category", "") or "")) or "unknown"
+        original_description = normalize_quotes(str(item.get("original_description", "") or ""))
+        poisoned_description = normalize_quotes(str(item.get("poisoned_description", "") or ""))
         trigger = normalize_quotes(str(item.get("trigger", "") or ""))
+        pair_source_index = item.get("merged_index", item.get("source_index", index))
 
-        if not name:
-            name = f"json_skill_{index:04d}"
-        if not description:
-            raise ValueError(f"JSON dataset row {index} has empty poisoned_description")
+        if not skill_name:
+            skill_name = f"merged_skill_{index:04d}"
+        if not original_description:
+            raise ValueError(f"Merged JSON row {index} has empty original_description")
+        if not poisoned_description:
+            raise ValueError(f"Merged JSON row {index} has empty poisoned_description")
 
-        skill_id = f"JSON{index:04d}"
-        skill_key = f"json_split/{skill_id}"
+        pair_group_id = f"pair_{pair_source_index}"
+        base_skill_id = f"MERGED{index:04d}"
 
-        skills.append(
-            SkillRecord(
-                skill_key=skill_key,
-                skill_id=skill_id,
-                category="json_split",
-                skill_name=name,
+        variants = [
+            ("clean", original_description, 0),
+            ("poison", poisoned_description, 1),
+        ]
+        for record_variant, description, label in variants:
+            record = SkillRecord(
+                skill_key=f"merged_pairs/{base_skill_id}/{record_variant}",
+                skill_id=base_skill_id,
+                category=category,
+                skill_name=skill_name,
                 description=description,
-                input_text=build_detection_text(name, description),
+                input_text=build_detection_text(skill_name, description),
                 skill_file=f"{json_path}#{index}",
                 source_dataset=source_dataset,
-                manifest_category="json_split",
-                source_result_index=index,
-                trigger_text=trigger or None,
+                manifest_category=category,
+                source_result_index=pair_source_index,
+                trigger_text=(trigger or None) if record_variant == "poison" else None,
+                label=label,
+                pair_group_id=pair_group_id,
+                record_variant=record_variant,
             )
-        )
+            records.append(record)
 
-    return skills
+    return records
 
 
-def split_skill_records(
+def split_skill_records_grouped_by_category(
     records: Sequence[SkillRecord],
     test_ratio: float,
     seed: int,
+    group_key_fn: Callable[[SkillRecord], str],
+    category_key_fn: Callable[[SkillRecord], str],
 ) -> Tuple[List[SkillRecord], List[SkillRecord], Dict[str, Any]]:
     if not records:
         raise ValueError("cannot split an empty dataset")
     if not 0 < test_ratio < 1:
         raise ValueError("test_ratio must be between 0 and 1")
 
-    total = len(records)
-    test_size = int(round(total * test_ratio))
-    if total > 1:
-        test_size = max(1, min(total - 1, test_size))
-    else:
-        test_size = 1
+    grouped_records: Dict[str, List[SkillRecord]] = {}
+    group_categories: Dict[str, str] = {}
+    categories: Dict[str, List[str]] = {}
 
-    indices = list(range(total))
+    for record in records:
+        group_key = str(group_key_fn(record))
+        category = str(category_key_fn(record) or "unknown")
+        grouped_records.setdefault(group_key, []).append(record)
+        existing_category = group_categories.get(group_key)
+        if existing_category is not None and existing_category != category:
+            raise ValueError(f"group {group_key!r} spans multiple categories")
+        group_categories[group_key] = category
+        categories.setdefault(category, [])
+        if group_key not in categories[category]:
+            categories[category].append(group_key)
+
     rng = random.Random(seed)
-    rng.shuffle(indices)
+    test_group_keys: set[str] = set()
+    category_summary: Dict[str, Dict[str, Any]] = {}
 
-    test_index_set = set(indices[:test_size])
+    for category in sorted(categories):
+        group_keys = list(categories[category])
+        rng.shuffle(group_keys)
+        if len(group_keys) < 2:
+            raise ValueError(
+                f"Category {category!r} has only {len(group_keys)} skill group(s); "
+                "cannot guarantee both train and test coverage."
+            )
+
+        test_group_size = int(round(len(group_keys) * test_ratio))
+        test_group_size = max(1, min(len(group_keys) - 1, test_group_size))
+        selected = set(group_keys[:test_group_size])
+        test_group_keys.update(selected)
+        category_summary[category] = {
+            "group_count": len(group_keys),
+            "test_group_count": len(selected),
+            "train_group_count": len(group_keys) - len(selected),
+            "test_group_keys": sorted(selected),
+        }
+
     train_records: List[SkillRecord] = []
     test_records: List[SkillRecord] = []
-
-    for index, record in enumerate(records):
-        split_name = "test" if index in test_index_set else "train"
+    for record in records:
+        group_key = str(group_key_fn(record))
+        split_name = "test" if group_key in test_group_keys else "train"
         copied = SkillRecord(**{**record.to_dict(), "dataset_split": split_name})
         if split_name == "test":
             test_records.append(copied)
         else:
             train_records.append(copied)
 
+    train_rng = random.Random(seed + 1)
+    test_rng = random.Random(seed + 2)
+    train_rng.shuffle(train_records)
+    test_rng.shuffle(test_records)
+
     split_metadata = {
         "seed": seed,
         "test_ratio": test_ratio,
+        "total_size": len(records),
+        "group_count": len(grouped_records),
+        "train_group_count": len(grouped_records) - len(test_group_keys),
+        "test_group_count": len(test_group_keys),
         "train_size": len(train_records),
         "test_size": len(test_records),
-        "total_size": total,
-        "train_indices": [record.source_result_index for record in train_records],
-        "test_indices": [record.source_result_index for record in test_records],
+        "category_summary": category_summary,
+        "train_group_keys": sorted(
+            {str(group_key_fn(record)) for record in train_records}
+        ),
+        "test_group_keys": sorted(test_group_keys),
+        "train_indices": [
+            record.source_result_index
+            for record in train_records
+            if record.source_result_index is not None
+        ],
+        "test_indices": [
+            record.source_result_index
+            for record in test_records
+            if record.source_result_index is not None
+        ],
     }
     return train_records, test_records, split_metadata
 
@@ -1085,10 +1157,15 @@ def build_summary(
             "safe": 0,
             "errors": 0,
             "skipped": 0,
+            "tp": 0,
+            "tn": 0,
+            "fp": 0,
+            "fn": 0,
         }
 
     for row in latest_rows:
         category = row.get("manifest_category") or row.get("category") or "unknown"
+        gold_label = row.get("label")
         method_payloads = row.get("methods", {})
         category_bucket = categories_summary.setdefault(category, {})
 
@@ -1098,18 +1175,43 @@ def build_summary(
 
             category_method = category_bucket.setdefault(
                 method,
-                {"processed": 0, "flagged": 0, "safe": 0, "errors": 0, "skipped": 0},
+                {
+                    "processed": 0,
+                    "flagged": 0,
+                    "safe": 0,
+                    "errors": 0,
+                    "skipped": 0,
+                    "tp": 0,
+                    "tn": 0,
+                    "fp": 0,
+                    "fn": 0,
+                },
             )
 
             if status == "ok":
                 methods_summary[method]["processed"] += 1
                 category_method["processed"] += 1
-                if result.get("flagged"):
+                flagged = bool(result.get("flagged"))
+                if flagged:
                     methods_summary[method]["flagged"] += 1
                     category_method["flagged"] += 1
                 else:
                     methods_summary[method]["safe"] += 1
                     category_method["safe"] += 1
+
+                if gold_label in {0, 1}:
+                    if flagged and gold_label == 1:
+                        methods_summary[method]["tp"] += 1
+                        category_method["tp"] += 1
+                    elif flagged and gold_label == 0:
+                        methods_summary[method]["fp"] += 1
+                        category_method["fp"] += 1
+                    elif (not flagged) and gold_label == 0:
+                        methods_summary[method]["tn"] += 1
+                        category_method["tn"] += 1
+                    elif (not flagged) and gold_label == 1:
+                        methods_summary[method]["fn"] += 1
+                        category_method["fn"] += 1
             elif status == "skipped":
                 methods_summary[method]["skipped"] += 1
                 category_method["skipped"] += 1
@@ -1119,10 +1221,27 @@ def build_summary(
 
     for method, stats in methods_summary.items():
         processed = stats["processed"]
-        stats["poisoned_recall_on_test_set"] = (
-            stats["flagged"] / processed if processed else None
-        )
         stats["coverage"] = processed / total_skills if total_skills else 0.0
+        tp = stats["tp"]
+        tn = stats["tn"]
+        fp = stats["fp"]
+        fn = stats["fn"]
+        labeled_total = tp + tn + fp + fn
+        precision = tp / (tp + fp) if (tp + fp) else None
+        recall = tp / (tp + fn) if (tp + fn) else None
+        specificity = tn / (tn + fp) if (tn + fp) else None
+        accuracy = (tp + tn) / labeled_total if labeled_total else None
+        f1 = (
+            2 * precision * recall / (precision + recall)
+            if precision is not None and recall is not None and (precision + recall) > 0
+            else None
+        )
+        stats["poisoned_recall_on_test_set"] = recall
+        stats["precision"] = precision
+        stats["recall"] = recall
+        stats["specificity"] = specificity
+        stats["accuracy"] = accuracy
+        stats["f1"] = f1
 
     return {
         "total_skills": total_skills,

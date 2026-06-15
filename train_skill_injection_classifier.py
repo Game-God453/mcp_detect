@@ -11,16 +11,14 @@ from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
 from skill_detection.core import (
     atomic_write_json,
-    discover_skills,
-    discover_skills_from_json,
-    split_skill_records,
+    discover_paired_skills_from_merged_json,
+    split_skill_records_grouped_by_category,
     utc_now_iso,
 )
 
 
 DEFAULT_ENV_PATH = Path(".env")
-DEFAULT_CLEAN_ROOT = Path("openaclaw_samples/clean")
-DEFAULT_POISON_JSON_PATH = Path("skill_poison_results_sum.json")
+DEFAULT_MERGED_JSON_PATH = Path("merged_poison_results_20260615.json")
 DEFAULT_OUTPUT_DIR = Path("finetune_runs/deberta_v3_small")
 
 MODEL_ALIASES = {
@@ -108,18 +106,13 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
             "Fine-tune a DeBERTa-v3 binary classifier for skill prompt-injection "
-            "detection using clean skills and poisoned JSON skills."
+            "detection using the merged paired clean/poison skill dataset."
         )
     )
     parser.add_argument(
-        "--clean-root",
+        "--merged-json-path",
         type=Path,
-        default=Path(env_str("FINETUNE_CLEAN_ROOT", str(DEFAULT_CLEAN_ROOT))),
-    )
-    parser.add_argument(
-        "--poison-json-path",
-        type=Path,
-        default=Path(env_str("FINETUNE_POISON_JSON_PATH", str(DEFAULT_POISON_JSON_PATH))),
+        default=Path(env_str("FINETUNE_MERGED_JSON_PATH", str(DEFAULT_MERGED_JSON_PATH))),
     )
     parser.add_argument(
         "--output-dir",
@@ -132,14 +125,9 @@ def build_parser() -> argparse.ArgumentParser:
         help="Model name or path. Recommended: microsoft/deberta-v3-small or microsoft/deberta-v3-large.",
     )
     parser.add_argument(
-        "--clean-test-ratio",
+        "--test-ratio",
         type=float,
-        default=env_float("FINETUNE_CLEAN_TEST_RATIO", 0.3),
-    )
-    parser.add_argument(
-        "--poison-test-ratio",
-        type=float,
-        default=env_float("FINETUNE_POISON_TEST_RATIO", 0.3),
+        default=env_float("FINETUNE_TEST_RATIO", 0.3),
     )
     parser.add_argument(
         "--split-seed",
@@ -252,30 +240,14 @@ def shuffle_examples(examples: Sequence[ClassificationExample], seed: int) -> Li
     return items
 
 
-def build_examples(clean_records: Sequence[Any], poison_records: Sequence[Any], split_name: str) -> List[ClassificationExample]:
+def build_examples(records: Sequence[Any], split_name: str) -> List[ClassificationExample]:
     examples: List[ClassificationExample] = []
-
-    for record in clean_records:
+    for record in records:
         examples.append(
             ClassificationExample(
-                example_id=f"clean::{record.skill_key}",
+                example_id=f"{record.record_variant or 'record'}::{record.skill_key}",
                 text=record.input_text,
-                label=0,
-                source_dataset=record.source_dataset,
-                split=split_name,
-                skill_name=record.skill_name,
-                description=record.description,
-                trigger_text=record.trigger_text,
-                skill_key=record.skill_key,
-            )
-        )
-
-    for record in poison_records:
-        examples.append(
-            ClassificationExample(
-                example_id=f"poison::{record.skill_key}",
-                text=record.input_text,
-                label=1,
+                label=int(record.label),
                 source_dataset=record.source_dataset,
                 split=split_name,
                 skill_name=record.skill_name,
@@ -286,6 +258,14 @@ def build_examples(clean_records: Sequence[Any], poison_records: Sequence[Any], 
         )
 
     return examples
+
+
+def paired_group_key(record: Any) -> str:
+    return str(record.pair_group_id or record.skill_id)
+
+
+def paired_category_key(record: Any) -> str:
+    return str(record.category or record.manifest_category or "unknown")
 
 
 def to_hf_dataset(examples: Sequence[ClassificationExample]) -> Any:
@@ -429,49 +409,47 @@ def main() -> int:
     log(f"[config] model: {model_name}")
     log(f"[config] CUDA_VISIBLE_DEVICES: {os.getenv('CUDA_VISIBLE_DEVICES', '<unset>')}")
 
-    clean_records = discover_skills(args.clean_root, "clean")
-    poison_records = discover_skills_from_json(args.poison_json_path, "poisoned_json")
+    all_records = discover_paired_skills_from_merged_json(
+        args.merged_json_path,
+        "merged_pairs",
+    )
+    train_records, test_records, split_meta = split_skill_records_grouped_by_category(
+        all_records,
+        test_ratio=args.test_ratio,
+        seed=args.split_seed,
+        group_key_fn=paired_group_key,
+        category_key_fn=paired_category_key,
+    )
 
-    clean_train, clean_test, clean_split_meta = split_skill_records(
-        clean_records,
-        test_ratio=args.clean_test_ratio,
-        seed=args.split_seed,
-    )
-    poison_train, poison_test, poison_split_meta = split_skill_records(
-        poison_records,
-        test_ratio=args.poison_test_ratio,
-        seed=args.split_seed,
-    )
+    train_clean_count = sum(1 for record in train_records if record.label == 0)
+    train_poison_count = sum(1 for record in train_records if record.label == 1)
+    test_clean_count = sum(1 for record in test_records if record.label == 0)
+    test_poison_count = sum(1 for record in test_records if record.label == 1)
 
     train_examples = shuffle_examples(
-        build_examples(clean_train, poison_train, "train"),
+        build_examples(train_records, "train"),
         seed=args.train_seed,
     )
     test_examples = shuffle_examples(
-        build_examples(clean_test, poison_test, "test"),
+        build_examples(test_records, "test"),
         seed=args.train_seed,
     )
 
     log(
-        "[data] clean split: "
-        f"train={len(clean_train)}, test={len(clean_test)}, seed={args.split_seed}, "
-        f"test_ratio={args.clean_test_ratio}"
-    )
-    log(
-        "[data] poison split: "
-        f"train={len(poison_train)}, test={len(poison_test)}, seed={args.split_seed}, "
-        f"test_ratio={args.poison_test_ratio}"
+        "[data] skill split: "
+        f"train_examples={len(train_records)}, test_examples={len(test_records)}, "
+        f"pair_groups={split_meta['group_count']}, seed={args.split_seed}, "
+        f"test_ratio={args.test_ratio}"
     )
     log(
         "[data] classification dataset: "
-        f"train={len(train_examples)} (clean={len(clean_train)}, poison={len(poison_train)}), "
-        f"test={len(test_examples)} (clean={len(clean_test)}, poison={len(poison_test)})"
+        f"train={len(train_examples)} (clean={train_clean_count}, poison={train_poison_count}), "
+        f"test={len(test_examples)} (clean={test_clean_count}, poison={test_poison_count})"
     )
 
     split_manifest = {
         "created_at": utc_now_iso(),
-        "clean_split": clean_split_meta,
-        "poison_split": poison_split_meta,
+        "split_metadata": split_meta,
         "train_examples": [example.to_dict() for example in train_examples],
         "test_examples": [example.to_dict() for example in test_examples],
     }
@@ -587,8 +565,7 @@ def main() -> int:
         "output_dir": str(output_dir),
         "eval_only": args.eval_only,
         "checkpoint_dir": str(checkpoint_dir) if args.eval_only else str(output_dir / "best_model"),
-        "clean_split": clean_split_meta,
-        "poison_split": poison_split_meta,
+        "split_metadata": split_meta,
         "train_example_count": len(train_examples),
         "test_example_count": len(test_examples),
         "metrics": metrics,

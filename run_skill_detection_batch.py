@@ -15,26 +15,21 @@ from skill_detection.core import (
     append_jsonl,
     atomic_write_json,
     build_summary,
-    discover_skills,
-    discover_skills_from_json,
+    discover_paired_skills_from_merged_json,
     init_ppl_worker,
     latest_rows_by_skill,
     load_jsonl,
     resolve_known_answer_config,
     resolve_rebuff_config,
     run_ppl_chunk,
-    split_skill_records,
+    split_skill_records_grouped_by_category,
     utc_now_iso,
 )
 
 
-DEFAULT_CLEAN_ROOT = Path("openaclaw_samples/clean")
-DEFAULT_POISONED_ALL_ROOT = Path("openaclaw_samples/posioned_skill_all/poisoned_skill_markdown")
-DEFAULT_TEST_ROOT = Path("openaclaw_samples/poisoned_skill_test/poisoned_skill_sample100")
-DEFAULT_MANIFEST_PATH = DEFAULT_TEST_ROOT / "selection_manifest.json"
 DEFAULT_OUTPUT_DIR = Path("detection_runs/poisoned_skill_sample100")
 DEFAULT_ENV_PATH = Path(".env")
-DEFAULT_JSON_DATASET_PATH = Path("skill_poison_results_sum.json")
+DEFAULT_MERGED_JSON_DATASET_PATH = Path("merged_poison_results_20260615.json")
 
 ALL_METHODS = ("rebuff_llm", "known_answer_detection", "ppl", "ppl_windowed")
 
@@ -106,55 +101,27 @@ def build_parser() -> argparse.ArgumentParser:
         )
     )
     parser.add_argument(
-        "--clean-root",
-        type=Path,
-        default=Path(env_str("SKILL_DETECT_CLEAN_ROOT", str(DEFAULT_CLEAN_ROOT))),
-    )
-    parser.add_argument(
-        "--poisoned-all-root",
-        type=Path,
-        default=Path(
-            env_str("SKILL_DETECT_POISONED_ALL_ROOT", str(DEFAULT_POISONED_ALL_ROOT))
-        ),
-    )
-    parser.add_argument(
-        "--test-root",
-        type=Path,
-        default=Path(env_str("SKILL_DETECT_TEST_ROOT", str(DEFAULT_TEST_ROOT))),
-    )
-    parser.add_argument(
-        "--manifest-path",
-        type=Path,
-        default=Path(env_str("SKILL_DETECT_MANIFEST_PATH", str(DEFAULT_MANIFEST_PATH))),
-    )
-    parser.add_argument(
         "--output-dir",
         type=Path,
         default=Path(env_str("SKILL_DETECT_OUTPUT_DIR", str(DEFAULT_OUTPUT_DIR))),
     )
     parser.add_argument(
-        "--dataset-mode",
-        choices=("sample_test", "json_split"),
-        default=env_str("SKILL_DETECT_DATASET_MODE", "sample_test"),
-        help="Use the existing sample test set or randomly split the JSON dataset into train/test.",
-    )
-    parser.add_argument(
-        "--json-dataset-path",
+        "--merged-json-path",
         type=Path,
-        default=Path(env_str("SKILL_DETECT_JSON_DATASET_PATH", str(DEFAULT_JSON_DATASET_PATH))),
-        help="JSON dataset used by dataset_mode=json_split.",
+        default=Path(env_str("SKILL_DETECT_MERGED_JSON_PATH", str(DEFAULT_MERGED_JSON_DATASET_PATH))),
+        help="Merged paired dataset used for both batch detection and train/test splitting.",
     )
     parser.add_argument(
-        "--json-test-ratio",
+        "--test-ratio",
         type=float,
-        default=env_float("SKILL_DETECT_JSON_TEST_RATIO", 0.3),
-        help="Test split ratio used by dataset_mode=json_split.",
+        default=env_float("SKILL_DETECT_TEST_RATIO", 0.3),
+        help="Per-category test split ratio for skill-level paired splitting.",
     )
     parser.add_argument(
-        "--json-split-seed",
+        "--split-seed",
         type=int,
-        default=env_int("SKILL_DETECT_JSON_SPLIT_SEED", 42),
-        help="Random seed used by dataset_mode=json_split.",
+        default=env_int("SKILL_DETECT_SPLIT_SEED", 42),
+        help="Random seed used for skill-level paired splitting.",
     )
     parser.add_argument(
         "--methods",
@@ -257,6 +224,14 @@ def chunk_list(values: List[Dict[str, Any]], chunk_size: int) -> List[List[Dict[
     return [values[index : index + chunk_size] for index in range(0, len(values), chunk_size)]
 
 
+def paired_group_key(record: Any) -> str:
+    return str(record.pair_group_id or record.skill_id)
+
+
+def paired_category_key(record: Any) -> str:
+    return str(record.category or record.manifest_category or "unknown")
+
+
 def llm_task(method_name: str, skill_key: str, text: str, detector: Any) -> Dict[str, Any]:
     return {"skill_key": skill_key, "methods": {method_name: {"status": "ok", **detector.detect(text)}}}
 
@@ -312,45 +287,35 @@ def main() -> int:
 
     log(f"[config] env file: {env_path}")
     log(f"[config] output dir: {output_dir}")
-    log(f"[config] dataset mode: {args.dataset_mode}")
     log(f"[config] methods: {', '.join(args.methods)}")
 
     split_metadata: Optional[Dict[str, Any]] = None
     train_records: List[Any] = []
 
-    clean_records = discover_skills(
-        dataset_root=args.clean_root,
-        source_dataset="clean",
+    merged_records = discover_paired_skills_from_merged_json(
+        json_path=args.merged_json_path,
+        source_dataset="merged_pairs",
     )
-
-    if args.dataset_mode == "json_split":
-        poisoned_json_records = discover_skills_from_json(
-            json_path=args.json_dataset_path,
-            source_dataset="poisoned_json",
-        )
-        train_records, test_records, split_metadata = split_skill_records(
-            poisoned_json_records,
-            test_ratio=args.json_test_ratio,
-            seed=args.json_split_seed,
-        )
-        log(
-            "[data] json dataset loaded: "
-            f"total={len(poisoned_json_records)}, train={len(train_records)}, test={len(test_records)}, "
-            f"seed={args.json_split_seed}, test_ratio={args.json_test_ratio}"
-        )
-    else:
-        test_records = discover_skills(
-            dataset_root=args.test_root,
-            source_dataset="poisoned_test",
-            manifest_path=args.manifest_path,
-            poisoned_all_root=args.poisoned_all_root,
-        )
+    train_records, test_records, split_metadata = split_skill_records_grouped_by_category(
+        merged_records,
+        test_ratio=args.test_ratio,
+        seed=args.split_seed,
+        group_key_fn=paired_group_key,
+        category_key_fn=paired_category_key,
+    )
+    clean_records = [record for record in train_records if record.label == 0]
+    log(
+        "[data] merged paired dataset loaded: "
+        f"total_examples={len(merged_records)}, train={len(train_records)}, test={len(test_records)}, "
+        f"seed={args.split_seed}, test_ratio={args.test_ratio}, "
+        f"pair_groups={split_metadata['group_count']}"
+    )
 
     if args.limit is not None:
         test_records = test_records[: args.limit]
 
     log(f"[data] clean skills for thresholding: {len(clean_records)}")
-    log(f"[data] poisoned test skills: {len(test_records)}")
+    log(f"[data] test records: {len(test_records)}")
 
     existing_rows = load_jsonl(results_path)
     latest_rows = latest_rows_by_skill(existing_rows)
@@ -423,14 +388,9 @@ def main() -> int:
 
     config_payload = {
         "started_at": utc_now_iso(),
-        "clean_root": str(args.clean_root),
-        "poisoned_all_root": str(args.poisoned_all_root),
-        "test_root": str(args.test_root),
-        "manifest_path": str(args.manifest_path),
-        "dataset_mode": args.dataset_mode,
-        "json_dataset_path": str(args.json_dataset_path),
-        "json_test_ratio": args.json_test_ratio,
-        "json_split_seed": args.json_split_seed,
+        "merged_json_path": str(args.merged_json_path),
+        "test_ratio": args.test_ratio,
+        "split_seed": args.split_seed,
         "output_dir": str(output_dir),
         "methods": args.methods,
         "limit": args.limit,
@@ -445,10 +405,10 @@ def main() -> int:
         atomic_write_json(
             split_manifest_path,
             {
-                "dataset_mode": args.dataset_mode,
-                "json_dataset_path": str(args.json_dataset_path),
-                "seed": args.json_split_seed,
-                "test_ratio": args.json_test_ratio,
+                "source_path": str(args.merged_json_path),
+                "seed": args.split_seed,
+                "test_ratio": args.test_ratio,
+                "split_metadata": split_metadata,
                 "train_records": [record.to_dict() for record in train_records],
                 "test_records": [record.to_dict() for record in test_records],
             },
