@@ -80,6 +80,14 @@ def env_bool(name: str, default: bool = False) -> bool:
     return value.lower() in {"1", "true", "yes", "y", "on"}
 
 
+def apply_cuda_visible_devices_from_env() -> None:
+    if os.getenv("CUDA_VISIBLE_DEVICES"):
+        return
+    configured = env_str("FINETUNE_CUDA_VISIBLE_DEVICES")
+    if configured:
+        os.environ["CUDA_VISIBLE_DEVICES"] = configured
+
+
 @dataclass
 class ClassificationExample:
     example_id: str
@@ -406,6 +414,7 @@ def write_jsonl(path: Path, rows: Sequence[Dict[str, Any]]) -> None:
 def main() -> int:
     env_path = Path(os.getenv("FINETUNE_ENV_FILE", str(DEFAULT_ENV_PATH)))
     load_env_file(env_path)
+    apply_cuda_visible_devices_from_env()
     parser = build_parser()
     args = parser.parse_args()
 
@@ -418,6 +427,7 @@ def main() -> int:
     log(f"[config] env file: {env_path}")
     log(f"[config] output dir: {output_dir}")
     log(f"[config] model: {model_name}")
+    log(f"[config] CUDA_VISIBLE_DEVICES: {os.getenv('CUDA_VISIBLE_DEVICES', '<unset>')}")
 
     clean_records = discover_skills(args.clean_root, "clean")
     poison_records = discover_skills_from_json(args.poison_json_path, "poisoned_json")
