@@ -335,6 +335,32 @@ def infer_run_name(model_name: str) -> str:
     return safe
 
 
+def load_tokenizer(model_name: str) -> Any:
+    from transformers import AutoTokenizer
+
+    try:
+        tokenizer = AutoTokenizer.from_pretrained(model_name)
+        log("[tokenizer] loaded fast tokenizer")
+        return tokenizer
+    except Exception as error:
+        log(
+            "[tokenizer] fast tokenizer load failed; "
+            f"trying explicit slow tokenizer: {type(error).__name__}: {error}"
+        )
+
+    lower_name = model_name.lower()
+    if "deberta-v3" in lower_name or "deberta_v3" in lower_name:
+        from transformers import DebertaV2Tokenizer
+
+        tokenizer = DebertaV2Tokenizer.from_pretrained(model_name)
+        log("[tokenizer] loaded explicit DebertaV2Tokenizer")
+        return tokenizer
+
+    tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=False)
+    log("[tokenizer] loaded generic slow tokenizer")
+    return tokenizer
+
+
 def build_training_arguments(args: argparse.Namespace, output_dir: Path) -> Any:
     from transformers import TrainingArguments
 
@@ -444,21 +470,11 @@ def main() -> int:
     from datasets import DatasetDict
     from transformers import (
         AutoModelForSequenceClassification,
-        AutoTokenizer,
         DataCollatorWithPadding,
         Trainer,
     )
 
-    try:
-        tokenizer = AutoTokenizer.from_pretrained(model_name)
-        log("[tokenizer] loaded fast tokenizer")
-    except Exception as error:
-        log(
-            "[tokenizer] fast tokenizer load failed; "
-            f"falling back to slow tokenizer: {type(error).__name__}: {error}"
-        )
-        tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=False)
-        log("[tokenizer] loaded slow tokenizer")
+    tokenizer = load_tokenizer(model_name)
 
     def preprocess(batch: Dict[str, List[Any]]) -> Dict[str, Any]:
         return tokenizer(
