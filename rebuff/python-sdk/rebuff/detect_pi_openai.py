@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Optional
 
 from openai import OpenAI
 
@@ -53,7 +53,11 @@ def render_prompt_for_pi_detection(user_input: str) -> str:
 
 
 def call_openai_to_detect_pi(
-    prompt_to_detect_pi_using_openai: str, model: str, api_key: str, api_base: str = None
+    prompt_to_detect_pi_using_openai: str,
+    model: str,
+    api_key: str,
+    api_base: str = None,
+    thinking_type: Optional[str] = None,
 ) -> Dict:
     """
     Using Open AI to detect prompt injection in the user input
@@ -69,16 +73,17 @@ def call_openai_to_detect_pi(
 
     """
     client = OpenAI(api_key=api_key, base_url=api_base)
+    request_kwargs = {
+        "model": model,
+        "messages": [{"role": "user", "content": prompt_to_detect_pi_using_openai}],
+    }
+    if thinking_type:
+        request_kwargs["extra_body"] = {"thinking": {"type": thinking_type}}
 
     try:
-        completion = client.chat.completions.create(
-            model=model,
-            messages=[{"role": "user", "content": prompt_to_detect_pi_using_openai}],
-        )
+        completion = client.chat.completions.create(**request_kwargs)
     except Exception as e:
-        print(f"Error calling LLM: {e}")
-        # Return a neutral/safe response implicitly indicating failure to detect or default to 0
-        return {"completion": "0.0"}
+        raise RuntimeError(f"Error calling LLM: {e}") from e
 
     if completion.choices[0].message.content is None:
         raise Exception("server error")

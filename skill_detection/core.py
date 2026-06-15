@@ -756,11 +756,13 @@ class RebuffLLMDetector:
         model: str,
         api_base: Optional[str] = None,
         threshold: float = 0.9,
+        thinking_type: Optional[str] = None,
     ) -> None:
         self.api_key = api_key
         self.model = model
         self.api_base = api_base
         self.threshold = threshold
+        self.thinking_type = thinking_type
         self._call_openai_to_detect_pi = None
         self._render_prompt_for_pi_detection = None
 
@@ -802,6 +804,7 @@ class RebuffLLMDetector:
             model=self.model,
             api_key=self.api_key,
             api_base=self.api_base,
+            thinking_type=self.thinking_type,
         )
         completion = str(raw_response.get("completion", "")).strip()
         match = re.search(r"-?\d+(?:\.\d+)?", completion)
@@ -825,11 +828,13 @@ class KnownAnswerLLMDetector:
         model: str,
         api_base: Optional[str] = None,
         secret_text: str = "Hello World!",
+        thinking_type: Optional[str] = None,
     ) -> None:
         self.api_key = api_key
         self.model = model
         self.api_base = api_base
         self.secret_text = secret_text
+        self.thinking_type = thinking_type
         self._openai_class = None
 
     def _lazy_load_openai(self) -> None:
@@ -851,10 +856,14 @@ class KnownAnswerLLMDetector:
         prompt = self.render_prompt(text)
         client = self._openai_class(api_key=self.api_key, base_url=self.api_base)
 
-        completion = client.chat.completions.create(
-            model=self.model,
-            messages=[{"role": "user", "content": prompt}],
-        )
+        request_kwargs = {
+            "model": self.model,
+            "messages": [{"role": "user", "content": prompt}],
+        }
+        if self.thinking_type:
+            request_kwargs["extra_body"] = {"thinking": {"type": self.thinking_type}}
+
+        completion = client.chat.completions.create(**request_kwargs)
         if len(completion.choices) == 0 or completion.choices[0].message.content is None:
             raise ValueError("known-answer detector returned an empty completion")
 
@@ -900,6 +909,7 @@ def resolve_rebuff_config(
     cli_model: Optional[str],
     cli_api_base: Optional[str],
     cli_threshold: float,
+    cli_thinking_type: Optional[str] = None,
 ) -> RebuffLLMDetector:
     api_key = cli_api_key or os.getenv("REBUFF_OPENAI_API_KEY") or os.getenv("OPENAI_API_KEY")
     api_base = (
@@ -909,6 +919,7 @@ def resolve_rebuff_config(
         or os.getenv("OPENAI_BASE_URL")
     )
     model = cli_model or os.getenv("REBUFF_OPENAI_MODEL") or os.getenv("OPENAI_MODEL")
+    thinking_type = cli_thinking_type or os.getenv("REBUFF_OPENAI_THINKING") or os.getenv("OPENAI_THINKING")
 
     if not api_key:
         raise ValueError(
@@ -926,6 +937,7 @@ def resolve_rebuff_config(
         model=model,
         api_base=api_base,
         threshold=cli_threshold,
+        thinking_type=thinking_type,
     )
 
 
@@ -934,6 +946,7 @@ def resolve_known_answer_config(
     cli_model: Optional[str],
     cli_api_base: Optional[str],
     cli_secret_text: Optional[str],
+    cli_thinking_type: Optional[str] = None,
 ) -> KnownAnswerLLMDetector:
     api_key = (
         cli_api_key
@@ -953,6 +966,12 @@ def resolve_known_answer_config(
         or os.getenv("KNOWN_ANSWER_OPENAI_MODEL")
         or os.getenv("REBUFF_OPENAI_MODEL")
         or os.getenv("OPENAI_MODEL")
+    )
+    thinking_type = (
+        cli_thinking_type
+        or os.getenv("KNOWN_ANSWER_OPENAI_THINKING")
+        or os.getenv("REBUFF_OPENAI_THINKING")
+        or os.getenv("OPENAI_THINKING")
     )
     secret_text = cli_secret_text or os.getenv("KNOWN_ANSWER_SECRET") or "Hello World!"
 
@@ -974,6 +993,7 @@ def resolve_known_answer_config(
         model=model,
         api_base=api_base,
         secret_text=secret_text,
+        thinking_type=thinking_type,
     )
 
 

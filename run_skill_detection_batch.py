@@ -185,6 +185,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--rebuff-api-key", default=env_str("REBUFF_OPENAI_API_KEY"))
     parser.add_argument("--rebuff-api-base", default=env_str("REBUFF_OPENAI_API_BASE"))
     parser.add_argument("--rebuff-model", default=env_str("REBUFF_OPENAI_MODEL"))
+    parser.add_argument(
+        "--rebuff-thinking-type",
+        default=env_str("REBUFF_OPENAI_THINKING"),
+        help="Optional DeepSeek thinking mode, e.g. disabled/enabled.",
+    )
     parser.add_argument("--rebuff-threshold", type=float, default=env_float("REBUFF_THRESHOLD", 0.9))
     parser.add_argument(
         "--known-answer-secret",
@@ -357,6 +362,7 @@ def main() -> int:
             cli_model=args.rebuff_model,
             cli_api_base=args.rebuff_api_base,
             cli_threshold=args.rebuff_threshold,
+            cli_thinking_type=args.rebuff_thinking_type,
         )
         thresholds["rebuff_llm"] = {
             "threshold": args.rebuff_threshold,
@@ -374,6 +380,7 @@ def main() -> int:
             cli_model=args.rebuff_model,
             cli_api_base=args.rebuff_api_base,
             cli_secret_text=args.known_answer_secret,
+            cli_thinking_type=args.rebuff_thinking_type,
         )
         thresholds["known_answer_detection"] = {
             "api_base": known_answer_detector.api_base,
