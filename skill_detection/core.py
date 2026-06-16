@@ -1171,7 +1171,8 @@ def summarize_numeric(values: Sequence[float]) -> Dict[str, float]:
 def build_summary(
     rows: Sequence[Dict[str, Any]],
     requested_methods: Sequence[str],
-    total_skills: int,
+    total_examples: int,
+    total_skill_pairs: Optional[int] = None,
 ) -> Dict[str, Any]:
     latest_rows = list(latest_rows_by_skill(rows).values())
     methods_summary: Dict[str, Dict[str, Any]] = {}
@@ -1248,7 +1249,7 @@ def build_summary(
 
     for method, stats in methods_summary.items():
         processed = stats["processed"]
-        stats["coverage"] = processed / total_skills if total_skills else 0.0
+        stats["coverage"] = processed / total_examples if total_examples else 0.0
         tp = stats["tp"]
         tn = stats["tn"]
         fp = stats["fp"]
@@ -1270,9 +1271,19 @@ def build_summary(
         stats["accuracy"] = accuracy
         stats["f1"] = f1
 
+    completed_skill_pairs = len(
+        {
+            str(row.get("pair_group_id"))
+            for row in latest_rows
+            if row.get("pair_group_id") is not None
+        }
+    )
+
     return {
-        "total_skills": total_skills,
-        "completed_skill_rows": len(latest_rows),
+        "total_examples": total_examples,
+        "completed_examples": len(latest_rows),
+        "total_skill_pairs": total_skill_pairs,
+        "completed_skill_pairs": completed_skill_pairs if total_skill_pairs is not None else None,
         "methods": methods_summary,
         "categories": categories_summary,
     }

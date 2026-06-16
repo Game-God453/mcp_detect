@@ -423,10 +423,13 @@ def main() -> int:
         log(f"[data] split manifest written to: {split_manifest_path}")
 
     def persist_state() -> None:
+        total_examples = len(test_records)
+        total_skill_pairs = len({paired_group_key(record) for record in test_records})
         summary = build_summary(
             rows=list(latest_rows.values()),
             requested_methods=args.methods,
-            total_skills=len(test_records),
+            total_examples=total_examples,
+            total_skill_pairs=total_skill_pairs,
         )
         atomic_write_json(
             state_path,
@@ -434,9 +437,24 @@ def main() -> int:
                 **config_payload,
                 "last_updated_at": utc_now_iso(),
                 "progress": {
-                    "total_skills": len(test_records),
-                    "completed_rows": len(latest_rows),
-                    "remaining_skills": max(0, len(test_records) - len(latest_rows)),
+                    "total_examples": total_examples,
+                    "completed_examples": len(latest_rows),
+                    "remaining_examples": max(0, total_examples - len(latest_rows)),
+                    "total_skill_pairs": total_skill_pairs,
+                    "completed_skill_pairs": len(
+                        {row.get("pair_group_id") for row in latest_rows.values() if row.get("pair_group_id")}
+                    ),
+                    "remaining_skill_pairs": max(
+                        0,
+                        total_skill_pairs
+                        - len(
+                            {
+                                row.get("pair_group_id")
+                                for row in latest_rows.values()
+                                if row.get("pair_group_id")
+                            }
+                        ),
+                    ),
                 },
                 "summary": summary,
             },
