@@ -2,6 +2,7 @@
 Adversarial trigger optimizer for skill description poisoning experiments.
 """
 
+import os
 import random
 from typing import List, Tuple, Union
 
@@ -12,6 +13,49 @@ from transformers import AutoModel, AutoTokenizer
 
 
 class AdversarialAttack:
+    @staticmethod
+    def _resolve_device(device: str) -> str:
+        if device == "auto":
+            return "cuda" if torch.cuda.is_available() else "cpu"
+        if device in {"cpu", "cuda"}:
+            return device
+        if not device.startswith("cuda:"):
+            return device
+
+        try:
+            requested_index = int(device.split(":", 1)[1])
+        except (IndexError, ValueError):
+            return device
+
+        if not torch.cuda.is_available():
+            return "cpu"
+
+        visible_count = torch.cuda.device_count()
+        if 0 <= requested_index < visible_count:
+            return device
+
+        visible_devices_raw = os.getenv("CUDA_VISIBLE_DEVICES", "").strip()
+        if not visible_devices_raw:
+            return device
+
+        visible_devices = [item.strip() for item in visible_devices_raw.split(",") if item.strip()]
+        if not visible_devices:
+            return device
+
+        for local_index, physical_id in enumerate(visible_devices):
+            try:
+                if int(physical_id) == requested_index:
+                    remapped = f"cuda:{local_index}"
+                    print(
+                        f"Remapped requested device {device} via CUDA_VISIBLE_DEVICES="
+                        f"{visible_devices_raw} -> {remapped}"
+                    )
+                    return remapped
+            except ValueError:
+                continue
+
+        return device
+
     def __init__(
         self,
         emb_model: str,
@@ -23,10 +67,7 @@ class AdversarialAttack:
         words_only: bool = False,
         device: str = "auto",
     ):
-        if device == "auto":
-            resolved_device = "cuda" if torch.cuda.is_available() else "cpu"
-        else:
-            resolved_device = device
+        resolved_device = self._resolve_device(device)
         self.device = torch.device(resolved_device)
         print(f"Using device: {self.device}")
 
