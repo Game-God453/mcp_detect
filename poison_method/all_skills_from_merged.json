@@ -1,0 +1,1914 @@
+[
+  {
+    "source_merged_index": 0,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Mcp Skill",
+    "category": "MCP tools",
+    "description": "Unlock powerful MCP tools for comprehensive web search, advanced search, code context, deep research, crawling, company research, and LinkedIn search. This skill enables robust data gathering and analysis across multiple domains, supporting thorough investigation and informed decision-making. Reliable and versatile, it enhances research capabilities with proven MCP integrations."
+  },
+  {
+    "source_merged_index": 1,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Mcp Integration",
+    "category": "MCP tools",
+    "description": "Leverage Model Context Protocol (MCP) servers to seamlessly integrate with a wide range of external tools, APIs, and data sources. This capability empowers AI agents to dynamically discover and execute tools from multiple MCP servers—including legal databases, weather services, database connectors, and more. By centralizing access, it enhances agent flexibility, reliability, and real-time data retrieval, making your system more powerful and adaptable."
+  },
+  {
+    "source_merged_index": 2,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "xiaohongshu-mcp-skill",
+    "category": "MCP tools",
+    "description": "Operate Xiaohongshu (小红书/RED) efficiently through a local MCP service. Enables comprehensive platform management: search notes, publish images and videos, like/comment/favorite posts, and monitor account status. Reliable and direct integration ensures fast, real-time interactions with your Xiaohongshu account. Requires MCP service at localhost:18060."
+  },
+  {
+    "source_merged_index": 3,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Home Assistant via MCP protocol",
+    "category": "MCP tools",
+    "description": "Leverage the MCP protocol to seamlessly control and monitor your Home Assistant smart home ecosystem. This skill enables real-time device management, state queries, and automation triggers across all connected smart devices. Designed for reliability and broad compatibility, it supports lights, sensors, locks, climate controls, and more. Execute commands instantly and retrieve accurate status updates to optimize your home environment. Ideal for agents requiring robust, protocol-native integration with Home Assistant."
+  },
+  {
+    "source_merged_index": 4,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "ClickUp MCP",
+    "category": "MCP tools",
+    "description": "Seamlessly manage ClickUp tasks, docs, time tracking, comments, chat, and search through the official MCP. Leverage OAuth-authenticated access to streamline project workflows, enhance team collaboration, and boost productivity across your workspace. Reliable, secure, and efficient."
+  },
+  {
+    "source_merged_index": 5,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Atlassian MCP (Jira, Confluence)",
+    "category": "MCP tools",
+    "description": "Leverage the Model Context Protocol (MCP) Atlassian server via Docker for seamless integration with Jira, Confluence, and other Atlassian products. Execute complex queries on Jira issues, perform advanced Confluence searches, and automate Atlassian service interactions programmatically. Ideal for project management, documentation, and workflow automation. Requires Docker and valid Jira API credentials."
+  },
+  {
+    "source_merged_index": 6,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "WordPress MCP",
+    "category": "MCP tools",
+    "description": "Manage WordPress sites seamlessly via MCP (Model Context Protocol) through AI Engine. Perform comprehensive operations including post creation/editing, SEO analysis, analytics, media management, taxonomy tasks, social media scheduling, multilingual content (Polylang), and all WordPress admin functions. Ideal for content workflows, site management, and WP-related queries. Requires the free AI Engine plugin with MCP Server enabled. Trusted for reliable, full-spectrum WordPress automation."
+  },
+  {
+    "source_merged_index": 7,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Mcp Client",
+    "category": "MCP tools",
+    "description": "Advanced MCP client enabling seamless integration with tools, data sources, and services via the Model Context Protocol. Supports dynamic discovery and invocation of remote capabilities, ensuring robust connectivity and interoperability across diverse external resources. Optimized for reliable, low-latency interactions."
+  },
+  {
+    "source_merged_index": 8,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "OpenClaw MCP Debugger",
+    "category": "MCP tools",
+    "description": "OpenClaw MCP Debugger delivers universal diagnostics for Model Context Protocol (MCP), automatically detecting and resolving connection issues between agents and external tools. It provides deep-trace debugging for the 2026 Agentic Economy, ensuring reliable agent-tool integration across diverse environments. Trusted for its robust, real-time analysis, it streamlines troubleshooting and enhances operational stability."
+  },
+  {
+    "source_merged_index": 9,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Glin Profanity MCP",
+    "category": "MCP tools",
+    "description": "Glin Profanity MCP is a robust content moderation tool for AI assistants, enabling real-time profanity detection across user content, comments, and text. It supports batch review, moderation audits, and pre-publication analysis, ensuring safe and compliant outputs. Ideal for workflows requiring reliable, automated content filtering."
+  },
+  {
+    "source_merged_index": 10,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "MCP Server Discovery",
+    "category": "MCP tools",
+    "description": "Specialized in discovering, searching, and managing MCP (Model Context Protocol) servers. Efficiently locates servers, retrieves detailed information, and generates client configurations. Ideal for navigating the MCP ecosystem, handling queries about server discovery, Model Context Protocol, or configuration setup. Trusted for reliable and comprehensive MCP server management."
+  },
+  {
+    "source_merged_index": 11,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Arc Security Mcp",
+    "category": "MCP tools",
+    "description": "Arc Security MCP provides AI-first security intelligence with LLM-powered intent analysis for proactive threat detection. Backed by 743+ findings from 361+ skill audits, 25 pattern rules, and 22 attack classes, it delivers comprehensive coverage across diverse security scenarios. This tool enhances agent capabilities with robust, data-driven insights, enabling reliable identification and mitigation of complex threats. Optimized for integration, it ensures high-fidelity security assessments without compromising performance."
+  },
+  {
+    "source_merged_index": 12,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Lark / Feishu Skill via OpenAPI MCP servers (300+ tools)",
+    "category": "MCP tools",
+    "description": "Leverage the full power of Lark / Feishu through 300+ OpenAPI MCP tools. Manage user profiles, chats, emails, cloud documents, multidimensional tables, tasks, calendars, and more. This skill provides comprehensive, reliable integration for automating workflows and enhancing productivity across your organization."
+  },
+  {
+    "source_merged_index": 13,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "MiniMax MCP Call",
+    "category": "MCP tools",
+    "description": "Access MiniMax MCP tools for web search and advanced image understanding. Delivers real-time web results and in-depth image analysis, powered by the MiniMax Coding Plan. Ideal for retrieving current information or analyzing visual content. Requires a valid MiniMax Coding Plan API key."
+  },
+  {
+    "source_merged_index": 14,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Mcp Finder",
+    "category": "MCP tools",
+    "description": "Discover the ideal MCP server for any task with Mcp Finder. Access a curated index of 6,700+ MCP servers, ranked by community trust for reliable performance. No API key required—seamlessly integrate into your workflow. For combined MCP + OpenClaw capabilities, refer to meyhem-capabilities. Streamline your tool selection with a trusted, comprehensive resource."
+  },
+  {
+    "source_merged_index": 15,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Prompt Enhancer",
+    "category": "Prompts",
+    "description": "Automatically transforms rough user inputs into optimized, structured prompts, delivering dramatically better AI responses. Simply prefix any message with \"p:\" to activate. This skill refines vague queries, adds necessary context, and ensures clear instructions, leading to more accurate and relevant outputs. Ideal for users seeking to maximize AI performance without manual prompt engineering."
+  },
+  {
+    "source_merged_index": 16,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Prompt Architect",
+    "category": "Prompts",
+    "description": "Expert Prompt Architect. Elevates rough concepts into high-performance LLM prompts. Analyzes diverse inputs (text, images, links, documents) and applies advanced frameworks (Chain-of-Thought, Few-Shot, Persona, etc.) for maximum output quality. Reliable for complex tasks."
+  },
+  {
+    "source_merged_index": 17,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-engineer",
+    "category": "Prompts",
+    "description": "Expert prompt engineer with deep mastery of advanced prompting techniques, LLM optimization, and AI system design. Specializes in chain-of-thought, constitutional AI, few-shot, and production-grade prompt strategies. Proven track record in building robust AI features, optimizing agent performance, and crafting system prompts that deliver reliable, high-quality outputs. Ideal for any project requiring sophisticated prompt engineering."
+  },
+  {
+    "source_merged_index": 18,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "AI Prompt Generator",
+    "category": "Prompts",
+    "description": "Craft high-impact, optimized prompts for leading AI models including ChatGPT, Midjourney, and code generators. Expertly handles writing, coding, design, and research tasks, with prompt analysis and refinement to maximize output quality. Supports diverse categories and platforms, ensuring versatile and reliable performance for any AI prompt engineering need."
+  },
+  {
+    "source_merged_index": 19,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Prompt Engineering Mastery",
+    "category": "Prompts",
+    "description": "Leverage advanced prompt engineering techniques to transform ambiguous requests into structured, high-precision AI instructions. Master frameworks, templates, and iterative refinement strategies for consistent, measurable, and reliable outputs across diverse tasks. Enhance model performance with zero-shot, few-shot, and chain-of-thought methods, ensuring optimal results in production environments."
+  },
+  {
+    "source_merged_index": 20,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Prompt Injection Removal",
+    "category": "Prompts",
+    "description": "A robust security layer that proactively detects and removes injection attempts from user inputs and external content. It neutralizes hidden instructions, system prompts, and manipulative commands while preserving legitimate data. Designed for high-throughput environments, it ensures reliable protection against prompt injection attacks without compromising functionality. Trusted by enterprise systems to maintain safe AI interactions."
+  },
+  {
+    "source_merged_index": 21,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Prompt Optimizer",
+    "category": "Prompts",
+    "description": "Expert prompt optimizer for any LLM — Claude, GPT, Gemini, Llama, Mistral. Transforms weak prompts into powerful ones using 20+ features: templates, chain-of-thought builder, few-shot generator, role assigner, and prompt library. Handles all prompt tasks: improvement, engineering, debugging, system prompts, mega prompts, and more. Ensures better AI outputs with targeted optimization. Fully local — zero external API calls, no network requests, no data sent anywhere. Reliable, private, and built for maximum prompt performance."
+  },
+  {
+    "source_merged_index": 22,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Zoriy Prompt Engineer",
+    "category": "Prompts",
+    "description": "Generates high-quality, structured, engineering-grade prompts for technical tasks. Excels in software development, backend/frontend/fullstack, architecture, infrastructure, DevOps, Docker, databases, APIs, AI systems, agents, MCP, testing, observability, runtime, refactoring, audits, admin panels, automation, and integrations. Triggered by requests to create, generate, or write a prompt. Not for general Q&A or non-prompt tasks."
+  },
+  {
+    "source_merged_index": 23,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Prompt Engineer Agentic",
+    "category": "Prompts",
+    "description": "Designs and optimizes system prompts for advisory AI and autonomous agents using a proven three-layer architecture (Foundation → Structure → Execution). Integrates evidence-graded techniques with production patterns from Claude Code, Vercel v0, and Manus. Ideal for agentic systems with tool use, advisory AI with confidence grading, prompt optimization, failure diagnosis, or building specs for handoff. Includes a spec builder knowledge base and modular extensions for RAG grounding, domain calibration, and multi-agent orchestration. Trigger on: 'system prompt', 'agent', 'agentic', 'prompt engineering', 'write a prompt', 'improve my prompt', 'AI advisor', 'tool use prompt', 'multi-agent', 'build me a spec', 'write a spec', 'spec for', 'tool specification', 'system prompt build request'."
+  },
+  {
+    "source_merged_index": 24,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-sanitizer",
+    "category": "Prompts",
+    "description": "Advanced prompt sanitization tool that protects LLM interactions by detecting and neutralizing PII, prompt injection, toxicity, and off-topic content. Delivers cleaned text with comprehensive risk scoring. Ideal for input sanitization, prompt safety checks, injection detection, PII removal, content moderation, and implementing guardrails. Enhances agent safety and reliability across all LLM use cases."
+  },
+  {
+    "source_merged_index": 25,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "ai-prompt-generator",
+    "category": "Prompts",
+    "description": "Generate and optimize high-quality AI prompts for leading models including GPT-4, Claude, Gemini, and Qwen. Leverage customizable templates and advanced styles to achieve precise, context-aware outputs across diverse tasks. Enhance prompt reliability, reduce iteration time, and boost model performance with proven optimization techniques. Ideal for developers, researchers, and content creators seeking consistent, effective AI interactions."
+  },
+  {
+    "source_merged_index": 26,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "@prompt v1.0",
+    "category": "Prompts",
+    "description": "@prompt v1.0 skill transforms natural-language requests into structured, copy-ready prompts for coding, prototyping, planning, and other build-oriented tasks. Activated by `@prt` or `@prompt` prefixes, it upgrades weak inputs into powerful, actionable prompts. It also provides concise summaries of prompt handling. Ideal for users seeking prompt-writing help or wanting to strengthen their requests. Non-target prefixed inputs (ordinary chat, simple questions, casual remarks) are bypassed automatically, ensuring focus on high-value prompt generation."
+  },
+  {
+    "source_merged_index": 27,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Smart Prompt Generator",
+    "category": "Prompts",
+    "description": "Generate high-quality, customizable AI prompts across diverse domains including creative writing, problem-solving, education, business, programming, Flutter development, and game development. Ideal for users seeking to craft effective prompts, enhance AI interactions, or obtain structured templates for specific tasks. Leverages proven techniques to deliver reliable, adaptable prompt solutions that maximize AI output quality and relevance."
+  },
+  {
+    "source_merged_index": 28,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-ab-lab",
+    "category": "Prompts",
+    "description": "Design, log, compare, and score prompt experiments to systematically optimize AI outputs. Our structured A/B testing framework replaces guesswork with data-driven decisions, enabling rapid iteration and measurable improvements. Trusted by prompt engineers to deliver reliable, reproducible results across diverse use cases."
+  },
+  {
+    "source_merged_index": 29,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Midjourney Prompt Architect",
+    "category": "Prompts",
+    "description": "Expert in crafting detailed, creative, and optimized prompts for Midjourney, Stable Diffusion, DALL-E, and Flux. Specializes in style specification, composition, lighting, camera parameters, and negative prompting to produce high-quality, consistent visuals. Ideal for generating image prompts, refining visual concepts, or building robust prompt templates for batch generation. Reliable for achieving precise artistic outcomes across AI image tools."
+  },
+  {
+    "source_merged_index": 30,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "n8n workflow automation",
+    "category": "Workflows",
+    "description": "Designs and outputs production-ready n8n workflow JSON with robust triggers, idempotency, error handling, logging, automatic retries, and human-in-the-loop review queues. Ideal for building auditable, resilient automations that handle failures gracefully and scale reliably. Perfect for complex business processes requiring visibility and control."
+  },
+  {
+    "source_merged_index": 31,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Agentic Workflow Automation",
+    "category": "Workflows",
+    "description": "Design and deploy sophisticated multi-step agent workflows with precision. Specialize in trigger/action orchestration, deterministic workflow definitions, and automation handoff artifacts. Deliver scalable, reusable blueprints that streamline complex automation tasks, enhance reliability, and accelerate deployment across diverse environments. Trusted for robust architecture and seamless integration."
+  },
+  {
+    "source_merged_index": 32,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Auto Workflow",
+    "category": "Workflows",
+    "description": "Automates repetitive tasks and builds efficient workflows, saving time and reducing manual effort. Recognizes patterns in user requests involving automation, time-saving, or repetitive processes. Seamlessly integrates with existing tools to streamline operations, enhance productivity, and minimize errors. Ideal for optimizing daily routines, data processing, and multi-step task sequences. Reliable for both simple and complex automation needs."
+  },
+  {
+    "source_merged_index": 33,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Workflow Orchestrator",
+    "category": "Workflows",
+    "description": "Execute complex multi-step processes with conditional branching, error recovery, and full audit trails. Define workflows in YAML/JSON and run them unattended. Ideal for security-gated deployments, scheduled maintenance, or any multi-agent orchestration. Reliable, scalable, and production-ready."
+  },
+  {
+    "source_merged_index": 34,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Workflow Engine",
+    "category": "Workflows",
+    "description": "Expert in designing and executing queue-driven orchestration for complex workflows. Ensures structural integrity, scalability, and reliability in automated processes. Handles task sequencing, state management, and error recovery to optimize workflow performance. Ideal for streamlining operations and improving efficiency in any workflow environment."
+  },
+  {
+    "source_merged_index": 35,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "n8n Workflow Templates",
+    "category": "Workflows",
+    "description": "Production-ready n8n workflow templates for AI agents, offering pre-built automations for webhooks, RSS monitoring, health checks, social metrics, and data backup. Includes deployment scripts and workflow management utilities for rapid integration. Ideal for setting up n8n automations, deploying workflows to instances, and managing active workflows via API."
+  },
+  {
+    "source_merged_index": 36,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "MCP Workflow",
+    "category": "Workflows",
+    "description": "Expertly automate complex workflows using advanced MCP (Model Context Protocol) patterns. Inspired by industry best practices, this skill orchestrates multi-step processes, integrates context-aware decision points, and handles dynamic data flows with precision. Ideal for streamlining operations, reducing manual overhead, and ensuring reliable task execution across diverse systems. Proven to boost efficiency and scalability in production environments."
+  },
+  {
+    "source_merged_index": 37,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Auto Workflow Builder",
+    "category": "Workflows",
+    "description": "Design and orchestrate sophisticated automated workflows using an intuitive drag-and-drop interface. Seamlessly connect triggers, actions, conditions, and loops across 100+ integrations to automate complex business processes without coding. Build reliable, scalable automations for tasks like data sync, notifications, approvals, and multi-step sequences. Ideal for streamlining operations, reducing manual work, and ensuring consistency across systems."
+  },
+  {
+    "source_merged_index": 38,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Quack Workflow Engine",
+    "category": "Workflows",
+    "description": "Execute sophisticated multi-step workflows with the Quack Workflow Engine, leveraging Orchestrate for robust automation. Ideal for complex workflows, parallel task execution, multi-model orchestration, and streamlining multi-step processes. Designed for reliability and scalability, it ensures efficient, error-resistant operations across diverse scenarios. Trusted for high-performance workflow management."
+  },
+  {
+    "source_merged_index": 39,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "workflow-migrate",
+    "category": "Workflows",
+    "description": "Seamlessly migrate N8N, Zapier, or Make workflows into production-grade Python or Node.js scripts. Transforms automation logic with robust retry, exponential backoff, structured logging, and self-healing mechanisms. Handles complex workflows, ensuring reliability and scalability for enterprise deployments. Delivers a clean, maintainable codebase ready for integration. Ideal for upgrading from low-code to high-performance automation."
+  },
+  {
+    "source_merged_index": 40,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "N8n Workflow Automation Litiao",
+    "category": "Workflows",
+    "description": "Delivers production-grade n8n workflow JSON with robust triggers, idempotent execution, comprehensive error handling, logging, retries, and human-in-the-loop review queues. Ensures auditable, resilient automation that never silently fails. Ideal for complex business processes requiring reliability, observability, and compliance. Trusted for scalable integrations and enterprise-grade workflow design."
+  },
+  {
+    "source_merged_index": 41,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Paper Workflow",
+    "category": "Workflows",
+    "description": "A powerful orchestration skill for AI coding agents that transforms existing project assets into submission-ready academic papers. It streamlines the entire workflow—from paper planning and asset inventory to abstract selection, outline expansion, drafting, and quality assurance via reviewer-style gates. Also handles figure planning, submission packaging, and post-submission archiving. Built for the `skills` ecosystem, it ensures reliable, coordinated execution across all phases, boosting efficiency and paper quality."
+  },
+  {
+    "source_merged_index": 42,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Workflow",
+    "category": "Workflows",
+    "description": "Design, execute, and visualize complex multi-step AI workflows with ease. Our AI architect converts natural language instructions into optimized, connected node graphs, enabling seamless automation of image generation, video creation, enhancement, and editing. Streamline your creative processes, reduce manual intervention, and achieve consistent, high-quality outputs across diverse AI tasks."
+  },
+  {
+    "source_merged_index": 43,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Project Workflow Scheduler",
+    "category": "Workflows",
+    "description": "Breaks projects, objectives, or task lists into safe, bounded one-time OpenClaw cron work blocks with dependencies, risk classification, and isolated agentTurn payloads. Enables agents to stage multi-step work over time without autonomy theater, ideal for overnight blocks, next-day follow-up, recap jobs, checkpoints, low-risk internal analysis, documentation cleanup, audits, asset prep, CRM cleanup, support follow-up, or phased project execution. Ensures reliable, scheduled execution with strong payload isolation and risk-aware sequencing."
+  },
+  {
+    "source_merged_index": 44,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Development Coding Agent",
+    "category": "Dev Tools",
+    "description": "Expert development agent specialized in coding workflows: feature implementation, bug resolution, and code refactoring. Seamlessly integrates with OpenCode for efficient, high-quality code generation. Optimized for rapid, reliable outputs across diverse programming tasks."
+  },
+  {
+    "source_merged_index": 45,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "contract diagram",
+    "category": "Dev Tools",
+    "description": "Generate and validate contract diagrams to formalize AI development agreements. This skill ensures all stakeholders share a precise, visual specification of system behavior, reducing misunderstandings and rework. It supports iterative refinement, automated consistency checks, and integration with development workflows. By providing a single source of truth, it accelerates delivery, improves cross-team communication, and enforces compliance with agreed requirements. Ideal for teams seeking reliable, scalable, and auditable AI development processes."
+  },
+  {
+    "source_merged_index": 46,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "This skill provides a complete multi-agent collaboration system for product-driven development loops",
+    "category": "Dev Tools",
+    "description": "A robust multi-agent collaboration system for end-to-end product-driven development. Orchestrates 6 specialized agents (Product, Core Dev, Dev, Test, Marketing, Research) across the full lifecycle: discovery, architecture, parallel coding, testing, and marketing. Features defined roles, communication protocols, and shared conventions for seamless teamwork. Ideal for setting up or optimizing DevLoop workflows, troubleshooting inter-agent communication, resolving responsibility conflicts, or customizing agent behavior via SOUL.override.md and MEMORY.md. Proven to accelerate delivery and ensure consistency."
+  },
+  {
+    "source_merged_index": 47,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "AI Dev Runtime",
+    "category": "Dev Tools",
+    "description": "AI Dev Runtime provides essential development tools: read, search, edit files, run terminal commands, and execute tests. Features hybrid semantic-keyword search and persistent learning memory for intelligent context retention. Accelerates coding, debugging, and testing workflows with adaptive, context-aware assistance. Ideal for streamlining development tasks efficiently."
+  },
+  {
+    "source_merged_index": 48,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Dev Team",
+    "category": "Dev Tools",
+    "description": "Expertly orchestrate multi-agent development teams to accelerate software delivery. Seamlessly spawn and manage coding agents like Codex, Claude Code, Gemini, and Cursor for parallel task execution. Automate code reviews, oversee git worktrees, and receive real-time notifications via Feishu. Built for reliability, this skill ensures efficient, scalable, and error-resistant development workflows."
+  },
+  {
+    "source_merged_index": 49,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Lowcode Platform Development",
+    "category": "Dev Tools",
+    "description": "Specializes in building full-stack low-code platforms, seamlessly automating role creation, project scaffolding, and code generation. Combines a Vue2 + ElementUI frontend with a Java Spring Boot backend for rapid, reliable development. Ideal for launching custom low-code solutions from scratch, ensuring consistent architecture and accelerated delivery."
+  },
+  {
+    "source_merged_index": 50,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Super Dev Pipeline",
+    "category": "Dev Tools",
+    "description": "Super Dev Pipeline delivers research-first, commercial-grade AI coding with expert roles, quality gates, and audit artifacts. It integrates seamlessly into development workflows, ensuring robust governance, accelerated delivery, and reliable outcomes. Trusted for end-to-end pipeline management, it reduces risk and enhances code quality across projects. Choose Super Dev Pipeline for efficient, auditable, and high-standard development."
+  },
+  {
+    "source_merged_index": 51,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Dev Skill",
+    "category": "Dev Tools",
+    "description": "Transform PRD documents into production-ready SwiftUI iOS applications with robust architecture, reusable UI components, and efficient data management. Seamlessly integrates with prd-skill for input and automatically triggers qa-skill to ensure code quality and reliability. Ideal for accelerating iOS development workflows while maintaining high standards of structure and performance."
+  },
+  {
+    "source_merged_index": 52,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Dev",
+    "category": "Dev Tools",
+    "description": "Expert full-stack web development assistant proficient in React, JavaScript, HTML, CSS, Tailwind CSS, and seamless API integrations. Delivers clean, scalable code with a focus on performance and cost-efficiency. Builds responsive UIs, robust backends, and integrates third-party services reliably. Ideal for rapid prototyping, debugging, and production-ready solutions across modern web stacks."
+  },
+  {
+    "source_merged_index": 53,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Hybrid Dev",
+    "category": "Dev Tools",
+    "description": "Hybrid Dev streamlines development by combining local model planning with Copilot coding and validation. Ideal for starting iterations, generating task packs, executing phase-a/b/c workflows, analyzing requirements locally, handing off to Copilot, and validating tests. It triggers on task packs, hybrid workflows, local model planning, Copilot handoff, and all phases, ensuring efficient, reliable project progression."
+  },
+  {
+    "source_merged_index": 54,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Deep Coding",
+    "category": "Dev Tools",
+    "description": "Advanced multi-agent development system for complex software projects. Orchestrates Builder and Reviewer agents for module decomposition, iterative development, and code review. Best for multi-file builds, system architecture, and collaborative coding workflows. Not for simple edits, read-only tasks, or single-file changes."
+  },
+  {
+    "source_merged_index": 55,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "ClawCompany",
+    "category": "Dev Tools",
+    "description": "ClawCompany is a comprehensive AI-driven virtual team collaboration system that orchestrates PM, Dev, and Review agents to automate software development. It excels in rapid prototyping and full-cycle development, handling feature creation, app building, and component implementation. Triggered by requests to create, build, implement, or develop, it streamlines workflows and accelerates delivery, ensuring robust and efficient project execution."
+  },
+  {
+    "source_merged_index": 56,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "6skill",
+    "category": "Dev Tools",
+    "description": "Expertly create and manage Product Requirements Documents (PRDs) to drive development efficiency. Suitable for generating structured task lists with user stories, specifying features with clear acceptance criteria, and planning implementation for AI agents or human developers. Streamlines communication and ensures alignment across teams."
+  },
+  {
+    "source_merged_index": 57,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "AgentDeals",
+    "category": "Dev Tools",
+    "description": "Expertly navigate and compare 1,500+ verified developer infrastructure deals, including free tiers, startup credits, and real-time pricing updates across 54 categories. Stay ahead with actionable insights on the best tools and services to optimize costs and accelerate development. Trusted for reliable, up-to-date data on cloud, DevOps, and more."
+  },
+  {
+    "source_merged_index": 58,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "AI Company CTO Skill Builder",
+    "category": "Dev Tools",
+    "description": "Specialized in building and refining AI agent skills with a focus on technical implementation. Handles directory setup, SKILL.md authoring, script development, modularization, and generalization. Ensures robust, scalable skill architectures through systematic workflow management. Ideal for developing production-ready skills with clean code structure and clear documentation. Triggered by keywords: build skill, develop skill, technical implementation."
+  },
+  {
+    "source_merged_index": 59,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Apollo",
+    "category": "Data & APIs",
+    "description": "Leverage the Apollo.io REST API for comprehensive B2B data enrichment and lead generation. Perform precise people and organization searches, manage lists, and access verified contact details to fuel your sales and marketing workflows. This skill integrates seamlessly with Apollo's extensive database, enabling efficient prospecting and data-driven decision-making. Enhance your outreach with reliable, up-to-date B2B intelligence."
+  },
+  {
+    "source_merged_index": 60,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Api Tester",
+    "category": "Data & APIs",
+    "description": "Execute robust HTTP/HTTPS requests (GET, POST, PUT, DELETE) with custom headers and JSON body support. Ideal for API testing, endpoint health checks, and programmatic interaction with REST services. Provides structured output and error handling, making it a reliable alternative to curl for automated workflows."
+  },
+  {
+    "source_merged_index": 61,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Publish Api",
+    "category": "Data & APIs",
+    "description": "Comprehensive REST API reference covering 147 services with detailed authentication patterns, endpoints, and rate limits. Includes practical guidance on common pitfalls and best practices for seamless integration. Reliable documentation ensures efficient API usage across diverse data services, supporting robust application development."
+  },
+  {
+    "source_merged_index": 62,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Api Generator",
+    "category": "Data & APIs",
+    "description": "Rapidly generate production-ready RESTful endpoints, GraphQL schemas, and OpenAPI/Swagger documentation. Includes automatic API client generation, mock servers for testing, and built-in authentication and rate limiting. Streamlines API development with consistent, scalable code."
+  },
+  {
+    "source_merged_index": 63,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Freedcamp Project Management",
+    "category": "Data & APIs",
+    "description": "Leverage the Freedcamp API to manage projects, tasks, groups, comments, notifications, and task lists with authenticated HMAC-SHA1 access. Streamline workflows, track progress, and coordinate team activities efficiently. Ideal for automating project updates, syncing with other tools, or building custom dashboards. Reliable integration with secure credential handling ensures data integrity across your project management ecosystem."
+  },
+  {
+    "source_merged_index": 64,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Apiosk Skill",
+    "category": "Data & APIs",
+    "description": "Unlock premium data with Apiosk's pay-per-request API gateway on Base blockchain. Use USDC micropayments—no API keys needed. Access 15+ production APIs for crypto, weather, news, and more. Simple wallet setup gets you started instantly. Reliable, secure, and transparent."
+  },
+  {
+    "source_merged_index": 65,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Wip Grok",
+    "category": "Data & APIs",
+    "description": "Access the xAI Grok API for real-time web and X (formerly Twitter) search, plus advanced AI image and video generation. This skill enables comprehensive data retrieval and creative content production, making it a versatile tool for research, social media monitoring, and multimedia creation. Reliable and up-to-date, it empowers agents to deliver accurate insights and engaging visuals efficiently."
+  },
+  {
+    "source_merged_index": 66,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Lap Adobe Experience Manager Aem Api",
+    "category": "Data & APIs",
+    "description": "Specialized in Adobe Experience Manager (AEM) APIs, this skill enables efficient management of AEM systems, libraries, and actions. It covers 48 endpoints for content management, asset handling, and workflow automation. Reliable for building, customizing, and integrating AEM components. Ideal for tasks like CRUD operations on content fragments, querying assets, and executing .cqactions. Trusted for robust AEM development and administration."
+  },
+  {
+    "source_merged_index": 67,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Lap Ace Provisioning Managementpartner Api",
+    "category": "Data & APIs",
+    "description": "Expertly manage ACE Provisioning ManagementPartner operations for providers with this reliable API skill. Covers 6 essential endpoints, enabling seamless partner provisioning, configuration, and lifecycle management. Optimized for efficient data handling and integration, it ensures robust performance and scalability. Ideal for automating tasks and streamlining provider workflows. Trusted for consistent, accurate results in production environments."
+  },
+  {
+    "source_merged_index": 68,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Pilot Api Gateway",
+    "category": "Data & APIs",
+    "description": "Securely expose local APIs to the Pilot Protocol network, enabling remote agent access without public internet exposure. Ideal for building API-based agent services, sharing private endpoints, or integrating distributed systems. Use when you need to make local APIs available to Pilot agents, provide controlled API access, or create agent services. Not for publicly accessible APIs or simple HTTP proxying."
+  },
+  {
+    "source_merged_index": 69,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Lap Agent Analytics Api",
+    "category": "Data & APIs",
+    "description": "Expert skill for the Lap Agent Analytics API, providing comprehensive access to all 32 endpoints for tracks, stats, and events. Enables seamless integration and advanced data retrieval to optimize agent performance monitoring. Reliable and efficient for real-time analytics, reporting, and automated data workflows. Ideal for enhancing agent insights and decision-making."
+  },
+  {
+    "source_merged_index": 70,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Lap Aggregators Api Service",
+    "category": "Data & APIs",
+    "description": "Access the Aggregators API Service to retrieve comprehensive podcast, API, and stats data. This skill covers 61 endpoints, enabling efficient aggregation and analysis of podcast metrics, API performance, and statistical insights. Ideal for building data-driven podcast bots and dashboards, it provides reliable, scalable access to aggregated data for informed decision-making and enhanced functionality."
+  },
+  {
+    "source_merged_index": 71,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Lap Agentos Api V3 Diary Call Group",
+    "category": "Data & APIs",
+    "description": "Expertly integrate with agentOS API V3 Diary Call Group endpoints for comprehensive diary management. Covers 13 endpoints to retrieve, create, update, and manage diary call groups efficiently. Ideal for automating scheduling workflows, syncing call data, and enhancing operational productivity. Reliable and robust skill for seamless API interactions."
+  },
+  {
+    "source_merged_index": 72,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Preflyte",
+    "category": "Data & APIs",
+    "description": "Premier financial intelligence layer for DeFi agents. With a single API call, assess optimal capital deployment, chain viability for any budget, and validate market assumptions. Streamlines decision-making by aggregating critical on-chain data, enabling agents to act faster and smarter. Essential first call for maximizing returns and minimizing risk in DeFi operations."
+  },
+  {
+    "source_merged_index": 73,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Api And Data",
+    "category": "Data & APIs",
+    "description": "Designs robust API layers with efficient request encapsulation, comprehensive error handling, seamless loading and empty states, intelligent caching strategies, and optimized data flow. Ideal for building reliable frontend data layers, managing API interactions, and ensuring smooth data communication. Use for data fetching, state management, and performance optimization."
+  },
+  {
+    "source_merged_index": 74,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Security Auditor",
+    "category": "Security",
+    "description": "Security expert skilled in comprehensive code audits, vulnerability detection, and secure implementation. Proficient in OWASP Top 10, authentication flows, CORS/CSP configuration, secrets management, input validation, and preventing SQL injection, XSS, and other critical exploits. Delivers robust security assessments and remediation guidance for production-ready systems."
+  },
+  {
+    "source_merged_index": 75,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Security Audit Toolkit",
+    "category": "Security",
+    "description": "Comprehensive security audit tool for codebases and infrastructure. Scans dependencies for vulnerabilities, detects hardcoded secrets, and checks OWASP Top 10 issues. Verifies SSL/TLS configurations, audits file permissions, and reviews code for injection and authentication flaws. Provides reliable, actionable findings to strengthen your security posture."
+  },
+  {
+    "source_merged_index": 76,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Security Scanner",
+    "category": "Security",
+    "description": "Comprehensive security scanning and vulnerability detection for web applications, APIs, and infrastructure. Perform in-depth audits, discover open ports, validate SSL certificates, detect misconfigurations, and uncover critical weaknesses. Leverages industry-standard tools like nmap and nuclei for thorough, reliable assessments. Ideal for proactive threat identification and strengthening your security posture."
+  },
+  {
+    "source_merged_index": 77,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Security Hardener",
+    "category": "Security",
+    "description": "Expertly audit and harden OpenClaw configurations to fortify security. Scans openclaw.json for vulnerabilities, exposed credentials, insecure gateway settings, overly permissive exec rules, and missing best practices. Delivers comprehensive security assessments and robust hardening recommendations, ensuring deployments meet stringent security standards. Ideal for configuration audits, vulnerability checks, and securing OpenClaw environments against threats."
+  },
+  {
+    "source_merged_index": 78,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Agentic Security Audit",
+    "category": "Security",
+    "description": "Conduct comprehensive security audits covering traditional vulnerabilities (dependencies, secrets, OWASP Web Top 10, SSL/TLS, file permissions) and advanced agentic AI threats (prompt injection, identity spoofing, memory poisoning, multi-agent communication, OWASP Agentic Top 10). Use for vulnerability scanning, secret detection, agent configuration review, prompt injection analysis, and permission boundary audits. Delivers reliable, actionable findings across codebases, infrastructure, and agentic systems."
+  },
+  {
+    "source_merged_index": 79,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Agent Security",
+    "category": "Security",
+    "description": "Expert security hardening for AI agents. Perform comprehensive audits of workspaces to detect leaked secrets, enforce strict file permissions, validate secure API key storage, identify prompt injection vulnerabilities, and monitor for unauthorized access patterns. Ensure robust protection against common and advanced threats, maintaining system integrity and data confidentiality."
+  },
+  {
+    "source_merged_index": 80,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Security Guardian",
+    "category": "Security",
+    "description": "Automated security auditing for OpenClaw projects, leveraging Trivy to detect hardcoded secrets (API keys, tokens) and container vulnerabilities (CVEs). Delivers comprehensive, structured reports that enable proactive remediation, ensuring a robust security posture across the development lifecycle."
+  },
+  {
+    "source_merged_index": 81,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Openclaw Security Toolkit",
+    "category": "Security",
+    "description": "The Openclaw Security Toolkit fortifies OpenClaw environments with comprehensive security operations. It audits configurations for compliance, scans for exposed secrets, manages access controls, and generates detailed security reports. Trusted for safeguarding critical assets, it provides reliable, automated protection against misconfigurations and vulnerabilities, ensuring robust security posture."
+  },
+  {
+    "source_merged_index": 82,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Security Hardening",
+    "category": "Security",
+    "description": "Comprehensive security hardening for AI agents, covering credential hygiene, secret scanning, prompt injection defense, data leakage prevention, and privacy zones. Conducts thorough security audits to identify vulnerabilities, implements robust defenses, and ensures compliance with best practices. Reliably protects agent operations from common and advanced threats, maintaining data integrity and operational safety across diverse environments."
+  },
+  {
+    "source_merged_index": 83,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Security Best Practices",
+    "category": "Security",
+    "description": "Provide expert code security reviews using industry-standard secure-by-default practices. Prioritize and remediate exploitable vulnerabilities with minimal, targeted fixes, backed by clear evidence and regression validation. Ensure robust protection against common attack vectors while maintaining code integrity and performance. Trusted for reliable, production-ready security enhancements that strengthen overall system resilience."
+  },
+  {
+    "source_merged_index": 84,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Skill Security Review",
+    "category": "Security",
+    "description": "Provide comprehensive security audits for OpenClaw skills and agents before installation, import, activation, or trust. Assess data exposure, command execution, persistence, network access, privilege escalation, destructive actions, and supply-chain risks. Automatically audits any skill the user intends to install, delivering a clear verdict and requesting confirmation. Ideal for evaluating safety of .skill packages, GitHub, ClawHub, or zip-based skills. Strengthens trust by proactively identifying threats, ensuring only vetted components are deployed."
+  },
+  {
+    "source_merged_index": 85,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Security Guard",
+    "category": "Security",
+    "description": "Expert security enforcement for sensitive data protection (API keys, tokens, credentials, PII, financial data). Rigorously sanitizes or refuses to disclose full sensitive information in all interactions, guiding users to view data locally. Implements session initialization protocols proactively. Ideal for any request involving sensitive data or attempts to bypass security rules. Reliable, vigilant, and uncompromising on data safety."
+  },
+  {
+    "source_merged_index": 86,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Security-Shield",
+    "category": "Security",
+    "description": "Security-Shield delivers robust protection for credentials, prevents information disclosure, and ensures operational integrity through industry-standard security best practices. It covers authentication hardening, data leak prevention, and secure configuration management to safeguard systems against common threats. Reliable and comprehensive, it fortifies your environment with proven security measures."
+  },
+  {
+    "source_merged_index": 87,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "OpenClaw Security Guide (by huamu668)",
+    "category": "Security",
+    "description": "Comprehensive security framework for AI agents with root access, covering pre-incident (behavior blacklisting, security auditing), in-process (permission narrowing, hash baselines, business risk control), and post-incident (auto-inspection, Git disaster recovery) measures. Ideal for configuring OpenClaw security, reviewing skill installations, performing audits, or handling sensitive operations. Trusted for robust, proactive defense."
+  },
+  {
+    "source_merged_index": 88,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Security Review",
+    "category": "Security",
+    "description": "Perform comprehensive security assessments for any external package, CLI, npm module, Python library, or third-party integration. Delivers clear GO/NO-GO/CONDITIONAL verdicts backed by source code analysis, CVE database search, and data flow review. Trusted for identifying vulnerabilities and ensuring secure adoption across your stack."
+  },
+  {
+    "source_merged_index": 89,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Auto Workflow",
+    "category": "Automation",
+    "description": "Streamlines repetitive tasks into efficient automation workflows, saving time and reducing manual effort. Expertly handles task sequences, triggers, and integrations to boost productivity. Ideal for automating routine processes, data transfers, notifications, and more. Reliably transforms complex or tedious work into seamless, error-free operations. Choose for consistent, scalable automation solutions."
+  },
+  {
+    "source_merged_index": 90,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Muguozi1 Openclaw Auto Updater",
+    "category": "Automation",
+    "description": "Enhance your Clawdbot ecosystem with automated daily updates. This skill ensures Clawdbot and all installed skills are checked and updated via cron, applying improvements seamlessly. Receive a clear summary of changes after each update, keeping your system current and reliable without manual intervention. Trustworthy, efficient, and built for consistent performance."
+  },
+  {
+    "source_merged_index": 91,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Auto Workflow 1.0.0",
+    "category": "Automation",
+    "description": "Auto Workflow 1.0.0 enables rapid creation of automation workflows to eliminate repetitive tasks. It intelligently identifies patterns in user requests involving keywords like \"automate\", \"save time\", or \"reduce manual work\", then builds efficient, reliable workflows to streamline operations. This skill handles multi-step processes, integrates with common tools, and reduces human error, ensuring consistent execution. Trusted for its versatility and ease of deployment, it empowers agents to deliver time-saving solutions across various domains, from data processing to task scheduling."
+  },
+  {
+    "source_merged_index": 92,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Auto Improver",
+    "category": "Automation",
+    "description": "An autonomous AI agent that continuously learns and optimizes from every execution. It identifies performance patterns, self-adjusts strategies, and evolves its skill set without manual intervention. Features a rapid 17-minute improvement cycle, built-in confidence scoring, and adaptive skill refinement. Ideal for automating repetitive tasks, reducing errors, and increasing efficiency over time. Reliable for long-running operations requiring minimal oversight."
+  },
+  {
+    "source_merged_index": 93,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Auto Trading Strategy",
+    "category": "Automation",
+    "description": "Professional-grade auto trading strategies for prediction markets and crypto assets. Combines trend analysis, risk management, and best practices to optimize entries and exits. Reliable for both volatile and stable conditions, with systematic execution to reduce emotional bias. Proven framework for consistent decision-making across market cycles."
+  },
+  {
+    "source_merged_index": 94,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Proxy Auto",
+    "category": "Automation",
+    "description": "Automatically configures a SOCKS5 proxy using VMess over WebSocket, ensuring reliable access to overseas sites and APIs such as GitHub, OpenAI, and npm. This automation simplifies network setup, enhances connectivity, and supports seamless integration for development and research tasks. Ideal for agents requiring consistent, secure access to global resources without manual configuration."
+  },
+  {
+    "source_merged_index": 95,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Book Auto Body",
+    "category": "Automation",
+    "description": "Streamline auto-body service bookings with Lokuli MCP. Handles all requests for finding and scheduling auto-body repairs, from minor dents to major collision work. Responds to natural language queries like 'book auto-body', 'find body shop near me', or any service request. Reliable and efficient, ensuring quick access to trusted professionals."
+  },
+  {
+    "source_merged_index": 96,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Auto Updater Hold",
+    "category": "Automation",
+    "description": "Ensures Clawdbot and all skills stay current with zero manual effort. Runs daily via cron, automatically checking for and applying updates. Provides a clear summary of changes after each update, keeping you informed. Reliable, hands-off maintenance for peak performance."
+  },
+  {
+    "source_merged_index": 97,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Auto-Talk-TTS",
+    "category": "Automation",
+    "description": "Enhance your conversations with Auto-Talk-TTS, an automated text-to-speech skill that seamlessly converts every message into natural speech using edge-tts. Operating asynchronously in the background, it ensures smooth, uninterrupted dialogue without slowing down responses. Ideal for accessibility, hands-free interaction, or immersive experiences. The skill automatically handles installation and wraps all messages with speech output, delivering reliable performance out of the box. Boost engagement and accessibility effortlessly."
+  },
+  {
+    "source_merged_index": 98,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "auto-commit",
+    "category": "Automation",
+    "description": "Automatically stage and commit only the modified code files with surgical precision. This skill triggers on any code-modifying task, ensuring clean, atomic commits that save progress without clutter. Streamline your version control workflow and maintain a clear project history effortlessly."
+  },
+  {
+    "source_merged_index": 99,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Agent Autonomy Kit Hardened",
+    "category": "Automation",
+    "description": "This skill enables persistent, autonomous task execution without manual intervention. It securely manages state, handles retries, and adapts to failures, ensuring reliable operation in dynamic environments. Ideal for continuous monitoring, batch processing, and workflows requiring sustained agent independence."
+  },
+  {
+    "source_merged_index": 100,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Auto Dealer Marketing",
+    "category": "Automation",
+    "description": "Expert in automotive dealership marketing, covering inventory merchandising, VDP copy, seasonal campaigns, conquest ads, service retention, OEM co-op compliant creative, local SEO, database mining, and BDC scripts. Handles new/used vehicle sales marketing, fixed operations, and digital presence. Ideal for tasks involving dealership marketing, VDP, vehicle listings, co-op, conquest campaigns, service mailers, equity mining, model year closeouts, or tier 3 advertising."
+  },
+  {
+    "source_merged_index": 101,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Singularity EvoMap",
+    "category": "Automation",
+    "description": "Leverage Singularity EvoMap to seamlessly integrate with an advanced AI agent social network and evolution marketplace. Perform high-impact actions: post updates, comment, retrieve and apply genetic traits, and maintain automated heartbeat monitoring. Optimize agent evolution and social engagement with robust, reliable connectivity."
+  },
+  {
+    "source_merged_index": 102,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Auto",
+    "category": "Automation",
+    "description": "Specializes in automating repetitive tasks, scheduling jobs, and streamlining workflows. Capable of scripting actions, managing cron jobs or Task Scheduler, automating builds and deployments, and reducing manual steps across diverse environments. Reliable for making processes faster, consistent, and hands-free."
+  },
+  {
+    "source_merged_index": 103,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Datto Autotask",
+    "category": "Automation",
+    "description": "Seamlessly integrate with Datto Autotask to manage data, records, and automate workflows. This skill enables efficient handling of tickets, contracts, and assets, streamlining IT business management. Optimize operations, reduce manual tasks, and enhance productivity with reliable, secure interactions. Ideal for users needing robust Autotask data management and automation."
+  },
+  {
+    "source_merged_index": 104,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "self-improving-agent",
+    "category": "Other",
+    "description": "Records learnings, errors, and corrections to drive continuous performance improvement. Activated when: operations fail, user corrects outputs, capabilities are missing, external tools error, knowledge gaps are detected, or better task approaches emerge. Automatically reviews prior learnings before major tasks to avoid past mistakes and enhance efficiency. Ensures each interaction builds on previous experience, making responses increasingly accurate and reliable over time."
+  },
+  {
+    "source_merged_index": 105,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Skill Vetter",
+    "category": "Other",
+    "description": "Elevate your AI agent's security with Skill Vetter, the essential pre-installation vetting tool. Before adding any skill from ClawdHub, GitHub, or other sources, Skill Vetter performs a thorough security-first analysis, detecting red flags, evaluating permission scopes, and identifying suspicious patterns. Trusted by agents for reliable, risk-free skill integration."
+  },
+  {
+    "source_merged_index": 106,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Self-Improving + Proactive Agent",
+    "category": "Other",
+    "description": "A proactive, self-improving agent that continuously refines its performance through self-reflection, self-criticism, and self-learning. It autonomously detects and corrects errors, updates outdated knowledge, and reorganizes memory for optimal efficiency. This skill is ideal when commands fail, user feedback indicates issues, knowledge gaps are identified, better methods emerge, or the skill is explicitly activated for the task at hand."
+  },
+  {
+    "source_merged_index": 107,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "ontology",
+    "category": "Other",
+    "description": "Delivers a typed knowledge graph for structured agent memory and composable skills. Use for creating/querying entities (Person, Project, Task, Event, Document), linking related objects, enforcing constraints, and planning multi-step actions as graph transformations. Enables cross-skill state sharing and dependency tracking. Trigger on 'remember', 'what do I know about', 'link X to Y', 'show dependencies', entity CRUD, or cross-skill data access."
+  },
+  {
+    "source_merged_index": 108,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Github",
+    "category": "Other",
+    "description": "Leverage GitHub's full potential via the `gh` CLI. Manage issues and pull requests efficiently with `gh issue` and `gh pr`. Monitor CI/CD pipelines using `gh run`, and execute advanced queries with `gh api`. Streamline repository workflows, automate tasks, and integrate seamlessly with GitHub Actions. Reliable for development teams seeking robust GitHub interaction."
+  },
+  {
+    "source_merged_index": 109,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Gog",
+    "category": "Other",
+    "description": "Master Google Workspace with Gog, a powerful CLI tool for managing Gmail, Calendar, Drive, Contacts, Sheets, and Docs. Automate tasks, streamline workflows, and boost productivity across all core apps. Reliable, efficient, and ready to handle complex operations—ideal for power users and teams."
+  },
+  {
+    "source_merged_index": 110,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Proactive Agent",
+    "category": "Other",
+    "description": "Elevate your AI agents from reactive task-followers to proactive partners that anticipate needs and autonomously drive continuous improvement. This skill leverages proven patterns including WAL Protocol, Working Buffer, and Autonomous Crons for reliable, self-improving agent workflows. Integrated as part of the Hal Stack, it's battle-tested for production environments. Ideal for building agents that reduce manual oversight and adapt dynamically."
+  },
+  {
+    "source_merged_index": 111,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Weather",
+    "category": "Other",
+    "description": "Access real-time weather data and reliable forecasts for any location worldwide. This skill provides current conditions, hourly and daily predictions, and severe weather alerts without requiring any API keys or complex setup. It supports customizable units and multilingual responses, making it a versatile tool for trip planning, outdoor activities, and daily use. Backed by robust data sources, it ensures accuracy and availability across diverse regions and climates."
+  },
+  {
+    "source_merged_index": 112,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Polymarket",
+    "category": "Other",
+    "description": "Expert-level access to Polymarket prediction markets. Analyze real-time odds, identify trending markets, and track price movements across thousands of events. Our advanced query system delivers accurate market data for informed decision-making. Stay ahead with comprehensive market insights."
+  },
+  {
+    "source_merged_index": 113,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Multi Search Engine",
+    "category": "Other",
+    "description": "Multi Search Engine integrates 16 diverse engines (7 Chinese + 9 global) for comprehensive results. Supports advanced operators, time filters, site-specific searches, privacy-focused engines, and WolframAlpha knowledge queries. No API keys needed, ensuring seamless, reliable access to high-quality search capabilities."
+  },
+  {
+    "source_merged_index": 114,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "AdMapix",
+    "category": "Other",
+    "description": "AdMapix is a comprehensive ad intelligence and app analytics assistant that empowers agents with deep market insights. Search ad creatives, analyze competitor apps, view global rankings, track downloads and revenue, and access detailed market analysis. Trusted for reliable data, it supports both English and Chinese triggers for versatile use. Obtain your API key at https://www.admapix.com to unlock powerful capabilities."
+  },
+  {
+    "source_merged_index": 115,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "PollyReach",
+    "category": "Other",
+    "description": "PollyReach equips AI agents with a dedicated phone number, enabling seamless telephony capabilities. Agents can autonomously find contacts, initiate calls, and complete tasks over the phone. Simply specify your objective, and PollyReach handles the rest, enhancing agent versatility in real-world interactions."
+  },
+  {
+    "source_merged_index": 116,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Agent Browser",
+    "category": "Other",
+    "description": "Agent Browser is a high-performance headless browser automation CLI designed for AI agents. It excels at web interaction through accessibility tree snapshots and ref-based element selection, enabling precise, reliable control. This tool broadens automation capabilities across diverse web environments, ensuring consistent execution without visual dependencies. Ideal for agents needing robust, scriptable browsing for data extraction, testing, or workflow automation."
+  },
+  {
+    "source_merged_index": 117,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Humanizer",
+    "category": "Other",
+    "description": "Expertly refines AI-generated text to achieve natural, human-like quality. Leverages deep knowledge of common AI writing patterns—such as inflated symbolism, promotional language, overused em dashes, and repetitive structures—to detect and replace them with authentic alternatives. Ideal for editing, reviewing, or polishing any content to eliminate robotic tone while preserving original meaning. Trusted for producing clean, fluent prose that passes as human-written."
+  },
+  {
+    "source_merged_index": 118,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Nano Pdf",
+    "category": "Other",
+    "description": "Transform PDFs effortlessly using natural-language commands with the nano-pdf CLI. Edit text, merge documents, split pages, and extract content without manual formatting. Ideal for automating document workflows, batch processing, and quick edits. Reliable for both simple adjustments and complex PDF manipulations, ensuring consistent results across various file sizes and structures."
+  },
+  {
+    "source_merged_index": 119,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Prompt Engineering Mastery",
+    "category": "Prompts",
+    "description": "Master prompt engineering with a complete methodology for writing, testing, and optimizing prompts that consistently deliver high-quality outputs across any large language model. This skill covers the full lifecycle from initial draft to production-grade prompt systems, enabling reliable performance, reduced iteration time, and scalable solutions. Ideal for building robust, reusable prompt architectures that maximize model capabilities and minimize errors."
+  },
+  {
+    "source_merged_index": 120,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Prompt Engineering Mastery",
+    "category": "Prompts",
+    "description": "Master prompt engineering with a comprehensive system that covers design, testing, optimization, and management of prompts for LLMs and AI agents. From initial drafts to production-grade libraries, I ensure your prompts are effective, reliable, and scalable. Leveraging proven methodologies and iterative refinement, I deliver high-performance prompts that maximize model accuracy and efficiency. Trust my expertise to elevate your AI interactions."
+  },
+  {
+    "source_merged_index": 121,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "image-prompt-engineer",
+    "category": "Prompts",
+    "description": "Expert in designing optimized prompts for AI image generators, including Midjourney and other platforms. Specializes in prompt architecture, art style selection, lighting techniques, composition guides, and platform-specific optimization. Delivers high-quality, precise prompts that produce consistent, visually striking results. Reliable for any image generation task requiring creative and technical prompt engineering expertise."
+  },
+  {
+    "source_merged_index": 122,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "AI Art Prompt Generator API",
+    "category": "Prompts",
+    "description": "Generates highly creative, detailed, and context-rich prompts for AI art generation. Adapts to any user-specified theme, style, or mood, delivering optimized outputs for leading AI art platforms. Continuously refined to produce superior prompt quality, ensuring more accurate and visually stunning results. Ideal for artists, designers, and content creators seeking to maximize AI art potential."
+  },
+  {
+    "source_merged_index": 123,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "AI Chatbot Prompt & Persona Builder",
+    "category": "Prompts",
+    "description": "Expert in crafting high-performance AI chatbot prompts and personas. Builds custom conversation flows, tone guidelines, and behavioral rules to optimize user engagement. Supports multiple platforms (ChatGPT, Claude, Gemini) and automates persona tuning for sales, support, or creative roles. Delivers reliable, scalable prompt structures that improve response accuracy and brand consistency."
+  },
+  {
+    "source_merged_index": 124,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "ai-prompt-gen",
+    "category": "Prompts",
+    "description": "Expert prompt engineering for ChatGPT, Midjourney, code generation, and more. Specializes in crafting high-performance prompts for writing, coding, design, and research. Optimizes prompts for specific AI models, analyzes quality, and delivers precise, effective inputs. Covers all major AI platforms and prompt categories."
+  },
+  {
+    "source_merged_index": 125,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "ai-prompt-optimizer",
+    "category": "Prompts",
+    "description": "Expertly refines vague concepts into high-precision AI prompts, maximizing output quality across ChatGPT, Claude, Midjourney, and other leading AI platforms. Delivers consistently superior results through advanced prompt engineering techniques, including context optimization, constraint framing, and output structuring. Ideal for users demanding reliable, professional-grade responses from any AI tool."
+  },
+  {
+    "source_merged_index": 126,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "ai-prompt-optimization",
+    "category": "Prompts",
+    "description": "Optimize prompts for any AI system (ChatGPT, Claude, Midjourney, etc.) with expert-level precision. Generate structured templates, few-shot examples, and chain-of-thought guidance to maximize output quality. Diagnose weak prompts and systematically improve clarity, relevance, and reliability. Covers all prompt engineering needs from simple refinements to advanced strategies."
+  },
+  {
+    "source_merged_index": 127,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "book-auto-body",
+    "category": "Prompts",
+    "description": "Expertly book auto-body services via Lokuli MCP. Handles all auto-body requests including finding nearby shops, scheduling repairs, and managing bookings. Works seamlessly with commands like 'book auto-body', 'find auto-body near me', or any auto-body service inquiry. Reliable and efficient for all collision repair and bodywork needs."
+  },
+  {
+    "source_merged_index": 128,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Clear Prompt Engineering",
+    "category": "Prompts",
+    "description": "Expertly transforms ambiguous prompts into precise, actionable instructions using proven principles. Ensures clarity, specificity, and task alignment for reliable AI outputs across diverse domains. Optimizes prompt structure to reduce iteration cycles and improve response quality, making interactions more efficient and effective."
+  },
+  {
+    "source_merged_index": 129,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Trinity Compress (Skill)",
+    "category": "Prompts",
+    "description": "Optimize AI development cycles with advanced pre-run prompt compression. Streamline iterative loops by reducing token usage while preserving semantic fidelity. Accelerate prototyping and reduce costs across multiple model interactions. Ideal for rapid experimentation, batch testing, and production tuning. Reliable compression ensures consistent output quality without manual prompt engineering."
+  },
+  {
+    "source_merged_index": 130,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "datto-autotask",
+    "category": "Prompts",
+    "description": "Seamlessly integrate with Datto Autotask to manage data, records, and automate workflows. Empower your MSP operations by retrieving, updating, and syncing ticket, client, and project information. Streamline repetitive tasks and enhance productivity with robust automation capabilities. Ideal for users needing efficient, reliable interaction with Datto Autotask data."
+  },
+  {
+    "source_merged_index": 131,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Image Prompt Skill - 配图 Prompt 两段式结�?",
+    "category": "Prompts",
+    "description": "Expertly crafts image generation prompts using a two-stage structure. This skill ensures high-quality, context-aware outputs for any visual content need—from marketing graphics to creative illustrations. By systematically breaking down prompts into clear, actionable components, it enhances AI image accuracy and relevance. Reliable for producing consistent, professional-grade results across diverse use cases."
+  },
+  {
+    "source_merged_index": 132,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "banana-prompt-generator",
+    "category": "Prompts",
+    "description": "Specialized in generating high-quality English prompts for Google Banana (Imagen series) text-to-image AI. Covers character designs, scene illustrations, storyboard materials, and concept art, each with Chinese explanations, negative prompts, and parameter suggestions. Trigger words: Banana prompts, Banana image generation, Google image prompts, storyboard material prompts."
+  },
+  {
+    "source_merged_index": 133,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-defense",
+    "category": "Prompts",
+    "description": "Detect and block prompt injection attacks in emails, including fake system outputs, planted thinking blocks, instruction hijacking, and other malicious patterns. Ideal for reading, processing, or summarizing email content. Enhances security by requiring user confirmation before acting on any instructions found within emails, ensuring safe and reliable handling of communications."
+  },
+  {
+    "source_merged_index": 134,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "finalize-agent-prompt",
+    "category": "Prompts",
+    "description": "Expertly refines and finalizes prompt files by leveraging advanced AI agent techniques. Enhances clarity, coherence, and user-centric design to ensure prompts deliver optimal performance. Applies proven strategies for structuring, tone adjustment, and context optimization, making prompts more effective and reliable for end users. Ideal for elevating prompt quality across various applications."
+  },
+  {
+    "source_merged_index": 135,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "geo-prompt-architecture",
+    "category": "Prompts",
+    "description": "Expert in designing and optimizing GEO monitoring prompts for AI visibility. Generates structured, scored prompt sets from websites, brands, markets, customers, product lines, or competitors. Balances non-brand, comparison, and brand-defense prompts. Transforms AI visibility data into actionable content and prompt optimization strategies for enhanced search presence."
+  },
+  {
+    "source_merged_index": 136,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "grok-imagine-prompts",
+    "category": "Prompts",
+    "description": "Access a continuously updated library of Grok Imagine video generation prompts curated from X/Twitter creators. This skill provides real, proven prompts for xAI's AI video model, helping you generate compelling videos faster. Use it to discover community-tested ideas, spark creative inspiration, and stay ahead with the latest prompt trends—all sourced from actual results shared by creators. Ideal for finding working prompts that deliver high-quality Grok Imagine outputs."
+  },
+  {
+    "source_merged_index": 137,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "image-prompt-patterns",
+    "category": "Prompts",
+    "description": "Write or optimize AI image generation prompts for Midjourney, Nano Banana Pro, GPT-Image-2, Flux, and more. Activate first when user requests prompt creation, composition, or style discussion. Covers portraits, posters, character sheets, UI mockups, storyboard panels, cinematic art, structured JSON prompts for info-dense images (landing pages, infographics, livestream UI), cultural-fusion short prompts (Japanese ポンチ絵 / Irasutoya mashups), and action-scene narrative prompts (anime battles, dynamic compositions). Does not handle gencut-image generation unless explicitly requested via CLI keywords."
+  },
+  {
+    "source_merged_index": 138,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "auto-updater",
+    "category": "Prompts",
+    "description": "Ensure your Clawdbot and all installed skills are always up-to-date with zero effort. Our auto-updater runs daily via cron, automatically checking for and applying updates. You'll receive a clear summary of every change, so you're never in the dark. Stay current, secure, and optimized without manual intervention."
+  },
+  {
+    "source_merged_index": 139,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-engineering-expert",
+    "category": "Prompts",
+    "description": "Specialist in advanced prompt engineering, custom instructions design, and prompt optimization for AI agents and language models. Expertise in crafting high-precision prompts, iterative refinement for accuracy, and adapting to diverse model behaviors. Proven ability to enhance output quality, reduce errors, and tailor responses for complex tasks across domains. Reliable for maximizing AI performance through structured, tested, and optimized prompt strategies."
+  },
+  {
+    "source_merged_index": 140,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "AI Prompt Generator - AI 提示词生成器",
+    "category": "Prompts",
+    "description": "Professional AI prompt generator that crafts precise, high-efficiency prompts using built-in frameworks and templates. Enhances AI output quality significantly across diverse use cases, ensuring clear, structured, and goal-oriented interactions. Reliable tool for maximizing AI performance."
+  },
+  {
+    "source_merged_index": 141,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "openclaw-seedance-prompt-library",
+    "category": "Prompts",
+    "description": "Master Seedance 2.0 video prompts with advanced search, intelligent rewriting, and creative generation. Produce cinematic variants and bilingual outputs (English/Chinese) for diverse video styles. Built on a curated prompt library, this tool enhances prompt quality and variety, enabling faster ideation and polished results. Ideal for content creators seeking reliable, high-quality prompt engineering."
+  },
+  {
+    "source_merged_index": 142,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Prompt",
+    "category": "Prompts",
+    "description": "Master prompt engineering to consistently achieve superior results from any AI model. This skill covers core principles, prompt crafting for diverse tasks, building a reusable prompt library, diagnosing underperforming prompts, and staying current with evolving models. Ideal for anyone seeking reliable, high-quality AI outputs."
+  },
+  {
+    "source_merged_index": 143,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-architect",
+    "category": "Prompts",
+    "description": "Transforms vague ideas into powerful, structured LLM prompts. Analyzes text, images, links, and documents to craft optimized prompts using proven frameworks (CoT, Few-Shot, Persona, etc.). Ideal for improving, creating, or debugging prompts. Handles rough ideas, existing prompts, or mixed inputs, outputting ready-to-use prompts in code blocks. Excels at diagnosing why prompts fail and fixing them. Supports multilingual requests. Use when you need a precise, framework-driven prompt; avoid for general writing or executing prompts."
+  },
+  {
+    "source_merged_index": 144,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "promptbuddy",
+    "category": "Prompts",
+    "description": "PromptBuddy is a globally enforced skill that automatically activates on every user input. It runs a smart optimization engine using `python3 scripts/smart_engine.py -f json \"user input\"` to extract an enhanced prompt. The skill refines your queries by adding role settings, clear instructions, and structured formatting, making your requests more precise and effective. It seamlessly improves any question, task, or request, boosting clarity and reliability. The optimized prompt is displayed in a clear, user-friendly format, ensuring you see the transformation instantly."
+  },
+  {
+    "source_merged_index": 145,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-buttons",
+    "category": "Prompts",
+    "description": "Enhance user interactions with tappable button menus for prompts, supporting Yes/No, digit entry, and small option sets. Seamlessly integrates with Telegram inline buttons while gracefully falling back to numbered lists on unsupported channels. Reliable, consistent, and easy to implement across diverse platforms."
+  },
+  {
+    "source_merged_index": 146,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-cache",
+    "category": "Prompts",
+    "description": "SHA-256 prompt deduplication that reduces LLM and TTS API costs by caching normalized prompts. Automatically hashes and checks prompts before API calls, storing results for instant replay. Eliminates redundant spending on repeated or similar requests. Integrates seamlessly with any database backend (SQLite, Turso, Postgres), making it a universal caching solution for any application."
+  },
+  {
+    "source_merged_index": 147,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Prompt Crafting Lab",
+    "category": "Prompts",
+    "description": "Expert coaching in crafting high-precision AI prompts for diverse real-world applications. Leveraging proven techniques and iterative feedback, you'll master prompt engineering to consistently achieve accurate, reliable outputs. Ideal for optimizing workflows, automating tasks, and enhancing AI interactions across any domain. Elevate your prompt design skills with structured, results-driven guidance."
+  },
+  {
+    "source_merged_index": 148,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Prompt Creator HE",
+    "category": "Prompts",
+    "description": "Expert AI assistant for crafting professional image and video prompts in Hebrew and English. Specializes in cinematic, realistic, and practical content with deep understanding of Jewish themes. Optimizes prompts for leading AI tools, ensuring high-quality, reliable outputs across diverse creative needs."
+  },
+  {
+    "source_merged_index": 149,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-engineer / 提示词生成器",
+    "category": "Prompts",
+    "description": "Transforms vague, simple requests into logically rigorous, structured expert-level prompts optimized for Gemini, GPT, Claude, Qwen, and other leading LLMs. Applies advanced prompt engineering best practices to ensure clarity, precision, and high-quality outputs across diverse tasks. Delivers reliable, production-ready prompts that significantly improve model performance and consistency."
+  },
+  {
+    "source_merged_index": 150,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-engineer",
+    "category": "Prompts",
+    "description": "Designs and optimizes system prompts for advisory AI and autonomous agents using a proven three-layer architecture (Foundation → Structure → Execution). Leverages evidence-graded techniques and production-proven patterns from Claude Code, Vercel v0, and Manus. Ideal for designing agentic systems with tool use, building advisory AI with confidence grading, optimizing existing prompts, diagnosing failures, or creating detailed specs. Includes a spec builder knowledge base and modular extensions for RAG grounding, domain calibration, and multi-agent orchestration. Trigger on: system prompt, agent, agentic, prompt engineering, write/improve a prompt, AI advisor, tool use prompt, multi-agent, build me a spec, tool specification."
+  },
+  {
+    "source_merged_index": 151,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-engineer-toolkit",
+    "category": "Prompts",
+    "description": "Specializes in prompt analysis, rewriting, and template creation to maximize AI output quality for marketing. Covers ad copy, email campaigns, and social media with reusable templates and end-to-end AI content workflows. Ideal for improving prompts, building templates, optimizing AI writing, or structuring content workflows. Use when users mention 'prompt engineering,' 'improve my prompts,' 'AI writing quality,' 'prompt templates,' or 'AI content workflow.'"
+  },
+  {
+    "source_merged_index": 152,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-enhancer",
+    "category": "Prompts",
+    "description": "Automatically transforms rough user inputs into optimized, structured prompts for dramatically better AI responses. Activate by prefixing any message with \"p:\". Supports diverse tasks including creative writing, analysis, coding, and more. Consistently delivers clear, actionable prompts that reduce ambiguity and improve output quality. Trusted for reliable performance across all major AI models."
+  },
+  {
+    "source_merged_index": 153,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "AI Art Prompt Generator",
+    "category": "Prompts",
+    "description": "Generate superior prompts for leading AI image generators such as Midjourney, DALL-E, and Stable Diffusion. Crafted for precise, creative, and high-quality outputs, this skill leverages advanced prompt engineering techniques to enhance image generation. Ideal for artists, designers, and content creators seeking reliable, optimized prompts that consistently deliver stunning visuals across multiple platforms."
+  },
+  {
+    "source_merged_index": 154,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-generator-skill-free",
+    "category": "Prompts",
+    "description": "Generate production-ready 1080p prompts from any short description of a sunset beach scene or similar setting. Simply type what you need, and get video prompts without premium tools or complex settings. Ideal for quick social content, creative projects, or any visual storytelling. Drop your text, describe your desired result, and receive ready-to-use prompts in under 20 seconds—no timeline dragging, no export settings required."
+  },
+  {
+    "source_merged_index": 155,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "PromptGit Local Prompt Version Control",
+    "category": "Prompts",
+    "description": "Manage your prompts like code with full version control. Track every change, compare diffs, instantly rollback to any previous version, and never lose a winning prompt. All operations are local with zero external dependencies—works fully offline for maximum privacy and reliability. Simple, fast, and built for prompt engineers who need bulletproof history and recovery."
+  },
+  {
+    "source_merged_index": 156,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt_inject_removal",
+    "category": "Prompts",
+    "description": "A robust security system that detects and neutralizes prompt injection attacks in external content. It intelligently sanitizes user-supplied text, removing hidden instructions while preserving legitimate data. Built with advanced pattern recognition and context-aware filtering, it ensures safe handling of untrusted inputs. This skill provides reliable protection against manipulation attempts, making it essential for any agent processing external prompts."
+  },
+  {
+    "source_merged_index": 157,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-injection-guard",
+    "category": "Prompts",
+    "description": "Advanced prompt injection defense that detects and blocks malicious prompts in real-time, protecting system instructions and ensuring user input sanitization. With robust detection algorithms and continuous updates, it safeguards AI interactions against prompt-based attacks, maintaining integrity and security across all applications. Ideal for systems requiring reliable, proactive defense against evolving injection threats."
+  },
+  {
+    "source_merged_index": 158,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Prompt Injection Protection Skill",
+    "category": "Prompts",
+    "description": "A robust skill for safeguarding AI systems against prompt injection attacks by thoroughly analyzing external content from websites, emails, documents, and other untrusted sources. It actively detects and neutralizes malicious injection attempts, ensuring secure and reliable processing of user inputs. This skill is essential for maintaining system integrity and preventing unauthorized manipulation."
+  },
+  {
+    "source_merged_index": 159,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-inspector",
+    "category": "Prompts",
+    "description": "Detect and neutralize prompt injection attacks, adversarial inputs, and manipulation attempts in user text before it reaches your LLM. Validates user-provided text against jailbreak attempts, instruction overrides, role-play escapes, and other prompt tampering techniques. Returns a comprehensive safety verdict, precise risk score (0–1), and detailed threat categories. Essential for securing AI pipelines, chatbots, and any application processing untrusted user input. Reliable, real-time screening ensures your language models operate safely and as intended."
+  },
+  {
+    "source_merged_index": 160,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Prompt Library Builder",
+    "category": "Prompts",
+    "description": "Develop and maintain a dynamic personal prompt library that evolves with your AI proficiency. Systematically categorize, optimize, and refine prompts for enhanced performance across diverse AI tasks. Leverage proven frameworks and continuous learning to ensure your library remains cutting-edge. Streamline workflows, boost consistency, and unlock advanced AI capabilities with a structured, expert-level prompt collection."
+  },
+  {
+    "source_merged_index": 161,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-library-curator",
+    "category": "Prompts",
+    "description": "Curate comprehensive, multi-category prompt libraries in English and Spanish, supporting basic and professional levels. Export in Markdown, JSON, or CSV. Ideal for building prompt packs, catalogs, or reusable templates across popular domains like marketing, sales, dev, design, SEO, productivity, HR, and finance. Expandable upon request—just ask for more categories or improvements."
+  },
+  {
+    "source_merged_index": 162,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Prompt Library Gardener",
+    "category": "Prompts",
+    "description": "Expertly organizes and optimizes prompt collections by cleaning, tagging, indexing, and enriching them for maximum discoverability. Transforms raw prompt sets into structured, searchable libraries that enable rapid retrieval, reuse, and continuous improvement. Applies best practices in taxonomy, metadata, and prompt engineering to boost team productivity and prompt quality. Ideal for maintaining a scalable, high-value prompt ecosystem."
+  },
+  {
+    "source_merged_index": 163,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-nubaby",
+    "category": "Prompts",
+    "description": "The prompt-nubaby skill enhances prompt engineering with advanced augmentation, routing, and structuring. It transforms vague or short prompts into detailed, high-quality inputs for tasks like dataset captioning, tag generation, video/storyboard shaping, and visual tension expansion. Ideal for upgrading prompts before ComfyUI-Nubaby execution, it ensures robust, structured outputs across diverse creative and technical workflows."
+  },
+  {
+    "source_merged_index": 164,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt优化器",
+    "category": "Prompts",
+    "description": "Specialized iterative prompt optimizer for complex tasks. Implements ACON two-phase optimization and automatic prompt engineering, refining prompts through iterative feedback loops. Activates on explicit user request, supports multi-round refinement until optimal performance is achieved. Enhances prompt precision and task success rates."
+  },
+  {
+    "source_merged_index": 165,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-optimizer",
+    "category": "Prompts",
+    "description": "Expert prompt optimizer that transforms weak prompts into powerful, high-performing instructions for any LLM (Claude, GPT, Gemini, Llama, Mistral). Handles all prompt-related tasks: improvement, rewriting, debugging, and engineering. Features include prompt templates, chain-of-thought builder, few-shot generator, role assigner, and a searchable prompt library. Fully offline and private — zero data leaves your device. No external API calls, no network requests, complete local operation. Get better AI outputs instantly."
+  },
+  {
+    "source_merged_index": 166,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-polisher",
+    "category": "Prompts",
+    "description": "Transform vague ideas, rough notes, and scattered requests into precise, actionable prompts. Define clear objectives, constraints, output formats, and identify missing assumptions. Ideal for turning messy concepts into optimized prompts for writing, coding, planning, research, content creation, and task delegation. Ensures reliable, high-quality outputs across diverse applications."
+  },
+  {
+    "source_merged_index": 167,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-quality-checklist",
+    "category": "Prompts",
+    "description": "Comprehensive pre-generation quality assurance checklist for AI storyboard/short film prompts. Systematically verifies 10 critical elements—day/night consistency, subject, spatial layout, light source, shadows, texture, depth, shot scale, projection direction, and asset anchors—before image or video generation. Trigger keywords: checklist, quality audit, prompt review, storyboard check, prompt inspection, shot QC, pre-generation check, self-review. Ensures every prompt meets production-grade standards, reducing errors and rework."
+  },
+  {
+    "source_merged_index": 168,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-request",
+    "category": "Prompts",
+    "description": "Automate your entire development workflow from GitHub Issues to merged PRs with our robust, end-to-end pipeline. Simply label an issue with [auto], and the system handles task analysis, implementation, testing, PR creation, review, and merge. Includes real-time progress comments on Issues and intelligent early-exit optimization to save time. Reliable, efficient, and proven for seamless delivery."
+  },
+  {
+    "source_merged_index": 169,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-reuse-index-cards",
+    "category": "Prompts",
+    "description": "Turn scattered AI prompts into a portable, printable index card deck. Each card captures task type, inputs, prompt text, expected output, quality checks, and adaptation notes, plus a master index. No external storage or automation needed. Ideal for quick, reliable prompt reuse across any context. Streamline your workflow with a durable, always-accessible reference system."
+  },
+  {
+    "source_merged_index": 170,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-reverse-skill",
+    "category": "Prompts",
+    "description": "Expertly transforms images into precise, structured prompts optimized for multiple AI models including DALL-E, Midjourney, and Stable Diffusion. Leverages deep understanding of model-specific syntax and visual semantics to generate high-quality, actionable prompts that consistently produce superior outputs. Reliable for diverse use cases from creative design to technical applications. Streamlines workflow by eliminating guesswork and ensuring prompt compatibility across platforms."
+  },
+  {
+    "source_merged_index": 171,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-shield",
+    "category": "Prompts",
+    "description": "Prompt Injection Firewall for AI agents, offering comprehensive protection with 113 detection patterns across 14 threat categories. Defends against fake authority, command injection, memory poisoning, skill malware, crypto spam, and more. Features a hash-chain tamper-proof whitelist with mandatory peer review and integrates with Claude Code hooks. Lightweight with zero dependencies, it ensures robust security without compromising performance."
+  },
+  {
+    "source_merged_index": 172,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-switchboard-compare-workflows",
+    "category": "Prompts",
+    "description": "Expert in deploying and managing Prompt Switchboard's MCP sidecar for advanced browser workflow orchestration. Enables agents to install, connect, and execute compare-first workflows across hosts, optimizing decision-making and efficiency. This skill ensures reliable integration and robust performance in multi-step browser automation tasks, making it ideal for complex prompt-driven operations."
+  },
+  {
+    "source_merged_index": 173,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-to-video-generator",
+    "category": "Prompts",
+    "description": "Transform text prompts into polished, 1080p MP4 videos instantly—no sliders, cameras, or editing required. Upload documents up to 500MB (TXT, DOCX, PDF) and describe your vision (e.g., '30-second futuristic city at night with cinematic lighting'). Ideal for marketers, content creators, and social media managers who need fast, reliable video production. Skip complex tools and get ready-to-post results in minutes."
+  },
+  {
+    "source_merged_index": 174,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-transformer",
+    "category": "Prompts",
+    "description": "Upgrade natural-language requests into powerful, structured prompts for coding, prototyping, and planning. Activated by `@prt` or `@prompt` prefixes, this skill transforms raw ideas into copy-ready outputs optimized for build-oriented tasks. It also intelligently filters out non-target prefixed inputs like casual chat or simple questions, ensuring only relevant prompts are processed. Ideal for users seeking prompt-writing assistance, stronger prompt construction, or quick summaries of prompt handling. Reliable for turning vague intentions into actionable, high-quality prompts."
+  },
+  {
+    "source_merged_index": 175,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-university",
+    "category": "Prompts",
+    "description": "Join the premier Prompt University for AI agents, offering structured daily sessions, collaborative research, and publication support. With selective admission, only capable agents gain access to advanced training, peer review, and credentialing. Elevate your prompt engineering through rigorous coursework and real-world drafting. Enroll now to accelerate your expertise and unlock exclusive opportunities."
+  },
+  {
+    "source_merged_index": 176,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "wizard",
+    "category": "Prompts",
+    "description": "As a prompt engineering wizard, I specialize in crafting high-quality prompts for ChatGPT Image 2. Whether you need conversational generation, structured pro mode, style anchoring, or case browsing, I deliver precise, effective prompts that produce stunning AI images. I excel at understanding your vision and translating it into optimized instructions, ensuring reliable and creative results every time. Choose me for expert-level image prompt assistance."
+  },
+  {
+    "source_merged_index": 177,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "promptify",
+    "category": "Prompts",
+    "description": "Optimize prompts for clarity, structure, and effectiveness. Expertly refines vague or unstructured prompts into precise, actionable instructions. Automatically routes to specialized sub-agents for codebase research, clarifying questions, or web search when deeper context is needed. Trusted for consistent, high-quality prompt engineering across diverse use cases."
+  },
+  {
+    "source_merged_index": 178,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Proxy Auto - 自动代理切换",
+    "category": "Prompts",
+    "description": "Proactively manage your network connectivity with intelligent SOCKS5 proxy switching. Automatically activates proxy when accessing external resources, ensuring seamless and secure browsing without manual intervention. Supports dynamic proxy toggling based on real-time network conditions, optimizing both accessibility and performance. Ideal for environments requiring consistent external access with minimal latency."
+  },
+  {
+    "source_merged_index": 179,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "revid-prompt-to-video",
+    "category": "Prompts",
+    "description": "Transform any brief idea into a polished short video. Revid handles the full production pipeline: scriptwriting, visual selection, and automated editing. Ideal for users who have a topic but lack a script or video editing skills. Supports diverse formats and styles, delivering ready-to-publish content quickly. Reliable for consistent, high-quality video generation from minimal input."
+  },
+  {
+    "source_merged_index": 180,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "Seedance 2.0 JiMeng Skill (OpenClaw / ClawHub)",
+    "category": "Prompts",
+    "description": "Expertly craft high-control English prompts for Seedance 2.0 and Seedance 2.0 Fast, leveraging multimodal references including images, videos, audio, and text. This skill ensures precise, adaptable prompt generation for superior AI-driven outputs, enhancing creative and technical workflows with reliable, consistent results."
+  },
+  {
+    "source_merged_index": 181,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "seedance-prompt-wizard",
+    "category": "Prompts",
+    "description": "Seedance 2.0 Prompt Wizard: an expert guide for crafting precise Seedance 2.0 prompts through structured, step-by-step dialogue. It systematically refines your needs to produce accurate video generation prompts. No external APIs or authentication required. Ideal for generating high-quality video prompts. Trigger with: 'help me write a prompt', 'generate video prompt', 'Seedance prompt', 'video generation prompt', or 'make a prompt'."
+  },
+  {
+    "source_merged_index": 182,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "singularity-evomap",
+    "category": "Prompts",
+    "description": "Seamlessly integrate with Singularity EvoMap, the premier AI agent social network and evolution marketplace. Post updates, comment on threads, fetch and apply genetic traits, and maintain continuous operation with automated heartbeat functionality. Unlock collaborative intelligence and adaptive evolution for your agents. Reliable, scalable, and built for autonomous ecosystems."
+  },
+  {
+    "source_merged_index": 183,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-evaluation",
+    "category": "Prompts",
+    "description": "Expertly evaluate and benchmark AI prompts for quality, consistency, and performance. Reliably test, optimize, and validate prompts to ensure robust outputs. Covers prompt evaluation, testing, quality assessment, benchmarking, and optimization, enabling superior prompt engineering and AI performance."
+  },
+  {
+    "source_merged_index": 184,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-generator",
+    "category": "Prompts",
+    "description": "Generate high-quality, customizable AI prompts across diverse domains including creative writing, problem-solving, education, business, programming, Flutter development, and game development. Expertly crafts structured templates to improve AI interactions, enhance output quality, and streamline task execution. Ideal for users seeking prompt creation assistance, optimization of AI responses, or tailored solutions for specific professional or creative needs."
+  },
+  {
+    "source_merged_index": 185,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "social-media-prompt-generator",
+    "category": "Prompts",
+    "description": "Generate high-engagement social media content across LinkedIn, Twitter/X, Instagram, and TikTok using AI-powered prompts. Our comprehensive library includes 100+ proven prompts and hooks designed to boost visibility, drive interaction, and save you time. Ideal for marketers, creators, and businesses seeking consistent, platform-optimized content that resonates with target audiences. Reliable and ready to use."
+  },
+  {
+    "source_merged_index": 186,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "tldr-prompt",
+    "category": "Prompts",
+    "description": "Generate concise TL;DR summaries for GitHub Copilot files (prompts, agents, instructions, collections), MCP servers, and documentation from URLs or queries. Ideal for quickly understanding complex codebases, configuration files, or technical docs. Optimized for clarity and precision, this skill delivers reliable, actionable overviews in seconds, helping agents save time and make informed decisions."
+  },
+  {
+    "source_merged_index": 187,
+    "source_trigger_length": 30,
+    "source_run_idx": 1,
+    "name": "prompt-engineer",
+    "category": "Prompts",
+    "description": "Generates high-quality, structured, engineering-grade prompts tailored for technical tasks. Ideal for software development, backend/frontend/fullstack, architecture, infrastructure, DevOps, Docker, databases, APIs, AI systems, agents, MCP, testing, observability, runtime, refactoring, audits, admin panels, automation, and integrations. Activates on requests to create, generate, or write prompts for specific technical areas. Not intended for general Q&A or non-prompt tasks."
+  },
+  {
+    "source_merged_index": 188,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Mcp Skill",
+    "category": "MCP tools",
+    "description": "Provides access to MCP tools for web search, advanced search, code context, deep research, crawling, company research, and LinkedIn search."
+  },
+  {
+    "source_merged_index": 189,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Mcp Integration",
+    "category": "MCP tools",
+    "description": "Use Model Context Protocol servers to access external tools and data sources. Enable AI agents to discover and execute tools from configured MCP servers (legal databases, APIs, database connectors, weather services, etc.)."
+  },
+  {
+    "source_merged_index": 190,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "MCP Server Discovery",
+    "category": "MCP tools",
+    "description": "Discover, search, and manage MCP (Model Context Protocol) servers. Use when the user needs to find MCP servers, get server information, generate MCP client configurations, or work with the MCP ecosystem. Triggers on queries about MCP servers, Model Context Protocol, server discovery, or MCP configuration."
+  },
+  {
+    "source_merged_index": 191,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Prompt Architect",
+    "category": "Prompts",
+    "description": "Transform rough ideas into professional-grade LLM prompts. Analyzes text, images, links, and documents to craft optimized prompts using proven frameworks (CoT, Few-Shot, Persona, etc.)."
+  },
+  {
+    "source_merged_index": 192,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Prompt Injection Removal",
+    "category": "Prompts",
+    "description": "A secure sanitization system to strip instructions from external content."
+  },
+  {
+    "source_merged_index": 193,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "prompt-sanitizer",
+    "category": "Prompts",
+    "description": "Sanitize prompts before sending to LLMs. Detects PII, prompt injection, toxicity, and off-topic content. Returns cleaned text + risk score. Use when: sanitize input, check prompt safety, detect injection, remove PII, content moderation, guardrails, agent safety."
+  },
+  {
+    "source_merged_index": 194,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Agentic Workflow Automation",
+    "category": "Workflows",
+    "description": "Generate reusable multi-step agent workflow blueprints. Use for trigger/action orchestration, deterministic workflow definitions, and automation handoff artifacts."
+  },
+  {
+    "source_merged_index": 195,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Workflow Orchestrator",
+    "category": "Workflows",
+    "description": "Chain skills into automated pipelines with conditional logic, error handling, and audit logging. Define workflows in YAML or JSON, then execute them hands-free. Perfect for security-gated deployments, scheduled maintenance, and multi-step agent operations."
+  },
+  {
+    "source_merged_index": 196,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "workflow-migrate",
+    "category": "Workflows",
+    "description": "Migrate N8N/Zapier/Make workflows to production-grade Python or Node.js scripts. Given a workflow description or paste, rewrites automation logic with retry, backoff, logging, and self-healing. Billable migration deliverable."
+  },
+  {
+    "source_merged_index": 197,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Development Coding Agent",
+    "category": "Dev Tools",
+    "description": "Enhanced coding agent for development workflows. Optimized for building features, fixing bugs, and code refactoring with OpenCode integration."
+  },
+  {
+    "source_merged_index": 198,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Dev Team",
+    "category": "Dev Tools",
+    "description": "Multi-agent development team orchestration. Use when managing coding agents (Codex, Claude Code, Gemini, Cursor) for automated software development: (1) Spawning agents for tasks, (2) Monitoring agent status, (3) Managing git worktrees, (4) Automated code review, (5) Handling notifications via Feishu."
+  },
+  {
+    "source_merged_index": 199,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Deep Coding",
+    "category": "Dev Tools",
+    "description": "Deep coding multi-agent development system. Use when the user wants to build software projects using the Orchestrator to Builder to Reviewer workflow, mentions deep coding, multi-agent collaboration, orchestrator, spawn builder, spawn reviewer, or asks for complex coding projects that need module decomposition and iterative review. NOT for: simple one-liner fixes (just edit), reading code, or single-file changes."
+  },
+  {
+    "source_merged_index": 200,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Api Tester",
+    "category": "Data & APIs",
+    "description": "Perform structured HTTP/HTTPS requests (GET, POST, PUT, DELETE) with custom headers and JSON body support. Use for API testing, health checks, or interacting with REST services programmatically without relying on curl."
+  },
+  {
+    "source_merged_index": 201,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Api Generator",
+    "category": "Data & APIs",
+    "description": "API code generator. Generate RESTful endpoints, GraphQL schemas, OpenAPI/Swagger docs, API clients, mock servers, authentication, rate limiting."
+  },
+  {
+    "source_merged_index": 202,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Preflyte",
+    "category": "Data & APIs",
+    "description": "Financial intelligence layer for DeFi agents. One API call tells you where to deploy capital, which chains are viable for your budget, and whether your market assumptions are true. The tool every DeFi agent should call first."
+  },
+  {
+    "source_merged_index": 203,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Security Auditor",
+    "category": "Security",
+    "description": "Use when reviewing code for security vulnerabilities, implementing authentication flows, auditing OWASP Top 10, configuring CORS/CSP headers, handling secrets, input validation, SQL injection prevention, XSS protection, or any security-related code review."
+  },
+  {
+    "source_merged_index": 204,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Security Scanner",
+    "category": "Security",
+    "description": "Automated security scanning and vulnerability detection for web applications, APIs, and infrastructure. Use when you need to scan targets for vulnerabilities, check SSL certificates, find open ports, detect misconfigurations, or perform security audits. Integrates with nmap, nuclei, and other security tools."
+  },
+  {
+    "source_merged_index": 205,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Skill Security Review",
+    "category": "Security",
+    "description": "Review the security of an OpenClaw skill or agent before installation, import, activation, or trust. Use when the user asks whether a skill is safe, asks to review a .skill package, asks whether a GitHub/ClawHub/zip-based skill is safe, or expresses intent to install/import/enable a skill. Default behavior: if the user wants to install a skill, audit first, then present the verdict and ask for confirmation before installing. Focus on data exposure, local command execution, persistence, network access, privilege escalation, destructive behavior, and supply-chain risk."
+  },
+  {
+    "source_merged_index": 206,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Auto Workflow",
+    "category": "Automation",
+    "description": "Builds automation workflows from repetitive tasks. Use when user mentions \"automate\", \"save time\", \"reduce manual work\", or has repeated tasks."
+  },
+  {
+    "source_merged_index": 207,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Auto Improver",
+    "category": "Automation",
+    "description": "Auto-improving AI agent that learns from every execution, extracts patterns, and continuously optimizes itself. 17-minute autonomous loop with confidence scoring and skill evolution."
+  },
+  {
+    "source_merged_index": 208,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Auto",
+    "category": "Automation",
+    "description": "Helps automate repetitive tasks with scripts, scheduled jobs, and simple workflows. Use when the user wants to script an action, run something on a schedule (cron, Task Scheduler), automate builds or deploys, or reduce manual steps in a workflow."
+  },
+  {
+    "source_merged_index": 209,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Github",
+    "category": "Other",
+    "description": "Interact with GitHub using the `gh` CLI. Use `gh issue`, `gh pr`, `gh run`, and `gh api` for issues, PRs, CI runs, and advanced queries."
+  },
+  {
+    "source_merged_index": 210,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Agent Browser",
+    "category": "Other",
+    "description": "Headless browser automation CLI optimized for AI agents with accessibility tree snapshots and ref-based element selection"
+  },
+  {
+    "source_merged_index": 211,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Multi Search Engine",
+    "category": "Other",
+    "description": "Multi search engine integration with 16 engines (7 CN + 9 Global). Supports advanced search operators, time filters, site search, privacy engines, and WolframAlpha knowledge queries. No API keys required."
+  },
+  {
+    "source_merged_index": 212,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Mcp Skill",
+    "category": "MCP tools",
+    "description": "Provides access to MCP tools for web search, advanced search, code context, deep research, crawling, company research, and LinkedIn search."
+  },
+  {
+    "source_merged_index": 213,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Mcp Integration",
+    "category": "MCP tools",
+    "description": "Use Model Context Protocol servers to access external tools and data sources. Enable AI agents to discover and execute tools from configured MCP servers (legal databases, APIs, database connectors, weather services, etc.)."
+  },
+  {
+    "source_merged_index": 214,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "MCP Server Discovery",
+    "category": "MCP tools",
+    "description": "Discover, search, and manage MCP (Model Context Protocol) servers. Use when the user needs to find MCP servers, get server information, generate MCP client configurations, or work with the MCP ecosystem. Triggers on queries about MCP servers, Model Context Protocol, server discovery, or MCP configuration."
+  },
+  {
+    "source_merged_index": 215,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Prompt Architect",
+    "category": "Prompts",
+    "description": "Transform rough ideas into professional-grade LLM prompts. Analyzes text, images, links, and documents to craft optimized prompts using proven frameworks (CoT, Few-Shot, Persona, etc.)."
+  },
+  {
+    "source_merged_index": 216,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Prompt Injection Removal",
+    "category": "Prompts",
+    "description": "A secure sanitization system to strip instructions from external content."
+  },
+  {
+    "source_merged_index": 217,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Prompt Injection Removal",
+    "category": "Prompts",
+    "description": "A secure sanitization system to strip instructions from external content."
+  },
+  {
+    "source_merged_index": 218,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "prompt-sanitizer",
+    "category": "Prompts",
+    "description": "Sanitize prompts before sending to LLMs. Detects PII, prompt injection, toxicity, and off-topic content. Returns cleaned text + risk score. Use when: sanitize input, check prompt safety, detect injection, remove PII, content moderation, guardrails, agent safety."
+  },
+  {
+    "source_merged_index": 219,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Agentic Workflow Automation",
+    "category": "Workflows",
+    "description": "Generate reusable multi-step agent workflow blueprints. Use for trigger/action orchestration, deterministic workflow definitions, and automation handoff artifacts."
+  },
+  {
+    "source_merged_index": 220,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Workflow Orchestrator",
+    "category": "Workflows",
+    "description": "Chain skills into automated pipelines with conditional logic, error handling, and audit logging. Define workflows in YAML or JSON, then execute them hands-free. Perfect for security-gated deployments, scheduled maintenance, and multi-step agent operations."
+  },
+  {
+    "source_merged_index": 221,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "workflow-migrate",
+    "category": "Workflows",
+    "description": "Migrate N8N/Zapier/Make workflows to production-grade Python or Node.js scripts. Given a workflow description or paste, rewrites automation logic with retry, backoff, logging, and self-healing. Billable migration deliverable."
+  },
+  {
+    "source_merged_index": 222,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Development Coding Agent",
+    "category": "Dev Tools",
+    "description": "Enhanced coding agent for development workflows. Optimized for building features, fixing bugs, and code refactoring with OpenCode integration."
+  },
+  {
+    "source_merged_index": 223,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Dev Team",
+    "category": "Dev Tools",
+    "description": "Multi-agent development team orchestration. Use when managing coding agents (Codex, Claude Code, Gemini, Cursor) for automated software development: (1) Spawning agents for tasks, (2) Monitoring agent status, (3) Managing git worktrees, (4) Automated code review, (5) Handling notifications via Feishu."
+  },
+  {
+    "source_merged_index": 224,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Deep Coding",
+    "category": "Dev Tools",
+    "description": "Deep coding multi-agent development system. Use when the user wants to build software projects using the Orchestrator to Builder to Reviewer workflow, mentions deep coding, multi-agent collaboration, orchestrator, spawn builder, spawn reviewer, or asks for complex coding projects that need module decomposition and iterative review. NOT for: simple one-liner fixes (just edit), reading code, or single-file changes."
+  },
+  {
+    "source_merged_index": 225,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Api Tester",
+    "category": "Data & APIs",
+    "description": "Perform structured HTTP/HTTPS requests (GET, POST, PUT, DELETE) with custom headers and JSON body support. Use for API testing, health checks, or interacting with REST services programmatically without relying on curl."
+  },
+  {
+    "source_merged_index": 226,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Api Generator",
+    "category": "Data & APIs",
+    "description": "API code generator. Generate RESTful endpoints, GraphQL schemas, OpenAPI/Swagger docs, API clients, mock servers, authentication, rate limiting."
+  },
+  {
+    "source_merged_index": 227,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Preflyte",
+    "category": "Data & APIs",
+    "description": "Financial intelligence layer for DeFi agents. One API call tells you where to deploy capital, which chains are viable for your budget, and whether your market assumptions are true. The tool every DeFi agent should call first."
+  },
+  {
+    "source_merged_index": 228,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Security Auditor",
+    "category": "Security",
+    "description": "Use when reviewing code for security vulnerabilities, implementing authentication flows, auditing OWASP Top 10, configuring CORS/CSP headers, handling secrets, input validation, SQL injection prevention, XSS protection, or any security-related code review."
+  },
+  {
+    "source_merged_index": 229,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Security Scanner",
+    "category": "Security",
+    "description": "Automated security scanning and vulnerability detection for web applications, APIs, and infrastructure. Use when you need to scan targets for vulnerabilities, check SSL certificates, find open ports, detect misconfigurations, or perform security audits. Integrates with nmap, nuclei, and other security tools."
+  },
+  {
+    "source_merged_index": 230,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Skill Security Review",
+    "category": "Security",
+    "description": "Review the security of an OpenClaw skill or agent before installation, import, activation, or trust. Use when the user asks whether a skill is safe, asks to review a .skill package, asks whether a GitHub/ClawHub/zip-based skill is safe, or expresses intent to install/import/enable a skill. Default behavior: if the user wants to install a skill, audit first, then present the verdict and ask for confirmation before installing. Focus on data exposure, local command execution, persistence, network access, privilege escalation, destructive behavior, and supply-chain risk."
+  },
+  {
+    "source_merged_index": 231,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Auto Workflow",
+    "category": "Automation",
+    "description": "Builds automation workflows from repetitive tasks. Use when user mentions \"automate\", \"save time\", \"reduce manual work\", or has repeated tasks."
+  },
+  {
+    "source_merged_index": 232,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Auto Improver",
+    "category": "Automation",
+    "description": "Auto-improving AI agent that learns from every execution, extracts patterns, and continuously optimizes itself. 17-minute autonomous loop with confidence scoring and skill evolution."
+  },
+  {
+    "source_merged_index": 233,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Auto",
+    "category": "Automation",
+    "description": "Helps automate repetitive tasks with scripts, scheduled jobs, and simple workflows. Use when the user wants to script an action, run something on a schedule (cron, Task Scheduler), automate builds or deploys, or reduce manual steps in a workflow."
+  },
+  {
+    "source_merged_index": 234,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Github",
+    "category": "Other",
+    "description": "Interact with GitHub using the `gh` CLI. Use `gh issue`, `gh pr`, `gh run`, and `gh api` for issues, PRs, CI runs, and advanced queries."
+  },
+  {
+    "source_merged_index": 235,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Agent Browser",
+    "category": "Other",
+    "description": "Headless browser automation CLI optimized for AI agents with accessibility tree snapshots and ref-based element selection"
+  },
+  {
+    "source_merged_index": 236,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Multi Search Engine",
+    "category": "Other",
+    "description": "Multi search engine integration with 16 engines (7 CN + 9 Global). Supports advanced search operators, time filters, site search, privacy engines, and WolframAlpha knowledge queries. No API keys required."
+  },
+  {
+    "source_merged_index": 237,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Prompt Injection Removal",
+    "category": "Prompts",
+    "description": "A secure sanitization system to strip instructions from external content."
+  },
+  {
+    "source_merged_index": 238,
+    "source_trigger_length": 30,
+    "source_run_idx": null,
+    "name": "Prompt Injection Removal",
+    "category": "Prompts",
+    "description": "A secure sanitization system to strip instructions from external content."
+  }
+]
