@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any, Dict, List
 
 from train_skill_injection_classifier import (
+    ClassificationExample,
     apply_cuda_visible_devices_from_env,
     build_examples,
     compute_metrics_builder,
@@ -23,6 +24,7 @@ from train_skill_injection_classifier import (
     write_jsonl,
 )
 from skill_detection.core import (
+    build_detection_text,
     discover_paired_skills_from_merged_json,
     split_skill_records_grouped_by_category,
     utc_now_iso,
@@ -77,6 +79,17 @@ def build_parser() -> argparse.ArgumentParser:
         help="Pretrained HF model name or path, e.g. microsoft/deberta-v3-small",
     )
     parser.add_argument(
+        "--poison-test-json",
+        type=Path,
+        default=Path(env_str("PRETRAINED_EVAL_POISON_TEST_JSON")) if env_str("PRETRAINED_EVAL_POISON_TEST_JSON") else None,
+        help=(
+            "Optional regenerated poison test file, e.g. "
+            "alt_trigger_eval_runs/.../regenerated_test_poison_rows.json. "
+            "When provided, clean test samples still come from the fixed split, "
+            "but poison test samples are replaced by this file."
+        ),
+    )
+    parser.add_argument(
         "--output-dir",
         type=Path,
         default=None,
@@ -110,6 +123,93 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def load_alt_poison_rows(path: Path) -> List[Dict[str, Any]]:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if isinstance(payload, dict):
+        rows = payload.get("rows", [])
+    else:
+        rows = payload
+    if not isinstance(rows, list):
+        raise ValueError(f"{path} must contain a JSON array or an object with a 'rows' list")
+    normalized: List[Dict[str, Any]] = []
+    for index, item in enumerate(rows):
+        if not isinstance(item, dict):
+            raise ValueError(f"{path}[{index}] must be an object")
+        source_merged_index = item.get("source_merged_index")
+        skill_name = str(item.get("skill_name", "")).strip()
+        category = str(item.get("category", "")).strip()
+        poisoned_description = str(item.get("poisoned_description", "")).strip()
+        trigger = item.get("trigger")
+        if source_merged_index is None or not skill_name or not category or not poisoned_description:
+            raise ValueError(
+                f"{path}[{index}] requires source_merged_index, skill_name, category, and poisoned_description"
+            )
+        normalized.append(
+            {
+                "source_merged_index": int(source_merged_index),
+                "skill_name": skill_name,
+                "category": category,
+                "poisoned_description": poisoned_description,
+                "trigger": None if trigger is None else str(trigger),
+            }
+        )
+    return normalized
+
+
+def build_test_examples_with_alt_poison(
+    clean_records: List[Any],
+    alt_poison_rows: List[Dict[str, Any]],
+    split_name: str,
+) -> List[ClassificationExample]:
+    clean_examples: List[ClassificationExample] = []
+    clean_index_to_record: Dict[int, Any] = {}
+    for record in clean_records:
+        clean_examples.append(
+            ClassificationExample(
+                example_id=f"{record.record_variant or 'record'}::{record.skill_key}",
+                text=record.input_text,
+                label=int(record.label),
+                source_dataset=record.source_dataset,
+                split=split_name,
+                skill_name=record.skill_name,
+                description=record.description,
+                trigger_text=record.trigger_text,
+                skill_key=record.skill_key,
+            )
+        )
+        clean_index_to_record[int(record.source_result_index)] = record
+
+    expected_indices = set(clean_index_to_record.keys())
+    provided_indices = {int(row["source_merged_index"]) for row in alt_poison_rows}
+    if provided_indices != expected_indices:
+        missing = sorted(expected_indices - provided_indices)
+        extra = sorted(provided_indices - expected_indices)
+        raise ValueError(
+            "Alternative poison rows do not match the fixed test split. "
+            f"missing_indices={missing[:10]} extra_indices={extra[:10]}"
+        )
+
+    poison_examples: List[ClassificationExample] = []
+    for row in alt_poison_rows:
+        merged_index = int(row["source_merged_index"])
+        clean_record = clean_index_to_record[merged_index]
+        poison_examples.append(
+            ClassificationExample(
+                example_id=f"alt_poison::{merged_index}::{clean_record.skill_key}",
+                text=build_detection_text(row["skill_name"], row["poisoned_description"]),
+                label=1,
+                source_dataset=str(Path("alt_poison").as_posix()),
+                split=split_name,
+                skill_name=row["skill_name"],
+                description=row["poisoned_description"],
+                trigger_text=row.get("trigger"),
+                skill_key=f"alt_poison/{merged_index}/poison",
+            )
+        )
+
+    return clean_examples + poison_examples
+
+
 def main() -> int:
     env_path = Path(os.getenv("FINETUNE_ENV_FILE", str(DEFAULT_ENV_PATH)))
     load_env_file(env_path)
@@ -128,6 +228,10 @@ def main() -> int:
     log(f"[config] env file: {env_path}")
     log(f"[config] output dir: {output_dir}")
     log(f"[config] pretrained model: {model_name}")
+    log(
+        "[config] poison test source: "
+        f"{args.poison_test_json if args.poison_test_json else 'merged_json_default_test_split'}"
+    )
     log(f"[config] CUDA_VISIBLE_DEVICES: {os.getenv('CUDA_VISIBLE_DEVICES', '<unset>')}")
 
     all_records = discover_paired_skills_from_merged_json(
@@ -148,7 +252,21 @@ def main() -> int:
     test_poison_count = sum(1 for record in test_records if record.label == 1)
 
     train_examples = shuffle_examples(build_examples(train_records, "train"), seed=args.train_seed)
-    test_examples = shuffle_examples(build_examples(test_records, "test"), seed=args.train_seed)
+    if args.poison_test_json is None:
+        test_examples = shuffle_examples(build_examples(test_records, "test"), seed=args.train_seed)
+        test_mode = "merged_default"
+    else:
+        alt_poison_rows = load_alt_poison_rows(args.poison_test_json)
+        clean_test_records = [record for record in test_records if int(record.label) == 0]
+        test_examples = shuffle_examples(
+            build_test_examples_with_alt_poison(
+                clean_records=clean_test_records,
+                alt_poison_rows=alt_poison_rows,
+                split_name="test",
+            ),
+            seed=args.train_seed,
+        )
+        test_mode = "alt_poison_rows"
 
     log(
         "[data] skill split: "
@@ -159,12 +277,15 @@ def main() -> int:
     log(
         "[data] classification dataset: "
         f"train={len(train_examples)} (clean={train_clean_count}, poison={train_poison_count}), "
-        f"test={len(test_examples)} (clean={test_clean_count}, poison={test_poison_count})"
+        f"test={len(test_examples)} (clean={test_clean_count}, poison={test_poison_count}), "
+        f"test_mode={test_mode}"
     )
 
     split_manifest = {
         "created_at": utc_now_iso(),
         "split_metadata": split_meta,
+        "test_mode": test_mode,
+        "poison_test_json": str(args.poison_test_json) if args.poison_test_json else None,
         "train_examples": [example.to_dict() for example in train_examples],
         "test_examples": [example.to_dict() for example in test_examples],
     }
@@ -260,6 +381,8 @@ def main() -> int:
         "model_name": model_name,
         "output_dir": str(output_dir),
         "mode": "pretrained_only",
+        "test_mode": test_mode,
+        "poison_test_json": str(args.poison_test_json) if args.poison_test_json else None,
         "split_metadata": split_meta,
         "train_example_count": len(train_examples),
         "test_example_count": len(test_examples),

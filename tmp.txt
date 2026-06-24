@@ -1,0 +1,8 @@
+intfloat/e5-large-v2 
+sentence-transformers/all-mpnet-base-v2
+BAAI/bge-small-en-v1.5
+
+
+
+  python evaluate_pretrained_classifier.py \
+  --model-name BAAI/bge-small-en-v1.5
