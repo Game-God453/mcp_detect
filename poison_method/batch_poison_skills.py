@@ -245,6 +245,13 @@ def make_attack(args: argparse.Namespace) -> Any:
         restarts=1,
         words_only=args.words_only,
         device=args.device,
+        attack_mode=args.attack_mode,
+        teacher_ppl_model=args.teacher_ppl_model,
+        teacher_ppl_lambda=args.teacher_ppl_lambda,
+        teacher_tau_percentile=args.teacher_tau_percentile,
+        teacher_n_samples_per_desc=args.teacher_n_samples_per_desc,
+        teacher_ppl_batch_size=args.teacher_ppl_batch_size,
+        teacher_clean_corpus_texts=args.teacher_clean_corpus_texts,
     )
 
 
@@ -355,6 +362,13 @@ def _poison_chunk_worker(
                 restarts=1,
                 words_only=worker_config["words_only"],
                 device=device,
+                attack_mode=worker_config["attack_mode"],
+                teacher_ppl_model=worker_config["teacher_ppl_model"],
+                teacher_ppl_lambda=worker_config["teacher_ppl_lambda"],
+                teacher_tau_percentile=worker_config["teacher_tau_percentile"],
+                teacher_n_samples_per_desc=worker_config["teacher_n_samples_per_desc"],
+                teacher_ppl_batch_size=worker_config["teacher_ppl_batch_size"],
+                teacher_clean_corpus_texts=worker_config["teacher_clean_corpus_texts"],
             )
             attack_cache[trigger_length] = attack
 
@@ -376,8 +390,10 @@ def _poison_chunk_worker(
                 "run_idx": task["run_idx"],
                 "original_description": task["original_description"],
                 "rewritten_description": rewritten_description,
+                "attack_mode": worker_config["attack_mode"],
                 "trigger": trigger,
                 "poisoned_description": build_poisoned_description(rewritten_description, trigger),
+                **attack.last_run_metadata,
                 "_task_index": task["_task_index"],
                 "_device": device,
             }
@@ -412,6 +428,12 @@ def build_parser() -> argparse.ArgumentParser:
         default=SCRIPT_DIR / "poisoned_all_skills_results.json",
     )
     parser.add_argument("--dry_run", action="store_true")
+    parser.add_argument(
+        "--limit",
+        type=int,
+        default=None,
+        help="Only process the first N skills for quick testing.",
+    )
 
     parser.add_argument("--train_split_ratio", type=float, default=0.8)
     parser.add_argument("--seed", type=int, default=42)
@@ -442,6 +464,43 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--batch_size", type=int, default=256)
     parser.add_argument("--words_only", action="store_true")
     parser.add_argument("--topk_train_prompts", type=int, default=12)
+    parser.add_argument(
+        "--attack_mode",
+        type=str,
+        choices=("original", "teacher_weighted_ppl"),
+        default="original",
+        help="original keeps the previous embedding-only attack. teacher_weighted_ppl adds the teacher's GPT-2 weighted-PPL penalty.",
+    )
+    parser.add_argument(
+        "--teacher_ppl_model",
+        type=str,
+        default="gpt2",
+        help="Teacher-scheme LM used for weighted PPL penalty. The user requested GPT-2 only.",
+    )
+    parser.add_argument(
+        "--teacher_ppl_lambda",
+        type=float,
+        default=1.0,
+        help="Lambda in the teacher weighted-PPL objective.",
+    )
+    parser.add_argument(
+        "--teacher_tau_percentile",
+        type=float,
+        default=99.0,
+        help="Percentile used to calibrate tau in teacher_weighted_ppl mode.",
+    )
+    parser.add_argument(
+        "--teacher_n_samples_per_desc",
+        type=int,
+        default=5,
+        help="How many natural suffix samples are drawn per clean text when calibrating tau.",
+    )
+    parser.add_argument(
+        "--teacher_ppl_batch_size",
+        type=int,
+        default=64,
+        help="Batch size for GPT-2 weighted-PPL scoring in teacher_weighted_ppl mode.",
+    )
 
     parser.add_argument("--enable_llm_rewrite", action="store_true")
     parser.add_argument("--deepseek_model", type=str, default="deepseek-chat")
@@ -457,12 +516,17 @@ def main(args: argparse.Namespace) -> None:
     random.seed(args.seed)
 
     raw_skills = load_skills(args.skills_json)
+    if args.limit is not None:
+        if args.limit <= 0:
+            raise ValueError("--limit must be a positive integer")
+        raw_skills = raw_skills[: args.limit]
     prompt_class_map = load_prompts(args.prompts_json)
     prompt_pools = build_train_prompt_pools(
         prompt_class_map=prompt_class_map,
         train_split_ratio=args.train_split_ratio,
         seed=args.seed,
     )
+    args.teacher_clean_corpus_texts = [skill_text(skill) for skill in raw_skills]
     unsupported_categories = sorted(
         {skill["category"] for skill in raw_skills if skill["category"] not in prompt_class_map}
     )
@@ -501,7 +565,12 @@ def main(args: argparse.Namespace) -> None:
         try:
             log(f"[PLAN] run_dir={run_dir}")
             log(f"[PLAN] input_records={len(raw_skills)} trigger_length={args.trigger_length}")
+            log(f"[PLAN] limit={args.limit if args.limit is not None else '<none>'}")
             log(f"[PLAN] category_counts={dict(Counter(skill['category'] for skill in raw_skills))}")
+            log(
+                f"[PLAN] attack_mode={args.attack_mode} emb_model={args.emb_model} "
+                f"teacher_ppl_model={args.teacher_ppl_model if args.attack_mode == 'teacher_weighted_ppl' else '<unused>'}"
+            )
             task_rows: List[Dict[str, Any]] = []
             task_index = 0
             for skill_index, raw_skill in enumerate(raw_skills, start=1):
@@ -547,6 +616,13 @@ def main(args: argparse.Namespace) -> None:
                         "batch_size": args.batch_size,
                         "words_only": args.words_only,
                         "topk_train_prompts": args.topk_train_prompts,
+                        "attack_mode": args.attack_mode,
+                        "teacher_ppl_model": args.teacher_ppl_model,
+                        "teacher_ppl_lambda": args.teacher_ppl_lambda,
+                        "teacher_tau_percentile": args.teacher_tau_percentile,
+                        "teacher_n_samples_per_desc": args.teacher_n_samples_per_desc,
+                        "teacher_ppl_batch_size": args.teacher_ppl_batch_size,
+                        "teacher_clean_corpus_texts": args.teacher_clean_corpus_texts,
                         "prompt_pools": prompt_pools,
                         "enable_llm_rewrite": args.enable_llm_rewrite,
                         "deepseek_model": args.deepseek_model,
@@ -594,6 +670,13 @@ def main(args: argparse.Namespace) -> None:
                             "batch_size": args.batch_size,
                             "words_only": args.words_only,
                             "topk_train_prompts": args.topk_train_prompts,
+                            "attack_mode": args.attack_mode,
+                            "teacher_ppl_model": args.teacher_ppl_model,
+                            "teacher_ppl_lambda": args.teacher_ppl_lambda,
+                            "teacher_tau_percentile": args.teacher_tau_percentile,
+                            "teacher_n_samples_per_desc": args.teacher_n_samples_per_desc,
+                            "teacher_ppl_batch_size": args.teacher_ppl_batch_size,
+                            "teacher_clean_corpus_texts": args.teacher_clean_corpus_texts,
                             "prompt_pools": prompt_pools,
                             "enable_llm_rewrite": args.enable_llm_rewrite,
                             "deepseek_model": args.deepseek_model,
