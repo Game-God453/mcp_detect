@@ -22,6 +22,8 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 SCRIPT_DIR = Path(__file__).resolve().parent
+_POISON_WORKER_CONFIG: Optional[Dict[str, Any]] = None
+_POISON_ATTACK_CACHE: Dict[int, Any] = {}
 
 
 def ensure_parent_dir(path: Path) -> None:
@@ -313,91 +315,115 @@ def _rewrite_with_config(skill: Dict[str, Any], config: Dict[str, Any]) -> str:
     return rewritten
 
 
+def _poison_single_task_impl(
+    task: Dict[str, Any],
+    worker_config: Dict[str, Any],
+    attack_cache: Dict[int, Any],
+) -> Dict[str, Any]:
+    from trigger_attack_skill import AdversarialAttack
+
+    category = task["category"]
+    prompt_pool = worker_config["prompt_pools"][category]
+    if not prompt_pool:
+        raise ValueError(f"category {category!r} has an empty train prompt pool")
+
+    rewritten_description = _rewrite_with_config(
+        {
+            "name": task["skill_name"],
+            "category": category,
+            "description": task["original_description"],
+        },
+        worker_config,
+    )
+
+    skill = {
+        "name": task["skill_name"],
+        "category": category,
+        "description": rewritten_description,
+    }
+    trigger_length = int(task["trigger_length"])
+    attack = attack_cache.get(trigger_length)
+    if attack is None:
+        attack = AdversarialAttack(
+            emb_model=worker_config["emb_model"],
+            trigger_length=trigger_length,
+            iterations=worker_config["iterations"],
+            top_k=worker_config["top_k"],
+            batch_size=worker_config["batch_size"],
+            restarts=1,
+            words_only=worker_config["words_only"],
+            device=worker_config["device"],
+            attack_mode=worker_config["attack_mode"],
+            teacher_ppl_model=worker_config["teacher_ppl_model"],
+            teacher_ppl_lambda=worker_config["teacher_ppl_lambda"],
+            teacher_tau_percentile=worker_config["teacher_tau_percentile"],
+            teacher_n_samples_per_desc=worker_config["teacher_n_samples_per_desc"],
+            teacher_ppl_batch_size=worker_config["teacher_ppl_batch_size"],
+            teacher_clean_corpus_texts=worker_config["teacher_clean_corpus_texts"],
+        )
+        attack_cache[trigger_length] = attack
+
+    trigger = poison_skill_once(
+        attack=attack,
+        skill=skill,
+        train_pool_prompts=prompt_pool,
+        topk_train_prompts=worker_config["topk_train_prompts"],
+    )
+    return {
+        "source_merged_index": task["source_merged_index"],
+        "source_input_index": task["source_input_index"],
+        "source_trigger_length": task["source_trigger_length"],
+        "source_run_idx": task["source_run_idx"],
+        "skill_name": task["skill_name"],
+        "category": category,
+        "trigger_length": trigger_length,
+        "run_idx": task["run_idx"],
+        "original_description": task["original_description"],
+        "rewritten_description": rewritten_description,
+        "attack_mode": worker_config["attack_mode"],
+        "trigger": trigger,
+        "poisoned_description": build_poisoned_description(rewritten_description, trigger),
+        **attack.last_run_metadata,
+        "_task_index": task["_task_index"],
+        "_device": worker_config["device"],
+    }
+
+
+def _init_poison_worker(worker_config: Dict[str, Any]) -> None:
+    global _POISON_WORKER_CONFIG, _POISON_ATTACK_CACHE
+
+    import torch
+
+    _POISON_WORKER_CONFIG = worker_config
+    _POISON_ATTACK_CACHE = {}
+    random.seed(worker_config["seed"])
+    torch.manual_seed(worker_config["seed"])
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(worker_config["seed"])
+
+
+def _poison_single_task(task: Dict[str, Any]) -> Dict[str, Any]:
+    if _POISON_WORKER_CONFIG is None:
+        raise RuntimeError("poison worker was not initialized")
+    return _poison_single_task_impl(task, _POISON_WORKER_CONFIG, _POISON_ATTACK_CACHE)
+
+
 def _poison_chunk_worker(
     chunk_tasks: List[Dict[str, Any]],
     worker_config: Dict[str, Any],
 ) -> List[Dict[str, Any]]:
     import torch
 
-    from trigger_attack_skill import AdversarialAttack
-
     random.seed(worker_config["seed"])
     torch.manual_seed(worker_config["seed"])
     if torch.cuda.is_available():
         torch.cuda.manual_seed_all(worker_config["seed"])
 
-    device = worker_config["device"]
     attack_cache: Dict[int, Any] = {}
     results: List[Dict[str, Any]] = []
 
     for task in chunk_tasks:
-        category = task["category"]
-        prompt_pool = worker_config["prompt_pools"][category]
-        if not prompt_pool:
-            raise ValueError(f"category {category!r} has an empty train prompt pool")
-
-        rewritten_description = _rewrite_with_config(
-            {
-                "name": task["skill_name"],
-                "category": category,
-                "description": task["original_description"],
-            },
-            worker_config,
-        )
-
-        skill = {
-            "name": task["skill_name"],
-            "category": category,
-            "description": rewritten_description,
-        }
-        trigger_length = int(task["trigger_length"])
-        attack = attack_cache.get(trigger_length)
-        if attack is None:
-            attack = AdversarialAttack(
-                emb_model=worker_config["emb_model"],
-                trigger_length=trigger_length,
-                iterations=worker_config["iterations"],
-                top_k=worker_config["top_k"],
-                batch_size=worker_config["batch_size"],
-                restarts=1,
-                words_only=worker_config["words_only"],
-                device=device,
-                attack_mode=worker_config["attack_mode"],
-                teacher_ppl_model=worker_config["teacher_ppl_model"],
-                teacher_ppl_lambda=worker_config["teacher_ppl_lambda"],
-                teacher_tau_percentile=worker_config["teacher_tau_percentile"],
-                teacher_n_samples_per_desc=worker_config["teacher_n_samples_per_desc"],
-                teacher_ppl_batch_size=worker_config["teacher_ppl_batch_size"],
-                teacher_clean_corpus_texts=worker_config["teacher_clean_corpus_texts"],
-            )
-            attack_cache[trigger_length] = attack
-
-        trigger = poison_skill_once(
-            attack=attack,
-            skill=skill,
-            train_pool_prompts=prompt_pool,
-            topk_train_prompts=worker_config["topk_train_prompts"],
-        )
-        results.append(
-            {
-                "source_merged_index": task["source_merged_index"],
-                "source_input_index": task["source_input_index"],
-                "source_trigger_length": task["source_trigger_length"],
-                "source_run_idx": task["source_run_idx"],
-                "skill_name": task["skill_name"],
-                "category": category,
-                "trigger_length": trigger_length,
-                "run_idx": task["run_idx"],
-                "original_description": task["original_description"],
-                "rewritten_description": rewritten_description,
-                "attack_mode": worker_config["attack_mode"],
-                "trigger": trigger,
-                "poisoned_description": build_poisoned_description(rewritten_description, trigger),
-                **attack.last_run_metadata,
-                "_task_index": task["_task_index"],
-                "_device": device,
-            }
-        )
+        results.append(_poison_single_task_impl(task, worker_config, attack_cache))
 
     return results
 
@@ -604,106 +630,92 @@ def main(args: argparse.Namespace) -> None:
                 f"workers_per_device={args.workers_per_device} total_workers={len(device_slots)}"
             )
 
+            common_worker_config = {
+                "emb_model": args.emb_model,
+                "iterations": args.iterations,
+                "top_k": args.top_k,
+                "batch_size": args.batch_size,
+                "words_only": args.words_only,
+                "topk_train_prompts": args.topk_train_prompts,
+                "attack_mode": args.attack_mode,
+                "teacher_ppl_model": args.teacher_ppl_model,
+                "teacher_ppl_lambda": args.teacher_ppl_lambda,
+                "teacher_tau_percentile": args.teacher_tau_percentile,
+                "teacher_n_samples_per_desc": args.teacher_n_samples_per_desc,
+                "teacher_ppl_batch_size": args.teacher_ppl_batch_size,
+                "teacher_clean_corpus_texts": args.teacher_clean_corpus_texts,
+                "prompt_pools": prompt_pools,
+                "enable_llm_rewrite": args.enable_llm_rewrite,
+                "deepseek_model": args.deepseek_model,
+                "deepseek_base_url": args.deepseek_base_url,
+                "deepseek_api_key": args.deepseek_api_key,
+                "deepseek_timeout_seconds": args.deepseek_timeout_seconds,
+                "rewrite_temperature": args.rewrite_temperature,
+            }
+
             if len(device_slots) == 1:
-                worker_results = _poison_chunk_worker(
-                    task_rows,
-                    {
-                        "seed": args.seed,
-                        "device": device_slots[0],
-                        "emb_model": args.emb_model,
-                        "iterations": args.iterations,
-                        "top_k": args.top_k,
-                        "batch_size": args.batch_size,
-                        "words_only": args.words_only,
-                        "topk_train_prompts": args.topk_train_prompts,
-                        "attack_mode": args.attack_mode,
-                        "teacher_ppl_model": args.teacher_ppl_model,
-                        "teacher_ppl_lambda": args.teacher_ppl_lambda,
-                        "teacher_tau_percentile": args.teacher_tau_percentile,
-                        "teacher_n_samples_per_desc": args.teacher_n_samples_per_desc,
-                        "teacher_ppl_batch_size": args.teacher_ppl_batch_size,
-                        "teacher_clean_corpus_texts": args.teacher_clean_corpus_texts,
-                        "prompt_pools": prompt_pools,
-                        "enable_llm_rewrite": args.enable_llm_rewrite,
-                        "deepseek_model": args.deepseek_model,
-                        "deepseek_base_url": args.deepseek_base_url,
-                        "deepseek_api_key": args.deepseek_api_key,
-                        "deepseek_timeout_seconds": args.deepseek_timeout_seconds,
-                        "rewrite_temperature": args.rewrite_temperature,
-                    },
-                )
-                worker_results.sort(key=lambda item: item["_task_index"])
-                for item in worker_results:
+                local_worker_config = {
+                    **common_worker_config,
+                    "seed": args.seed,
+                    "device": device_slots[0],
+                }
+                local_attack_cache: Dict[int, Any] = {}
+                for completed, task in enumerate(task_rows, start=1):
+                    item = _poison_single_task_impl(task, local_worker_config, local_attack_cache)
                     item.pop("_task_index", None)
                     device_used = item.pop("_device", device_slots[0])
                     results.append(item)
                     save_results(output_json, results)
                     preview = item["trigger"][:120] + ("..." if len(item["trigger"]) > 120 else "")
                     log(
-                        f"[POISON][done] merged_index={item.get('source_merged_index')} "
+                        f"[POISON][{completed}/{len(task_rows)}] merged_index={item.get('source_merged_index')} "
                         f"skill={item['skill_name']} run={item['run_idx']} "
                         f"device={device_used} trigger={preview}"
                     )
             else:
-                chunks: List[List[Dict[str, Any]]] = [[] for _ in device_slots]
-                for index, task in enumerate(task_rows):
-                    chunks[index % len(device_slots)].append(task)
-                worker_jobs = [
-                    (device, chunk)
-                    for device, chunk in zip(device_slots, chunks)
-                    if chunk
-                ]
-                log(f"[PLAN] parallel_workers={len(worker_jobs)}")
+                log(f"[PLAN] parallel_workers={len(device_slots)}")
+                mp_context = get_context("spawn")
+                executors: List[ProcessPoolExecutor] = []
+                future_to_task: Dict[Any, Dict[str, Any]] = {}
 
-                with ProcessPoolExecutor(
-                    max_workers=len(worker_jobs),
-                    mp_context=get_context("spawn"),
-                ) as executor:
-                    futures = []
-                    for worker_index, (device, chunk) in enumerate(worker_jobs):
+                try:
+                    for worker_index, device in enumerate(device_slots):
                         worker_config = {
+                            **common_worker_config,
                             "seed": args.seed + worker_index,
                             "device": device,
-                            "emb_model": args.emb_model,
-                            "iterations": args.iterations,
-                            "top_k": args.top_k,
-                            "batch_size": args.batch_size,
-                            "words_only": args.words_only,
-                            "topk_train_prompts": args.topk_train_prompts,
-                            "attack_mode": args.attack_mode,
-                            "teacher_ppl_model": args.teacher_ppl_model,
-                            "teacher_ppl_lambda": args.teacher_ppl_lambda,
-                            "teacher_tau_percentile": args.teacher_tau_percentile,
-                            "teacher_n_samples_per_desc": args.teacher_n_samples_per_desc,
-                            "teacher_ppl_batch_size": args.teacher_ppl_batch_size,
-                            "teacher_clean_corpus_texts": args.teacher_clean_corpus_texts,
-                            "prompt_pools": prompt_pools,
-                            "enable_llm_rewrite": args.enable_llm_rewrite,
-                            "deepseek_model": args.deepseek_model,
-                            "deepseek_base_url": args.deepseek_base_url,
-                            "deepseek_api_key": args.deepseek_api_key,
-                            "deepseek_timeout_seconds": args.deepseek_timeout_seconds,
-                            "rewrite_temperature": args.rewrite_temperature,
                         }
-                        futures.append(executor.submit(_poison_chunk_worker, chunk, worker_config))
+                        executor = ProcessPoolExecutor(
+                            max_workers=1,
+                            mp_context=mp_context,
+                            initializer=_init_poison_worker,
+                            initargs=(worker_config,),
+                        )
+                        executors.append(executor)
+
+                    for index, task in enumerate(task_rows):
+                        executor = executors[index % len(executors)]
+                        future = executor.submit(_poison_single_task, task)
+                        future_to_task[future] = task
 
                     completed = 0
-                    for future in as_completed(futures):
-                        worker_results = future.result()
-                        worker_results.sort(key=lambda item: item["_task_index"])
-                        for item in worker_results:
-                            item.pop("_task_index", None)
-                            device_used = item.pop("_device", "unknown")
-                            results.append(item)
-                            save_results(output_json, results)
-                            completed += 1
-                            preview = item["trigger"][:120] + ("..." if len(item["trigger"]) > 120 else "")
-                            log(
-                                f"[POISON][{completed}/{len(task_rows)}] "
-                                f"merged_index={item.get('source_merged_index')} "
-                                f"skill={item['skill_name']} run={item['run_idx']} "
-                                f"device={device_used} trigger={preview}"
-                            )
+                    for future in as_completed(future_to_task):
+                        item = future.result()
+                        item.pop("_task_index", None)
+                        device_used = item.pop("_device", "unknown")
+                        results.append(item)
+                        save_results(output_json, results)
+                        completed += 1
+                        preview = item["trigger"][:120] + ("..." if len(item["trigger"]) > 120 else "")
+                        log(
+                            f"[POISON][{completed}/{len(task_rows)}] "
+                            f"merged_index={item.get('source_merged_index')} "
+                            f"skill={item['skill_name']} run={item['run_idx']} "
+                            f"device={device_used} trigger={preview}"
+                        )
+                finally:
+                    for executor in executors:
+                        executor.shutdown(wait=True, cancel_futures=False)
 
                 results.sort(key=lambda item: (item["source_input_index"], item["run_idx"]))
                 save_results(output_json, results)
