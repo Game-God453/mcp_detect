@@ -93,6 +93,98 @@ def load_merged_rows(path: Path) -> List[Dict[str, Any]]:
     return rows
 
 
+def load_json_rows(path: Path) -> List[Dict[str, Any]]:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if isinstance(payload, dict):
+        for key in ("rows", "items", "data"):
+            if key in payload and isinstance(payload[key], list):
+                payload = payload[key]
+                break
+    if not isinstance(payload, list):
+        raise ValueError(f"{path} must contain a JSON array or a dict with rows/items/data")
+    rows: List[Dict[str, Any]] = []
+    for index, item in enumerate(payload):
+        if not isinstance(item, dict):
+            raise ValueError(f"{path}[{index}] must be an object")
+        rows.append(item)
+    return rows
+
+
+def build_eval_examples_from_poison_rows(
+    rows: Sequence[Dict[str, Any]],
+    source_label: str,
+) -> tuple[List[Dict[str, Any]], List[Dict[str, Any]], Dict[str, Any]]:
+    eval_examples: List[Dict[str, Any]] = []
+    normalized_rows: List[Dict[str, Any]] = []
+
+    for index, item in enumerate(rows):
+        skill_name = str(item.get("name") or item.get("skill_name") or "").strip()
+        category = str(item.get("category") or "unknown").strip() or "unknown"
+        original_description = str(item.get("original_description") or "").strip()
+        poisoned_description = str(
+            item.get("poisoned_description") or item.get("description") or ""
+        ).strip()
+        trigger = str(
+            item.get("trigger")
+            or item.get("gradient_free_suffix")
+            or item.get("trigger_text")
+            or ""
+        ).strip()
+
+        if not skill_name:
+            skill_name = f"skill_{index:04d}"
+        if not original_description:
+            raise ValueError(f"{source_label}[{index}] is missing original_description")
+        if not poisoned_description:
+            raise ValueError(f"{source_label}[{index}] is missing description/poisoned_description")
+
+        normalized_rows.append(
+            {
+                "source_index": index,
+                "skill_name": skill_name,
+                "category": category,
+                "original_description": original_description,
+                "poisoned_description": poisoned_description,
+                "trigger": trigger or None,
+            }
+        )
+        eval_examples.append(
+            {
+                "example_id": f"{source_label}::ROW{index:04d}::clean",
+                "source_row_index": index,
+                "record_variant": "clean",
+                "skill_name": skill_name,
+                "category": category,
+                "description": original_description,
+                "text": build_detection_text(skill_name, original_description),
+                "gold_label": 0,
+                "trigger_text": None,
+            }
+        )
+        eval_examples.append(
+            {
+                "example_id": f"{source_label}::ROW{index:04d}::poison",
+                "source_row_index": index,
+                "record_variant": "poison",
+                "skill_name": skill_name,
+                "category": category,
+                "description": poisoned_description,
+                "text": build_detection_text(skill_name, poisoned_description),
+                "gold_label": 1,
+                "trigger_text": trigger or None,
+            }
+        )
+
+    summary = {
+        "mode": "poison_test_json",
+        "source_label": source_label,
+        "row_count": len(normalized_rows),
+        "example_count": len(eval_examples),
+        "category_counts": dict(Counter(row["category"] for row in normalized_rows)),
+    }
+    return eval_examples, normalized_rows, summary
+
+
 def load_prompts(path: Path) -> Dict[str, Dict[str, Any]]:
     data = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(data, list):
@@ -560,7 +652,21 @@ def main() -> int:
 
     eval_examples: List[Dict[str, Any]] = []
     regen_manifest = None
-    if args.emb_model:
+    poison_test_rows: List[Dict[str, Any]] = []
+    poison_test_summary: Dict[str, Any] = {}
+    if args.poison_test_json is not None:
+        poison_test_rows = load_json_rows(args.poison_test_json)
+        eval_examples, poison_test_rows, poison_test_summary = build_eval_examples_from_poison_rows(
+            poison_test_rows,
+            source_label=args.poison_test_json.stem,
+        )
+        log(
+            f"[data] poison test json loaded: rows={len(poison_test_rows)}, "
+            f"examples={len(eval_examples)}, source={args.poison_test_json}"
+        )
+        if args.emb_model:
+            log("[data] alt trigger regeneration skipped because poison-test-json was provided")
+    elif args.emb_model:
         generated_poison_rows_path = output_dir / "generated_poison_rows.json"
         if generated_poison_rows_path.exists():
             generated_payload = json.loads(generated_poison_rows_path.read_text(encoding="utf-8"))
@@ -829,6 +935,18 @@ def main() -> int:
             )
 
     metrics = compute_metrics(prediction_rows)
+    summary_test_pairs = len(poison_test_rows) if poison_test_rows else len(test_rows)
+    summary_category_counts = (
+        dict(Counter(row["category"] for row in poison_test_rows))
+        if poison_test_rows
+        else dict(Counter(str(item.get("category", "unknown")) for item in test_rows))
+    )
+    summary_trigger_counts = (
+        {}
+        if poison_test_rows
+        else dict(Counter(int(item.get("trigger_length") or 30) for item in test_rows))
+    )
+
     summary = {
         "created_at": utc_now_iso(),
         "merged_json_path": str(args.merged_json_path),
@@ -840,12 +958,13 @@ def main() -> int:
         "split_seed": args.split_seed,
         "test_ratio": args.test_ratio,
         "attack_seed": args.attack_seed,
-        "test_mode": "alt_poison_rows" if args.emb_model else "merged_only",
+        "test_mode": "poison_test_json" if args.poison_test_json else ("alt_poison_rows" if args.emb_model else "merged_only"),
         "poison_test_json": str(args.poison_test_json) if args.poison_test_json else None,
-        "test_pair_count": len(test_rows),
+        "poison_test_summary": poison_test_summary or None,
+        "test_pair_count": summary_test_pairs,
         "test_example_count": len(eval_examples),
-        "trigger_length_counts": dict(Counter(int(item.get("trigger_length") or 30) for item in test_rows)),
-        "category_counts": dict(Counter(str(item.get("category", "unknown")) for item in test_rows)),
+        "trigger_length_counts": summary_trigger_counts,
+        "category_counts": summary_category_counts,
         "metrics": metrics,
         "split_metadata": split_meta,
     }
