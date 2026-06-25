@@ -28,6 +28,18 @@ def ensure_parent_dir(path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
 
 
+def create_timestamped_run_dir(base_dir: Path) -> Path:
+    base_dir.mkdir(parents=True, exist_ok=True)
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    candidate = base_dir / timestamp
+    counter = 1
+    while candidate.exists():
+        candidate = base_dir / f"{timestamp}_{counter:02d}"
+        counter += 1
+    candidate.mkdir(parents=False, exist_ok=False)
+    return candidate
+
+
 def save_results(path: Path, results: List[Dict[str, Any]]) -> None:
     ensure_parent_dir(path)
     tmp_path = path.with_suffix(path.suffix + ".tmp")
@@ -472,10 +484,10 @@ def main(args: argparse.Namespace) -> None:
     if len(device_slots) == 1:
         args.device = device_slots[0]
 
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_json = args.output_json
-    log_path = output_json.with_name(f"{output_json.stem}_{timestamp}.log.txt")
-    output_json = output_json.with_name(f"{output_json.stem}_{timestamp}.json")
+    output_json_template = args.output_json
+    run_dir = create_timestamped_run_dir(output_json_template.parent / output_json_template.stem)
+    output_json = run_dir / output_json_template.name
+    log_path = run_dir / f"{output_json_template.stem}.log.txt"
 
     results: List[Dict[str, Any]] = []
     save_results(output_json, results)
@@ -487,6 +499,7 @@ def main(args: argparse.Namespace) -> None:
             log_handle.flush()
 
         try:
+            log(f"[PLAN] run_dir={run_dir}")
             log(f"[PLAN] input_records={len(raw_skills)} trigger_length={args.trigger_length}")
             log(f"[PLAN] category_counts={dict(Counter(skill['category'] for skill in raw_skills))}")
             task_rows: List[Dict[str, Any]] = []

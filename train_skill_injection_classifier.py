@@ -11,7 +11,8 @@ from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
 from skill_detection.core import (
     atomic_write_json,
-    discover_paired_skills_from_merged_json,
+    create_timestamped_output_dir,
+    discover_paired_skills_from_detection_json,
     split_skill_records_grouped_by_category,
     utc_now_iso,
 )
@@ -19,6 +20,7 @@ from skill_detection.core import (
 
 DEFAULT_ENV_PATH = Path(".env")
 DEFAULT_MERGED_JSON_PATH = Path("merged_poison_results_20260615.json")
+DEFAULT_DATASET_JSON_PATH = DEFAULT_MERGED_JSON_PATH
 DEFAULT_OUTPUT_DIR = Path("finetune_runs/deberta_v3_small")
 
 MODEL_ALIASES = {
@@ -106,13 +108,23 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
             "Fine-tune a DeBERTa-v3 binary classifier for skill prompt-injection "
-            "detection using the merged paired clean/poison skill dataset."
+            "detection using a paired clean/poison skill dataset."
         )
     )
     parser.add_argument(
-        "--merged-json-path",
+        "--dataset-json-path",
         type=Path,
-        default=Path(env_str("FINETUNE_MERGED_JSON_PATH", str(DEFAULT_MERGED_JSON_PATH))),
+        default=Path(
+            env_str(
+                "FINETUNE_DATASET_JSON_PATH",
+                env_str("FINETUNE_MERGED_JSON_PATH", str(DEFAULT_DATASET_JSON_PATH)),
+            )
+        ),
+        help=(
+            "Paired JSON dataset used for train/test splitting. Supports both "
+            "merged_poison_results_20260615.json and flat paired poison files such as "
+            "gradient_free_poisoned_skills.json."
+        ),
     )
     parser.add_argument(
         "--output-dir",
@@ -401,17 +413,19 @@ def main() -> int:
     seed_everything(args.train_seed)
 
     model_name = resolve_model_name(args.model_name)
-    output_dir = args.output_dir
-    output_dir.mkdir(parents=True, exist_ok=True)
+    base_output_dir = args.output_dir
+    output_dir = create_timestamped_output_dir(base_output_dir)
 
     log(f"[config] env file: {env_path}")
+    log(f"[config] output base dir: {base_output_dir}")
     log(f"[config] output dir: {output_dir}")
+    log(f"[config] dataset json: {args.dataset_json_path}")
     log(f"[config] model: {model_name}")
     log(f"[config] CUDA_VISIBLE_DEVICES: {os.getenv('CUDA_VISIBLE_DEVICES', '<unset>')}")
 
-    all_records = discover_paired_skills_from_merged_json(
-        args.merged_json_path,
-        "merged_pairs",
+    all_records = discover_paired_skills_from_detection_json(
+        args.dataset_json_path,
+        "detection_pairs",
     )
     train_records, test_records, split_meta = split_skill_records_grouped_by_category(
         all_records,
@@ -449,6 +463,7 @@ def main() -> int:
 
     split_manifest = {
         "created_at": utc_now_iso(),
+        "dataset_json_path": str(args.dataset_json_path),
         "split_metadata": split_meta,
         "train_examples": [example.to_dict() for example in train_examples],
         "test_examples": [example.to_dict() for example in test_examples],
@@ -493,10 +508,13 @@ def main() -> int:
     ]
     tokenized_datasets = tokenized_datasets.remove_columns(remove_columns)
 
-    checkpoint_dir = args.checkpoint_dir or output_dir
+    checkpoint_dir = args.checkpoint_dir or base_output_dir
     if args.eval_only:
         if not checkpoint_dir.exists():
-            raise FileNotFoundError(f"checkpoint dir not found: {checkpoint_dir}")
+            raise FileNotFoundError(
+                f"checkpoint dir not found: {checkpoint_dir}. "
+                "When using --eval-only with timestamped output dirs, please pass --checkpoint-dir explicitly."
+            )
         model_load_path = str(checkpoint_dir)
     else:
         model_load_path = model_name
@@ -561,6 +579,7 @@ def main() -> int:
 
     summary = {
         "created_at": utc_now_iso(),
+        "dataset_json_path": str(args.dataset_json_path),
         "model_name": model_name,
         "output_dir": str(output_dir),
         "eval_only": args.eval_only,

@@ -25,6 +25,7 @@ from train_skill_injection_classifier import (
 )
 from skill_detection.core import (
     build_detection_text,
+    create_timestamped_output_dir,
     discover_paired_skills_from_merged_json,
     split_skill_records_grouped_by_category,
     utc_now_iso,
@@ -222,10 +223,11 @@ def main() -> int:
 
     model_name = resolve_model_name(args.model_name)
     safe_model_name = model_name.replace("/", "__")
-    output_dir = args.output_dir or (DEFAULT_OUTPUT_DIR / safe_model_name)
-    output_dir.mkdir(parents=True, exist_ok=True)
+    base_output_dir = args.output_dir or (DEFAULT_OUTPUT_DIR / safe_model_name)
+    output_dir = create_timestamped_output_dir(base_output_dir)
 
     log(f"[config] env file: {env_path}")
+    log(f"[config] output base dir: {base_output_dir}")
     log(f"[config] output dir: {output_dir}")
     log(f"[config] pretrained model: {model_name}")
     log(

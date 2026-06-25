@@ -15,7 +15,8 @@ from skill_detection.core import (
     append_jsonl,
     atomic_write_json,
     build_summary,
-    discover_paired_skills_from_merged_json,
+    create_timestamped_output_dir,
+    discover_paired_skills_from_detection_json,
     init_ppl_worker,
     latest_rows_by_skill,
     load_jsonl,
@@ -30,6 +31,7 @@ from skill_detection.core import (
 DEFAULT_OUTPUT_DIR = Path("detection_runs/poisoned_skill_sample100")
 DEFAULT_ENV_PATH = Path(".env")
 DEFAULT_MERGED_JSON_DATASET_PATH = Path("merged_poison_results_20260615.json")
+DEFAULT_DATASET_JSON_PATH = DEFAULT_MERGED_JSON_DATASET_PATH
 
 ALL_METHODS = ("rebuff_llm", "known_answer_detection", "ppl", "ppl_windowed")
 
@@ -106,10 +108,19 @@ def build_parser() -> argparse.ArgumentParser:
         default=Path(env_str("SKILL_DETECT_OUTPUT_DIR", str(DEFAULT_OUTPUT_DIR))),
     )
     parser.add_argument(
-        "--merged-json-path",
+        "--dataset-json-path",
         type=Path,
-        default=Path(env_str("SKILL_DETECT_MERGED_JSON_PATH", str(DEFAULT_MERGED_JSON_DATASET_PATH))),
-        help="Merged paired dataset used for both batch detection and train/test splitting.",
+        default=Path(
+            env_str(
+                "SKILL_DETECT_DATASET_JSON_PATH",
+                env_str("SKILL_DETECT_MERGED_JSON_PATH", str(DEFAULT_DATASET_JSON_PATH)),
+            )
+        ),
+        help=(
+            "Paired JSON dataset used for batch detection and train/test splitting. "
+            "Supports both merged_poison_results_20260615.json and flat paired poison files "
+            "such as gradient_free_poisoned_skills.json."
+        ),
     )
     parser.add_argument(
         "--test-ratio",
@@ -284,25 +295,27 @@ def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
 
-    output_dir: Path = args.output_dir
-    output_dir.mkdir(parents=True, exist_ok=True)
+    base_output_dir: Path = args.output_dir
+    output_dir = create_timestamped_output_dir(base_output_dir)
     results_path = output_dir / "results.jsonl"
     state_path = output_dir / "run_state.json"
     summary_path = output_dir / "summary.json"
 
     log(f"[config] env file: {env_path}")
+    log(f"[config] output base dir: {base_output_dir}")
     log(f"[config] output dir: {output_dir}")
+    log(f"[config] dataset json: {args.dataset_json_path}")
     log(f"[config] methods: {', '.join(args.methods)}")
 
     split_metadata: Optional[Dict[str, Any]] = None
     train_records: List[Any] = []
 
-    merged_records = discover_paired_skills_from_merged_json(
-        json_path=args.merged_json_path,
-        source_dataset="merged_pairs",
+    dataset_records = discover_paired_skills_from_detection_json(
+        json_path=args.dataset_json_path,
+        source_dataset="detection_pairs",
     )
     train_records, test_records, split_metadata = split_skill_records_grouped_by_category(
-        merged_records,
+        dataset_records,
         test_ratio=args.test_ratio,
         seed=args.split_seed,
         group_key_fn=paired_group_key,
@@ -310,8 +323,8 @@ def main() -> int:
     )
     clean_records = [record for record in train_records if record.label == 0]
     log(
-        "[data] merged paired dataset loaded: "
-        f"total_examples={len(merged_records)}, train={len(train_records)}, test={len(test_records)}, "
+        "[data] paired dataset loaded: "
+        f"total_examples={len(dataset_records)}, train={len(train_records)}, test={len(test_records)}, "
         f"seed={args.split_seed}, test_ratio={args.test_ratio}, "
         f"pair_groups={split_metadata['group_count']}"
     )
@@ -395,7 +408,8 @@ def main() -> int:
 
     config_payload = {
         "started_at": utc_now_iso(),
-        "merged_json_path": str(args.merged_json_path),
+        "dataset_json_path": str(args.dataset_json_path),
+        "merged_json_path": str(args.dataset_json_path),
         "test_ratio": args.test_ratio,
         "split_seed": args.split_seed,
         "output_dir": str(output_dir),
@@ -412,7 +426,7 @@ def main() -> int:
         atomic_write_json(
             split_manifest_path,
             {
-                "source_path": str(args.merged_json_path),
+                "source_path": str(args.dataset_json_path),
                 "seed": args.split_seed,
                 "test_ratio": args.test_ratio,
                 "split_metadata": split_metadata,

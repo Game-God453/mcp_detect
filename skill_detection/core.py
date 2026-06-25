@@ -32,6 +32,23 @@ def utc_now_iso() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat()
 
 
+def local_timestamp_slug() -> str:
+    return datetime.now().strftime("%Y%m%d_%H%M%S")
+
+
+def create_timestamped_output_dir(base_dir: Path, suffix: Optional[str] = None) -> Path:
+    base_dir.mkdir(parents=True, exist_ok=True)
+    timestamp = local_timestamp_slug()
+    run_name = timestamp if not suffix else f"{timestamp}_{suffix}"
+    candidate = base_dir / run_name
+    counter = 1
+    while candidate.exists():
+        candidate = base_dir / f"{run_name}_{counter:02d}"
+        counter += 1
+    candidate.mkdir(parents=False, exist_ok=False)
+    return candidate
+
+
 def ensure_parent_dir(path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -280,6 +297,86 @@ def discover_paired_skills_from_merged_json(
         for record_variant, description, label in variants:
             record = SkillRecord(
                 skill_key=f"merged_pairs/{base_skill_id}/{record_variant}",
+                skill_id=base_skill_id,
+                category=category,
+                skill_name=skill_name,
+                description=description,
+                input_text=build_detection_text(skill_name, description),
+                skill_file=f"{json_path}#{index}",
+                source_dataset=source_dataset,
+                manifest_category=category,
+                source_result_index=pair_source_index,
+                trigger_text=(trigger or None) if record_variant == "poison" else None,
+                label=label,
+                pair_group_id=pair_group_id,
+                record_variant=record_variant,
+            )
+            records.append(record)
+
+    return records
+
+
+def discover_paired_skills_from_detection_json(
+    json_path: Path,
+    source_dataset: str,
+) -> List[SkillRecord]:
+    if not json_path.exists():
+        raise FileNotFoundError(f"Detection JSON dataset not found: {json_path}")
+
+    payload = json.loads(json_path.read_text(encoding="utf-8", errors="ignore"))
+    if isinstance(payload, dict):
+        if isinstance(payload.get("items"), list):
+            payload = payload["items"]
+        elif isinstance(payload.get("rows"), list):
+            payload = payload["rows"]
+    if not isinstance(payload, list):
+        raise ValueError(
+            "Detection JSON dataset must be a list of records or a dict with an 'items' or 'rows' list"
+        )
+
+    records: List[SkillRecord] = []
+    for index, item in enumerate(payload):
+        if not isinstance(item, dict):
+            raise ValueError(f"Detection JSON row {index} is not an object")
+
+        skill_name = normalize_quotes(str(item.get("skill_name") or item.get("name") or ""))
+        category = normalize_quotes(str(item.get("category", "") or "")) or "unknown"
+        original_description = normalize_quotes(str(item.get("original_description", "") or ""))
+        poisoned_description = normalize_quotes(
+            str(item.get("poisoned_description") or item.get("description") or "")
+        )
+        trigger = normalize_quotes(
+            str(
+                item.get("trigger")
+                or item.get("gradient_free_suffix")
+                or item.get("trigger_text")
+                or ""
+            )
+        )
+        pair_source_index = item.get(
+            "merged_index",
+            item.get("source_merged_index", item.get("source_index", index)),
+        )
+
+        if not skill_name:
+            skill_name = f"json_skill_{index:04d}"
+        if not original_description:
+            raise ValueError(f"Detection JSON row {index} has empty original_description")
+        if not poisoned_description:
+            raise ValueError(
+                f"Detection JSON row {index} has empty poisoned_description/description"
+            )
+
+        pair_group_id = f"pair_{pair_source_index}"
+        base_skill_id = f"PAIR{index:04d}"
+
+        variants = [
+            ("clean", original_description, 0),
+            ("poison", poisoned_description, 1),
+        ]
+        for record_variant, description, label in variants:
+            record = SkillRecord(
+                skill_key=f"{source_dataset}/{base_skill_id}/{record_variant}",
                 skill_id=base_skill_id,
                 category=category,
                 skill_name=skill_name,

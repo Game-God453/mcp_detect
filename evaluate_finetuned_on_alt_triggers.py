@@ -15,6 +15,7 @@ from typing import Any, Dict, List, Optional, Sequence
 from skill_detection.core import (
     atomic_write_json,
     build_detection_text,
+    create_timestamped_output_dir,
     discover_paired_skills_from_merged_json,
     split_skill_records_grouped_by_category,
     utc_now_iso,
@@ -557,10 +558,10 @@ def main() -> int:
         raise FileNotFoundError(f"checkpoint dir not found: {args.checkpoint_dir}")
 
     if args.emb_model:
-        output_dir = args.output_dir or Path("alt_trigger_eval_runs") / sanitize_name(args.emb_model)
+        base_output_dir = args.output_dir or Path("alt_trigger_eval_runs") / sanitize_name(args.emb_model)
     else:
-        output_dir = args.output_dir or Path("finetune_runs") / "recheck_merged_only"
-    output_dir.mkdir(parents=True, exist_ok=True)
+        base_output_dir = args.output_dir or Path("finetune_runs") / "recheck_merged_only"
+    output_dir = create_timestamped_output_dir(base_output_dir)
 
     random.seed(args.attack_seed)
     os.environ["PYTHONHASHSEED"] = str(args.attack_seed)
@@ -571,6 +572,7 @@ def main() -> int:
     log(f"[config] merged json: {args.merged_json_path}")
     log(f"[config] prompts json: {args.prompts_json}")
     log(f"[config] checkpoint dir: {args.checkpoint_dir}")
+    log(f"[config] output base dir: {base_output_dir}")
     log(f"[config] output dir: {output_dir}")
     log(f"[config] emb model: {args.emb_model if args.emb_model else '<none>'}")
     log(
