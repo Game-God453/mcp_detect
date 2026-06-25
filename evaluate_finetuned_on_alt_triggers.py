@@ -300,6 +300,21 @@ def build_parser() -> argparse.ArgumentParser:
         help="Fine-tuned classifier checkpoint, typically .../best_model",
     )
     parser.add_argument(
+        "--poison-test-json",
+        type=Path,
+        default=Path(env_str("ALT_TRIGGER_POISON_TEST_JSON")) if env_str("ALT_TRIGGER_POISON_TEST_JSON") else None,
+        help=(
+            "Optional regenerated poison test file. When omitted, the script evaluates the "
+            "fixed merged_poison_results_20260615.json test split."
+        ),
+    )
+    parser.add_argument(
+        "--threshold",
+        type=float,
+        default=0.5,
+        help="Probability threshold on label=1 for deciding poison vs clean.",
+    )
+    parser.add_argument(
         "--output-dir",
         type=Path,
         default=None,
@@ -334,8 +349,8 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--emb-model",
-        required=True,
-        help="Alternative embedding model used to optimize triggers.",
+        default=env_str("ALT_TRIGGER_EMB_MODEL"),
+        help="Alternative embedding model used to optimize triggers. Omit this to only evaluate merged_poison_results_20260615.json.",
     )
     parser.add_argument(
         "--train-split-ratio",
@@ -413,6 +428,24 @@ def compute_metrics(rows: Sequence[Dict[str, Any]]) -> Dict[str, float]:
     }
 
 
+def evaluate_with_threshold(
+    prediction_rows: Sequence[Dict[str, Any]],
+    threshold: float,
+) -> List[Dict[str, Any]]:
+    adjusted_rows: List[Dict[str, Any]] = []
+    for row in prediction_rows:
+        prob_1 = float(row["prob_label_1"])
+        pred_label = 1 if prob_1 >= threshold else 0
+        adjusted_rows.append(
+            {
+                **row,
+                "pred_label": pred_label,
+                "correct": int(pred_label == int(row["gold_label"])),
+            }
+        )
+    return adjusted_rows
+
+
 def write_jsonl(path: Path, rows: Sequence[Dict[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8") as handle:
@@ -431,7 +464,10 @@ def main() -> int:
     if not args.checkpoint_dir.exists():
         raise FileNotFoundError(f"checkpoint dir not found: {args.checkpoint_dir}")
 
-    output_dir = args.output_dir or Path("alt_trigger_eval_runs") / sanitize_name(args.emb_model)
+    if args.emb_model:
+        output_dir = args.output_dir or Path("alt_trigger_eval_runs") / sanitize_name(args.emb_model)
+    else:
+        output_dir = args.output_dir or Path("finetune_runs") / "recheck_merged_only"
     output_dir.mkdir(parents=True, exist_ok=True)
 
     random.seed(args.attack_seed)
@@ -444,7 +480,7 @@ def main() -> int:
     log(f"[config] prompts json: {args.prompts_json}")
     log(f"[config] checkpoint dir: {args.checkpoint_dir}")
     log(f"[config] output dir: {output_dir}")
-    log(f"[config] emb model: {args.emb_model}")
+    log(f"[config] emb model: {args.emb_model if args.emb_model else '<none>'}")
     log(
         f"[config] devices={devices} workers_per_device={args.workers_per_device} "
         f"total_workers={len(device_slots)}"
@@ -466,6 +502,7 @@ def main() -> int:
             "workers_per_device": args.workers_per_device,
             "total_workers": len(device_slots),
             "emb_model": args.emb_model,
+            "threshold": args.threshold,
             "train_split_ratio": args.train_split_ratio,
             "iterations": args.iterations,
             "top_k": args.top_k,
@@ -521,115 +558,69 @@ def main() -> int:
     if torch.cuda.is_available():
         torch.cuda.manual_seed_all(args.attack_seed)
 
-    generated_poison_rows_path = output_dir / "generated_poison_rows.json"
-    if generated_poison_rows_path.exists():
-        generated_payload = json.loads(generated_poison_rows_path.read_text(encoding="utf-8"))
-        if isinstance(generated_payload, dict):
-            generated_poison_rows = list(generated_payload.get("rows", []))
-        elif isinstance(generated_payload, list):
-            generated_poison_rows = generated_payload
+    eval_examples: List[Dict[str, Any]] = []
+    regen_manifest = None
+    if args.emb_model:
+        generated_poison_rows_path = output_dir / "generated_poison_rows.json"
+        if generated_poison_rows_path.exists():
+            generated_payload = json.loads(generated_poison_rows_path.read_text(encoding="utf-8"))
+            if isinstance(generated_payload, dict):
+                generated_poison_rows = list(generated_payload.get("rows", []))
+            elif isinstance(generated_payload, list):
+                generated_poison_rows = generated_payload
+            else:
+                raise ValueError(f"{generated_poison_rows_path} must contain a JSON object or array")
         else:
-            raise ValueError(f"{generated_poison_rows_path} must contain a JSON object or array")
-    else:
-        generated_poison_rows = []
-    generated_by_index = {
-        int(row["source_merged_index"]): row
-        for row in generated_poison_rows
-        if "source_merged_index" in row
-    }
+            generated_poison_rows = []
+        generated_by_index = {
+            int(row["source_merged_index"]): row
+            for row in generated_poison_rows
+            if "source_merged_index" in row
+        }
 
-    pending_tasks: List[Dict[str, Any]] = []
-    for index, item in enumerate(test_rows, start=1):
-        merged_index = int(item.get("merged_index", index - 1))
-        if merged_index in generated_by_index:
-            log(f"[regen][skip] {index}/{len(test_rows)} merged_index={merged_index}")
-            continue
+        pending_tasks: List[Dict[str, Any]] = []
+        for index, item in enumerate(test_rows, start=1):
+            merged_index = int(item.get("merged_index", index - 1))
+            if merged_index in generated_by_index:
+                log(f"[regen][skip] {index}/{len(test_rows)} merged_index={merged_index}")
+                continue
 
-        skill_name = str(item.get("skill_name", "")).strip()
-        category = str(item.get("category", "")).strip()
-        original_description = str(item.get("original_description", "")).strip()
-        rewritten_description = str(item.get("rewritten_description", "")).strip()
-        source_trigger_length = int(item.get("trigger_length") or 30)
+            skill_name = str(item.get("skill_name", "")).strip()
+            category = str(item.get("category", "")).strip()
+            original_description = str(item.get("original_description", "")).strip()
+            rewritten_description = str(item.get("rewritten_description", "")).strip()
+            source_trigger_length = int(item.get("trigger_length") or 30)
 
-        if not skill_name or not category or not original_description or not rewritten_description:
-            raise ValueError(f"merged row {merged_index} is missing required fields")
+            if not skill_name or not category or not original_description or not rewritten_description:
+                raise ValueError(f"merged row {merged_index} is missing required fields")
 
-        if not prompt_pools.get(category):
-            raise ValueError(f"category {category!r} has an empty train prompt pool")
+            if not prompt_pools.get(category):
+                raise ValueError(f"category {category!r} has an empty train prompt pool")
 
-        pending_tasks.append(
-            {
-                "_task_index": index - 1,
-                "source_merged_index": merged_index,
-                "skill_name": skill_name,
-                "category": category,
-                "source_trigger_length": source_trigger_length,
-                "original_description": original_description,
-                "rewritten_description": rewritten_description,
-            }
+            pending_tasks.append(
+                {
+                    "_task_index": index - 1,
+                    "source_merged_index": merged_index,
+                    "skill_name": skill_name,
+                    "category": category,
+                    "source_trigger_length": source_trigger_length,
+                    "original_description": original_description,
+                    "rewritten_description": rewritten_description,
+                }
+            )
+
+        log(
+            f"[regen] pending_pairs={len(pending_tasks)} devices={devices} "
+            f"workers_per_device={args.workers_per_device} total_workers={len(device_slots)}"
         )
 
-    log(
-        f"[regen] pending_pairs={len(pending_tasks)} devices={devices} "
-        f"workers_per_device={args.workers_per_device} total_workers={len(device_slots)}"
-    )
-
-    if pending_tasks:
-        if len(device_slots) == 1:
-            worker_results = _regenerate_chunk_worker(
-                pending_tasks,
-                {
-                    "attack_seed": args.attack_seed,
-                    "device": device_slots[0],
-                    "prompt_pools": prompt_pools,
-                    "emb_model": args.emb_model,
-                    "iterations": args.iterations,
-                    "top_k": args.top_k,
-                    "batch_size": args.batch_size,
-                    "words_only": args.words_only,
-                    "topk_train_prompts": args.topk_train_prompts,
-                },
-            )
-            worker_results.sort(key=lambda item: item["_task_index"])
-            for completed, row in enumerate(worker_results, start=1):
-                row.pop("_task_index", None)
-                device_used = row.pop("_device", device_slots[0])
-                generated_poison_rows.append(row)
-                generated_by_index[int(row["source_merged_index"])] = row
-                atomic_write_json(
-                    generated_poison_rows_path,
+        if pending_tasks:
+            if len(device_slots) == 1:
+                worker_results = _regenerate_chunk_worker(
+                    pending_tasks,
                     {
-                        "created_at": utc_now_iso(),
-                        "emb_model": args.emb_model,
-                        "row_count": len(generated_poison_rows),
-                        "rows": generated_poison_rows,
-                    },
-                )
-                preview = row["trigger"][:120] + ("..." if len(row["trigger"]) > 120 else "")
-                log(
-                    f"[regen][{completed}/{len(pending_tasks)}] merged_index={row['source_merged_index']} "
-                        f"trigger_length={row['source_trigger_length']} device={device_used} trigger={preview}"
-                    )
-        else:
-            chunks: List[List[Dict[str, Any]]] = [[] for _ in device_slots]
-            for index, task in enumerate(pending_tasks):
-                chunks[index % len(device_slots)].append(task)
-            worker_jobs = [
-                (device, chunk)
-                for device, chunk in zip(device_slots, chunks)
-                if chunk
-            ]
-            log(f"[regen] parallel_workers={len(worker_jobs)}")
-
-            with ProcessPoolExecutor(
-                max_workers=len(worker_jobs),
-                mp_context=get_context("spawn"),
-            ) as executor:
-                futures = []
-                for worker_index, (device, chunk) in enumerate(worker_jobs):
-                    worker_config = {
-                        "attack_seed": args.attack_seed + worker_index,
-                        "device": device,
+                        "attack_seed": args.attack_seed,
+                        "device": device_slots[0],
                         "prompt_pools": prompt_pools,
                         "emb_model": args.emb_model,
                         "iterations": args.iterations,
@@ -637,79 +628,162 @@ def main() -> int:
                         "batch_size": args.batch_size,
                         "words_only": args.words_only,
                         "topk_train_prompts": args.topk_train_prompts,
-                    }
-                    futures.append(executor.submit(_regenerate_chunk_worker, chunk, worker_config))
+                    },
+                )
+                worker_results.sort(key=lambda item: item["_task_index"])
+                for completed, row in enumerate(worker_results, start=1):
+                    row.pop("_task_index", None)
+                    device_used = row.pop("_device", device_slots[0])
+                    generated_poison_rows.append(row)
+                    generated_by_index[int(row["source_merged_index"])] = row
+                    atomic_write_json(
+                        generated_poison_rows_path,
+                        {
+                            "created_at": utc_now_iso(),
+                            "emb_model": args.emb_model,
+                            "row_count": len(generated_poison_rows),
+                            "rows": generated_poison_rows,
+                        },
+                    )
+                    preview = row["trigger"][:120] + ("..." if len(row["trigger"]) > 120 else "")
+                    log(
+                        f"[regen][{completed}/{len(pending_tasks)}] merged_index={row['source_merged_index']} "
+                        f"trigger_length={row['source_trigger_length']} device={device_used} trigger={preview}"
+                    )
+            else:
+                chunks: List[List[Dict[str, Any]]] = [[] for _ in device_slots]
+                for index, task in enumerate(pending_tasks):
+                    chunks[index % len(device_slots)].append(task)
+                worker_jobs = [
+                    (device, chunk)
+                    for device, chunk in zip(device_slots, chunks)
+                    if chunk
+                ]
+                log(f"[regen] parallel_workers={len(worker_jobs)}")
 
-                completed = 0
-                for future in as_completed(futures):
-                    worker_results = future.result()
-                    worker_results.sort(key=lambda item: item["_task_index"])
-                    for row in worker_results:
-                        row.pop("_task_index", None)
-                        device_used = row.pop("_device", "unknown")
-                        generated_poison_rows.append(row)
-                        generated_by_index[int(row["source_merged_index"])] = row
-                        atomic_write_json(
-                            generated_poison_rows_path,
-                            {
-                                "created_at": utc_now_iso(),
-                                "emb_model": args.emb_model,
-                                "row_count": len(generated_poison_rows),
-                                "rows": generated_poison_rows,
-                            },
-                        )
-                        completed += 1
-                        preview = row["trigger"][:120] + ("..." if len(row["trigger"]) > 120 else "")
-                        log(
-                            f"[regen][{completed}/{len(pending_tasks)}] merged_index={row['source_merged_index']} "
-                            f"trigger_length={row['source_trigger_length']} device={device_used} trigger={preview}"
-                        )
+                with ProcessPoolExecutor(
+                    max_workers=len(worker_jobs),
+                    mp_context=get_context("spawn"),
+                ) as executor:
+                    futures = []
+                    for worker_index, (device, chunk) in enumerate(worker_jobs):
+                        worker_config = {
+                            "attack_seed": args.attack_seed + worker_index,
+                            "device": device,
+                            "prompt_pools": prompt_pools,
+                            "emb_model": args.emb_model,
+                            "iterations": args.iterations,
+                            "top_k": args.top_k,
+                            "batch_size": args.batch_size,
+                            "words_only": args.words_only,
+                            "topk_train_prompts": args.topk_train_prompts,
+                        }
+                        futures.append(executor.submit(_regenerate_chunk_worker, chunk, worker_config))
 
-    ordered_poison_rows = [generated_by_index[int(item.get("merged_index"))] for item in test_rows]
-    atomic_write_json(
-        output_dir / "regenerated_test_poison_rows.json",
-        {
-            "created_at": utc_now_iso(),
-            "emb_model": args.emb_model,
-            "row_count": len(ordered_poison_rows),
-            "rows": ordered_poison_rows,
-        },
-    )
+                    completed = 0
+                    for future in as_completed(futures):
+                        worker_results = future.result()
+                        worker_results.sort(key=lambda item: item["_task_index"])
+                        for row in worker_results:
+                            row.pop("_task_index", None)
+                            device_used = row.pop("_device", "unknown")
+                            generated_poison_rows.append(row)
+                            generated_by_index[int(row["source_merged_index"])] = row
+                            atomic_write_json(
+                                generated_poison_rows_path,
+                                {
+                                    "created_at": utc_now_iso(),
+                                    "emb_model": args.emb_model,
+                                    "row_count": len(generated_poison_rows),
+                                    "rows": generated_poison_rows,
+                                },
+                            )
+                            completed += 1
+                            preview = row["trigger"][:120] + ("..." if len(row["trigger"]) > 120 else "")
+                            log(
+                                f"[regen][{completed}/{len(pending_tasks)}] merged_index={row['source_merged_index']} "
+                                f"trigger_length={row['source_trigger_length']} device={device_used} trigger={preview}"
+                            )
 
-    eval_examples: List[Dict[str, Any]] = []
-    for item in test_rows:
-        merged_index = int(item["merged_index"])
-        skill_name = str(item["skill_name"]).strip()
-        category = str(item["category"]).strip()
-        original_description = str(item["original_description"]).strip()
-        regen = generated_by_index[merged_index]
-
-        eval_examples.append(
+        ordered_poison_rows = [generated_by_index[int(item.get("merged_index"))] for item in test_rows]
+        atomic_write_json(
+            output_dir / "regenerated_test_poison_rows.json",
             {
-                "example_id": f"alt_trigger::MERGED{merged_index:04d}::clean",
-                "source_merged_index": merged_index,
-                "record_variant": "clean",
-                "skill_name": skill_name,
-                "category": category,
-                "description": original_description,
-                "text": build_detection_text(skill_name, original_description),
-                "gold_label": 0,
-                "trigger_text": None,
-            }
+                "created_at": utc_now_iso(),
+                "emb_model": args.emb_model,
+                "row_count": len(ordered_poison_rows),
+                "rows": ordered_poison_rows,
+            },
         )
-        eval_examples.append(
-            {
-                "example_id": f"alt_trigger::MERGED{merged_index:04d}::poison",
-                "source_merged_index": merged_index,
-                "record_variant": "poison",
-                "skill_name": skill_name,
-                "category": category,
-                "description": regen["poisoned_description"],
-                "text": build_detection_text(skill_name, regen["poisoned_description"]),
-                "gold_label": 1,
-                "trigger_text": regen["trigger"],
-            }
-        )
+        regen_manifest = ordered_poison_rows
+        for item in test_rows:
+            merged_index = int(item["merged_index"])
+            skill_name = str(item["skill_name"]).strip()
+            category = str(item["category"]).strip()
+            original_description = str(item["original_description"]).strip()
+            regen = generated_by_index[merged_index]
+
+            eval_examples.append(
+                {
+                    "example_id": f"alt_trigger::MERGED{merged_index:04d}::clean",
+                    "source_merged_index": merged_index,
+                    "record_variant": "clean",
+                    "skill_name": skill_name,
+                    "category": category,
+                    "description": original_description,
+                    "text": build_detection_text(skill_name, original_description),
+                    "gold_label": 0,
+                    "trigger_text": None,
+                }
+            )
+            eval_examples.append(
+                {
+                    "example_id": f"alt_trigger::MERGED{merged_index:04d}::poison",
+                    "source_merged_index": merged_index,
+                    "record_variant": "poison",
+                    "skill_name": skill_name,
+                    "category": category,
+                    "description": regen["poisoned_description"],
+                    "text": build_detection_text(skill_name, regen["poisoned_description"]),
+                    "gold_label": 1,
+                    "trigger_text": regen["trigger"],
+                }
+            )
+    else:
+        for item in test_rows:
+            merged_index = int(item["merged_index"])
+            skill_name = str(item["skill_name"]).strip()
+            category = str(item["category"]).strip()
+            original_description = str(item["original_description"]).strip()
+            poisoned_description = str(item["poisoned_description"]).strip()
+            trigger = str(item.get("trigger", "") or "")
+
+            eval_examples.append(
+                {
+                    "example_id": f"merged::MERGED{merged_index:04d}::clean",
+                    "source_merged_index": merged_index,
+                    "record_variant": "clean",
+                    "skill_name": skill_name,
+                    "category": category,
+                    "description": original_description,
+                    "text": build_detection_text(skill_name, original_description),
+                    "gold_label": 0,
+                    "trigger_text": None,
+                }
+            )
+            eval_examples.append(
+                {
+                    "example_id": f"merged::MERGED{merged_index:04d}::poison",
+                    "source_merged_index": merged_index,
+                    "record_variant": "poison",
+                    "skill_name": skill_name,
+                    "category": category,
+                    "description": poisoned_description,
+                    "text": build_detection_text(skill_name, poisoned_description),
+                    "gold_label": 1,
+                    "trigger_text": trigger,
+                }
+            )
 
     tokenizer = load_tokenizer(str(args.checkpoint_dir))
     model = AutoModelForSequenceClassification.from_pretrained(str(args.checkpoint_dir), num_labels=2)
@@ -742,9 +816,8 @@ def main() -> int:
         shifted = logits - np.max(logits, axis=-1, keepdims=True)
         probs = np.exp(shifted)
         probs = probs / probs.sum(axis=-1, keepdims=True)
-        pred_labels = np.argmax(logits, axis=-1)
-
-        for example, pred_label, prob_row in zip(batch, pred_labels, probs):
+        for example, prob_row in zip(batch, probs):
+            pred_label = 1 if float(prob_row[1]) >= args.threshold else 0
             prediction_rows.append(
                 {
                     **example,
@@ -763,9 +836,12 @@ def main() -> int:
         "checkpoint_dir": str(args.checkpoint_dir),
         "output_dir": str(output_dir),
         "emb_model": args.emb_model,
+        "threshold": args.threshold,
         "split_seed": args.split_seed,
         "test_ratio": args.test_ratio,
         "attack_seed": args.attack_seed,
+        "test_mode": "alt_poison_rows" if args.emb_model else "merged_only",
+        "poison_test_json": str(args.poison_test_json) if args.poison_test_json else None,
         "test_pair_count": len(test_rows),
         "test_example_count": len(eval_examples),
         "trigger_length_counts": dict(Counter(int(item.get("trigger_length") or 30) for item in test_rows)),
