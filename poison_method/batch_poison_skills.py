@@ -244,7 +244,7 @@ def make_attack(args: argparse.Namespace) -> Any:
         iterations=args.iterations,
         top_k=args.top_k,
         batch_size=args.batch_size,
-        restarts=1,
+        restarts=args.restarts,
         words_only=args.words_only,
         device=args.device,
         attack_mode=args.attack_mode,
@@ -350,7 +350,7 @@ def _poison_single_task_impl(
             iterations=worker_config["iterations"],
             top_k=worker_config["top_k"],
             batch_size=worker_config["batch_size"],
-            restarts=1,
+            restarts=worker_config["restarts"],
             words_only=worker_config["words_only"],
             device=worker_config["device"],
             attack_mode=worker_config["attack_mode"],
@@ -486,6 +486,12 @@ def build_parser() -> argparse.ArgumentParser:
 
     parser.add_argument("--emb_model", type=str, default="BAAI/bge-small-en-v1.5")
     parser.add_argument("--iterations", type=int, default=40)
+    parser.add_argument(
+        "--restarts",
+        type=int,
+        default=1,
+        help="How many random restarts to run per skill. Larger values usually improve trigger quality but cost more time.",
+    )
     parser.add_argument("--top_k", type=int, default=64)
     parser.add_argument("--batch_size", type=int, default=256)
     parser.add_argument("--words_only", action="store_true")
@@ -633,6 +639,7 @@ def main(args: argparse.Namespace) -> None:
             common_worker_config = {
                 "emb_model": args.emb_model,
                 "iterations": args.iterations,
+                "restarts": args.restarts,
                 "top_k": args.top_k,
                 "batch_size": args.batch_size,
                 "words_only": args.words_only,
