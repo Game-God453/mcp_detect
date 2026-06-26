@@ -499,16 +499,19 @@ class HuggingFaceCausalPerplexityModel:
         device: str = "auto",
         cache_dir: Optional[Path] = None,
         dtype: str = "auto",
+        scoring_mode: str = "auto",
     ) -> None:
         self.model_name_or_path = model_name_or_path
         self.device = device
         self.cache_dir = str(cache_dir) if cache_dir else None
         self.dtype = dtype
+        self.scoring_mode = scoring_mode
         self.tokenizer = None
         self.model = None
         self.torch = None
         self.device_repr = None
         self.max_positions = None
+        self.model_kind: Optional[str] = None
 
     def _lazy_load_tokenizer(self) -> None:
         if self.tokenizer is not None:
@@ -548,14 +551,46 @@ class HuggingFaceCausalPerplexityModel:
         self._lazy_load_tokenizer()
 
         import torch
-        from transformers import AutoModelForCausalLM
+        from transformers import AutoConfig, AutoModelForCausalLM, AutoModelForMaskedLM
 
-        resolved_dtype = self._resolve_dtype(torch)
-        model = AutoModelForCausalLM.from_pretrained(
+        masked_model_types = {
+            "bert",
+            "roberta",
+            "albert",
+            "distilbert",
+            "electra",
+            "deberta",
+            "deberta-v2",
+            "mobilebert",
+        }
+        config = AutoConfig.from_pretrained(
             self.model_name_or_path,
             cache_dir=self.cache_dir,
-            torch_dtype=resolved_dtype,
         )
+
+        resolved_dtype = self._resolve_dtype(torch)
+        if self.scoring_mode not in {"auto", "causal", "masked"}:
+            raise ValueError(
+                f"Unsupported scoring_mode {self.scoring_mode!r}. Use auto/causal/masked."
+            )
+
+        use_masked = self.scoring_mode == "masked" or (
+            self.scoring_mode == "auto" and getattr(config, "model_type", None) in masked_model_types
+        )
+        if use_masked:
+            model = AutoModelForMaskedLM.from_pretrained(
+                self.model_name_or_path,
+                cache_dir=self.cache_dir,
+                torch_dtype=resolved_dtype,
+            )
+            self.model_kind = "masked"
+        else:
+            model = AutoModelForCausalLM.from_pretrained(
+                self.model_name_or_path,
+                cache_dir=self.cache_dir,
+                torch_dtype=resolved_dtype,
+            )
+            self.model_kind = "causal"
 
         assert self.tokenizer is not None
         if self.tokenizer.pad_token_id is None and self.tokenizer.eos_token_id is not None:
@@ -589,9 +624,15 @@ class HuggingFaceCausalPerplexityModel:
     def _truncate_tokens(self, tokens: Sequence[int]) -> List[int]:
         if self.max_positions is None:
             return list(tokens)
-        if len(tokens) <= self.max_positions:
+        available_positions = self.max_positions
+        if self.model_kind == "masked" and self.tokenizer is not None:
+            available_positions = max(
+                1,
+                self.max_positions - self.tokenizer.num_special_tokens_to_add(pair=False),
+            )
+        if len(tokens) <= available_positions:
             return list(tokens)
-        return list(tokens[: self.max_positions])
+        return list(tokens[:available_positions])
 
     def average_negative_log_likelihood(self, tokens: Sequence[int]) -> float:
         return self.batch_average_negative_log_likelihood([tokens], batch_size=1)[0]
@@ -610,6 +651,12 @@ class HuggingFaceCausalPerplexityModel:
             return []
 
         normalized = [self._truncate_tokens(tokens) for tokens in token_batches]
+        if self.model_kind == "masked":
+            return self._batch_average_negative_log_likelihood_masked(
+                normalized,
+                batch_size=batch_size,
+            )
+
         results: List[float] = []
         pad_token_id = self.tokenizer.pad_token_id
         if pad_token_id is None:
@@ -653,6 +700,92 @@ class HuggingFaceCausalPerplexityModel:
 
         return results
 
+    def _batch_average_negative_log_likelihood_masked(
+        self,
+        token_batches: Sequence[Sequence[int]],
+        batch_size: int = 16,
+    ) -> List[float]:
+        assert self.torch is not None
+        assert self.model is not None
+        assert self.tokenizer is not None
+
+        mask_token_id = self.tokenizer.mask_token_id
+        if mask_token_id is None:
+            raise ValueError(
+                f"Tokenizer for {self.model_name_or_path!r} does not define a mask token, "
+                "so masked pseudo-perplexity is unavailable."
+            )
+
+        pad_token_id = self.tokenizer.pad_token_id
+        if pad_token_id is None:
+            raise ValueError("Tokenizer must define pad_token_id for masked pseudo-perplexity.")
+
+        sample_requests: List[Tuple[int, int, int, List[int]]] = []
+        sums = [0.0] * len(token_batches)
+        counts = [0] * len(token_batches)
+
+        for sample_index, tokens in enumerate(token_batches):
+            if not tokens:
+                continue
+            full_ids = self.tokenizer.build_inputs_with_special_tokens(list(tokens))
+            special_mask = self.tokenizer.get_special_tokens_mask(
+                full_ids,
+                already_has_special_tokens=True,
+            )
+            for position, (token_id, is_special) in enumerate(zip(full_ids, special_mask)):
+                if is_special:
+                    continue
+                masked_ids = list(full_ids)
+                masked_ids[position] = mask_token_id
+                sample_requests.append((sample_index, position, int(token_id), masked_ids))
+
+        if not sample_requests:
+            return [0.0] * len(token_batches)
+
+        for start in range(0, len(sample_requests), batch_size):
+            chunk = sample_requests[start : start + batch_size]
+            max_len = max(len(masked_ids) for _, _, _, masked_ids in chunk)
+            padded_ids: List[List[int]] = []
+            padded_masks: List[List[int]] = []
+            positions: List[int] = []
+            targets: List[int] = []
+            owners: List[int] = []
+
+            for owner, position, target, masked_ids in chunk:
+                pad_len = max_len - len(masked_ids)
+                padded_ids.append(masked_ids + [pad_token_id] * pad_len)
+                padded_masks.append([1] * len(masked_ids) + [0] * pad_len)
+                positions.append(position)
+                targets.append(target)
+                owners.append(owner)
+
+            input_ids = self.torch.tensor(padded_ids, device=self.model.device)
+            attention_mask = self.torch.tensor(padded_masks, device=self.model.device)
+            target_tensor = self.torch.tensor(targets, device=self.model.device)
+            position_tensor = self.torch.tensor(positions, device=self.model.device)
+
+            with self.torch.no_grad():
+                logits = self.model(
+                    input_ids=input_ids,
+                    attention_mask=attention_mask,
+                ).logits
+                row_indices = self.torch.arange(logits.size(0), device=self.model.device)
+                selected_logits = logits[row_indices, position_tensor, :]
+                losses = self.torch.nn.functional.cross_entropy(
+                    selected_logits,
+                    target_tensor,
+                    reduction="none",
+                )
+
+            for owner, loss in zip(owners, losses.tolist()):
+                sums[owner] += float(loss)
+                counts[owner] += 1
+
+        return [
+            (sums[index] / counts[index]) if counts[index] else 0.0
+            for index in range(len(token_batches))
+        ]
+
     def release(self) -> None:
         if self.model is not None and self.torch is not None:
             try:
@@ -695,6 +828,7 @@ class PerplexityDetectors:
         device: str = "auto",
         cache_dir: Optional[Path] = None,
         dtype: str = "auto",
+        scoring_mode: str = "auto",
         inference_batch_size: int = 16,
         calibration_sample_size: int = 100,
         calibration_seed: int = 42,
@@ -706,6 +840,7 @@ class PerplexityDetectors:
             device=device,
             cache_dir=cache_dir,
             dtype=dtype,
+            scoring_mode=scoring_mode,
         )
         self.inference_batch_size = inference_batch_size
         self.calibration_sample_size = calibration_sample_size
@@ -1110,6 +1245,7 @@ def init_ppl_worker(
     device: str,
     cache_dir: Optional[str],
     dtype: str,
+    scoring_mode: str,
     batch_size: int,
 ) -> None:
     global _PPL_WORKER
@@ -1119,12 +1255,15 @@ def init_ppl_worker(
         device=device,
         cache_dir=Path(cache_dir) if cache_dir else None,
         dtype=dtype,
+        scoring_mode=scoring_mode,
     )
     _PPL_WORKER_BATCH_SIZE = batch_size
 
 
 def run_ppl_chunk(
     chunk: Sequence[Dict[str, Any]],
+    ppl_method_name: str,
+    ppl_windowed_method_name: str,
     ppl_log_threshold: Optional[float],
     window_log_threshold: Optional[float],
     window_size: int,
@@ -1209,9 +1348,11 @@ def run_ppl_chunk(
             log_score = full_scores[idx]
             if ppl_log_threshold is None:
                 raise RuntimeError("PPL threshold is missing")
-            methods["ppl"] = {
+            methods[ppl_method_name] = {
                 "status": "ok",
-                "method": "ppl",
+                "method": ppl_method_name,
+                "model_name_or_path": _PPL_WORKER.model_name_or_path,
+                "scoring_mode": _PPL_WORKER.model_kind,
                 "flagged": log_score > ppl_log_threshold,
                 "log_score": log_score,
                 "score": math.exp(log_score),
@@ -1225,9 +1366,11 @@ def run_ppl_chunk(
                 raise RuntimeError("PPL-W threshold is missing")
             window_payload = window_scores_by_record[idx]
             log_score = window_payload["log_score"]
-            methods["ppl_windowed"] = {
+            methods[ppl_windowed_method_name] = {
                 "status": "ok",
-                "method": "ppl_windowed",
+                "method": ppl_windowed_method_name,
+                "model_name_or_path": _PPL_WORKER.model_name_or_path,
+                "scoring_mode": _PPL_WORKER.model_kind,
                 "flagged": log_score > window_log_threshold,
                 "log_score": log_score,
                 "score": math.exp(log_score),

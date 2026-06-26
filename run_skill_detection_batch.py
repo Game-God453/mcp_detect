@@ -32,6 +32,7 @@ DEFAULT_OUTPUT_DIR = Path("detection_runs/poisoned_skill_sample100")
 DEFAULT_ENV_PATH = Path(".env")
 DEFAULT_MERGED_JSON_DATASET_PATH = Path("merged_poison_results_20260615.json")
 DEFAULT_DATASET_JSON_PATH = DEFAULT_MERGED_JSON_DATASET_PATH
+DEFAULT_MAINSTREAM_PPL_MODELS = ("gpt2", "bert-base-uncased", "xlnet-base-cased")
 
 ALL_METHODS = ("rebuff_llm", "known_answer_detection", "ppl", "ppl_windowed")
 
@@ -151,6 +152,15 @@ def build_parser() -> argparse.ArgumentParser:
         help="Hugging Face causal LM used for PPL/PPL-W scoring. Default follows the GPT-2 family.",
     )
     parser.add_argument(
+        "--ppl-models",
+        default=env_str("PPL_MODELS", ""),
+        help=(
+            "Comma-separated PPL backbones to evaluate in one run. "
+            f"Recommended mainstream trio: {','.join(DEFAULT_MAINSTREAM_PPL_MODELS)}. "
+            "If empty, falls back to --ppl-model."
+        ),
+    )
+    parser.add_argument(
         "--ppl-device",
         default=env_str("PPL_DEVICE", "auto"),
         help="Device for the PPL model, e.g. auto/cpu/cuda/cuda:0.",
@@ -234,6 +244,24 @@ def parse_device_list(raw_devices: str, fallback_device: str) -> List[str]:
     return devices or [fallback_device]
 
 
+def parse_model_list(raw_models: str, fallback_model: str) -> List[str]:
+    models = [item.strip() for item in raw_models.split(",") if item.strip()]
+    return models or [fallback_model]
+
+
+def infer_ppl_scoring_mode(model_name: str) -> str:
+    lowered = model_name.lower()
+    if "bert" in lowered and "xlnet" not in lowered:
+        return "masked"
+    return "causal"
+
+
+def build_ppl_method_name(base_method: str, model_name: str, multi_model: bool) -> str:
+    if not multi_model:
+        return base_method
+    return f"{base_method}@{model_name}"
+
+
 def chunk_list(values: List[Dict[str, Any]], chunk_size: int) -> List[List[Dict[str, Any]]]:
     if chunk_size <= 0:
         raise ValueError("chunk size must be positive")
@@ -301,11 +329,34 @@ def main() -> int:
     state_path = output_dir / "run_state.json"
     summary_path = output_dir / "summary.json"
 
+    ppl_model_names = parse_model_list(args.ppl_models, args.ppl_model)
+    use_ppl_methods = "ppl" in args.methods or "ppl_windowed" in args.methods
+    ppl_multi_model = use_ppl_methods and len(ppl_model_names) > 1
+    ppl_method_specs: List[Dict[str, Any]] = []
+    actual_methods = list(args.methods)
+    if use_ppl_methods:
+        actual_methods = [
+            method_name
+            for method_name in actual_methods
+            if method_name not in {"ppl", "ppl_windowed"}
+        ]
+        for model_name in ppl_model_names:
+            if "ppl" in args.methods:
+                actual_methods.append(
+                    build_ppl_method_name("ppl", model_name, ppl_multi_model)
+                )
+            if "ppl_windowed" in args.methods:
+                actual_methods.append(
+                    build_ppl_method_name("ppl_windowed", model_name, ppl_multi_model)
+                )
+
     log(f"[config] env file: {env_path}")
     log(f"[config] output base dir: {base_output_dir}")
     log(f"[config] output dir: {output_dir}")
     log(f"[config] dataset json: {args.dataset_json_path}")
     log(f"[config] methods: {', '.join(args.methods)}")
+    if use_ppl_methods:
+        log(f"[config] ppl backbones: {', '.join(ppl_model_names)}")
 
     split_metadata: Optional[Dict[str, Any]] = None
     train_records: List[Any] = []
@@ -340,32 +391,58 @@ def main() -> int:
     records_by_skill = {record.skill_key: record for record in test_records}
 
     thresholds: Dict[str, Any] = {}
-    if "ppl" in args.methods or "ppl_windowed" in args.methods:
+    if use_ppl_methods:
         ppl_devices = parse_device_list(args.ppl_devices, args.ppl_device)
+        thresholds["perplexity"] = {}
         log(
             "[ppl] calibrating thresholds with "
-            f"model={args.ppl_model}, devices={','.join(ppl_devices)}, "
+            f"models={','.join(ppl_model_names)}, devices={','.join(ppl_devices)}, "
             f"batch_size={args.ppl_batch_size}, window_size={args.window_size}"
         )
-        ppl_detectors = PerplexityDetectors(
-            model_name_or_path=args.ppl_model,
-            device=ppl_devices[0],
-            cache_dir=args.ppl_cache_dir,
-            dtype=args.ppl_dtype,
-            inference_batch_size=args.ppl_batch_size,
-            calibration_sample_size=args.calibration_sample_size,
-            calibration_seed=args.calibration_seed,
-            target_fpr=args.target_fpr,
-            window_size=parse_window_size(args.window_size),
-        )
-        thresholds["perplexity"] = ppl_detectors.fit(clean_records)
-        ppl_detectors.release()
-        log(
-            "[ppl] calibrated: "
-            f"log_threshold={thresholds['perplexity']['ppl_log_threshold']:.4f}, "
-            f"window_log_threshold={thresholds['perplexity']['ppl_window_log_threshold']:.4f}, "
-            f"window_size={thresholds['perplexity']['window_size']}"
-        )
+        for model_name in ppl_model_names:
+            scoring_mode = infer_ppl_scoring_mode(model_name)
+            ppl_method_name = build_ppl_method_name("ppl", model_name, ppl_multi_model)
+            ppl_windowed_method_name = build_ppl_method_name(
+                "ppl_windowed",
+                model_name,
+                ppl_multi_model,
+            )
+            ppl_detectors = PerplexityDetectors(
+                model_name_or_path=model_name,
+                device=ppl_devices[0],
+                cache_dir=args.ppl_cache_dir,
+                dtype=args.ppl_dtype,
+                scoring_mode=scoring_mode,
+                inference_batch_size=args.ppl_batch_size,
+                calibration_sample_size=args.calibration_sample_size,
+                calibration_seed=args.calibration_seed,
+                target_fpr=args.target_fpr,
+                window_size=parse_window_size(args.window_size),
+            )
+            fit_payload = ppl_detectors.fit(clean_records)
+            ppl_detectors.release()
+            thresholds["perplexity"][model_name] = {
+                **fit_payload,
+                "scoring_mode": scoring_mode,
+                "ppl_method_name": ppl_method_name,
+                "ppl_windowed_method_name": ppl_windowed_method_name,
+            }
+            ppl_method_specs.append(
+                {
+                    "model_name": model_name,
+                    "scoring_mode": scoring_mode,
+                    "ppl_method_name": ppl_method_name,
+                    "ppl_windowed_method_name": ppl_windowed_method_name,
+                    "thresholds": thresholds["perplexity"][model_name],
+                }
+            )
+            log(
+                "[ppl] calibrated: "
+                f"model={model_name}, scoring_mode={scoring_mode}, "
+                f"log_threshold={fit_payload['ppl_log_threshold']:.4f}, "
+                f"window_log_threshold={fit_payload['ppl_window_log_threshold']:.4f}, "
+                f"window_size={fit_payload['window_size']}"
+            )
 
     rebuff_detector = None
     known_answer_detector = None
@@ -414,6 +491,7 @@ def main() -> int:
         "split_seed": args.split_seed,
         "output_dir": str(output_dir),
         "methods": args.methods,
+        "actual_methods": actual_methods,
         "limit": args.limit,
         "retry_errors": args.retry_errors,
         "env_file": str(env_path),
@@ -441,7 +519,7 @@ def main() -> int:
         total_skill_pairs = len({paired_group_key(record) for record in test_records})
         summary = build_summary(
             rows=list(latest_rows.values()),
-            requested_methods=args.methods,
+            requested_methods=actual_methods,
             total_examples=total_examples,
             total_skill_pairs=total_skill_pairs,
         )
@@ -478,7 +556,7 @@ def main() -> int:
     persist_state()
 
     llm_jobs: List[Dict[str, Any]] = []
-    ppl_jobs: List[Dict[str, Any]] = []
+    ppl_jobs_by_model: List[Dict[str, Any]] = []
 
     for record in test_records:
         previous = latest_rows.get(record.skill_key)
@@ -511,25 +589,47 @@ def main() -> int:
                     "detector": known_answer_detector,
                 }
             )
-        if need_ppl or need_ppl_windowed:
-            ppl_jobs.append(
+        for spec in ppl_method_specs:
+            need_model_ppl = "ppl" in args.methods and row_is_retryable(
+                previous,
+                spec["ppl_method_name"],
+                args.retry_errors,
+            )
+            need_model_ppl_windowed = "ppl_windowed" in args.methods and row_is_retryable(
+                previous,
+                spec["ppl_windowed_method_name"],
+                args.retry_errors,
+            )
+            if not need_model_ppl and not need_model_ppl_windowed:
+                continue
+            model_job_bucket = next(
+                (
+                    bucket
+                    for bucket in ppl_jobs_by_model
+                    if bucket["model_name"] == spec["model_name"]
+                ),
+                None,
+            )
+            if model_job_bucket is None:
+                model_job_bucket = {**spec, "jobs": []}
+                ppl_jobs_by_model.append(model_job_bucket)
+            model_job_bucket["jobs"].append(
                 {
                     "skill_key": record.skill_key,
                     "input_text": record.input_text,
-                    "need_ppl": need_ppl,
-                    "need_ppl_windowed": need_ppl_windowed,
+                    "need_ppl": need_model_ppl,
+                    "need_ppl_windowed": need_model_ppl_windowed,
                 }
             )
 
     log(
         "[plan] pending jobs: "
         f"llm={len(llm_jobs)}, "
-        f"ppl_like={len(ppl_jobs)}"
+        f"ppl_like={sum(len(bucket['jobs']) for bucket in ppl_jobs_by_model)}"
     )
 
     future_map: Dict[Any, Tuple[str, Any]] = {}
     rebuff_executor: Optional[ThreadPoolExecutor] = None
-    ppl_executors: List[ProcessPoolExecutor] = []
     completed_llm = 0
     completed_ppl_like = 0
     llm_error_count = 0
@@ -553,41 +653,7 @@ def main() -> int:
                 future_map[future] = ("llm", (method_name, record.skill_key))
             log(f"[llm] submitted {len(llm_jobs)} requests")
 
-        if ppl_jobs:
-            ppl_devices = parse_device_list(args.ppl_devices, args.ppl_device)
-            mp_context = get_context("spawn")
-            for device in ppl_devices:
-                executor = ProcessPoolExecutor(
-                    max_workers=1,
-                    mp_context=mp_context,
-                    initializer=init_ppl_worker,
-                    initargs=(
-                        args.ppl_model,
-                        device,
-                        str(args.ppl_cache_dir) if args.ppl_cache_dir else None,
-                        args.ppl_dtype,
-                        args.ppl_batch_size,
-                    ),
-                )
-                ppl_executors.append(executor)
-
-            ppl_chunks = chunk_list(ppl_jobs, args.ppl_chunk_size)
-            log(
-                "[ppl] submitted "
-                f"{len(ppl_chunks)} chunks across {len(ppl_executors)} worker(s)"
-            )
-            for index, chunk in enumerate(ppl_chunks):
-                executor = ppl_executors[index % len(ppl_executors)]
-                future = executor.submit(
-                    run_ppl_chunk,
-                    chunk,
-                    thresholds["perplexity"].get("ppl_log_threshold"),
-                    thresholds["perplexity"].get("ppl_window_log_threshold"),
-                    int(thresholds["perplexity"]["window_size"]),
-                )
-                future_map[future] = ("ppl", [item["skill_key"] for item in chunk])
-
-        if not future_map:
+        if not future_map and not any(bucket["jobs"] for bucket in ppl_jobs_by_model):
             log("[done] no pending work; all requested methods already completed")
 
         while future_map:
@@ -652,7 +718,98 @@ def main() -> int:
                         f"[{method_name}][{completed_llm}/{len(llm_jobs)}] "
                         f"{skill_key} status={llm_status} flagged={llm_flagged}"
                     )
-                else:
+    finally:
+        if rebuff_executor is not None:
+            rebuff_executor.shutdown(wait=True, cancel_futures=False)
+
+    for model_bucket in ppl_jobs_by_model:
+        model_name = model_bucket["model_name"]
+        scoring_mode = model_bucket["scoring_mode"]
+        model_jobs = model_bucket["jobs"]
+        if not model_jobs:
+            continue
+
+        ppl_devices = parse_device_list(args.ppl_devices, args.ppl_device)
+        mp_context = get_context("spawn")
+        ppl_executors: List[ProcessPoolExecutor] = []
+        ppl_future_map: Dict[Any, Dict[str, Any]] = {}
+        ppl_chunks = chunk_list(model_jobs, args.ppl_chunk_size)
+        total_model_jobs = len(model_jobs)
+
+        try:
+            for device in ppl_devices:
+                executor = ProcessPoolExecutor(
+                    max_workers=1,
+                    mp_context=mp_context,
+                    initializer=init_ppl_worker,
+                    initargs=(
+                        model_name,
+                        device,
+                        str(args.ppl_cache_dir) if args.ppl_cache_dir else None,
+                        args.ppl_dtype,
+                        scoring_mode,
+                        args.ppl_batch_size,
+                    ),
+                )
+                ppl_executors.append(executor)
+
+            log(
+                "[ppl] submitted "
+                f"model={model_name}, chunks={len(ppl_chunks)}, workers={len(ppl_executors)}"
+            )
+            for index, chunk in enumerate(ppl_chunks):
+                executor = ppl_executors[index % len(ppl_executors)]
+                future = executor.submit(
+                    run_ppl_chunk,
+                    chunk,
+                    model_bucket["ppl_method_name"],
+                    model_bucket["ppl_windowed_method_name"],
+                    model_bucket["thresholds"].get("ppl_log_threshold"),
+                    model_bucket["thresholds"].get("ppl_window_log_threshold"),
+                    int(model_bucket["thresholds"]["window_size"]),
+                )
+                ppl_future_map[future] = {
+                    "skill_keys": [item["skill_key"] for item in chunk],
+                    "method_names": [
+                        method_name
+                        for method_name in (
+                            model_bucket["ppl_method_name"],
+                            model_bucket["ppl_windowed_method_name"],
+                        )
+                        if method_name in actual_methods
+                    ],
+                    "model_name": model_name,
+                }
+
+            while ppl_future_map:
+                done, _ = wait(set(ppl_future_map.keys()), return_when=FIRST_COMPLETED)
+                for future in done:
+                    future_context = ppl_future_map.pop(future)
+                    try:
+                        result = future.result()
+                    except Exception as error:
+                        if args.stop_on_error:
+                            raise
+                        ppl_error_count += len(future_context["skill_keys"])
+                        for skill_key in future_context["skill_keys"]:
+                            row = merge_skill_result(
+                                skill_key=skill_key,
+                                method_updates={
+                                    method_name: method_error_payload(error)
+                                    for method_name in future_context["method_names"]
+                                },
+                                records_by_skill=records_by_skill,
+                                latest_rows=latest_rows,
+                            )
+                            append_jsonl(results_path, row)
+                            persist_state()
+                        log(
+                            "[ppl][error] "
+                            f"model={future_context['model_name']} chunk failed for "
+                            f"{len(future_context['skill_keys'])} skills: {type(error).__name__}: {error}"
+                        )
+                        continue
+
                     completed_ppl_like += len(result)
                     for item in result:
                         row = merge_skill_result(
@@ -664,14 +821,12 @@ def main() -> int:
                         append_jsonl(results_path, row)
                         persist_state()
                     log(
-                        f"[ppl][{completed_ppl_like}/{len(ppl_jobs)}] "
+                        f"[ppl][model={model_name}][{completed_ppl_like}] "
                         f"finished chunk of {len(result)} skills"
                     )
-    finally:
-        if rebuff_executor is not None:
-            rebuff_executor.shutdown(wait=True, cancel_futures=False)
-        for executor in ppl_executors:
-            executor.shutdown(wait=True, cancel_futures=False)
+        finally:
+            for executor in ppl_executors:
+                executor.shutdown(wait=True, cancel_futures=False)
 
     persist_state()
     log(
