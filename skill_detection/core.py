@@ -569,13 +569,23 @@ class HuggingFaceCausalPerplexityModel:
         )
 
         resolved_dtype = self._resolve_dtype(torch)
+        model_type = getattr(config, "model_type", None)
+        if (
+            model_type == "xlnet"
+            and resolved_dtype in {torch.float16, torch.bfloat16}
+        ):
+            print(
+                "[ppl] XLNet does not behave reliably with reduced precision in this "
+                "environment; falling back to float32."
+            )
+            resolved_dtype = torch.float32
         if self.scoring_mode not in {"auto", "causal", "masked"}:
             raise ValueError(
                 f"Unsupported scoring_mode {self.scoring_mode!r}. Use auto/causal/masked."
             )
 
         use_masked = self.scoring_mode == "masked" or (
-            self.scoring_mode == "auto" and getattr(config, "model_type", None) in masked_model_types
+            self.scoring_mode == "auto" and model_type in masked_model_types
         )
         if use_masked:
             model = AutoModelForMaskedLM.from_pretrained(
