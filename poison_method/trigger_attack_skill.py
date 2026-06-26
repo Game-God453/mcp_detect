@@ -608,6 +608,9 @@ class AdversarialAttack:
         best_history: List[float] = []
         best_utility = float("-inf")
         target_emb = self.get_embedding(target_texts)
+        baseline_text = f"{text_pre_trigger} {text_post_trigger}".strip()
+        baseline_emb = self.get_embedding(baseline_text)
+        baseline_similarity = F.cosine_similarity(baseline_emb, target_emb).mean().item()
         self.last_run_metadata = {}
 
         for i in range(self.restarts):
@@ -636,6 +639,7 @@ class AdversarialAttack:
                     best_history = history
                     self.last_run_metadata = {
                         "attack_mode": self.attack_mode,
+                        "baseline_similarity_no_trigger": baseline_similarity,
                         "teacher_ppl_model": self.teacher_ppl_model_name,
                         "teacher_ppl_lambda": self.teacher_ppl_lambda,
                         "teacher_tau": self.teacher_tau,
@@ -656,6 +660,7 @@ class AdversarialAttack:
                     best_history = history
                     self.last_run_metadata = {
                         "attack_mode": self.attack_mode,
+                        "baseline_similarity_no_trigger": baseline_similarity,
                         "teacher_ppl_model": None,
                         "teacher_ppl_lambda": None,
                         "teacher_tau": None,
