@@ -13,8 +13,8 @@ CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python poison_method/batch_poison_skills.py
   --output_json poison_method/poisoned_all_skills_results.json \
   --attack_mode teacher_weighted_ppl \
   --devices cuda:0,cuda:1,cuda:2,cuda:3,cuda:4,cuda:5,cuda:6,cuda:7 \
-  --workers-per-device 1
-  --teacher_ppl_lambda 2
-  --limit 10
+  --workers-per-device 1 \
+  --teacher_ppl_lambda 2 \
+  --limit 8
 
 python run_skill_detection_batch.py --dataset-json-path poison_method/poisoned_all_skills_results/20260625_112258/poisoned_all_skills_results.json --methods ppl ppl_windowed

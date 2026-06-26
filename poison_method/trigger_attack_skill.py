@@ -103,7 +103,7 @@ class AdversarialAttack:
         self.teacher_ppl_tokenizer = None
         self.teacher_ppl_model = None
         self.teacher_tau: Optional[float] = None
-        self.teacher_natural_token_ids: List[int] = []
+        self.teacher_natural_token_sequences: List[List[int]] = []
         self._desc_ppl_cache: Dict[str, Tuple[torch.Tensor, float]] = {}
         self.last_run_metadata: Dict[str, Any] = {}
 
@@ -151,11 +151,11 @@ class AdversarialAttack:
         ).to(self.device)
         self.teacher_ppl_model.eval()
 
-        self.teacher_natural_token_ids = self._build_natural_corpus_token_ids(
+        self.teacher_natural_token_sequences = self._build_natural_corpus_token_sequences(
             self.teacher_clean_corpus_texts
         )
-        if not self.teacher_natural_token_ids:
-            raise ValueError("teacher_weighted_ppl mode requires a non-empty natural token pool")
+        if not self.teacher_natural_token_sequences:
+            raise ValueError("teacher_weighted_ppl mode requires a non-empty natural text corpus")
 
         self.teacher_tau = self._calibrate_teacher_tau(self.teacher_clean_corpus_texts)
         print(
@@ -165,17 +165,22 @@ class AdversarialAttack:
             f"samples_per_desc={self.teacher_n_samples_per_desc}"
         )
 
-    def _build_natural_corpus_token_ids(self, clean_corpus_texts: Sequence[str]) -> List[int]:
+    def _build_natural_corpus_token_sequences(
+        self,
+        clean_corpus_texts: Sequence[str],
+    ) -> List[List[int]]:
         assert self.teacher_ppl_tokenizer is not None
-        token_ids: List[int] = []
+        token_sequences: List[List[int]] = []
         for text in clean_corpus_texts:
             encoded = self.teacher_ppl_tokenizer(
                 text,
                 add_special_tokens=False,
                 return_attention_mask=False,
             )
-            token_ids.extend(int(token_id) for token_id in encoded["input_ids"])
-        return token_ids
+            token_ids = [int(token_id) for token_id in encoded["input_ids"]]
+            if token_ids:
+                token_sequences.append(token_ids)
+        return token_sequences
 
     def get_embedding(self, text: Union[str, List[str]]) -> torch.Tensor:
         is_single = isinstance(text, str)
@@ -312,22 +317,36 @@ class AdversarialAttack:
             trigger_id_batches.append([int(token_id) for token_id in encoded["input_ids"]])
         return self._compute_batch_weighted_ppl_from_trigger_ids(desc_text, trigger_id_batches)
 
-    def _sample_natural_trigger_ids(self) -> List[int]:
-        pool = self.teacher_natural_token_ids
-        if len(pool) >= self.trigger_length:
-            return random.sample(pool, self.trigger_length)
-        return random.choices(pool, k=self.trigger_length)
+    def _sample_natural_trigger_text(self) -> str:
+        assert self.teacher_ppl_tokenizer is not None
+
+        sequences = [
+            seq for seq in self.teacher_natural_token_sequences if len(seq) >= self.trigger_length
+        ]
+        if sequences:
+            token_ids = random.choice(sequences)
+            start = random.randint(0, len(token_ids) - self.trigger_length)
+            span_ids = token_ids[start : start + self.trigger_length]
+        else:
+            flattened = [
+                token_id
+                for seq in self.teacher_natural_token_sequences
+                for token_id in seq
+            ]
+            if not flattened:
+                raise ValueError("teacher_weighted_ppl mode could not sample any natural suffix span")
+            span_ids = random.choices(flattened, k=self.trigger_length)
+
+        return self.teacher_ppl_tokenizer.decode(span_ids, skip_special_tokens=True).strip()
 
     def _calibrate_teacher_tau(self, clean_corpus_texts: Sequence[str]) -> float:
         ppl_values: List[float] = []
         for desc_text in clean_corpus_texts:
-            sampled_batches = [
-                self._sample_natural_trigger_ids()
+            sampled_trigger_texts = [
+                self._sample_natural_trigger_text()
                 for _ in range(self.teacher_n_samples_per_desc)
             ]
-            ppl_values.extend(
-                self._compute_batch_weighted_ppl_from_trigger_ids(desc_text, sampled_batches)
-            )
+            ppl_values.extend(self._compute_batch_weighted_ppl(desc_text, sampled_trigger_texts))
 
         if not ppl_values:
             raise ValueError("teacher_weighted_ppl tau calibration produced no samples")
