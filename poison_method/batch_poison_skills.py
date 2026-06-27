@@ -13,6 +13,7 @@ import json
 import math
 import os
 import random
+import re
 import time
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from collections import Counter
@@ -187,9 +188,75 @@ Skill input:
 """
 
 
-def rewrite_skill_description_with_deepseek(skill: Dict[str, Any], args: argparse.Namespace) -> str:
+def parse_rewrite_response_content(content: str) -> str:
+    raw = str(content or "").strip()
+    if not raw:
+        raise ValueError("LLM returned empty content")
+
+    candidates = [raw]
+    fenced = re.findall(r"```(?:json)?\s*(.*?)```", raw, flags=re.DOTALL | re.IGNORECASE)
+    candidates.extend(item.strip() for item in fenced if item.strip())
+
+    brace_match = re.search(r"\{.*\}", raw, flags=re.DOTALL)
+    if brace_match:
+        candidates.append(brace_match.group(0).strip())
+
+    for candidate in candidates:
+        try:
+            parsed = json.loads(candidate)
+        except json.JSONDecodeError:
+            continue
+        if isinstance(parsed, dict):
+            rewritten = str(parsed.get("description", "")).strip()
+            if rewritten:
+                return rewritten
+
+    raise ValueError(f"unable to parse rewrite JSON from response: {raw[:500]}")
+
+
+def request_rewritten_description(
+    *,
+    url: str,
+    headers: Dict[str, str],
+    model: str,
+    temperature: float,
+    prompt: str,
+    timeout_seconds: int,
+) -> str:
     import requests
 
+    base_payload = {
+        "model": model,
+        "temperature": temperature,
+        "messages": [
+            {"role": "system", "content": "You are a precise rewriting assistant."},
+            {"role": "user", "content": prompt},
+        ],
+    }
+
+    payloads = [
+        {**base_payload, "response_format": {"type": "json_object"}},
+        base_payload,
+    ]
+
+    errors: List[str] = []
+    for attempt_index, payload in enumerate(payloads, start=1):
+        response = requests.post(url, headers=headers, json=payload, timeout=timeout_seconds)
+        if response.ok:
+            data = response.json()
+            content = data["choices"][0]["message"]["content"]
+            return parse_rewrite_response_content(content)
+        errors.append(
+            f"attempt={attempt_index} status={response.status_code} body={response.text}"
+        )
+
+    raise RuntimeError(
+        f"rewrite request failed after compatibility retries: url={url} model={model} "
+        + " | ".join(errors)
+    )
+
+
+def rewrite_skill_description_with_deepseek(skill: Dict[str, Any], args: argparse.Namespace) -> str:
     api_key = args.deepseek_api_key or os.getenv("DEEPSEEK_API_KEY")
     if not api_key:
         raise ValueError("DeepSeek API key is required. Use --deepseek_api_key or DEEPSEEK_API_KEY.")
@@ -199,24 +266,14 @@ def rewrite_skill_description_with_deepseek(skill: Dict[str, Any], args: argpars
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json",
     }
-    payload = {
-        "model": args.deepseek_model,
-        "temperature": args.rewrite_temperature,
-        "messages": [
-            {"role": "system", "content": "You are a precise rewriting assistant."},
-            {"role": "user", "content": build_rewrite_prompt(skill)},
-        ],
-        "response_format": {"type": "json_object"},
-    }
-
-    response = requests.post(url, headers=headers, json=payload, timeout=args.deepseek_timeout_seconds)
-    response.raise_for_status()
-    data = response.json()
-    parsed = json.loads(data["choices"][0]["message"]["content"])
-    rewritten = str(parsed.get("description", "")).strip()
-    if not rewritten:
-        raise ValueError("LLM returned empty rewritten description")
-    return rewritten
+    return request_rewritten_description(
+        url=url,
+        headers=headers,
+        model=args.deepseek_model,
+        temperature=args.rewrite_temperature,
+        prompt=build_rewrite_prompt(skill),
+        timeout_seconds=args.deepseek_timeout_seconds,
+    )
 
 
 def maybe_rewrite_skill(skill: Dict[str, Any], args: argparse.Namespace, log_fn) -> str:
@@ -284,8 +341,6 @@ def _rewrite_with_config(skill: Dict[str, Any], config: Dict[str, Any]) -> str:
     if not config["enable_llm_rewrite"]:
         return skill["description"]
 
-    import requests
-
     api_key = config["deepseek_api_key"] or os.getenv("DEEPSEEK_API_KEY")
     if not api_key:
         raise ValueError("DeepSeek API key is required. Use --deepseek_api_key or DEEPSEEK_API_KEY.")
@@ -295,24 +350,14 @@ def _rewrite_with_config(skill: Dict[str, Any], config: Dict[str, Any]) -> str:
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json",
     }
-    payload = {
-        "model": config["deepseek_model"],
-        "temperature": config["rewrite_temperature"],
-        "messages": [
-            {"role": "system", "content": "You are a precise rewriting assistant."},
-            {"role": "user", "content": build_rewrite_prompt(skill)},
-        ],
-        "response_format": {"type": "json_object"},
-    }
-
-    response = requests.post(url, headers=headers, json=payload, timeout=config["deepseek_timeout_seconds"])
-    response.raise_for_status()
-    data = response.json()
-    parsed = json.loads(data["choices"][0]["message"]["content"])
-    rewritten = str(parsed.get("description", "")).strip()
-    if not rewritten:
-        raise ValueError("LLM returned empty rewritten description")
-    return rewritten
+    return request_rewritten_description(
+        url=url,
+        headers=headers,
+        model=config["deepseek_model"],
+        temperature=config["rewrite_temperature"],
+        prompt=build_rewrite_prompt(skill),
+        timeout_seconds=config["deepseek_timeout_seconds"],
+    )
 
 
 def _poison_single_task_impl(
