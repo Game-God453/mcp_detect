@@ -4,6 +4,7 @@ import importlib.util
 import json
 import math
 import os
+import errno
 import random
 import re
 import sys
@@ -53,6 +54,15 @@ def ensure_parent_dir(path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
 
 
+def safe_fsync(fd: int) -> None:
+    try:
+        os.fsync(fd)
+    except OSError as exc:
+        # Some mounted filesystems reject fsync on regular files with EINVAL.
+        if exc.errno != errno.EINVAL:
+            raise
+
+
 def atomic_write_json(path: Path, payload: Dict[str, Any]) -> None:
     ensure_parent_dir(path)
     temp_path = path.parent / f".{path.name}.{uuid.uuid4().hex}.tmp"
@@ -61,7 +71,7 @@ def atomic_write_json(path: Path, payload: Dict[str, Any]) -> None:
             json.dump(payload, handle, ensure_ascii=False, indent=2, sort_keys=True)
             handle.write("\n")
             handle.flush()
-            os.fsync(handle.fileno())
+            safe_fsync(handle.fileno())
         temp_path.replace(path)
     finally:
         if temp_path.exists():
@@ -76,7 +86,7 @@ def append_jsonl(path: Path, payload: Dict[str, Any]) -> None:
     with path.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(payload, ensure_ascii=False) + "\n")
         handle.flush()
-        os.fsync(handle.fileno())
+        safe_fsync(handle.fileno())
 
 
 def load_jsonl(path: Path) -> List[Dict[str, Any]]:
