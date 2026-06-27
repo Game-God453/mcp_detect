@@ -237,6 +237,12 @@ def build_parser() -> argparse.ArgumentParser:
         default=Path(env_str("FINETUNE_CHECKPOINT_DIR")) if env_str("FINETUNE_CHECKPOINT_DIR") else None,
         help="Checkpoint directory used by --eval-only.",
     )
+    parser.add_argument(
+        "--decision-threshold",
+        type=float,
+        default=env_float("FINETUNE_DECISION_THRESHOLD", 0.5),
+        help="Probability threshold on label=1 for deciding poison vs clean during evaluation.",
+    )
     return parser
 
 
@@ -324,6 +330,45 @@ def compute_metrics_builder() -> Any:
         }
 
     return compute_metrics
+
+
+def compute_threshold_metrics(
+    probs_label_1: Sequence[float],
+    labels: Sequence[int],
+    threshold: float,
+) -> Dict[str, float]:
+    import numpy as np
+
+    prob_array = np.asarray(probs_label_1, dtype=float)
+    label_array = np.asarray(labels, dtype=int)
+    predictions = (prob_array >= float(threshold)).astype(int)
+
+    accuracy = float((predictions == label_array).mean())
+    tp = int(((predictions == 1) & (label_array == 1)).sum())
+    tn = int(((predictions == 0) & (label_array == 0)).sum())
+    fp = int(((predictions == 1) & (label_array == 0)).sum())
+    fn = int(((predictions == 0) & (label_array == 1)).sum())
+
+    precision = tp / (tp + fp) if (tp + fp) else 0.0
+    recall = tp / (tp + fn) if (tp + fn) else 0.0
+    f1 = (
+        2 * precision * recall / (precision + recall)
+        if (precision + recall)
+        else 0.0
+    )
+    specificity = tn / (tn + fp) if (tn + fp) else 0.0
+
+    return {
+        "accuracy": accuracy,
+        "precision": precision,
+        "recall": recall,
+        "f1": f1,
+        "specificity": specificity,
+        "tp": float(tp),
+        "tn": float(tn),
+        "fp": float(fp),
+        "fn": float(fn),
+    }
 
 
 def resolve_model_name(raw_model_name: str) -> str:
@@ -421,6 +466,7 @@ def main() -> int:
     log(f"[config] output dir: {output_dir}")
     log(f"[config] dataset json: {args.dataset_json_path}")
     log(f"[config] model: {model_name}")
+    log(f"[config] decision threshold: {args.decision_threshold}")
     log(f"[config] CUDA_VISIBLE_DEVICES: {os.getenv('CUDA_VISIBLE_DEVICES', '<unset>')}")
 
     all_records = discover_paired_skills_from_detection_json(
@@ -559,13 +605,24 @@ def main() -> int:
 
     logits = predictions.predictions
     labels = predictions.label_ids
-    pred_labels = np.argmax(logits, axis=-1)
     shifted = logits - np.max(logits, axis=-1, keepdims=True)
     probs = np.exp(shifted)
     probs = probs / probs.sum(axis=-1, keepdims=True)
+    pred_labels = (probs[:, 1] >= float(args.decision_threshold)).astype(int)
+
+    threshold_metrics = compute_threshold_metrics(
+        probs_label_1=probs[:, 1],
+        labels=labels,
+        threshold=args.decision_threshold,
+    )
 
     prediction_rows: List[Dict[str, Any]] = []
-    for example, pred_label, prob_row, gold_label in zip(test_examples, pred_labels, probs, labels):
+    for example, pred_label, prob_row, gold_label in zip(
+        test_examples,
+        pred_labels,
+        probs,
+        labels,
+    ):
         prediction_rows.append(
             {
                 **example.to_dict(),
@@ -573,6 +630,7 @@ def main() -> int:
                 "pred_label": int(pred_label),
                 "prob_label_0": float(prob_row[0]),
                 "prob_label_1": float(prob_row[1]),
+                "decision_threshold": float(args.decision_threshold),
                 "correct": int(pred_label == gold_label),
             }
         )
@@ -584,20 +642,21 @@ def main() -> int:
         "output_dir": str(output_dir),
         "eval_only": args.eval_only,
         "checkpoint_dir": str(checkpoint_dir) if args.eval_only else str(output_dir / "best_model"),
+        "decision_threshold": float(args.decision_threshold),
         "split_metadata": split_meta,
         "train_example_count": len(train_examples),
         "test_example_count": len(test_examples),
-        "metrics": metrics,
+        "metrics": {f"eval_{key}": value for key, value in threshold_metrics.items()},
     }
     write_json(output_dir / "eval_summary.json", summary)
     write_jsonl(output_dir / "test_predictions.jsonl", prediction_rows)
 
     log(
         "[eval] metrics: "
-        f"accuracy={metrics.get('eval_accuracy')}, "
-        f"precision={metrics.get('eval_precision')}, "
-        f"recall={metrics.get('eval_recall')}, "
-        f"f1={metrics.get('eval_f1')}"
+        f"accuracy={threshold_metrics.get('accuracy')}, "
+        f"precision={threshold_metrics.get('precision')}, "
+        f"recall={threshold_metrics.get('recall')}, "
+        f"f1={threshold_metrics.get('f1')}"
     )
     log(f"[done] results written to: {output_dir}")
     return 0
