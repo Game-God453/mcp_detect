@@ -293,41 +293,20 @@ def to_hf_dataset(examples: Sequence[ClassificationExample]) -> Any:
     return Dataset.from_list(rows)
 
 
-def compute_metrics_builder() -> Any:
+def compute_metrics_builder(threshold: float) -> Any:
     import numpy as np
 
     def compute_metrics(eval_pred: Any) -> Dict[str, float]:
         logits, labels = eval_pred
-        predictions = np.argmax(logits, axis=-1)
-        labels = np.asarray(labels)
-        predictions = np.asarray(predictions)
-
-        accuracy = float((predictions == labels).mean())
-        tp = int(((predictions == 1) & (labels == 1)).sum())
-        tn = int(((predictions == 0) & (labels == 0)).sum())
-        fp = int(((predictions == 1) & (labels == 0)).sum())
-        fn = int(((predictions == 0) & (labels == 1)).sum())
-
-        precision = tp / (tp + fp) if (tp + fp) else 0.0
-        recall = tp / (tp + fn) if (tp + fn) else 0.0
-        f1 = (
-            2 * precision * recall / (precision + recall)
-            if (precision + recall)
-            else 0.0
+        labels = np.asarray(labels, dtype=int)
+        shifted = logits - np.max(logits, axis=-1, keepdims=True)
+        probs = np.exp(shifted)
+        probs = probs / probs.sum(axis=-1, keepdims=True)
+        return compute_threshold_metrics(
+            probs_label_1=probs[:, 1],
+            labels=labels,
+            threshold=threshold,
         )
-        specificity = tn / (tn + fp) if (tn + fp) else 0.0
-
-        return {
-            "accuracy": accuracy,
-            "precision": precision,
-            "recall": recall,
-            "f1": f1,
-            "specificity": specificity,
-            "tp": float(tp),
-            "tn": float(tn),
-            "fp": float(fp),
-            "fn": float(fn),
-        }
 
     return compute_metrics
 
@@ -578,7 +557,7 @@ def main() -> int:
         eval_dataset=tokenized_datasets["test"],
         tokenizer=tokenizer,
         data_collator=DataCollatorWithPadding(tokenizer=tokenizer),
-        compute_metrics=compute_metrics_builder(),
+        compute_metrics=compute_metrics_builder(args.decision_threshold),
     )
 
     if not args.eval_only:
