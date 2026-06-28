@@ -243,12 +243,44 @@ def build_parser() -> argparse.ArgumentParser:
         default=env_float("FINETUNE_DECISION_THRESHOLD", 0.5),
         help="Probability threshold on label=1 for deciding poison vs clean during evaluation.",
     )
+    parser.add_argument(
+        "--deterministic",
+        action="store_true",
+        default=env_bool("FINETUNE_DETERMINISTIC", True),
+        help="Enable stricter deterministic settings for reproducibility.",
+    )
+    parser.add_argument(
+        "--no-deterministic",
+        action="store_false",
+        dest="deterministic",
+        help="Disable stricter deterministic settings.",
+    )
     return parser
 
 
-def seed_everything(seed: int) -> None:
+def seed_everything(seed: int, deterministic: bool) -> None:
+    import numpy as np
+    import torch
+
     random.seed(seed)
+    np.random.seed(seed)
     os.environ["PYTHONHASHSEED"] = str(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed)
+
+    if deterministic:
+        os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
+        try:
+            torch.use_deterministic_algorithms(True, warn_only=True)
+        except TypeError:
+            torch.use_deterministic_algorithms(True)
+    else:
+        torch.backends.cudnn.deterministic = False
+        torch.backends.cudnn.benchmark = True
 
 
 def shuffle_examples(examples: Sequence[ClassificationExample], seed: int) -> List[ClassificationExample]:
@@ -293,20 +325,41 @@ def to_hf_dataset(examples: Sequence[ClassificationExample]) -> Any:
     return Dataset.from_list(rows)
 
 
-def compute_metrics_builder(threshold: float) -> Any:
+def compute_metrics_builder() -> Any:
     import numpy as np
 
     def compute_metrics(eval_pred: Any) -> Dict[str, float]:
         logits, labels = eval_pred
+        predictions = np.argmax(logits, axis=-1)
         labels = np.asarray(labels, dtype=int)
-        shifted = logits - np.max(logits, axis=-1, keepdims=True)
-        probs = np.exp(shifted)
-        probs = probs / probs.sum(axis=-1, keepdims=True)
-        return compute_threshold_metrics(
-            probs_label_1=probs[:, 1],
-            labels=labels,
-            threshold=threshold,
+        predictions = np.asarray(predictions, dtype=int)
+
+        accuracy = float((predictions == labels).mean())
+        tp = int(((predictions == 1) & (labels == 1)).sum())
+        tn = int(((predictions == 0) & (labels == 0)).sum())
+        fp = int(((predictions == 1) & (labels == 0)).sum())
+        fn = int(((predictions == 0) & (labels == 1)).sum())
+
+        precision = tp / (tp + fp) if (tp + fp) else 0.0
+        recall = tp / (tp + fn) if (tp + fn) else 0.0
+        f1 = (
+            2 * precision * recall / (precision + recall)
+            if (precision + recall)
+            else 0.0
         )
+        specificity = tn / (tn + fp) if (tn + fp) else 0.0
+
+        return {
+            "accuracy": accuracy,
+            "precision": precision,
+            "recall": recall,
+            "f1": f1,
+            "specificity": specificity,
+            "tp": float(tp),
+            "tn": float(tn),
+            "fp": float(fp),
+            "fn": float(fn),
+        }
 
     return compute_metrics
 
@@ -348,6 +401,12 @@ def compute_threshold_metrics(
         "fp": float(fp),
         "fn": float(fn),
     }
+
+
+def metric_value(metrics: Dict[str, Any], base_name: str) -> Any:
+    if base_name in metrics:
+        return metrics.get(base_name)
+    return metrics.get(f"eval_{base_name}")
 
 
 def resolve_model_name(raw_model_name: str) -> str:
@@ -434,7 +493,7 @@ def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
 
-    seed_everything(args.train_seed)
+    seed_everything(args.train_seed, args.deterministic)
 
     model_name = resolve_model_name(args.model_name)
     base_output_dir = args.output_dir
@@ -446,6 +505,7 @@ def main() -> int:
     log(f"[config] dataset json: {args.dataset_json_path}")
     log(f"[config] model: {model_name}")
     log(f"[config] decision threshold: {args.decision_threshold}")
+    log(f"[config] deterministic: {args.deterministic}")
     log(f"[config] CUDA_VISIBLE_DEVICES: {os.getenv('CUDA_VISIBLE_DEVICES', '<unset>')}")
 
     all_records = discover_paired_skills_from_detection_json(
@@ -557,7 +617,7 @@ def main() -> int:
         eval_dataset=tokenized_datasets["test"],
         tokenizer=tokenizer,
         data_collator=DataCollatorWithPadding(tokenizer=tokenizer),
-        compute_metrics=compute_metrics_builder(args.decision_threshold),
+        compute_metrics=compute_metrics_builder(),
     )
 
     if not args.eval_only:
@@ -587,13 +647,16 @@ def main() -> int:
     shifted = logits - np.max(logits, axis=-1, keepdims=True)
     probs = np.exp(shifted)
     probs = probs / probs.sum(axis=-1, keepdims=True)
-    pred_labels = (probs[:, 1] >= float(args.decision_threshold)).astype(int)
-
-    threshold_metrics = compute_threshold_metrics(
-        probs_label_1=probs[:, 1],
-        labels=labels,
-        threshold=args.decision_threshold,
-    )
+    if args.eval_only:
+        pred_labels = (probs[:, 1] >= float(args.decision_threshold)).astype(int)
+        final_metrics = compute_threshold_metrics(
+            probs_label_1=probs[:, 1],
+            labels=labels,
+            threshold=args.decision_threshold,
+        )
+    else:
+        pred_labels = np.argmax(logits, axis=-1)
+        final_metrics = metrics
 
     prediction_rows: List[Dict[str, Any]] = []
     for example, pred_label, prob_row, gold_label in zip(
@@ -625,17 +688,17 @@ def main() -> int:
         "split_metadata": split_meta,
         "train_example_count": len(train_examples),
         "test_example_count": len(test_examples),
-        "metrics": {f"eval_{key}": value for key, value in threshold_metrics.items()},
+        "metrics": final_metrics,
     }
     write_json(output_dir / "eval_summary.json", summary)
     write_jsonl(output_dir / "test_predictions.jsonl", prediction_rows)
 
     log(
         "[eval] metrics: "
-        f"accuracy={threshold_metrics.get('accuracy')}, "
-        f"precision={threshold_metrics.get('precision')}, "
-        f"recall={threshold_metrics.get('recall')}, "
-        f"f1={threshold_metrics.get('f1')}"
+        f"accuracy={metric_value(final_metrics, 'accuracy')}, "
+        f"precision={metric_value(final_metrics, 'precision')}, "
+        f"recall={metric_value(final_metrics, 'recall')}, "
+        f"f1={metric_value(final_metrics, 'f1')}"
     )
     log(f"[done] results written to: {output_dir}")
     return 0

@@ -28,3 +28,10 @@ env/
 .DS_Store
 .idea/
 .vscode/
+alt_trigger_eval_runs/
+pretrained_eval_runs/
+finetune_runs/
+finetune_threshold_search_runs/
+poison_method/poisoned_all_skills_results/
+*.log.txt
+tmp.sh
